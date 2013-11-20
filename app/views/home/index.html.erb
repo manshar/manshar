@@ -1,0 +1,1 @@
+<ng-view></ng-view>

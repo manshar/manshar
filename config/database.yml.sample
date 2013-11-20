@@ -1,0 +1,18 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  database: manshar_development
+  pool: 5
+  username: postgres
+  password:
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  database: manshar_test
+
+production:
+  <<: *defaults
+  database: manshar_production

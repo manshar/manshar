@@ -1,0 +1,11 @@
+@import 'bourbon-and-neat-override-and-variables';
+
+body {
+  color: $black;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  @include outer-container;
+}

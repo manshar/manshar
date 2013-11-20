@@ -1,0 +1,11 @@
+{
+  "name": "Manshar",
+  "homepage": "https://github.com/manshar/manshar",
+  "dependencies": {
+    "bower": "~1.2.7",
+    "coffee-script": "~1.6.3"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
+  }
+}

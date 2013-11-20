@@ -1,0 +1,27 @@
+---
+language: ruby
+env:
+  - DISPLAY=:99.0
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - ruby-head
+  - jruby-19mode
+jdk:
+  - oraclejdk7
+  - openjdk7
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq nodejs
+before_script:
+  - cp config/database.yml.sample config/database.yml
+  - psql -c 'create database manshar_test;' -U postgres
+  - rake db:migrate
+  - npm install
+  - sh -e /etc/init.d/xvfb start
+bundler_args: --without development
+script: 'bundle exec rspec && bundle exec teaspoon'
+matrix:
+  allow_failures:
+    - rvm: jruby-19mode
+    - rvm: ruby-head
