@@ -18,6 +18,7 @@ before_script:
   - cp config/database.yml.sample config/database.yml
   - psql -c 'create database manshar_test;' -U postgres
   - rake db:migrate
+  - npm install
   - cd ../web-client
   - npm install -g bower grunt-cli grunt
   - npm install grunt --save-dev
