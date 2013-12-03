@@ -19,8 +19,11 @@ before_script:
   - psql -c 'create database manshar_test;' -U postgres
   - rake db:migrate
   - cd ../web-client
+  - npm install -g bower grunt-cli grunt
+  - npm install grunt --save-dev
   - npm install
   - sh -e /etc/init.d/xvfb start
+  - 'bower install'
 bundler_args: --without development
 script: 
   - 'cd ../web-client && grunt test'
