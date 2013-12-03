@@ -11,6 +11,7 @@ jdk:
   - oraclejdk7
   - openjdk7
 before_install:
+ - cd backend
  - sudo apt-get update -qq
  - sudo apt-get install -qq nodejs
 before_script:
