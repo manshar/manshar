@@ -1,0 +1,12 @@
+<header>
+  <img src="/images/61dce6ee.manshar@200x200.png" class="manshar-logo">
+  <h1>{{title}}</h1>
+  <h2 class="manshar-tagline">{{tagline}}</h2>
+</header>
+
+<ul class="manshar-articles-list one-column">
+  <li class="manshar-article" ng-repeat="article in articles">
+    <h3>{{article.title}}</h3>
+    <p class="manshar-snippet">{{article.body}}</p>
+  </li>
+</ul>

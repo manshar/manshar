@@ -18,10 +18,13 @@ before_script:
   - cp config/database.yml.sample config/database.yml
   - psql -c 'create database manshar_test;' -U postgres
   - rake db:migrate
+  - cd ../web-client
   - npm install
   - sh -e /etc/init.d/xvfb start
 bundler_args: --without development
-script: 'bundle exec rspec && bundle exec teaspoon'
+script: 
+  - 'cd ../web-client && grunt test'
+  - 'cd ../backend && bundle exec rspec && bundle exec teaspoon'
 matrix:
   allow_failures:
     - rvm: jruby-19mode
