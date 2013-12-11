@@ -1,10 +1,10 @@
-language: ruby
+language: rubyGG
 env:
   matrix:
   - DISPLAY=:99.0
-  - MANSHAR_HOME=/home/travis/build/manshar/manshar
   global:
-    secure: Ek/EsKA4yC6RrhlHNhlSsztud+UxFxbvwiaEkqIo2MTo1ewr40/7k8JLuONgYNHL47/ZKvzqXfRiD+Zq18xIXNEO8KyIf3ASLmhMYOLQsPZIsmCSUgnBpwpfiO9tiuAf4ww5+A8sD4Ob4xnkLpwB961bBn1RyIKN6mymuxzdtPw=
+  - MANSHAR_HOME=/home/travis/build/manshar/manshar
+  - secure: Ek/EsKA4yC6RrhlHNhlSsztud+UxFxbvwiaEkqIo2MTo1ewr40/7k8JLuONgYNHL47/ZKvzqXfRiD+Zq18xIXNEO8KyIf3ASLmhMYOLQsPZIsmCSUgnBpwpfiO9tiuAf4ww5+A8sD4Ob4xnkLpwB961bBn1RyIKN6mymuxzdtPw=
 rvm:
   - 1.9.3
   - 2.0.0
