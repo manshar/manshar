@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Manshar::Application.config.secret_key_base = 'a59d98c49d5a9b6ccf7e14cc35cb005e1ba9ab6656070e4c05e5df95d07afd44f98fd48552a68ac83e6dc3440691db011ef635c0c1a74102964686e7d51f3bf3'
+Manshar::Application.config.secret_key_base = ENV['SECRET_TOKEN']
