@@ -1,4 +1,4 @@
-language: rubyGG
+language: ruby
 env:
   matrix:
   - DISPLAY=:99.0
