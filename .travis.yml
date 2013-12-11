@@ -1,7 +1,10 @@
----
 language: ruby
 env:
+  matrix:
   - DISPLAY=:99.0
+  - MANSHAR_HOME=/home/travis/build/manshar/manshar
+  global:
+    secure: Ek/EsKA4yC6RrhlHNhlSsztud+UxFxbvwiaEkqIo2MTo1ewr40/7k8JLuONgYNHL47/ZKvzqXfRiD+Zq18xIXNEO8KyIf3ASLmhMYOLQsPZIsmCSUgnBpwpfiO9tiuAf4ww5+A8sD4Ob4xnkLpwB961bBn1RyIKN6mymuxzdtPw=
 rvm:
   - 1.9.3
   - 2.0.0
@@ -11,24 +14,33 @@ jdk:
   - oraclejdk7
   - openjdk7
 before_install:
- - cd backend
- - sudo apt-get update -qq
- - sudo apt-get install -qq nodejs
+  - cd /usr/lib/git-core/
+  - sudo wget https://raw.github.com/apenwarr/git-subtree/master/git-subtree.sh
+  - sudo mv git-subtree.sh git-subtree
+  - sudo chmod 755 git-subtree
+  - cd $MANSHAR_HOME/backend
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq nodejs
 before_script:
+  - cd $MANSHAR_HOME/backend
   - cp config/database.yml.sample config/database.yml
   - psql -c 'create database manshar_test;' -U postgres
   - rake db:migrate
   - npm install
-  - cd ../web-client
+  - cd $MANSHAR_HOME/web-client
   - npm install grunt --save-dev
   - npm install
   - sh -e /etc/init.d/xvfb start
-  - 'bower install'
+  - bower install
 bundler_args: --without development
-script: 
-  - 'cd ../web-client && grunt test'
-  - 'cd ../backend && bundle exec rspec && bundle exec teaspoon'
+script:
+  - cd $MANSHAR_HOME/web-client && grunt test
+  - cd $MANSHAR_HOME/backend && bundle exec rspec && bundle exec teaspoon
 matrix:
   allow_failures:
-    - rvm: jruby-19mode
-    - rvm: ruby-head
+  - rvm: jruby-19mode
+  - rvm: ruby-head
+after_success:
+  - cd $MANSHAR_HOME
+  - ./utils/travis/deploy.sh
+
