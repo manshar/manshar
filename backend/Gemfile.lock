@@ -34,30 +34,13 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (3.1.8)
-      sass (>= 3.2.0)
-      thor
     builder (3.1.4)
     bullet (4.7.1)
       activesupport
       uniform_notifier (>= 1.4.0)
-    capybara (2.1.0)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
-    cliver (0.2.2)
     coderay (1.1.0)
-    coffee-rails (4.0.1)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.2.0)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.6.3)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     devise (3.1.1)
@@ -71,7 +54,6 @@ GEM
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
     erubis (2.7.0)
-    execjs (2.0.2)
     factory_girl (4.3.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.3.0)
@@ -95,9 +77,6 @@ GEM
     guard-rspec (4.0.4)
       guard (>= 2.1.1)
       rspec (~> 2.14)
-    guard-teaspoon (0.0.4)
-      guard (>= 1.6.1)
-      teaspoon (>= 0.5.3)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -106,7 +85,6 @@ GEM
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
-    json (1.8.1)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -121,26 +99,10 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25)
-    mini_portile (0.5.2)
     minitest (4.7.5)
-    mobileesp_converted (0.2.2)
-    mobvious (0.3.2)
-      mobileesp_converted (~> 0.2.0)
-      rack (>= 1.1.0)
     multi_json (1.8.2)
-    neat (1.4.0)
-      bourbon (>= 2.1)
-      sass (>= 3.2)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
     pg (0.17.0)
-    phantomjs (1.9.2.0)
-    poltergeist (1.4.1)
-      capybara (~> 2.1.0)
-      cliver (~> 0.2.1)
-      multi_json (~> 1.0)
-      websocket-driver (>= 0.2.0)
     polyglot (0.3.3)
     pry (0.9.12.3)
       coderay (~> 1.0)
@@ -195,14 +157,6 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-progressbar (1.2.0)
-    sass (3.2.12)
-    sass-rails (4.0.1)
-      railties (>= 4.0.0, < 5.0)
-      sass (>= 3.1.10)
-      sprockets-rails (~> 2.0.0)
-    simple_form (3.0.0)
-      actionpack (>= 4.0.0, < 4.1)
-      activemodel (>= 4.0.0, < 4.1)
     slop (3.4.7)
     sprockets (2.10.0)
       hike (~> 1.2)
@@ -213,9 +167,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    teaspoon (0.7.7)
-      phantomjs (>= 1.8.1.1)
-      railties (>= 3.2.5, < 5)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -228,15 +179,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
-    uglifier (2.3.1)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
     uniform_notifier (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
-    websocket-driver (0.3.0)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -246,10 +191,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  bourbon
   bullet
-  capybara
-  coffee-rails (~> 4.0.0)
   database_cleaner
   devise (= 3.1.1)
   dotenv-rails
@@ -257,14 +199,9 @@ DEPENDENCIES
   foreman
   fuubar
   guard-rspec
-  guard-teaspoon
   inherited_resources (= 1.4.1)
   kaminari
-  mobvious
-  neat
   pg
-  phantomjs
-  poltergeist
   pry
   puma
   quiet_assets
@@ -273,8 +210,4 @@ DEPENDENCIES
   rb-fsevent
   rb-inotify (~> 0.9)
   rspec-rails
-  sass-rails (~> 4.0.0)
-  simple_form
-  teaspoon
   therubyracer
-  uglifier (>= 1.3.0)

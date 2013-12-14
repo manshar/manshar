@@ -25,9 +25,6 @@ module Manshar
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.middleware.use Mobvious::Manager
-
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
-    config.assets.enabled = true
+    config.assets.enabled = false
   end
 end
