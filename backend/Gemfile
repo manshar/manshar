@@ -1,41 +1,32 @@
 source 'https://rubygems.org'
 
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 
-gem 'pg', platforms: :ruby
-gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
+gem 'rails-api'
 
-gem 'devise', '3.1.1'
+gem 'pg', platform: :ruby
 
-gem 'inherited_resources', '1.4.1'
-gem 'kaminari'
+gem 'devise'
 
-gem 'foreman'
-gem 'dotenv-rails'
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
 
-group :production do
-  gem 'therubyracer', platforms: :ruby
-  gem 'rails_12factor'
-  gem 'puma'
-end
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
 
-group :development do
-  # gem 'rack-mini-profiler'
-  gem 'quiet_assets'
-  gem 'bullet'
-  gem 'binding_of_caller'
-  gem 'better_errors'
-  gem 'pry'
-  gem 'awesome_print'
-end
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano', :group => :development
+
+# To use debugger
+# gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test, :development do
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false
-  gem 'rb-inotify', '~> 0.9', require: RUBY_PLATFORM =~ /linux/i ? 'rb-inotify' : false
-  gem 'database_cleaner'
   gem 'guard-rspec'
-  gem 'fuubar'
-
+  gem 'factory_girl_rails'
+  gem 'email_spec'
 end
