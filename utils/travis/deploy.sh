@@ -1,4 +1,8 @@
-if [[ "$TRAVIS_BRANCH" == "" ]]
+if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]
+then
+  echo "This is a pull request. No deployment will be done."
+  exit 0
+elif [[ "$TRAVIS_BRANCH" == "" ]]
 then
   echo "TRAVIS_BRANCH variable is empty. This util is only to be used by Travis CI."
   exit 1
