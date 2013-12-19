@@ -1,4 +1,4 @@
-if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]
+if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]
 then
   echo "This is a pull request. No deployment will be done."
   exit 0
@@ -23,6 +23,6 @@ else
   yes | heroku keys:add
   yes | git push web-client-heroku `git subtree split --prefix web-client/dist master`:master --force
   yes | git push backend-heroku `git subtree split --prefix backend master`:master --force
-  yes | heroku run rake db:migrate --app manshar-backend
+  heroku run rake db:migrate --app manshar-backend
 fi
 
