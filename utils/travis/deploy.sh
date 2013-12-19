@@ -1,4 +1,8 @@
-if [[ "$TRAVIS_BRANCH" == "" ]]
+if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]
+then
+  echo "This is a pull request. No deployment will be done."
+  exit 0
+elif [[ "$TRAVIS_BRANCH" == "" ]]
 then
   echo "TRAVIS_BRANCH variable is empty. This util is only to be used by Travis CI."
   exit 1
@@ -19,6 +23,6 @@ else
   yes | heroku keys:add
   yes | git push web-client-heroku `git subtree split --prefix web-client/dist master`:master --force
   yes | git push backend-heroku `git subtree split --prefix backend master`:master --force
-  yes | heroku run rake db:migrate --app manshar-backend
+  heroku run rake db:migrate --app manshar-backend
 fi
 

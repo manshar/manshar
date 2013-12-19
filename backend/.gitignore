@@ -24,3 +24,4 @@ dist
 .tmp
 .sass-cache
 vendor/assets/bower_components
+
