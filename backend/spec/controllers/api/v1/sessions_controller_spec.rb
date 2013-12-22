@@ -14,7 +14,7 @@ describe Api::V1::SessionsController do
 
       response.should be_success
       parsed_response['user']['email'].should eq(@user.email)
-      parsed_response['auth_token'].should eq(@user.authentication_token)
+      parsed_response['authToken'].should eq(@user.authentication_token)
     end
 
     it 'should not authenticate a user with invalid credentials' do

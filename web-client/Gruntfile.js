@@ -18,6 +18,31 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    // Define configuration depending on environment.
+    ngconstant: {
+      options: {
+        space: '  '
+      },
+      development: [{
+        dest: '<%= yeoman.app %>/scripts/appConfig.js',
+        wrap: '\'use strict\';\n\n <%= __ngModule %>',
+        name: 'AppConfig',
+        constants: {
+          ENV: 'development',
+          API_HOST: 'localhost:3000',
+        }
+      }],
+      production: [{
+        dest: '<%= yeoman.dist %>/scripts/appConfig.js',
+        wrap: '\'use strict\';\n\n<%= __ngModule %>',
+        name: 'AppConfig',
+        constants: {
+          ENV: 'production',
+          API_HOST: 'api.manshar.me',
+        }
+      }]
+    },
+
     // Project settings
     yeoman: {
       // configurable paths
@@ -136,9 +161,9 @@ module.exports = function (grunt) {
       }
     },
 
-    
 
-    
+
+
 
     // Renames files for browser caching purposes
     rev: {
@@ -338,6 +363,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -360,6 +386,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

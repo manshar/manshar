@@ -28,4 +28,16 @@ Backend::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Allow Cross-Origin Resource Sharing header to allow cross
+  # domain xhr requests.
+  config.middleware.insert_before Warden::Manager, Rack::Cors do
+    allow do
+      origins '*'
+      resource '*',
+      :headers => :any,
+      :methods => [:get, :delete, :post, :put, :options]
+    end
+  end
+
 end
