@@ -25,7 +25,7 @@ module.exports = function (grunt) {
       },
       development: [{
         dest: '<%= yeoman.app %>/scripts/appConfig.js',
-        wrap: '\'use strict\';\n\n <%= __ngModule %>',
+        wrap: '\'use strict\';\n\n<%= __ngModule %>',
         name: 'AppConfig',
         constants: {
           ENV: 'development',
