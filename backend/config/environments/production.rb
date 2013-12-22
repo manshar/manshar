@@ -81,4 +81,17 @@ Backend::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.action_mailer.default_url_options = { :host => 'manshar-backend.herokuapp.com' }
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Allow Cross-Origin Resource Sharing header to allow cross
+  # domain xhr requests.
+  config.middleware.insert_before Warden::Manager, Rack::Cors do
+    allow do
+      origins ENV['WEB_CLIENT_HOST']
+      resource '*',
+      :headers => :any,
+      :methods => [:get, :delete, :post, :put, :options]
+    end
+  end
 end
