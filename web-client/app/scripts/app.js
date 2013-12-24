@@ -14,7 +14,7 @@ angular.module('webClientApp', [
   /**
    * Routing.
    */
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
 
       .when('/', {
@@ -38,19 +38,19 @@ angular.module('webClientApp', [
       .otherwise({
         redirectTo: '/'
       });
-  })
-    /**
-     * Intercept every http request and check for 401 Unauthorized
-     * error. Clear the current user and redirect to /login page.
-     */
-    .config(function ($httpProvider) {
+  }])
+  /**
+   * Intercept every http request and check for 401 Unauthorized
+   * error. Clear the current user and redirect to /login page.
+   */
+  .config(['$httpProvider', function ($httpProvider) {
     var unAuthenticatedInterceptor = function ($location, $q) {
 
-      function success(response) {
+      var success = function (response) {
         return response;
-      }
+      };
 
-      function error(response) {
+      var error = function (response) {
         if (response.status === 401) {
           $location.path('/login');
           return $q.reject(response);
@@ -58,26 +58,21 @@ angular.module('webClientApp', [
         else {
           return $q.reject(response);
         }
-      }
-
-      return function (promise) {
-        return promise.then(success, error);
       };
+
+      return function (promise) { return promise.then(success, error); };
     };
     $httpProvider.responseInterceptors.push(unAuthenticatedInterceptor);
-
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
-  })
-   /**
-    * Everytime the route change check if the user need to login.
-    */
-   .run(function ($location, $rootScope, LoginService) {
-
-      LoginService.initAuthHeaders();
-
-      $rootScope.$on('$routeChangeStart', function(event, current, previous) {
-        if(!LoginService.isAuthorized(current.isPublic)) {
-          $location.path('/login?prev='+$location.path());
-        }
-      });
+  }])
+  /**
+   * Everytime the route change check if the user need to login.
+   */
+  .run(['$location', '$rootScope', 'LoginService', function ($location, $rootScope, LoginService) {
+    LoginService.initAuthHeaders();
+    $rootScope.$on('$routeChangeStart', function(event, current, previous) {
+      if(!LoginService.isAuthorized(current.isPublic)) {
+        $location.path('/login?prev='+$location.path());
+      }
     });
+  }]);

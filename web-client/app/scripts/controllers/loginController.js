@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('LoginCtrl', function ($scope, $http, $location, $routeParams, LoginService) {
+  .controller('LoginCtrl', ['$scope', '$http', '$location', '$routeParams', 'LoginService',
+      function ($scope, $http, $location, $routeParams, LoginService) {
 
     $scope.user = {};
     $scope.error = null;
@@ -18,4 +19,4 @@ angular.module('webClientApp')
       $scope.error = 'Wrong username and/or password.';
     };
 
-  });
+  }]);

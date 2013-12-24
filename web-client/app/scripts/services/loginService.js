@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('webClientApp')
-  .service('LoginService', function ($http, API_HOST, StorageService) {
+  .service('LoginService', ['$http', 'API_HOST', 'StorageService',
+      function ($http, API_HOST, StorageService) {
+
     var baseUrl = '//' + API_HOST + '/api/v1/';
 
     return {
@@ -75,4 +77,4 @@ angular.module('webClientApp')
         $http.defaults.headers.common.Authorization = null;
       }
     };
-  });
+  }]);

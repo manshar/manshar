@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', ['$scope', function ($scope) {
     $scope.title = 'منشر';
     $scope.tagline = 'منصة نشر مخصصة بالعربية';
     $scope.articles = [{
@@ -11,4 +11,4 @@ angular.module('webClientApp')
       title: 'كيف الحال',
       body: 'بخير وكل شيء تمام'
     }];
-  });
+  }]);
