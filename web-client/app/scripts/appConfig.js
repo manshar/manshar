@@ -1,6 +1,6 @@
 'use strict';
 
- angular.module("AppConfig", [])
+angular.module("AppConfig", [])
 
 .constant("ENV", "development")
 

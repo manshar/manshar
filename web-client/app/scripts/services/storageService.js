@@ -4,7 +4,7 @@ angular.module('webClientApp')
    /**
     * Provides an easy way to store data.
     */
-  .service('StorageService', function ($window) {
+  .service('StorageService',['$window', function ($window) {
 
     return {
 
@@ -39,4 +39,4 @@ angular.module('webClientApp')
 
     };
 
-  });
+  }]);
