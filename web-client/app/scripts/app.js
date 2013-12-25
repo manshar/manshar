@@ -29,6 +29,12 @@ angular.module('webClientApp', [
         isPublic: true
       })
 
+      .when('/signup', {
+        templateUrl: 'views/signup.html',
+        controller: 'SignupCtrl',
+        isPublic: true
+      })
+
       .when('/articles/:articleId', {
         templateUrl: 'views/articles/show.html',
         controller: 'ArticleCtrl',
