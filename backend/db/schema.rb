@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217043429) do
+ActiveRecord::Schema.define(version: 20131224053748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: true do |t|
+    t.string   "title",      default: "",    null: false
+    t.string   "tagline",    default: "",    null: false
+    t.text     "body",       default: "",    null: false
+    t.boolean  "published",  default: false, null: false
+    t.integer  "user_id",    default: 1,     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -34,6 +44,8 @@ ActiveRecord::Schema.define(version: 20131217043429) do
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name",                   default: "", null: false
+    t.string   "bio",                    default: ""
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
