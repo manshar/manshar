@@ -9,7 +9,7 @@ class CreateArticles < ActiveRecord::Migration
       t.boolean :published, :null => false, :default => false
 
       # Author.
-      t.integer :user_id, :null => false, :default => 1
+      t.integer :user_id, :null => false
 
       t.timestamps
     end

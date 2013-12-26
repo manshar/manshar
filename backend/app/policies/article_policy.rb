@@ -13,29 +13,29 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    super || true
   end
 
   def index?
-    true
+    super || true
   end
 
   def show?
-    @article.published || owned?
+    super || article.published || owned?
   end
 
   def update?
-    owned?
+    super || owned?
   end
 
   def destroy?
-    owned?
+    super || owned?
   end
 
 
   private
   def owned?
-		@article.user_id == @user.id if @user
+		article.user_id == user.id if user
   end
 
 end
