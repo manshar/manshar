@@ -24,7 +24,7 @@ class Api::V1::ArticlesController < ApplicationController
   # POST /api/v1/articles
   # POST /api/v1/articles.json
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
     authorize @article
     if @article.save
       render json: @article, status: :created
