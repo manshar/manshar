@@ -1,5 +1,8 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
 
+  skip_before_filter :authenticate_user_from_token!, :only => [:create]
+  skip_after_filter :verify_authorized
+
   respond_to :json
 
   def create
@@ -13,6 +16,8 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
              :json => { :errors => resource.errors }
     end
   end
+
+  private
 
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation, :name, :bio)

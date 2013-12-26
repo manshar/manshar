@@ -12,12 +12,10 @@ Backend::Application.routes.draw do
         match 'sessions', :to => 'sessions#create', :as => 'login', :via => [:post, :options]
         match 'sessions', :to => 'sessions#destroy', :as => 'logout', :via => [:delete, :options]
       end
-      # TODO(mkhatib): Remove this once we implement the articles resource.
-      match 'articles/1', :to => 'articles#get', :via => [:get, :options]
-      match 'articles/unsecure', :to => 'articles#unsecure', :via => [:get, :options]
+
+      resources :articles
     end
   end
 
-  # TODO(mkhatib): Propably redirect the root to the web client website.
-  root 'api/v1/articles#unsecure'
+  root 'api/v1/articles#index'
 end
