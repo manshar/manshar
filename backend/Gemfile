@@ -18,6 +18,12 @@ gem 'rack-cors', :require => 'rack/cors'
 # Provide a simple class-based authorization mechanism.
 gem 'pundit'
 
+# Provide an easy way to deal with image-uploads.
+gem 'paperclip'
+
+# Provide configuration for Amazon S3 for Storage.
+gem 'aws-sdk'
+
 group :production do
   gem 'therubyracer', platforms: :ruby
   gem 'rails_12factor'

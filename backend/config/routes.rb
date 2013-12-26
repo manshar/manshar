@@ -14,6 +14,7 @@ Backend::Application.routes.draw do
       end
 
       resources :articles
+      resources :images
     end
   end
 
