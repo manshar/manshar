@@ -17,7 +17,7 @@ Backend::Application.configure do
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
-  # config.action_dispatch.rack_cache = true
+  config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_assets = false
@@ -95,13 +95,4 @@ Backend::Application.configure do
     end
   end
 
-  # Use Amazon S3 for image storage and serving.
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['S3_BUCKET_NAME'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-    }
-  }
 end

@@ -19,15 +19,15 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'pundit'
 
 # Provide an easy way to deal with image-uploads.
-gem 'paperclip'
+gem 'dragonfly'
+gem 'dragonfly-s3_data_store'
 
-# Provide configuration for Amazon S3 for Storage.
-gem 'aws-sdk'
 
 group :production do
   gem 'therubyracer', platforms: :ruby
   gem 'rails_12factor'
   gem 'puma'
+	gem 'rack-cache', :require => 'rack/cache'
 end
 
 group :test, :development do

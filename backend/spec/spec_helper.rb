@@ -4,7 +4,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'email_spec'
 require 'rspec/rails'
 require 'rspec/autorun'
-require 'paperclip/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
