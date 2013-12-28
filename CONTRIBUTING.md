@@ -59,57 +59,70 @@ git clone https://github.com/USERNAME/manshar.git manshar && cd manshar
 ## Setup the development configurations
 
 ```sh
-cp .env.sample .env
+cp backend/.env.sample backend/.env
 
-cp config/database.yml.sample config/database.yml
+cp backend/config/database.yml.sample backend/config/database.yml
 ```
 
 ## Install the project dependencies
 
 ```sh
+# Installing backend dependencies.
+
+cd backend
+
 gem install bundler
 
 bundle install
 
+# Installing web-client dependencies.
+
+cd web-client
+
 npm install
+
+bower install
 ```
 
 ## Setup the database
 
 ```sh
+cd backend
+
 bundle exec  rake db:create
 
 bundle exec rake db:migrate
 ```
 
-## Run the server - We love Pow!
-
-To run Manshar on a .dev domain at your local machine, we recommend you to use [Pow](http://pow.cx).
-
-There's a gem called `powder` which makes working with pow alot easier.
+## Run the app.
 
 ```sh
-gem install powder
-```
+# Running the backend.
 
-Here's some handy commands (inside your project folder):
+cd backend
 
-```sh
-powder install
+rails s
 
-powder link
+# Running the web-client.
+cd web-client
 
-powder start
-
-powder stop
-
-powder restart
+grunt serve
 ```
 
 ## Run tests
 
 ```sh
-bundle exec guard
+# Backend Tests.
+
+cd backend
+
+rspec spec
+
+# Web-client tests.
+
+cd web-client
+
+grunt test
 ```
 
 ## HowTo keep in sync your git repository for Manshar
@@ -139,6 +152,9 @@ git checkout xyz
 ```
 
 After implementing the feature and its test cases, push it to your github account
+
+If your edits touch the web-client code, make sure to also run ```grunt``` to build the web-client. We keep
+our dist/ in our repo to allow us to automatically deploy to production once merged into master.
 
 ```sh
 git add .
