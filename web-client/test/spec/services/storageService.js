@@ -10,11 +10,14 @@ describe('Service: StorageService', function () {
     // Mock localStorage.
     mock = {
       localStorage: {
-        getItem: jasmine.createSpy(),
-        setItem: jasmine.createSpy(),
-        removeItem: jasmine.createSpy()
+        getItem: function (){},
+        setItem: function (){},
+        removeItem: function (){}
       }
     };
+    spyOn(mock.localStorage, 'getItem');
+    spyOn(mock.localStorage, 'setItem');
+    spyOn(mock.localStorage, 'removeItem');
     module(function($provide) {
       $provide.value('$window', mock);
     });

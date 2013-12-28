@@ -30,7 +30,7 @@ describe('Controller: ArticleCtrl', function () {
     httpBackend.expectGET(apiBase + 'articles/1').respond({title: 'Hello World.'});
 
     routeParams.articleId = 1;
-    var controller = createController();
+    createController();
     httpBackend.flush();
     expect(scope.article.title).toBe('Hello World.');
   });
