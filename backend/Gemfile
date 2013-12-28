@@ -4,15 +4,30 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.1'
 gem 'rails-api'
 gem 'pg', platform: :ruby
+
+# Authentication and Registration mechanism.
 gem 'devise'
 gem 'foreman'
+
+# Development and Test environment variables setup.
 gem 'dotenv-rails'
+
+# Allow for easy setup for Cross-Origin Response Sharing Policy.
 gem 'rack-cors', :require => 'rack/cors'
+
+# Provide a simple class-based authorization mechanism.
+gem 'pundit'
+
+# Provide an easy way to deal with image-uploads.
+gem 'dragonfly'
+gem 'dragonfly-s3_data_store'
+
 
 group :production do
   gem 'therubyracer', platforms: :ruby
   gem 'rails_12factor'
   gem 'puma'
+	gem 'rack-cache', :require => 'rack/cache'
 end
 
 group :test, :development do

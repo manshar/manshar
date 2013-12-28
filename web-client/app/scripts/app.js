@@ -50,7 +50,7 @@ angular.module('webClientApp', [
    * error. Clear the current user and redirect to /login page.
    */
   .config(['$httpProvider', function ($httpProvider) {
-    var unAuthenticatedInterceptor = function ($location, $q) {
+    var unAuthenticatedInterceptor = ['$location', '$q', function ($location, $q) {
 
       var success = function (response) {
         return response;
@@ -67,7 +67,7 @@ angular.module('webClientApp', [
       };
 
       return function (promise) { return promise.then(success, error); };
-    };
+    }];
     $httpProvider.responseInterceptors.push(unAuthenticatedInterceptor);
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
   }])
