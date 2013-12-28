@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   before_save :ensure_authentication_token
 
   has_many :articles, :dependent => :destroy
+  has_many :images, :dependent => :destroy
 
   def published_articles
   	articles.where(published: true)
