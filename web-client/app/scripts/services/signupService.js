@@ -9,7 +9,24 @@ angular.module('webClientApp')
     return {
 
       signup: function(user, optSuccess, optError) {
-        console.log('Yaaaa');
+        $http.post(baseUrl + 'registrations.json',
+                   {'user': user})
+        .then(
+
+          // Success.
+          angular.bind(this, function(response) {
+            //this.storeAuthData(response.data); // TODO should wait for confirmation
+            if (optSuccess) {
+              optSuccess(response.data);
+            }
+          }),
+
+          // Error.
+          function(response) {
+            if(optError) {
+              optError(response.data);
+            }
+          });
       },
     };
   }]);

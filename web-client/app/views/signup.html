@@ -1,32 +1,21 @@
-<form name="signup_form" novalidate ng-submit="signup()">
-  <fieldset>
-    <legend>Signup</legend>
-    <div class="row">
-      <div class="large-12 columns">
-        <label>Your name</label>
-        <input type="text" 
-            placeholder="Name" 
-            name="name" 
-            ng-model="signup.name" 
-            ng-minlength=3 
-            ng-maxlength=20 required />
-       <div class="error" 
-            ng-show="signup_form.name.$dirty && signup_form.name.$invalid && signup_form.submitted">
-        <small class="error" 
-            ng-show="signup_form.name.$error.required">
-            Your name is required.
-        </small>
-        <small class="error" 
-                ng-show="signup_form.name.$error.minlength">
-                Your name is required to be at least 3 characters
-        </small>
-        <small class="error" 
-                ng-show="signup_form.name.$error.maxlength">
-                Your name cannot be longer than 20 characters
-        </small>
-      </div>
-      </div>
-    </div>
+<form name="signupForm" novalidate ng-submit="signup(user)">
+  
+    <label>االاسم</label>
+    <input type="text" placeholder="Name" name="name" ng-model="user.name" required /></br>
+
+    <label>الايميل</label>
+    <input type="text" name="email" ng-model="user.email" required /></br>
+
+    <label>لقب</label>
+    <input type="text" name="bio" ng-model="user.bio" required /></br>
+    
+    <label>كلمة المرور</label>
+    <input type="password" name="password" ng-model="user.password" required /></br>
+    
+    <label>كلمة المرور</label>
+    <input type="password" name="password_confirmation" ng-model="user.password_confirmation" required />
+    </br>
+    
     <button type="submit" class="button radius">Submit</button>
-  </fieldset>
 </form>
+ <pre>User = {{user}}</pre>

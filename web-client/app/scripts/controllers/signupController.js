@@ -16,7 +16,7 @@ angular.module('webClientApp')
     };
 
     var error = function() {
-      $scope.error = 'Some error.';
+      $scope.error = 'An error occurs.';
     };
 
   }]);
