@@ -40,7 +40,7 @@ class Api::V1::ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:title, :caption, :img)
+    params.require(:image).permit(:title, :caption, :asset)
   end
 
 end

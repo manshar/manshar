@@ -6,6 +6,6 @@ FactoryGirl.define do
 
     title "My Image"
     caption "My Caption"
-    img { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
+    asset { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
   end
 end

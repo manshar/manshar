@@ -4,8 +4,8 @@ class CreateImages < ActiveRecord::Migration
       t.string :title, :null => false, :default => ''
       t.text :caption, :null => false, :default => ''
       t.integer :user_id, :null => false
-      t.string :img_uid, :null => false
-      t.string :img_name
+      t.string :asset_uid, :null => false
+      t.string :asset_name
 
       t.timestamps
     end

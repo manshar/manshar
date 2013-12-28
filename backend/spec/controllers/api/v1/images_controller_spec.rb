@@ -8,7 +8,7 @@ describe Api::V1::ImagesController do
     @image_params = {
       :title => 'Title',
       :caption => 'caption',
-      :img => fixture_file_upload('images/test.png', 'image/png')
+      :asset => fixture_file_upload('images/test.png', 'image/png')
     }
   end
 

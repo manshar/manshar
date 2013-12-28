@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20131225055933) do
     t.string   "title",      default: "", null: false
     t.text     "caption",    default: "", null: false
     t.integer  "user_id",                 null: false
-    t.string   "img_uid",                 null: false
-    t.string   "img_name"
+    t.string   "asset_uid",               null: false
+    t.string   "asset_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

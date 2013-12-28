@@ -1,6 +1,6 @@
 class Image < ActiveRecord::Base
 
-  dragonfly_accessor :img do
+  dragonfly_accessor :asset do
     storage_options do |attachment|
       { headers: {"x-amz-acl" => "public-read-write"} }
     end
