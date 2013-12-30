@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         }
       }],
       production: [{
-        dest: '<%= yeoman.dist %>/scripts/appConfig.js',
+        dest: '<%= yeoman.app %>/scripts/appConfig.js',
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         name: 'AppConfig',
         constants: {
