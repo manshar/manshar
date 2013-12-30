@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # Seed your local database by running rake db:seed.
 
 user = User.create(
