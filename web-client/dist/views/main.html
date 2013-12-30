@@ -5,8 +5,9 @@
 </header>
 
 <ul class="manshar-articles-list one-column">
-  <li class="manshar-article" ng-repeat="article in articles">
+  <li class="manshar-article" ng-repeat="article in articles" ng-click="showArticle(article.id)">
     <h3>{{article.title}}</h3>
+    <h4>{{article.tagline}}</h4>
     <p class="manshar-snippet">{{article.body}}</p>
   </li>
 </ul>

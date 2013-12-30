@@ -12,7 +12,9 @@ angular.module('webClientApp')
     };
 
     var success = function() {
-      $location.path($routeParams.prev || '/');
+      $location.path($routeParams.prev || '/')
+        // Remove the prev param when redirecting.
+        .search('prev', null);
     };
 
     var error = function() {

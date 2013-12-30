@@ -11,7 +11,7 @@ describe('Service: ArticleService', function () {
       httpBackend = $httpBackend;
       mockArticle = Article;
       apiBase = '//'+API_HOST+'/api/v1/';
-    })
+    });
   });
 
   afterEach(function () {
