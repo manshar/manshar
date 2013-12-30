@@ -15,18 +15,44 @@ angular.module('webClientApp', [
    * Routing.
    */
   .config(['$routeProvider', function ($routeProvider) {
+
+    /**
+     * Checks proper access to the route and reject it if unauthenticated.
+     */
+    var checkAccess = function(config) {
+      return {
+        load: ['$q', '$location', 'LoginService', function($q, $location, LoginService) {
+          if(LoginService.isAuthorized(config.isPublic)) {
+            var deferred = $q.defer();
+            deferred.resolve();
+            return deferred.promise;
+          } else {
+            return $q.reject({
+              redirectTo: '/login',
+              previous: $location.path()
+            });
+          }
+        }]
+      };
+    };
+
+
     $routeProvider
 
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        isPublic: true
+        resolve: checkAccess({
+          isPublic: true
+        })
       })
 
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
-        isPublic: true
+        resolve: checkAccess({
+          isPublic: true
+        })
       })
 
       .when('/signup', {
@@ -38,7 +64,9 @@ angular.module('webClientApp', [
       .when('/articles/:articleId', {
         templateUrl: 'views/articles/show.html',
         controller: 'ArticleCtrl',
-        isPublic: false
+        resolve: checkAccess({
+          isPublic: false
+        })
       })
 
       .otherwise({
@@ -74,11 +102,17 @@ angular.module('webClientApp', [
   /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', 'LoginService', function ($location, $rootScope, LoginService) {
+  .run(['$location', '$rootScope', 'LoginService',
+      function ($location, $rootScope, LoginService) {
+
+    // If the user is already logged in init the auth headers.
     LoginService.initAuthHeaders();
-    $rootScope.$on('$routeChangeStart', function(event, current, previous) {
-      if(!LoginService.isAuthorized(current.isPublic)) {
-        $location.path('/login?prev='+$location.path());
+
+    // Listen to $routeChangeError and redirect the user.
+    $rootScope.$on('$routeChangeError', function(event, current, previous, rejection) {
+      if(rejection && rejection.redirectTo) {
+        $location.path(rejection.redirectTo).search('prev', rejection.previous);
       }
     });
+
   }]);

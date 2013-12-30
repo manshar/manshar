@@ -1,7 +1,29 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# encoding: utf-8
+
+# Seed your local database by running rake db:seed.
+
+user = User.create(
+  name: 'فراولة عبعال',
+  bio: 'وحش في كتابة الأغاني العربية النشهورة.',
+  email: 'aabaal@farawleh.com',
+  password: 'farawleh',
+  confirmed_at: Time.now)
+
+user.articles.create([
+  {
+    title: 'بتحدى العالم',
+    tagline: 'من أجمل ما غنى صابر الرباعي',
+    body: 'بتحدى العالم كلو وأنا وياك، وبقول للدنيا إن أنا بهواك، وإن إنت حبيبي وروحي وقلبي معاك.',
+    published: true
+  }, {
+    title: 'بتحدى العالم',
+    tagline: 'من أجمل ما غنى صابر الرباعي',
+    body: 'بتحدى العالم كلو وأنا وياك، وبقول للدنيا إن أنا بهواك، وإن إنت حبيبي وروحي وقلبي معاك.',
+    published: true
+  }, {
+    title: 'بتحدى العالم',
+    tagline: 'من أجمل ما غنى صابر الرباعي',
+    body: 'بتحدى العالم كلو وأنا وياك، وبقول للدنيا إن أنا بهواك، وإن إنت حبيبي وروحي وقلبي معاك.',
+    published: true
+  }
+])

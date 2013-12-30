@@ -29,7 +29,9 @@ describe('Service: LoginService', function () {
       StorageSrv = StorageService;
     });
 
-    handlers = { success: jasmine.createSpy(), error: jasmine.createSpy() };
+    handlers = { success: function() {}, error: function() {} };
+    spyOn(handlers, 'success');
+    spyOn(handlers, 'error');
   });
 
   afterEach(function () {
@@ -81,7 +83,7 @@ describe('Service: LoginService', function () {
       LoginSrv.login(userCredentials, handlers.success, handlers.error);
       httpBackend.flush();
       expect(handlers.error).toHaveBeenCalledWith(errorData);
-    })
+    });
 
   });
 

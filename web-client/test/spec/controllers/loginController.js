@@ -24,19 +24,19 @@ describe('Controller: LoginCtrl', function () {
 
   describe('LoginCtrl.login', function () {
     it('should login user and redirect', function () {
-      spyOn(LoginSrv, 'login').andCallFake(function(user, success, error) {
+      spyOn(LoginSrv, 'login').andCallFake(function(user, success) {
         success();
       });
 
       routeParams.prev = '/articles/1';
-      var controller = createController();
+      createController();
       scope.login({});
 
       expect(location.path()).toBe('/articles/1');
 
       // Should redirect to / if prev parameter didn't exist.
       delete routeParams.prev;
-      var controller = createController();
+      createController();
       scope.login({});
 
       expect(location.path()).toBe('/');
@@ -49,7 +49,7 @@ describe('Controller: LoginCtrl', function () {
       });
 
       routeParams.prev = '/articles/1';
-      var controller = createController();
+      createController();
       scope.login({});
 
       expect(scope.error).toBe('Wrong username and/or password.');

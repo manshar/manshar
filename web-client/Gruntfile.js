@@ -18,6 +18,15 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    // Help caches angular templates to avoid errors during testing.
+    ngtemplates: {
+      webClientApp: {
+        cwd: 'app',
+        src: 'views/{,*/}*.html',
+        dest: 'test/spec/helpers/cachedTemplates.js'
+      }
+    },
+
     // Define configuration depending on environment.
     ngconstant: {
       options: {
@@ -33,7 +42,7 @@ module.exports = function (grunt) {
         }
       }],
       production: [{
-        dest: '<%= yeoman.dist %>/scripts/appConfig.js',
+        dest: '<%= yeoman.app %>/scripts/appConfig.js',
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         name: 'AppConfig',
         constants: {
@@ -55,6 +64,10 @@ module.exports = function (grunt) {
       js: {
         files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all']
+      },
+      templates: {
+        files: ['app/views/{,*/}*.html'],
+        tasks: ['ngtemplates']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -117,17 +130,26 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        globals: {
+          jasmine: false
+        }
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js'
+        '<%= yeoman.app %>/scripts/{,*/}*.js',
+        // Exclude the auto-generated stuff from ngconstant task.
+        '!<%= yeoman.app %>/scripts/appConfig.js'
       ],
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: [
+          'test/spec/{,*/}*.js',
+          // Exclude the auto-generated stuff from ngtemplates task.
+          '!test/spec/helpers/cachedTemplates.js'
+        ]
       }
     },
 
@@ -234,7 +256,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
+          src: ['*.html', 'views/{,*/}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -380,6 +402,7 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
+    'ngtemplates:webClientApp',
     'connect:test',
     'karma'
   ]);
