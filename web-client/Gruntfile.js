@@ -402,6 +402,7 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
+    'ngconstant:development',
     'ngtemplates:webClientApp',
     'connect:test',
     'karma'
