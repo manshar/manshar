@@ -15,7 +15,7 @@ angular.module('webClientApp')
 
           // Success.
           angular.bind(this, function(response) {
-            //this.storeAuthData(response.data); // TODO should wait for confirmation
+           // TODO (HammamSamara) redirect to a view that requests email confirmation
             if (optSuccess) {
               optSuccess(response.data);
             }

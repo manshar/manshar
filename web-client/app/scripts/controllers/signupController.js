@@ -12,6 +12,7 @@ angular.module('webClientApp')
     };
 
     var success = function() {
+      // TODO (HammamSamara) redirect to a view that requests email confirmation
       $location.path($routeParams.prev || '/');
     };
 
