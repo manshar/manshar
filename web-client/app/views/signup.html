@@ -1,0 +1,20 @@
+<form name="signupForm" ng-submit="signup(user)">
+  
+    <label>االاسم</label>
+    <input type="text" name="name" ng-model="user.name" required /></br>
+
+    <label>الايميل</label>
+    <input type="text" name="email" ng-model="user.email" required /></br>
+
+    <label>لقب</label>
+    <input type="text" name="bio" ng-model="user.bio" required /></br>
+    
+    <label>كلمة المرور</label>
+    <input type="password" name="password" ng-model="user.password" required /></br>
+    
+    <label>تأكيد كلمة المرور</label>
+    <input type="password" name="password_confirmation" ng-model="user.password_confirmation" required />
+    </br>
+    
+    <button type="submit" class="button radius">Submit</button>
+</form>
