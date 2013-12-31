@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .service('SignupService', ['$http', 'API_HOST', 'StorageService',
-      function ($http, API_HOST, StorageService) {
+  .service('SignupService', ['$http', 'API_HOST',
+      function ($http, API_HOST) {
 
     var baseUrl = '//' + API_HOST + '/api/v1/';
 

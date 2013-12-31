@@ -8,14 +8,9 @@ describe('Service: SignupService', function () {
   var userCredentials = {
     email: 'user@example.me',
     password: 'password',
-    password_confirmation: 'password',
+    'password_confirmation': 'password',
     name : 'Example Tester',
-    bio : "A tester who is an example in all tests."
-  };
-
-  var returnData = {
-    user: { email: 'hammam@manshar.me' },
-    authToken: 'CZexzPGLYT1us1bxWQjx'
+    bio : 'A tester who is an example in all tests.'
   };
 
   var errorData = {
