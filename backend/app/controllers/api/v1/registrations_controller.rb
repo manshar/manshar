@@ -8,7 +8,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     # TODO Static confitmation
-    resource.confirmed_at = Time.now
+    #resource.confirmed_at = Time.now
     if resource.save
       render :status => 200,
              :json => { :user => resource,
@@ -17,6 +17,13 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       render :status => 500,
              :json => { :errors => resource.errors }
     end
+  end
+
+  protected
+
+  def after_inactive_sign_up_path_for(resource)
+    # TODO (HammamSamara) move this env variable 
+    redirect_to 'http://www.manshar.me/'
   end
 
   private

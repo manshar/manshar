@@ -80,10 +80,18 @@ Backend::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { :host => 'manshar-backend.herokuapp.com' }
-
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
+  config.action_mailer.default_url_options = { :host => ENV['API_HOST'] }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "manshar.me",
+    :authentication => 'login',
+    :user_name => ENV['GMAIL_USERNAME'],
+    :password => ENV['GMAIL_PWD']
+  }
+  
   # Allow Cross-Origin Resource Sharing header to allow cross
   # domain xhr requests.
   config.middleware.insert_before Warden::Manager, Rack::Cors do
