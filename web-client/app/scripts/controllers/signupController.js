@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', 'SignupService',
-      function ($scope, $http, $location, $routeParams, SignupService) {
+  .controller('SignupCtrl', ['$scope', '$location', '$routeParams', 'SignupService',
+      function ($scope, $location, $routeParams, SignupService) {
 
     $scope.user = {};
     $scope.error = null;

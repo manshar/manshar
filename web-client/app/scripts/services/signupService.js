@@ -15,7 +15,6 @@ angular.module('webClientApp')
 
           // Success.
           angular.bind(this, function(response) {
-           // TODO (HammamSamara) redirect to a view that requests email confirmation
             if (optSuccess) {
               optSuccess(response.data);
             }
