@@ -17,8 +17,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  protected
-
   private
 
   def sign_up_params
