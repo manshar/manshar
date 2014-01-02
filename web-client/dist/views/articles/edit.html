@@ -1,0 +1,16 @@
+<div class="manshar-article">
+  <header>
+    <h1 class="manshar-editor" medium-editor="" placeholder="عنوان المقال" mode="inline" max-length="100" ng-model="article.title">
+    </h1>
+
+    <h2 class="manshar-editor" medium-editor="" placeholder="عنوان المقال الفرعي" mode="inline" max-length="200" ng-model="article.tagline">
+    </h2>
+
+  </header>
+
+  <article class="manshar-editor" medium-editor="" placeholder="اكتب مقالك هنا" mode="rich" ng-model="article.body">
+  </article>
+</div>
+
+<button ng-click="saveArticle(article, true)">نشر</button>
+<button ng-click="saveArticle(article, false)">حفظ مسودة</button>

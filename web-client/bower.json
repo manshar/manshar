@@ -8,7 +8,9 @@
     "angular-resource": "~1.2.0",
     "angular-cookies": "~1.2.0",
     "angular-sanitize": "~1.2.0",
-    "angular-route": "~1.2.0"
+    "angular-route": "~1.2.0",
+    "Medium.js": "jakiestfu/Medium.js",
+    "angular-truncate": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
