@@ -68,7 +68,7 @@ angular.module('webClientApp', [
         templateUrl: 'views/articles/edit.html',
         controller: 'EditArticleCtrl',
         resolve: checkAccess({
-          isPublic: true
+          isPublic: false
         })
       })
 
@@ -84,7 +84,7 @@ angular.module('webClientApp', [
         templateUrl: 'views/articles/show.html',
         controller: 'ArticleCtrl',
         resolve: checkAccess({
-          isPublic: false
+          isPublic: true
         })
       })
 

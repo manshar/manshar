@@ -25,7 +25,8 @@ ul.manshar-articles-list {
 }
 
 ul.manshar-articles-list li {
-	margin: 50px 0;
+  margin: 50px 0;
+  cursor: pointer;
 }
 
 
@@ -38,31 +39,31 @@ ul.manshar-articles-list li {
 }
 
 .manshar-article {
-	width: 1024px;
-	margin: 0 auto;
+  width: 1024px;
+  margin: 0 auto;
 }
 
 .manshar-article article {
-	padding: 10px;
-	font-size: 24pt;
-	min-height: 34pt !important;
-	text-align: justify;
+  padding: 10px;
+  font-size: 24pt;
+  min-height: 34pt !important;
+  text-align: justify;
 }
 
 .manshar-article h1 {
-	font-size: 48pt;
-	min-height: 58pt !important;
+  font-size: 48pt;
+  min-height: 58pt !important;
 }
 
 .manshar-article h2 {
-	font-size: 36pt;
-	min-height: 46pt !important;
-	color: #999;
+  font-size: 36pt;
+  min-height: 46pt !important;
+  color: #999;
 }
 
 /* Match medium.css editor */
 .manshar-article article p:first-child {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .manshar-article article p:last-child{
