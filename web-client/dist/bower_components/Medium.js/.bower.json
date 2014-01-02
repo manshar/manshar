@@ -1,0 +1,14 @@
+{
+  "name": "Medium.js",
+  "homepage": "https://github.com/jakiestfu/Medium.js",
+  "_release": "97f0f7189b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "97f0f7189b22a2c4b28f2378f72f1492a36ea1d1"
+  },
+  "_source": "git://github.com/jakiestfu/Medium.js.git",
+  "_target": "*",
+  "_originalSource": "jakiestfu/Medium.js",
+  "_direct": true
+}
