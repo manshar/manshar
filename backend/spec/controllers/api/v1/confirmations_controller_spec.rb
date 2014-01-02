@@ -15,7 +15,6 @@ describe Api::V1::ConfirmationsController do
     it 'should register with JSON request and returns auth_token' do
       @user.confirmed_at.should eq(nil)
       get :show, :confirmation_token => @token
-      puts response.body
       response.should be_redirect
       response.should redirect_to('http://' + ENV['WEB_CLIENT_HOST'])
       @user = User.find :last
