@@ -1,21 +1,23 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html ng-app="webClientApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="webClientApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="webClientApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html ng-app="webClientApp" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
+    <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/Medium.js/medium.css">
         <!-- endbuild -->
 </head>
-  <body ng-app="webClientApp">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -47,19 +49,29 @@
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/Medium.js/medium.js"></script>
+        <script src="bower_components/angular-truncate/dist/angular-truncate.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/appConfig.js"></script>
+
         <script src="scripts/controllers/mainController.js"></script>
         <script src="scripts/controllers/articleController.js"></script>
+        <script src="scripts/controllers/editArticleController.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/signupController.js"></script>
+
         <script src="scripts/services/articleService.js"></script>
         <script src="scripts/services/loginService.js"></script>
         <script src="scripts/services/signupService.js"></script>
         <script src="scripts/services/storageService.js"></script>
+
+        <script src="scripts/directives/mediumEditor.js"></script>
+
+        <script src="scripts/filters/nohtml.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>

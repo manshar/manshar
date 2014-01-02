@@ -10,6 +10,7 @@ angular.module('webClientApp', [
   'ngSanitize',
   'ngRoute',
   'AppConfig',
+  'truncate',
 ])
   /**
    * Routing.
@@ -63,6 +64,22 @@ angular.module('webClientApp', [
         })
       })
 
+      .when('/articles/new', {
+        templateUrl: 'views/articles/edit.html',
+        controller: 'EditArticleCtrl',
+        resolve: checkAccess({
+          isPublic: true
+        })
+      })
+
+      .when('/articles/:articleId/edit', {
+        templateUrl: 'views/articles/edit.html',
+        controller: 'EditArticleCtrl',
+        resolve: checkAccess({
+          isPublic: false
+        })
+      })
+
       .when('/articles/:articleId', {
         templateUrl: 'views/articles/show.html',
         controller: 'ArticleCtrl',
@@ -107,6 +124,10 @@ angular.module('webClientApp', [
   .run(['$location', '$rootScope', 'LoginService',
       function ($location, $rootScope, LoginService) {
 
+    $rootScope.page = {
+      title: 'منشر - منصة النشر العربية'
+    };
+
     // If the user is already logged in init the auth headers.
     LoginService.initAuthHeaders();
 
@@ -115,6 +136,10 @@ angular.module('webClientApp', [
       if(rejection && rejection.redirectTo) {
         $location.path(rejection.redirectTo).search('prev', rejection.previous);
       }
+    });
+
+    $rootScope.$on('$routeChangeSuccess', function (event, current) {
+      $rootScope.page.title = current.$$route.title || $rootScope.page.title;
     });
 
   }]);

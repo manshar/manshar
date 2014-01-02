@@ -29,5 +29,13 @@ describe('Service: ArticleService', function () {
 
       expect(article.title).toBe('Hello World.');
     });
+
+    it('should make a PUT request with :articleId', function () {
+      httpBackend.expectPUT(apiBase + 'articles/1', {title: 'What.'}).respond(200, {title: 'What.'});
+      var article = mockArticle.update({ 'articleId': 1 }, {title: 'What.'});
+      httpBackend.flush();
+
+      expect(article.title).toBe('What.');
+    });
   });
 });
