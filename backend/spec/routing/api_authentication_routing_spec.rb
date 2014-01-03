@@ -23,3 +23,17 @@ describe Api::V1::RegistrationsController do
   end
 
 end
+
+
+describe Api::V1::ConfirmationsController do
+
+  it 'should route get /confirm/:token to confirmations#show' do
+    expect(get '/api/v1/confirm/12r25awf2').
+      to route_to({
+        :controller => 'api/v1/confirmations',
+        :action => 'show',
+        :confirmation_token => '12r25awf2'
+      })
+  end
+
+end
