@@ -122,7 +122,14 @@ rspec spec
 
 cd web-client
 
+# This will also show you the test coverage.
 grunt test
+
+# If you want to dive deeper into the code coverage to see what is not covered.
+# You can run the following command and go to manshar/web-client/coverage/
+# Folder and copy paste the folder name after the localhost:5555 that opened.
+# You'll end up with something like: localhost:5555/PhantomJS 1.9.2 (Mac OS X)
+grunt coverage
 ```
 
 ## HowTo keep in sync your git repository for Manshar
