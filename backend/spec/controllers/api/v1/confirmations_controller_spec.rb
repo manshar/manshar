@@ -18,7 +18,6 @@ describe Api::V1::ConfirmationsController do
       response.should be_redirect
       response.should redirect_to('http://' + ENV['WEB_CLIENT_HOST'])
       @user.reload
-      # @user = User.find @user.id
       @user.confirmed_at.should_not eq(nil)
     end
 
