@@ -17,7 +17,8 @@ describe Api::V1::ConfirmationsController do
       get :show, :confirmation_token => @token
       response.should be_redirect
       response.should redirect_to('http://' + ENV['WEB_CLIENT_HOST'])
-      @user = User.find :last
+      @user.reload
+      # @user = User.find @user.id
       @user.confirmed_at.should_not eq(nil)
     end
 

@@ -22,6 +22,12 @@ gem 'pundit'
 gem 'dragonfly'
 gem 'dragonfly-s3_data_store'
 
+# Templating API JSON responses.
+gem 'rabl'
+
+# JSON parser.
+gem 'oj'
+
 
 group :production do
   gem 'therubyracer', platforms: :ruby
