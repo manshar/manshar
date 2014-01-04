@@ -4,3 +4,5 @@
 web-client/app/scripts/appConfig.js
 web-client/test/spec/helpers/cachedTemplates.js
 web-client/coverage
+
+backend/coverage

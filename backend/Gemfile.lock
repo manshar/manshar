@@ -40,6 +40,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.1)
     dotenv (0.9.0)
     dotenv-rails (0.9.0)
       dotenv (= 0.9.0)
@@ -166,6 +167,11 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-hmac (0.4.0)
+    simplecov (0.8.2)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -212,4 +218,5 @@ DEPENDENCIES
   rails-api
   rails_12factor
   rspec-rails
+  simplecov
   therubyracer
