@@ -106,6 +106,7 @@ GEM
     net-ssh (2.7.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oj (2.5.1)
     orm_adapter (0.5.0)
     pg (0.17.0)
     polyglot (0.3.3)
@@ -117,6 +118,8 @@ GEM
       rack (>= 1.1, < 2.0)
     pundit (0.2.1)
       activesupport (>= 3.0.0)
+    rabl (0.9.3)
+      activesupport (>= 2.3.14)
     rack (1.5.2)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -203,9 +206,11 @@ DEPENDENCIES
   factory_girl_rails
   foreman
   guard-rspec
+  oj
   pg
   puma
   pundit
+  rabl
   rack-cache
   rack-cors
   rails (= 4.0.1)
