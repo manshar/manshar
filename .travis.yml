@@ -21,7 +21,7 @@ before_script:
   - cd $MANSHAR_HOME/backend
   - cp config/database.yml.sample config/database.yml
   - psql -c 'create database manshar_test;' -U postgres
-  - rake db:migrate
+  - bundle exec rake db:migrate
   - cd $MANSHAR_HOME/web-client
   - npm install grunt --save-dev
   - npm install
