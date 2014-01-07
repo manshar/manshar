@@ -55,17 +55,19 @@ describe Api::V1::ArticlesController do
 
   describe 'POST articles' do
     it 'should 401 for unauthorized user' do
-      post :create, :article => { :title => 'Hello There',
-                                  :tagline => 'My awesome tagline',
-                                  :body => 'What is going on?' }
+      post :create, :article => {
+          :title => 'Hello There', :tagline => 'My awesome tagline',
+          :cover => fixture_file_upload('images/test.png', 'image/png'),
+          :body => 'What is going on?' }
       response.code.should eq('401')
     end
 
     it 'should create a draft article by default for authorized user' do
       request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
-      post :create, { :article => { :title => 'Hello There',
-                                    :tagline => 'My awesome tagline',
-                                    :body => 'What is going on?' } }
+      post :create, { :article => {
+        :title => 'Hello There', :tagline => 'My awesome tagline',
+        :cover => fixture_file_upload('images/test.png', 'image/png'),
+        :body => 'What is going on?' } }
       response.should be_success
       parsed_response = JSON.parse(response.body)
       article = Article.find(parsed_response['id'])
@@ -77,10 +79,10 @@ describe Api::V1::ArticlesController do
 
     it 'should publish a new article if specified' do
       request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
-      post :create, { :article => { :title => 'Hello There',
-                                  :tagline => 'My awesome tagline',
-                                  :body => 'What is going on?',
-                                  :published => true } }
+      post :create, { :article => {
+          :title => 'Hello There', :tagline => 'My awesome tagline',
+          :body => 'What is going on?', :published => true,
+          :cover => fixture_file_upload('images/test.png', 'image/png') } }
       response.should be_success
       parsed_response = JSON.parse(response.body)
       article = Article.find(parsed_response['id'])
