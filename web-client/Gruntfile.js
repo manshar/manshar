@@ -392,7 +392,7 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       },
-      unit_coverage: {
+      unitCoverage: {
         configFile: 'karma.conf.js',
         autoWatch: false,
         singleRun: true,
@@ -432,7 +432,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('coverage', [
-    'karma:unit_coverage',
+    'karma:unitCoverage',
     'connect:coverage'
   ]);
 
@@ -443,7 +443,7 @@ module.exports = function (grunt) {
     'ngconstant:development',
     'ngtemplates:webClientApp',
     'connect:test',
-    'karma:unit_coverage',
+    'karma:unitCoverage',
     'karma:unit'
   ]);
 
