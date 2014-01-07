@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Api::V1::ArticlesController do
+  render_views
 
   before (:each) do
     @user = FactoryGirl.create(:user)
@@ -18,7 +19,9 @@ describe Api::V1::ArticlesController do
 
       get :index
       response.should be_success
-      response.body.should eq([@article].to_json)
+      rendered = Rabl.render(
+          [@article], 'api/v1/articles/index', :view_path => 'app/views')
+      response.body.should eq(rendered)
     end
   end
 
@@ -33,7 +36,9 @@ describe Api::V1::ArticlesController do
       request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@article.user.authentication_token}"}
       get :show, :id => @article.id
       response.code.should eq('200')
-      response.body.should eq(@article.to_json)
+      rendered = Rabl.render(
+          @article, 'api/v1/articles/show', :view_path => 'app/views')
+      response.body.should eq(rendered)
     end
 
     it 'should allow users to access published articles without authentication' do
@@ -42,7 +47,9 @@ describe Api::V1::ArticlesController do
       @article.save
       get :show, :id => @article.id
       response.should be_success
-      response.body.should eq(@article.to_json)
+      rendered = Rabl.render(
+          @article, 'api/v1/articles/show', :view_path => 'app/views')
+      response.body.should eq(rendered)
     end
   end
 
@@ -97,7 +104,9 @@ describe Api::V1::ArticlesController do
       response.should be_success
       parsed_response = JSON.parse(response.body)
       article = Article.find(parsed_response['id'])
-      parsed_response.should eq(JSON.parse(article.to_json))
+      rendered = Rabl.render(
+          article, 'api/v1/articles/show', :view_path => 'app/views')
+      response.body.should eq(rendered)
     end
   end
 

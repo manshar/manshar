@@ -47,7 +47,8 @@
     "grunt-angular-templates": "~0.5.1",
     "grunt-contrib-sass": "~0.6.0",
     "node-bourbon": "~1.0.0",
-    "node-neat": "~1.1.0"
+    "node-neat": "~1.1.0",
+    "karma-coverage": "~0.1.4"
   },
   "engines": {
     "node": ">=0.8.0"

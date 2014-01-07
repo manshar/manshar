@@ -123,6 +123,14 @@ module.exports = function (grunt) {
         options: {
           base: '<%= yeoman.dist %>'
         }
+      },
+      coverage: {
+        options: {
+          open: true,
+          base: 'coverage/',
+          port: 5555,
+          keepalive: true
+        }
       }
     },
 
@@ -383,6 +391,21 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
+      },
+      unit_coverage: {
+        configFile: 'karma.conf.js',
+        autoWatch: false,
+        singleRun: true,
+        reporters: ['progress', 'coverage'],
+        preprocessors: {
+          'app/scripts/{,*/}*.js': ['coverage']
+        },
+        coverageReporter: {
+          reporters: [
+            {type : 'text'},
+            {type: 'html', dir: '/coverage'}
+          ]
+        }
       }
     }
   });
@@ -408,6 +431,11 @@ module.exports = function (grunt) {
     grunt.task.run(['serve']);
   });
 
+  grunt.registerTask('coverage', [
+    'karma:unit_coverage',
+    'connect:coverage'
+  ]);
+
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
@@ -415,7 +443,8 @@ module.exports = function (grunt) {
     'ngconstant:development',
     'ngtemplates:webClientApp',
     'connect:test',
-    'karma'
+    'karma:unit_coverage',
+    'karma:unit'
   ]);
 
   grunt.registerTask('build', [

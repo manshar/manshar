@@ -10,7 +10,7 @@ class Api::V1::ArticlesController < ApplicationController
     # marked published.
     @articles = Article.public
     authorize @articles
-    render json: @articles
+    render 'api/v1/articles/index'
   end
 
   # GET /api/v1/articles/1
@@ -18,7 +18,7 @@ class Api::V1::ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     authorize @article
-    render json: @article
+    render 'api/v1/articles/show'
   end
 
   # POST /api/v1/articles
@@ -27,7 +27,7 @@ class Api::V1::ArticlesController < ApplicationController
     @article = current_user.articles.new(article_params)
     authorize @article
     if @article.save
-      render json: @article, status: :created
+      render 'api/v1/articles/show', status: :created
     else
       render json: @article.errors, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class Api::V1::ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     authorize @article
     if @article.update(article_params)
-      render json: @article
+      render 'api/v1/articles/show'
     else
       render json: @article.errors, status: :unprocessable_entity
     end
