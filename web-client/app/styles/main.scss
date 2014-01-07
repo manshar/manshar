@@ -4,10 +4,10 @@
 *{
   padding:0;
   margin:0;
+  direction: rtl;
 }
 
 body {
-  direction: rtl;
   @include outer-container;
   font-family: $lucida-grande;
   background: #f9f9f9;

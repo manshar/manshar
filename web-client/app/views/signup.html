@@ -1,9 +1,5 @@
 <div class="form-div">
-  <header ng-controller="MainCtrl">
-    <img src="/images/manshar@200x200.png" class="manshar-logo" />
-    <h1>{{title}}</h1>
-  </header>
-  
+  <div ng-include="'views/partials/_form_header.html'"></div>
   <form id="signup-form" novalidate name="signupForm" ng-submit="signup(user)">
     <label>
       <input
