@@ -1,20 +1,50 @@
-<form name="signupForm" ng-submit="signup(user)">
+<div class="form-div">
+  <header ng-controller="MainCtrl">
+    <img src="/images/manshar@200x200.png" class="manshar-logo" />
+    <h1>{{title}}</h1>
+  </header>
   
-    <label>االاسم</label>
-    <input type="text" name="name" ng-model="user.name" required /></br>
+  <form id="signup-form" novalidate name="signupForm" ng-submit="signup(user)">
+    <label>
+      <input
+        type="text"
+        ng-model="user.name"
+        autofocus
+        required
+        placeholder="الاسم" />
+    </label>
 
-    <label>الايميل</label>
-    <input type="text" name="email" ng-model="user.email" required /></br>
+    <label>
+      <input
+        type="email"
+        ng-model="user.email"
+        required
+        placeholder="الايميل" />
+    </label>
 
-    <label>لقب</label>
-    <input type="text" name="bio" ng-model="user.bio" required /></br>
+    <label>
+      <input
+        type="password"
+        ng-model="user.password"
+        required
+        placeholder="كلمة المرور" />
+    </label>
     
-    <label>كلمة المرور</label>
-    <input type="password" name="password" ng-model="user.password" required /></br>
+    <label>
+      <input
+        type="password"
+        ng-model="user.password_confirmation"required
+        placeholder="تأكيد كلمة المرور" />
+    </label>
     
-    <label>تأكيد كلمة المرور</label>
-    <input type="password" name="password_confirmation" ng-model="user.password_confirmation" required />
-    </br>
+    <label>
+      <textarea
+        ng-model="user.bio"
+        class="input"
+        cols= "23"
+        placeholder="السيرة الذاتية"></textarea>
+    </label>
     
-    <button type="submit" class="button radius">Submit</button>
-</form>
+    <button type="submit">تسجيل</button>
+  </form>
+</div>

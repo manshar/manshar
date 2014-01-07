@@ -1,0 +1,130 @@
+@import "bourbon";
+@import "neat";
+
+*{
+  padding:0;
+  margin:0;
+}
+
+body {
+  direction: rtl;
+  @include outer-container;
+  font-family: $lucida-grande;
+  background: #f9f9f9;
+}
+
+.container{
+  @include span-columns(12);
+}
+
+header {
+  padding: 10px;
+
+  h1 {
+    font-size: 48pt;
+  }
+}
+
+.manshar-logo {
+  width: 64px;
+}
+
+.manshar-tagline,
+.manshar-snippet {
+  color: #666;
+}
+
+ul.manshar-articles-list {
+  list-style: none;
+  
+  li {
+    margin: 50px 0;
+    cursor: pointer;
+  }
+}
+
+.manshar-snippet {
+  font-size: 16pt;
+}
+
+.manshar-article {
+  width: 1024px;
+  margin: 0 auto;
+  
+  article {
+    padding: 10px;
+    font-size: 24pt;
+    min-height: 34pt !important;
+    text-align: justify;
+  }
+  
+  h1 {
+    font-size: 48pt;
+    min-height: 58pt !important;
+  }
+
+  h2 {
+    font-size: 36pt;
+    min-height: 46pt !important;
+    color: #999;
+  }
+
+  h3 {
+    font-size: 24pt;
+  }
+}
+
+/* Match medium.css editor */
+.manshar-article article p:first-child {
+  margin-top: 0;
+}
+
+.manshar-article article p:last-child{
+  margin-bottom: 0;
+}
+
+.form-div {
+  @include span-columns(3);
+  @include shift(5);
+
+  padding-top:100px;
+
+  header {
+    @include row(table);
+
+    img {
+      float: right;
+    }
+
+    h1 {
+      color: #3A3A3A;
+      padding-right: 85px;
+    }
+  }
+
+  form{
+    @include row(table);
+    padding: 10px 0;
+    input, .input{
+      display: block;
+      border: 2px solid #ECEBEC;
+      font-size: 20px;
+      margin: 20px 3px;
+      padding: 10px;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    button {
+      @include button(simple, #e48184);
+      font-size: 20px;
+      padding : 10px 125px;
+    }
+
+    .info{
+      margin: 10px 0;
+      font-size: 11px;
+      color: #bbbaba;
+    }
+  }
+}
