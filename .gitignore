@@ -4,3 +4,9 @@
 web-client/app/scripts/appConfig.js
 web-client/test/spec/helpers/cachedTemplates.js
 web-client/coverage
+
+# Ignore dist. This will be removed temp by travis to deploy to heroku.
+# As dist need to be tracked in order to push to heroku.
+# But the changes won't be pushed to origin.
+web-client/dist
+
