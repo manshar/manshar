@@ -21,8 +21,21 @@ else
   echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
   heroku keys:clear
   yes | heroku keys:add
-  yes | git push web-client-heroku `git subtree split --prefix web-client/dist master`:master --force
+
+  git config user.email "deploy-bot@manshar.me"
+  git config user.name "Manshar Deploy Bot"
+
+  # Deploy Manshar Web-Client.
+  # Create a temp branch to deploy from.
+  git checkout -b tmp-deploy
+  # Un-ignoring dist for a second.
+  sed '/web-client\/dist/d' .gitignore > .gitignore.new && mv .gitignore.new .gitignore
+  cd $MANSHAR_HOME/web-client/ && grunt && cd $MANSHAR_HOME
+  git add --all && git commit -a -m 'Dummy message.'
+  yes | git push web-client-heroku `git subtree split --prefix web-client/dist tmp-deploy`:master --force
+
+  # Deploy Manshar Backend.
+  git checkout master
   yes | git push backend-heroku `git subtree split --prefix backend master`:master --force
   heroku run rake db:migrate --app manshar-backend
 fi
-

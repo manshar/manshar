@@ -73,9 +73,9 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+      sass: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        tasks: ['sass']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -191,9 +191,17 @@ module.exports = function (grunt) {
       }
     },
 
-
-
-
+    // Compiles Sass to CSS and generates necessary files if requested
+    sass: {
+      dist: {
+        options: {
+          loadPath: require('node-neat').includePaths
+        },
+        files: {
+          '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.scss'
+        }
+      }
+    },
 
     // Renames files for browser caching purposes
     rev: {
@@ -221,7 +229,10 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on rev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      html: [
+        '<%= yeoman.dist %>/{,*/}*.html',
+        '<%= yeoman.dist %>/views/partials/{,*/}*.html'
+      ],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>']
@@ -337,12 +348,14 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'sass',
         'copy:styles'
       ],
       test: [
         'copy:styles'
       ],
       dist: [
+        'sass',
         'copy:styles',
         'imagemin',
         'svgmin',
@@ -382,7 +395,7 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       },
-      unit_coverage: {
+      unitCoverage: {
         configFile: 'karma.conf.js',
         autoWatch: false,
         singleRun: true,
@@ -422,7 +435,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('coverage', [
-    'karma:unit_coverage',
+    'karma:unitCoverage',
     'connect:coverage'
   ]);
 
@@ -433,7 +446,7 @@ module.exports = function (grunt) {
     'ngconstant:development',
     'ngtemplates:webClientApp',
     'connect:test',
-    'karma:unit_coverage',
+    'karma:unitCoverage',
     'karma:unit'
   ]);
 
