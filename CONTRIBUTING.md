@@ -79,6 +79,8 @@ bundle install
 
 cd web-client
 
+sudo gem install sass
+
 npm install
 
 bower install
@@ -160,8 +162,9 @@ git checkout xyz
 
 After implementing the feature and its test cases, push it to your github account
 
-If your edits touch the web-client code, make sure to also run ```grunt``` to build the web-client. We keep
-our dist/ in our repo to allow us to automatically deploy to production once merged into master.
+If your edits touch the web-client code, make sure to also run ```grunt``` to build the web-client. And make sure
+it builds successfully without errors or jshints warnings (try to fix jshints warnings).
+
 
 ```sh
 git add .
