@@ -10,3 +10,5 @@ web-client/coverage
 # But the changes won't be pushed to origin.
 web-client/dist
 
+# This is where dragonfly upload images in Development Env.
+backend/public/system/

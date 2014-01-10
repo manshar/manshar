@@ -28,6 +28,10 @@ gem 'rabl'
 # JSON parser.
 gem 'oj'
 
+# This is used in web-client not backend.
+# And it is to get around installing sass on Travis.
+gem 'sass'
+
 
 group :production do
   gem 'therubyracer', platforms: :ruby

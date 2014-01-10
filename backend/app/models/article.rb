@@ -23,4 +23,11 @@ class Article < ActiveRecord::Base
     not self.published
   end
 
+  def cover_abs_url
+    uri = cover.url
+    if uri && uri !~ /^http/
+      uri = "//#{ENV['API_HOST']}#{uri}"
+    end
+    uri
+  end
 end

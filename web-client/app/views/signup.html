@@ -1,6 +1,16 @@
 <div class="form-div">
   <div ng-include="'views/partials/_form_header.html'"></div>
   <form id="signup-form" novalidate name="signupForm" ng-submit="signup(user)">
+
+    <label>
+        صورتك
+        <input
+          type="file"
+          manshar-file
+            file-model="user.avatar"
+        />
+    </label>
+
     <label>
       <input
         type="text"
@@ -9,6 +19,7 @@
         required
         placeholder="الاسم" />
     </label>
+
 
     <label>
       <input
@@ -25,14 +36,14 @@
         required
         placeholder="كلمة المرور" />
     </label>
-    
+
     <label>
       <input
         type="password"
         ng-model="user.password_confirmation"required
         placeholder="تأكيد كلمة المرور" />
     </label>
-    
+
     <label>
       <textarea
         ng-model="user.bio"
@@ -40,7 +51,7 @@
         cols= "23"
         placeholder="السيرة الذاتية"></textarea>
     </label>
-    
+
     <button type="submit">تسجيل</button>
   </form>
 </div>

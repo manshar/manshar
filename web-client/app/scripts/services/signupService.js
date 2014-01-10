@@ -6,11 +6,29 @@ angular.module('webClientApp')
 
     var baseUrl = '//' + API_HOST + '/api/v1/';
 
+    /**
+     * These configs are needed. AngularJS identity tranformer
+     * can automatically figure out that this is a multipart
+     * content and use the correct Content-Type.
+     */
+    var configs = {
+      headers: {'Content-Type': undefined},
+      transformRequest: angular.identity
+    };
+
+    var createFormData = function (data) {
+      var fd = new FormData();
+      for (var key in data.user) {
+        fd.append('user[' + key + ']', data.user[key]);
+      }
+      return fd;
+    };
+
     return {
 
       signup: function(user, optSuccess, optError) {
         $http.post(baseUrl + 'registrations.json',
-                   {'user': user})
+                   createFormData({user: user}), configs)
         .then(
 
           // Success.
