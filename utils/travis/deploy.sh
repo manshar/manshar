@@ -30,6 +30,8 @@ else
   git checkout -b tmp-deploy
   # Un-ignoring dist for a second.
   sed '/web-client\/dist/d' .gitignore > .gitignore.new && mv .gitignore.new .gitignore
+  # Sass gem is needed to build web client.
+  sudo gem install sass
   cd $MANSHAR_HOME/web-client/ && grunt && cd $MANSHAR_HOME
   git add --all && git commit -a -m 'Dummy message.'
   yes | git push web-client-heroku `git subtree split --prefix web-client/dist tmp-deploy`:master --force
