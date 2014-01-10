@@ -3,10 +3,6 @@
 angular.module('webClientApp')
   .directive('mansharFile', [function () {
 
-    var myFunc = function () {
-      console.log('HELLOOOO');
-    };
-
     return {
       restrict: 'A',
       scope: {
@@ -17,7 +13,6 @@ angular.module('webClientApp')
 
         element.on('change', function(e) {
           var selectedFile = e.target.files[0];
-          var previewUrl;
 
           if (selectedFile) {
 

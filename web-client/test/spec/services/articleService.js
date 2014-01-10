@@ -70,7 +70,7 @@ describe('Service: Article', function () {
       });
 
       it('should make a PUT request and call error callback', function () {
-        var article = mockArticle.update(
+        mockArticle.update(
             { 'articleId': 1 }, {article: articleData},
             null, function (data) {
               expect(data.error).toBe(errorData.error);
@@ -79,7 +79,7 @@ describe('Service: Article', function () {
       });
 
       it('should work without callbacks', function () {
-        var article = mockArticle.update(
+        mockArticle.update(
             { 'articleId': 1 }, {article: articleData});
         httpBackend.flush();
       });
@@ -121,16 +121,16 @@ describe('Service: Article', function () {
       });
 
       it('should make a POST request and call error callback', function () {
-        var article = mockArticle.save(
+        mockArticle.save(
             { article: articleData.title},
-            function (data) {}, function (data) {
+            null, function (data) {
               expect(data.error).toBe(errorData.error);
             });
         httpBackend.flush();
       });
 
       it('should work without callbacks', function () {
-        var article = mockArticle.save({ article: articleData});
+        mockArticle.save({ article: articleData});
         httpBackend.flush();
       });
 
