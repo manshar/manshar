@@ -40,23 +40,46 @@ describe('Service: SignupService', function () {
 
   describe('SignupService.signup', function () {
 
-    it('should POST /registrations.json', function () {
-      var data = JSON.stringify({ user: userCredentials });
-      httpBackend.expectPOST(baseUrl + 'registrations.json', data).respond(200);
+    describe('Success statuses', function () {
 
-      SignupSrv.signup(userCredentials);
-      httpBackend.flush();
+      beforeEach(function () {
+        httpBackend.expectPOST(
+            baseUrl + 'registrations.json', new FormData())
+          .respond(200, userCredentials);
+      });
+
+      it('should POST /registrations.json and call success callback', function () {
+        SignupSrv.signup(userCredentials, handlers.success);
+        httpBackend.flush();
+        expect(handlers.success).toHaveBeenCalledWith(userCredentials);
+      });
+
+      it('should work without callbacks', function () {
+        SignupSrv.signup(userCredentials);
+        httpBackend.flush();
+      });
 
     });
 
-    it('should fail for an already used email', function () {
-      var data = JSON.stringify({ user: userCredentials });
-      httpBackend.expectPOST(baseUrl + 'registrations.json', data).respond(401, errorData);
+    describe('Success statuses', function () {
 
-      SignupSrv.signup(userCredentials, handlers.success, handlers.error);
-      httpBackend.flush();
-      expect(handlers.error).toHaveBeenCalledWith(errorData);
+      beforeEach(function () {
+        httpBackend.expectPOST(
+            baseUrl + 'registrations.json', new FormData())
+          .respond(401, errorData);
+      });
+
+      it('should POST /registrations.json and call fail callback', function () {
+        SignupSrv.signup(userCredentials, null, handlers.error);
+        httpBackend.flush();
+        expect(handlers.error).toHaveBeenCalledWith(errorData);
+      });
+
+      it('should work without callbacks', function () {
+        SignupSrv.signup(userCredentials);
+        httpBackend.flush();
+      });
+
     });
-
   });
 });

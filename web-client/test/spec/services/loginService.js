@@ -64,50 +64,95 @@ describe('Service: LoginService', function () {
 
   describe('LoginService.login', function () {
 
-    it('should POST /sessions.json and store user data', function () {
-      var data = JSON.stringify({ user: userCredentials });
-      httpBackend.expectPOST(baseUrl + 'sessions.json', data).respond(200, returnData);
+    describe('Success statuses', function () {
 
-      spyOn(LoginSrv, 'storeAuthData');
-      LoginSrv.login(userCredentials, handlers.success, handlers.error);
-      httpBackend.flush();
+      beforeEach(function () {
+        var data = JSON.stringify({ user: userCredentials });
+        httpBackend.expectPOST(baseUrl + 'sessions.json', data)
+          .respond(200, returnData);
+      });
 
-      expect(handlers.success).toHaveBeenCalledWith(returnData);
-      expect(LoginSrv.storeAuthData).toHaveBeenCalledWith(returnData);
+      it('should POST /sessions.json and store user data', function () {
+        spyOn(LoginSrv, 'storeAuthData');
+        LoginSrv.login(userCredentials, handlers.success, handlers.error);
+        httpBackend.flush();
+
+        expect(handlers.success).toHaveBeenCalledWith(returnData);
+        expect(LoginSrv.storeAuthData).toHaveBeenCalledWith(returnData);
+      });
+
+      it('should work without a callback', function () {
+        LoginSrv.login(userCredentials);
+        httpBackend.flush();
+      });
+
     });
 
-    it('should call the error callback with the data returned', function () {
-      var data = JSON.stringify({ user: userCredentials });
-      httpBackend.expectPOST(baseUrl + 'sessions.json', data).respond(401, errorData);
+    describe('Failure statuses', function () {
 
-      LoginSrv.login(userCredentials, handlers.success, handlers.error);
-      httpBackend.flush();
-      expect(handlers.error).toHaveBeenCalledWith(errorData);
+      beforeEach(function () {
+        var data = JSON.stringify({ user: userCredentials });
+        httpBackend.expectPOST(baseUrl + 'sessions.json', data)
+          .respond(401, errorData);
+      });
+
+      it('should call the error callback with the data returned', function () {
+        LoginSrv.login(userCredentials, handlers.success, handlers.error);
+        httpBackend.flush();
+        expect(handlers.error).toHaveBeenCalledWith(errorData);
+      });
+
+      it('should work without a callback', function () {
+        LoginSrv.login(userCredentials);
+        httpBackend.flush();
+      });
+
     });
-
   });
 
   describe('LoginService.logout', function () {
 
-    it('should DELETE /sessions.json and remove user data', function () {
-      httpBackend.expectDELETE(baseUrl + 'sessions.json').respond(200, {});
+    describe('Success statuses', function () {
 
-      spyOn(LoginSrv, 'reset');
-      LoginSrv.logout(handlers.success, handlers.error);
-      httpBackend.flush();
+      beforeEach(function () {
+        httpBackend.expectDELETE(baseUrl + 'sessions.json')
+          .respond(200, {});
+      });
 
-      expect(handlers.success).toHaveBeenCalledWith({});
-      expect(LoginSrv.reset).toHaveBeenCalled();
+      it('should DELETE /sessions.json and remove user data and calls callback', function () {
+        spyOn(LoginSrv, 'reset');
+        LoginSrv.logout(handlers.success, handlers.error);
+        httpBackend.flush();
+
+        expect(handlers.success).toHaveBeenCalledWith({});
+        expect(LoginSrv.reset).toHaveBeenCalled();
+      });
+
+      it('should work without a callback', function () {
+        LoginSrv.logout();
+        httpBackend.flush();
+      });
+
     });
 
-    it('should call the error callback with the data returned', function () {
-      httpBackend.expectDELETE(baseUrl + 'sessions.json').respond(401, errorData);
+    describe('Failure statuses', function () {
 
-      LoginSrv.logout(handlers.success, handlers.error);
-      httpBackend.flush();
-      expect(handlers.error).toHaveBeenCalledWith(errorData);
+      beforeEach(function () {
+        httpBackend.expectDELETE(baseUrl + 'sessions.json')
+          .respond(401, errorData);
+      });
+
+      it('should call the error callback with the data returned', function () {
+        LoginSrv.logout(handlers.success, handlers.error);
+        httpBackend.flush();
+        expect(handlers.error).toHaveBeenCalledWith(errorData);
+      });
+
+      it('should work without a callback', function () {
+        LoginSrv.logout();
+        httpBackend.flush();
+      });
     });
-
   });
 
   describe('LoginService.storeAuthData', function () {

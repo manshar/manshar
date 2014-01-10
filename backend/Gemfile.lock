@@ -169,6 +169,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-hmac (0.4.0)
+    sass (3.2.13)
     slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -217,4 +218,5 @@ DEPENDENCIES
   rails-api
   rails_12factor
   rspec-rails
+  sass
   therubyracer

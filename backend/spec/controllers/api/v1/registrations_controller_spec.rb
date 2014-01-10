@@ -10,11 +10,12 @@ describe Api::V1::RegistrationsController do
 
   describe 'POST /registerations' do
     it 'should register with JSON request and returns auth_token' do
-      post :create, {:user => { :email => 'tester@example.com',
-                                :password => 'tester123',
-                                :password_confirmation => 'tester123',
-                                :name => 'Example Tester',
-                                :bio => "A tester who is an example in all tests." } }
+      post :create, { :user => {
+          :email => 'tester@example.com',
+          :password => 'tester123', :password_confirmation => 'tester123',
+          :name => 'Example Tester',
+          :avatar => fixture_file_upload('images/test.png', 'image/png'),
+          :bio => "A tester who is an example in all tests." } }
       response.should be_success
       parsed_body = JSON.parse(response.body)
 

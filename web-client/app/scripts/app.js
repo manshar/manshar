@@ -116,7 +116,7 @@ angular.module('webClientApp', [
       return function (promise) { return promise.then(success, error); };
     }];
     $httpProvider.responseInterceptors.push(unAuthenticatedInterceptor);
-    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+    // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
   }])
   /**
    * Everytime the route change check if the user need to login.

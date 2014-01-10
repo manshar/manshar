@@ -7,6 +7,7 @@ user = User.create(
   bio: 'وحش في كتابة الأغاني العربية النشهورة.',
   email: 'aabaal@farawleh.com',
   password: 'farawleh',
+  avatar: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png'),
   confirmed_at: Time.now)
 
 user.articles.create([
@@ -14,16 +15,19 @@ user.articles.create([
     title: 'بتحدى العالم',
     tagline: 'من أجمل ما غنى صابر الرباعي',
     body: 'بتحدى العالم كلو وأنا وياك، وبقول للدنيا إن أنا بهواك، وإن إنت حبيبي وروحي وقلبي معاك.',
+    cover: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png'),
     published: true
   }, {
     title: 'بتحدى العالم',
     tagline: 'من أجمل ما غنى صابر الرباعي',
     body: 'بتحدى العالم كلو وأنا وياك، وبقول للدنيا إن أنا بهواك، وإن إنت حبيبي وروحي وقلبي معاك.',
+    cover: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png'),
     published: true
   }, {
     title: 'بتحدى العالم',
     tagline: 'من أجمل ما غنى صابر الرباعي',
     body: 'بتحدى العالم كلو وأنا وياك، وبقول للدنيا إن أنا بهواك، وإن إنت حبيبي وروحي وقلبي معاك.',
+    cover: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png'),
     published: true
   }
 ])

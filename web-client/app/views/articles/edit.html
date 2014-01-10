@@ -1,26 +1,51 @@
 <div class="manshar-article">
   <header>
-    <h1
-      class="manshar-editor"
-      medium-editor
-        placeholder="عنوان المقال"
-        mode="inline"
-        max-length="100"
-        ng-model="article.title"
-      >
-    </h1>
 
-    <h2
-      class="manshar-editor"
-      medium-editor
-        placeholder="عنوان المقال الفرعي"
-        mode="inline"
-        max-length="200"
-        ng-model="article.tagline"
-      >
-    </h2>
+    <div class="manshar-article-image-container">
+
+      <img class="manshar-article-header-image-aspect-ratio" src="data:image/gif;base64,R0lGODlhMgAVAPAAAP///wAAACH5BAEAAAAALAAAAAAyABUAAAIfhI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8dTAQA7" />
+
+      <img
+        class="manshar-article-img"
+        ng-src="{{article.cover_url}}"
+        alt="{{article.title}}"
+      />
+
+      <div class="manshar-article-header">
+
+        <input
+          type="file"
+          manshar-file
+            file-model="article.cover"
+            preview-url="article.cover_url"
+        />
+
+        <h1
+          class="manshar-editor"
+          medium-editor
+            placeholder="عنوان المقال"
+            mode="inline"
+            max-length="100"
+            ng-model="article.title"
+          >
+        </h1>
+
+        <h2
+          class="manshar-editor"
+          medium-editor
+            placeholder="عنوان المقال الفرعي"
+            mode="inline"
+            max-length="200"
+            ng-model="article.tagline"
+          >
+        </h2>
+
+      </div>
+
+    </div>
 
   </header>
+
 
   <article
     class="manshar-editor"
@@ -30,7 +55,10 @@
       ng-model="article.body"
     >
   </article>
-</div>
 
-<button ng-click="saveArticle(article, true)">نشر</button>
-<button ng-click="saveArticle(article, false)">حفظ مسودة</button>
+  <div class="manshar-controls">
+    <button ng-click="saveArticle(article, true)">نشر</button>
+    <button ng-click="saveArticle(article, false)">حفظ مسودة</button>
+  </div>
+
+</div>

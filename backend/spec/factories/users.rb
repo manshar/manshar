@@ -7,6 +7,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "user#{n}@example.com" }
     password 'testtest'
     password_confirmation 'testtest'
+    avatar { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
     confirmed
   end
 
@@ -14,5 +15,6 @@ FactoryGirl.define do
     sequence(:email) { |n| "user#{n}@example.com" }
     password 'testtest'
     password_confirmation 'testtest'
+    avatar { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
   end
 end
