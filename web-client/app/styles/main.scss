@@ -25,6 +25,10 @@ header {
   }
 }
 
+.main-header {
+  padding: 25px;
+}
+
 .manshar-logo {
   width: 64px;
 }
@@ -34,12 +38,52 @@ header {
   color: #666;
 }
 
+.author-details {
+  text-align: center;
+
+  img {
+    width: 65px;
+    border-radius: 500px;
+    border: 2px solid white;
+  }
+
+  .author-name {
+    font-size: 11pt;
+  }
+}
+
 ul.manshar-articles-list {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
   list-style: none;
+  padding: 15px;
 
   li {
     margin: 50px 0;
     cursor: pointer;
+
+    .article-details {
+      .article-thumb {
+        text-align: center;;
+
+        .article-cover-thumb {
+          width: 100%;
+          max-width: 400px;
+          border-radius: 500px;
+        }
+
+        .article-author-thumb {
+          width: 75px;
+          max-width: 400px;
+          border-radius: 500px;
+          margin-right: -150px;
+          z-index: 50;
+          position: relative;
+          border: 7px solid white;
+        }
+      }
+    }
   }
 }
 
@@ -76,13 +120,25 @@ ul.manshar-articles-list {
     position: relative;
     padding: 50px;
     z-index: 99;
+
+    .author-details {
+      float: left;
+      padding: 50px;
+
+      .author-name {
+        color: white;
+      }
+
+      img {
+        border-color: white;
+      }
+    }
   }
 
   article {
     padding: 30px;
     font-size: 22pt;
     min-height: 300px !important;
-    text-align: justify;
     max-width: 960px;
     width: 100%;
     margin: 0 auto;
@@ -109,16 +165,17 @@ ul.manshar-articles-list {
     font-size: 24pt;
   }
 
-  .manshar-controls {
-    padding: 25px;
-    text-align: left;
+}
 
-    button {
-      @include button(simple, #e48184);
-      font-size: 14pt;
-      padding : 10px 10px;
-      width: 200px;
-    }
+.manshar-controls {
+  padding: 25px;
+  text-align: left;
+
+  button {
+    @include button(simple, #e48184);
+    font-size: 14pt;
+    padding : 10px 10px;
+    width: 200px;
   }
 }
 

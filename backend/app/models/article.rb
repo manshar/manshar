@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  include Utils
 
   belongs_to :user
 
@@ -23,11 +24,11 @@ class Article < ActiveRecord::Base
     not self.published
   end
 
-  def cover_abs_url
-    uri = cover.url
-    if uri && uri !~ /^http/
-      uri = "//#{ENV['API_HOST']}#{uri}"
+  def cover_abs_url size = nil
+    if size
+      abs_url cover.thumb(size).url, ENV['API_HOST']
+    else
+      abs_url cover.url, ENV['API_HOST']
     end
-    uri
   end
 end
