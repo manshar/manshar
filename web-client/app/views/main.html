@@ -1,14 +1,22 @@
-<header>
+<header class="main-header">
   <img src="/images/manshar@200x200.png" class="manshar-logo" />
   <h1>{{title}}</h1>
   <h2 class="manshar-tagline">{{tagline}}</h2>
-  <button ng-click="newArticle()" ng-show="isLoggedIn">مقال جديد</button>
+  <div class="manshar-controls">
+	  <button ng-click="newArticle()" ng-show="isLoggedIn">مقال جديد</button>
+  </div>
 </header>
 
 <ul class="manshar-articles-list one-column">
   <li ng-repeat="article in articles" ng-click="showArticle(article.id)">
-    <h1>{{article.title}}</h1>
-    <h2 class="manshar-tagline">{{article.tagline}}</h2>
-    <p class="manshar-snippet">{{article.body | nohtml | words:50}}</p>
+  	<div class="article-details">
+  		<div class="article-thumb">
+  			<img class="article-cover-thumb" ng-src="{{article.thumb_url}}" />
+  			<img class="article-author-thumb" ng-src="{{article.user.thumb_url}}" />
+			</div>
+	    <h1>{{article.title}}</h1>
+	    <h2 class="manshar-tagline">{{article.tagline}}</h2>
+	    <p class="manshar-snippet">{{article.body | nohtml | words:50}}</p>
+    </div>
   </li>
 </ul>

@@ -12,6 +12,10 @@
       />
 
       <div class="manshar-article-header">
+        <div class="author-details">
+          <img ng-src="{{article.user.thumb_url}}" />
+          <div class="author-name">{{article.user.name}}</div>
+        </div>
         <h1>{{article.title}}</h1>
         <h2>{{article.tagline}}</h2>
       </div>
