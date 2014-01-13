@@ -66,6 +66,7 @@ ul.manshar-articles-list {
   margin: 0 auto;
   list-style: none;
   padding: 15px;
+  word-wrap: break-word;
 
   li {
     margin: 50px 0;
@@ -151,6 +152,7 @@ ul.manshar-articles-list {
     width: 100%;
     margin: 0 auto;
     font-weight: 100;
+    word-wrap: break-word;
 
     p {
       margin-top: 36px;
