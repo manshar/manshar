@@ -1,9 +1,12 @@
-<header class="main-header">
-  <img src="/images/manshar@200x200.png" class="manshar-logo" />
-  <h1>{{title}}</h1>
-  <h2 class="manshar-tagline">{{tagline}}</h2>
+<div class="metabar">
   <div class="manshar-controls">
-	  <button ng-click="newArticle()" ng-show="isLoggedIn">مقال جديد</button>
+    <button ng-click="newArticle()" ng-show="isLoggedIn">مقال جديد</button>
+  </div>
+</div>
+<header class="main-header">
+  <div class="hero-unit">
+    <h1>{{title}}</h1>
+    <p class="manshar-tagline">{{tagline}}</p>
   </div>
 </header>
 

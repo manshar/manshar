@@ -18,6 +18,10 @@
   direction: rtl;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: Niloofar, serif;
   background: #f9f9f9;
@@ -25,16 +29,40 @@ body {
 
 .container{
   @include span-columns(12);
+  position: relative;
+  background-color: #f9f9f9;  
+  height: 100%;
 }
 
-header {
-  h1 {
-    font-size: 48pt;
-  }
+.scrollable{
+  overflow: auto;
+  transition-property: top, bottom;
+  transition-duration: .2s, .2s;
+  transition-timing-function: linear, linear;
+  overflow-scrolling: touch;
 }
 
 .main-header {
-  padding: 25px;
+  text-align: center;
+  height: 300px;
+  background: #f3efee;
+
+  .hero-unit {
+    @include span-columns(6);
+    @include shift(3);
+    vertical-align: middle;
+    height: 100%;
+
+    &:before {
+      content: "";
+      display: block;
+      height: 20%;
+    }
+    
+    h1 {
+      font-size: 48pt;
+    }
+  }
 }
 
 .manshar-logo {
@@ -44,6 +72,59 @@ header {
 .manshar-tagline,
 .manshar-snippet {
   color: #666;
+}
+
+.site-nav-logo {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 42px;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.site-nav {
+  background-color: #272F36;
+  color: #F2F1F0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 264px;
+
+  ul {
+    margin: 80px 10px 0 0;
+    list-style: none;
+    line-height: 30px;
+    letter-spacing: 1px;
+
+    a {
+      color: #F2F1F0;
+
+      &::before, &::after {
+        display: inline-block;
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.2s;
+      }
+
+      &::before {
+        margin-right: 10px;
+        content: '[';
+        transform: translateX(20px);
+      }
+
+      &::after {
+        margin-left: 10px;
+        content: ']';
+        transform: translateX(-20px);
+      }
+
+      &:hover::before,  &:hover::after,  &:focus::before,  &:focus::after {
+        opacity: 1;
+        transform: translateX(0px);
+      }
+    }
+  }
 }
 
 .author-details {
@@ -101,7 +182,9 @@ ul.manshar-articles-list {
 }
 
 .manshar-article {
-
+  
+  background-color: #ffffff;
+  
   header {
     position: relative;
     overflow: hidden;
@@ -181,15 +264,24 @@ ul.manshar-articles-list {
 
 }
 
-.manshar-controls {
-  padding: 25px;
-  text-align: left;
+.metabar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 65px;
+  z-index: 2;
+  display: block;
 
-  button {
-    @include button(simple, #e48184);
-    font-size: 14pt;
-    padding : 10px 10px;
-    width: 200px;
+  .manshar-controls {
+    padding: 10px 0 0 10px;
+    text-align: left;
+
+    button {
+      @include button(simple, #e48184);
+      font-size: 14pt;
+      padding : 10px 10px;
+      width: 200px;
+    }
   }
 }
 
@@ -253,6 +345,15 @@ ul.manshar-articles-list {
       margin: 10px 0;
       font-size: 11px;
       color: #bbbaba;
+
+      .signup-link {
+        background-color: #F3EFEE;
+        border-radius: 8px;
+        color: #272F36;
+        font-size: 21px;
+        margin-left: 6px;
+        padding: 2px;
+      }
     }
   }
 }
