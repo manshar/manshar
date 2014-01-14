@@ -131,7 +131,7 @@ angular.module('webClientApp', [
 
     $rootScope.isLoggedIn = LoginService.isLoggedIn();
 
-    $rootScope.user = {
+    $rootScope.currentUser = {
       // TODO We need to display user name not email
       email: StorageService.get('user.email')
     };

@@ -34,14 +34,14 @@
     <nav class="site-nav" snap-drawer-right>
       <ul>
         <!-- TDOD: Convert to ng-repeat -->
-        <li><a href="/" snap-close>الصفحة الرئيسية</a></li>
-        <li><a href="#/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
-        <li><a href="#" snap-close ng-show="isLoggedIn">{{user.email}}</a></li>
+        <li><a href="/#" snap-close>الصفحة الرئيسية</a></li>
+        <li><a href="/#/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
+        <li><a href="#" snap-close ng-show="isLoggedIn">{{currentUser.email}}</a></li>
       </ul>
     </nav>
       
     <!-- Add your site or application content here -->
-    <snap-content>
+    <snap-content snap-options="{disable: left, touchToDrag:false}">
       <div class="container scrollable" ng-view=""></div>
     </snap-content>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

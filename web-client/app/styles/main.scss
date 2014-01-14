@@ -36,13 +36,10 @@ body {
 
 .scrollable{
   overflow: auto;
-  -webkit-transition-property: top, bottom;
   transition-property: top, bottom;
-  -webkit-transition-duration: .2s, .2s;
   transition-duration: .2s, .2s;
-  -webkit-transition-timing-function: linear, linear;
   transition-timing-function: linear, linear;
-  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
 }
 
 .main-header {
@@ -86,7 +83,6 @@ body {
   cursor: pointer;
 }
 
-/* TODO rewrite transform to one-line */
 .site-nav {
   background-color: #272F36;
   color: #F2F1F0;
@@ -108,31 +104,23 @@ body {
       &::before, &::after {
         display: inline-block;
         opacity: 0;
-        -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
-        -moz-transition: -moz-transform 0.3s, opacity 0.2s;
         transition: transform 0.3s, opacity 0.2s;
       }
 
       &::before {
         margin-right: 10px;
         content: '[';
-        -webkit-transform: translateX(20px);
-        -moz-transform: translateX(20px);
         transform: translateX(20px);
       }
 
       &::after {
         margin-left: 10px;
         content: ']';
-        -webkit-transform: translateX(-20px);
-        -moz-transform: translateX(-20px);
         transform: translateX(-20px);
       }
 
       &:hover::before,  &:hover::after,  &:focus::before,  &:focus::after {
         opacity: 1;
-        -webkit-transform: translateX(0px);
-        -moz-transform: translateX(0px);
         transform: translateX(0px);
       }
     }
@@ -193,7 +181,9 @@ ul.manshar-articles-list {
 }
 
 .manshar-article {
-
+  
+  background-color: #ffffff;
+  
   header {
     position: relative;
     overflow: hidden;
