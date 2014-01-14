@@ -15,6 +15,7 @@
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="bower_components/Medium.js/medium.css">
+        <link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css">
         <!-- endbuild -->
 </head>
   <body>
@@ -27,9 +28,22 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <!-- site nav -->
+    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="right"/>
+    
+    <nav class="site-nav" snap-drawer-right>
+      <ul>
+        <!-- TDOD: Convert to ng-repeat -->
+        <li><a href="/" snap-close>الصفحة الرئيسية</a></li>
+        <li><a href="#/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
+        <li><a href="#" snap-close ng-show="isLoggedIn">{{user.email}}</a></li>
+      </ul>
+    </nav>
+      
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
-
+    <snap-content>
+      <div class="container scrollable" ng-view=""></div>
+    </snap-content>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -50,6 +64,8 @@
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/Medium.js/medium.js"></script>
+        <script src="bower_components/snapjs/snap.js"></script>
+        <script src="bower_components/angular-snap/angular-snap.js"></script>
         <script src="bower_components/angular-truncate/dist/angular-truncate.js"></script>
         <!-- endbuild -->
 

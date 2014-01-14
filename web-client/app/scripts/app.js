@@ -11,6 +11,7 @@ angular.module('webClientApp', [
   'ngRoute',
   'AppConfig',
   'truncate',
+  'snap'
 ])
   /**
    * Routing.
@@ -121,11 +122,18 @@ angular.module('webClientApp', [
   /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', 'LoginService',
-      function ($location, $rootScope, LoginService) {
+  .run(['$location', '$rootScope', 'LoginService', 'StorageService',
+      function ($location, $rootScope, LoginService, StorageService) {
 
     $rootScope.page = {
       title: 'منشر - منصة النشر العربية'
+    };
+
+    $rootScope.isLoggedIn = LoginService.isLoggedIn();
+
+    $rootScope.user = {
+      // TODO We need to display user name not email
+      email: StorageService.get('user.email')
     };
 
     // If the user is already logged in init the auth headers.
