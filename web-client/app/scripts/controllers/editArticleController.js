@@ -21,6 +21,10 @@ angular.module('webClientApp')
       $location.path('/articles/' + resource.id);
     };
 
+    var deleteSuccess = function (resource) {
+      $location.path('/');
+    };
+
     var error = function (resource) {
       console.log(resource);
     };
@@ -32,6 +36,10 @@ angular.module('webClientApp')
       } else {
         Article.save({ article: article }, success, error);
       }
+    };
+
+    $scope.deleteArticle = function(article) {
+      Article.delete({ 'articleId': article.id }, deleteSuccess, error);
     };
 
   }]);
