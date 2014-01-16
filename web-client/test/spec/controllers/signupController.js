@@ -4,7 +4,7 @@ describe('Controller: SignupCtrl', function () {
 
   beforeEach(module('webClientApp'));
 
-  var createController, scope, location, routeParams, SignupSrv;
+  var createController, scope, location, routeParams, SignupSrv, errorMessages;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $location, $rootScope, $routeParams, SignupService) {
@@ -20,9 +20,10 @@ describe('Controller: SignupCtrl', function () {
         $location: location
       });
     };
+    errorMessages = {'errors':{'email': 'can\'t be blank'}};
   }));
 
-  describe('LoginCtrl.signup', function () {
+  describe('SignupCtrl.signup', function () {
     it('should signup user and redirect', function () {
       spyOn(SignupSrv, 'signup').andCallFake(function(user, success) {
         success();
@@ -45,14 +46,15 @@ describe('Controller: SignupCtrl', function () {
 
     it('should set error message when login fails', function () {
       spyOn(SignupSrv, 'signup').andCallFake(function(user, success, error) {
-        error();
+        error(errorMessages);
       });
 
       routeParams.prev = '/articles/1';
       createController();
       scope.signup({});
 
-      expect(scope.error).toBe('An error occurs.');
+      expect(scope.error).toBe('حدث خطأ ما.');
+      expect(scope.errorMessages.email).toBe('can\'t be blank');
     });
 
   });

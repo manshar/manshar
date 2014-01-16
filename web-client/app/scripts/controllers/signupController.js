@@ -6,6 +6,7 @@ angular.module('webClientApp')
 
     $scope.user = {};
     $scope.error = null;
+    $scope.errorMessages = {};
 
     $scope.signup = function(user) {
       SignupService.signup(user, success, error);
@@ -16,8 +17,9 @@ angular.module('webClientApp')
       $location.path($routeParams.prev || '/');
     };
 
-    var error = function() {
-      $scope.error = 'An error occurs.';
+    var error = function(response) {
+      $scope.error = 'حدث خطأ ما.'; // General form error.
+      $scope.errorMessages = response.errors; // Detailed error message from backend. 
     };
 
   }]);
