@@ -1,6 +1,7 @@
 <div class="form-div">
   <div ng-include="'views/partials/_form_header.html'"></div>
-  <form id="login-form" novalidate ng-submit="login(user)" name="loginForm">
+  <div class="form-errors">{{error}}</div>
+  <form id="login-form" ng-submit="login(user)" name="loginForm">
     <label>
       <input
         type="email"
@@ -16,7 +17,7 @@
         type="password"
         ng-model="user.password"
         required
-        placeholder="كلمة السر"
+        placeholder="كلمة المرور"
       />
     </label>
 

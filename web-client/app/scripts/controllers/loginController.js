@@ -18,7 +18,7 @@ angular.module('webClientApp')
     };
 
     var error = function() {
-      $scope.error = 'Wrong username and/or password.';
+      $scope.error = 'خطأ في البريد الالكتروني أو كلمة المرور';
     };
 
   }]);

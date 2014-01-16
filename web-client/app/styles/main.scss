@@ -16,6 +16,10 @@
   padding:0;
   margin:0;
   direction: rtl;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 a {
@@ -322,9 +326,18 @@ ul.manshar-articles-list {
     }
   }
 
+  .form-errors {
+    background: #CA1504;
+    color: #FFFFFF;
+    line-height: 40px;
+    padding: 4px;
+    text-align: center;
+  }
+
   form{
     @include row(table);
     padding: 10px 0;
+
     input, .input{
       display: block;
       border: 2px solid #ECEBEC;
@@ -333,6 +346,22 @@ ul.manshar-articles-list {
       padding: 10px;
       border-radius: 5px;
       width: 300px;
+      transition: 300ms ease;
+
+      &:invalid {
+        border-left: 4px solid #ECEBEC;
+        box-shadow: 0 0 0px;
+      }
+
+      &:focus:invalid {
+        border-left: 4px solid #E66565;
+        box-shadow: 0 0 0px;
+      }
+
+      &:focus:valid, &:valid {
+        border-left: 4px solid #44B387;
+        box-shadow: 0 0 0px;
+      }
     }
 
     button {
