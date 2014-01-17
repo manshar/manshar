@@ -47,7 +47,7 @@ module.exports = function (grunt) {
         name: 'AppConfig',
         constants: {
           ENV: 'production',
-          API_HOST: 'api.manshar.me',
+          API_HOST: 'api.manshar.com',
         }
       }]
     },
