@@ -2,6 +2,7 @@ require 'spec_helper'
 
 
 describe Api::V1::RegistrationsController do
+  render_views
 
   before(:each) do
     @user = FactoryGirl.create(:user)

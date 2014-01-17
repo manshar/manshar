@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .service('LoginService', ['$http', 'API_HOST', 'StorageService',
-      function ($http, API_HOST, StorageService) {
+  .service('LoginService', ['$http', '$rootScope', 'API_HOST', 'StorageService',
+      function ($http, $rootScope, API_HOST, StorageService) {
 
     var baseUrl = '//' + API_HOST + '/api/v1/';
 
@@ -13,7 +13,8 @@ angular.module('webClientApp')
       },
 
       isLoggedIn: function() {
-        return !!StorageService.get('user.email');
+        var userData = StorageService.get('userData');
+        return !!(userData && userData.authToken);
       },
 
       login: function(user, optSuccess, optError) {
@@ -44,6 +45,7 @@ angular.module('webClientApp')
           // Success.
           angular.bind(this, function(response) {
             this.reset();
+            $rootScope.$emit('user.loggedOut');
             if(optSuccess) {
               optSuccess(response.data);
             }
@@ -58,23 +60,33 @@ angular.module('webClientApp')
       },
 
       storeAuthData: function(data) {
-        StorageService.set('user.email', data.user.email);
-        StorageService.set('user.authToken', data.authToken);
-        this.initAuthHeaders();
+        StorageService.set('userData', data);
+        this.init();
       },
 
       initAuthHeaders: function() {
-        var authToken = StorageService.get('user.authToken');
-        if (authToken) {
-          var authHeader = 'Token token="' + authToken + '"';
+        var userData = StorageService.get('userData');
+        if (userData && userData.authToken) {
+          var authHeader = 'Token token="' + userData.authToken + '"';
           $http.defaults.headers.common.Authorization = authHeader;
         }
       },
 
       reset: function() {
-        StorageService.unset('user.email');
-        StorageService.unset('user.authToken');
+        StorageService.unset('userData');
         $http.defaults.headers.common.Authorization = null;
+        $rootScope.currentUser = null;
+        $rootScope.isLoggedIn = false;
+      },
+
+      // TODO(mkhatib): Add tests.
+      init: function() {
+        this.initAuthHeaders();
+        $rootScope.isLoggedIn = this.isLoggedIn();
+        var userData = StorageService.get('userData');
+        if (userData && userData.user) {
+          $rootScope.currentUser = userData.user;
+        }
       }
     };
   }]);

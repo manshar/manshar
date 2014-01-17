@@ -8,9 +8,8 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     if resource.save
-      render :status => 200,
-             :json => { :user => resource,
-                        :authToken => resource.authentication_token }
+      @user = resource
+      render 'api/v1/registrations/new'
     else
       render :status => 500,
              :json => { :errors => resource.errors }

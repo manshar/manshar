@@ -2,15 +2,19 @@
 
 describe('Directive: mediumEditor', function () {
 
-	var scope, inlineElement, richElement;
+	var scope, inlineElement, richElement, defaultElement;
 	beforeEach(module('webClientApp'));
 
 	beforeEach(inject(function ($compile, $rootScope) {
 		scope = $rootScope;
+
+		defaultElement = angular.element('<h1 medium-editor></h1>');
+
 		inlineElement = angular.element(
 				'<h1 medium-editor ' +
 							'mode="inline" ' +
-							'placeholder="My Placeholder"' +
+							'placeholder="My Placeholder" ' +
+							'ng-model="inlineVar"' +
 					'>' +
 				'</h1>');
 
@@ -23,6 +27,7 @@ describe('Directive: mediumEditor', function () {
 									'>Hello World' +
 				'</article>');
 
+		$compile(defaultElement)(scope);
 		$compile(inlineElement)(scope);
 		$compile(richElement)(scope);
 	}));
@@ -31,6 +36,7 @@ describe('Directive: mediumEditor', function () {
 		expect(inlineElement.hasClass('Medium')).toBe(true);
 		expect(inlineElement.hasClass('Medium-inline')).toBe(true);
 		expect(richElement.hasClass('Medium-rich')).toBe(true);
+		expect(defaultElement.hasClass('Medium-rich')).toBe(true);
 	});
 
 	it('should add contenteditable attributes', function () {
@@ -45,6 +51,7 @@ describe('Directive: mediumEditor', function () {
 
 		placeholderElement = richElement.children();
 		expect(richElement.html()).toBe('Hello World');
+		expect(defaultElement.text().trim()).toBe('');
 	});
 
 	it('should bind the ng-model to the content', function () {
@@ -54,6 +61,17 @@ describe('Directive: mediumEditor', function () {
 			scope.myvar = 'What';
 		});
 		expect(richElement.text()).toBe('What');
+
+		expect(scope.inlineVar).toBe('');
+		scope.$apply(function () {
+			scope.inlineVar = 'So What';
+		});
+		expect(inlineElement.text()).toBe('So What');
+
+		// The other way binding.
+		inlineElement.html('Hello World');
+		inlineElement.triggerHandler('change');
+		expect(scope.inlineVar).toBe('Hello World');
 	});
 
 });

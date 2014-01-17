@@ -29,7 +29,7 @@
 
   <div class="manshar-controls">
     <!-- TODO(mkhatib): Only show this for the author of the article. -->
-    <button ng-click="editArticle(article.id)" ng-show="isLoggedIn">تعديل</button>
+    <button ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">تعديل</button>
   </div>
 
 </div>

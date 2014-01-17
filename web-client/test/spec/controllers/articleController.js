@@ -4,14 +4,15 @@ describe('Controller: ArticleCtrl', function () {
 
   beforeEach(module('webClientApp'));
 
-  var createController, scope, httpBackend, apiBase, routeParams;
+  var createController, scope, httpBackend, apiBase, routeParams, articleMock, location;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $httpBackend, $routeParams, Article, API_HOST) {
+  beforeEach(inject(function ($location, $controller, $rootScope, $httpBackend, $routeParams, Article, API_HOST) {
     routeParams = $routeParams;
     apiBase = '//' + API_HOST + '/api/v1/';
     httpBackend = $httpBackend;
-
+    articleMock = Article;
+    location = $location;
     scope = $rootScope.$new();
     createController = function () {
       return $controller('ArticleCtrl', {
@@ -33,6 +34,16 @@ describe('Controller: ArticleCtrl', function () {
     createController();
     httpBackend.flush();
     expect(scope.article.title).toBe('Hello World.');
+  });
+
+  describe('editArticle', function () {
+    it('should redirect the user to edit page', function () {
+      spyOn(articleMock, 'get');
+
+      createController();
+      scope.editArticle(1);
+      expect(location.path()).toBe('/articles/1/edit');
+    });
   });
 
 });

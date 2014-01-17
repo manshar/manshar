@@ -3,7 +3,7 @@
 describe('Service: LoginService', function () {
 
   beforeEach(module('webClientApp'));
-  var LoginSrv, httpBackend, http, baseUrl, StorageSrv, handlers;
+  var LoginSrv, httpBackend, http, baseUrl, StorageSrv, handlers, rootScope;
 
   var userCredentials = {
     email: 'example@example.com',
@@ -21,7 +21,8 @@ describe('Service: LoginService', function () {
 
   beforeEach(function () {
 
-    inject(function ($httpBackend, $http, LoginService, API_HOST, StorageService) {
+    inject(function ($httpBackend, $http, LoginService, API_HOST, StorageService, $rootScope) {
+      rootScope = $rootScope;
       LoginSrv = LoginService;
       httpBackend = $httpBackend;
       http = $http;
@@ -56,9 +57,9 @@ describe('Service: LoginService', function () {
     it('should check if user is logged in', function () {
       expect(LoginSrv.isLoggedIn()).toBe(false);
 
-      spyOn(StorageSrv, 'get').andReturn('example@example.com');
+      spyOn(StorageSrv, 'get').andReturn({authToken:'token'});
       expect(LoginSrv.isLoggedIn()).toBe(true);
-      expect(StorageSrv.get).toHaveBeenCalledWith('user.email');
+      expect(StorageSrv.get).toHaveBeenCalledWith('userData');
     });
   });
 
@@ -129,8 +130,11 @@ describe('Service: LoginService', function () {
       });
 
       it('should work without a callback', function () {
+        spyOn(rootScope, '$emit');
         LoginSrv.logout();
         httpBackend.flush();
+        // Make sure the logout function sends out an event.
+        expect(rootScope.$emit).toHaveBeenCalledWith('user.loggedOut');
       });
 
     });
@@ -162,16 +166,15 @@ describe('Service: LoginService', function () {
       LoginSrv.storeAuthData(returnData);
 
       expect(LoginSrv.initAuthHeaders).toHaveBeenCalled();
-      expect(StorageSrv.set).toHaveBeenCalledWith('user.email', returnData.user.email);
-      expect(StorageSrv.set).toHaveBeenCalledWith('user.authToken', returnData.authToken);
+      expect(StorageSrv.set).toHaveBeenCalledWith('userData', returnData);
     });
   });
 
   describe('LoginService.initAuthHeaders', function () {
     it('should set auth headers', function () {
-      spyOn(StorageSrv, 'get').andReturn(returnData.authToken);
+      spyOn(StorageSrv, 'get').andReturn(returnData);
       LoginSrv.initAuthHeaders();
-      expect(StorageSrv.get).toHaveBeenCalledWith('user.authToken');
+      expect(StorageSrv.get).toHaveBeenCalledWith('userData');
 
       // Make HTTP request to confirm the Authorization header has been set.
       var expectedHeaders = {
@@ -192,10 +195,24 @@ describe('Service: LoginService', function () {
       spyOn(StorageSrv, 'unset');
       LoginSrv.reset();
 
-      expect(StorageSrv.unset).toHaveBeenCalledWith('user.email');
-      expect(StorageSrv.unset).toHaveBeenCalledWith('user.authToken');
+      expect(StorageSrv.unset).toHaveBeenCalledWith('userData');
       expect(http.defaults.headers.common.Authorization).toBe(null);
+      expect(rootScope.currentUser).toBe(null);
+      expect(rootScope.isLoggedIn).toBe(false);
     });
 
+  });
+
+  describe('LoginService.init', function () {
+    it('should initialize headers and other data', function () {
+      spyOn(LoginSrv, 'initAuthHeaders');
+      spyOn(StorageSrv, 'get').andReturn({user: { name: 'mk' }, authToken: 'token'});
+
+      LoginSrv.init();
+      expect(LoginSrv.initAuthHeaders).toHaveBeenCalled();
+      expect(StorageSrv.get).toHaveBeenCalledWith('userData');
+      expect(rootScope.isLoggedIn).toBe(true);
+      expect(rootScope.currentUser.name).toBe('mk');
+    });
   });
 });

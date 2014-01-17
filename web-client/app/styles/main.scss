@@ -24,6 +24,7 @@
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 body {
@@ -34,7 +35,7 @@ body {
 .container{
   @include span-columns(12);
   position: relative;
-  background-color: #f9f9f9;  
+  background-color: #f9f9f9;
   height: 100%;
 }
 
@@ -62,7 +63,7 @@ body {
       display: block;
       height: 20%;
     }
-    
+
     h1 {
       font-size: 48pt;
     }
@@ -94,10 +95,31 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 264px;
+  width: 266px;
+
+  .profile-badge {
+    position: relative;
+    min-height: 60px;
+
+    a {
+      span {
+        position: absolute;
+        color: white;
+        bottom: 0;
+        padding: 15px;
+        font-size: 16pt;
+        text-shadow: 1px 1px 1px #000;
+      }
+
+      img {
+        width: 100%;
+        display: block;
+      }
+    }
+  }
 
   ul {
-    margin: 80px 10px 0 0;
+    margin: 20px 10px 0 0;
     list-style: none;
     line-height: 30px;
     letter-spacing: 1px;
@@ -186,9 +208,9 @@ ul.manshar-articles-list {
 }
 
 .manshar-article {
-  
+
   background-color: #ffffff;
-  
+
   header {
     position: relative;
     overflow: hidden;
