@@ -30,16 +30,22 @@
 
     <!-- site nav -->
     <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="right"/>
-    
+
     <nav class="site-nav" snap-drawer-right>
+      <div class="profile-badge">
+        <a href="#" snap-close ng-show="isLoggedIn">
+          <img ng-src="{{currentUser.avatar_url}}" ng-show="currentUser}}"/>
+          <span>{{currentUser.name}}</span>
+        </a>
+      </div>
       <ul>
         <!-- TDOD: Convert to ng-repeat -->
         <li><a href="/#" snap-close>الصفحة الرئيسية</a></li>
         <li><a href="/#/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
-        <li><a href="#" snap-close ng-show="isLoggedIn">{{currentUser.email}}</a></li>
+        <li><a snap-close ng-show="isLoggedIn" ng-click="logout()">تسجيل الخروج</a></li>
       </ul>
     </nav>
-      
+
     <!-- Add your site or application content here -->
     <snap-content snap-options="{disable: left, touchToDrag:false}">
       <div class="container scrollable" ng-view=""></div>

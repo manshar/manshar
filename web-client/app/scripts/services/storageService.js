@@ -15,7 +15,7 @@ angular.module('webClientApp')
        * @return {*} Value of the key.
        */
       set: function(key, value) {
-        return $window.localStorage.setItem(key, value);
+        return $window.localStorage.setItem(key, angular.toJson(value));
       },
 
       /**
@@ -25,7 +25,7 @@ angular.module('webClientApp')
        * @return {string} Value of the key.
        */
       get: function(key, optDefault) {
-        return $window.localStorage.getItem(key) || optDefault;
+        return angular.fromJson($window.localStorage.getItem(key)) || optDefault;
       },
 
       /**
