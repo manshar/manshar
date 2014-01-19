@@ -1,6 +1,6 @@
 <div class="form-div">
   <div ng-include="'views/partials/_form_header.html'"></div>
-  <div class="form-errors">
+  <div class="form-errors" ng-show="error">
     <ul>
       <!-- TODO(HammamSamara) Will enhance this once we have Arabic strings from backend -->
       <li ng-repeat="(key, data) in errorMessages">{{key}} {{data}}</li>

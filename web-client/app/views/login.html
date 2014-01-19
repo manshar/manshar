@@ -1,6 +1,6 @@
 <div class="form-div">
   <div ng-include="'views/partials/_form_header.html'"></div>
-  <div class="form-errors">{{error}}</div>
+  <div class="form-errors" ng-show="error">{{error}}</div>
   <form id="login-form" ng-submit="login(user)" name="loginForm">
     <label>
       <input
