@@ -1,26 +1,21 @@
 'use strict';
 
 angular.module('webClientApp')
-	.directive('mediumEditor', [function () {
+	.directive('grandeEditor', [function () {
 		return {
       require: '?ngModel',
 			restrict: 'A',
       scope: {
         placeholder: '@',
-        maxLength: '@',
-        mode: '@'
+        mode: '@',
+        rtl: '@'
       },
 			link: function (scope, element, attrs, ngModel) {
-        // TODO(mkhatib):
-        // Medium has a bug in Firefox with innerText undefined.
-        // Issue: http://goo.gl/E7kl3z
-        new Medium({
+
+        new Grande(element, {
           placeholder: scope.placeholder || '',
-          maxLength: scope.maxLength || -1,
-          debug: false,
-          autoHR: false,
           mode: scope.mode || 'rich',
-          element: element[0]
+          rtl: scope.rtl || false
         });
 
         // we're done if no ng-model.
