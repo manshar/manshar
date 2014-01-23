@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   include Utils
 
+  default_scope order('created_at DESC')
   belongs_to :user
 
   dragonfly_accessor :cover do
