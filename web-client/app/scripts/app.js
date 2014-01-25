@@ -11,7 +11,9 @@ angular.module('webClientApp', [
   'ngRoute',
   'AppConfig',
   'truncate',
-  'snap'
+  'snap',
+  'angulartics',
+  'angulartics.google.analytics'
 ])
   /**
    * Routing.
@@ -123,8 +125,13 @@ angular.module('webClientApp', [
   /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', 'LoginService',
-      function ($location, $rootScope, LoginService) {
+  .run(['$location', '$rootScope', '$analytics', 'LoginService', 'GA_TRACKING_ID',
+      function ($location, $rootScope, $analytics, LoginService, GA_TRACKING_ID) {
+
+    // ga is the Google analytics global variable.
+    if (window.ga) {
+      ga('create', GA_TRACKING_ID);
+    }
 
     /**
      * Holds data about page-wide attributes. Like pages title.
@@ -137,6 +144,7 @@ angular.module('webClientApp', [
      * Logs the user out.
      */
     $rootScope.logout = function () {
+      $analytics.eventTrack('Logout');
       LoginService.logout();
     };
 
@@ -159,6 +167,10 @@ angular.module('webClientApp', [
     // Listen to $routeChangeError and redirect the user.
     $rootScope.$on('$routeChangeError', function(event, current, previous, rejection) {
       if(rejection && rejection.redirectTo) {
+        $analytics.eventTrack('Unauthorized', {
+          category: 'errors',
+          label: rejection.previous
+        });
         $location.path(rejection.redirectTo).search('prev', rejection.previous);
       }
     });

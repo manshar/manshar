@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', 'Article',
-      function ($rootScope, $scope, $routeParams, $location, Article) {
+  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$analytics', 'Article',
+      function ($rootScope, $scope, $routeParams, $location, $analytics, Article) {
 
     var isEdit = false;
 
@@ -29,10 +29,15 @@ angular.module('webClientApp')
 
 
     var success = function (resource) {
+      $analytics.eventTrack('Create Article');
       $location.path('/articles/' + resource.id);
     };
 
-    var error = function () {
+    var error = function (response) {
+      $analytics.eventTrack('Create Article', {
+        category: 'errors',
+        label: angular.toJson(response.errors)
+      });
       $scope.error = 'حدث خطأ في حفظ المقال.';
     };
 
