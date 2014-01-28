@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('SignupCtrl', ['$scope', '$location', '$routeParams', 'SignupService',
-      function ($scope, $location, $routeParams, SignupService) {
+  .controller('SignupCtrl', ['$scope', '$location', '$routeParams', '$analytics', 'SignupService',
+      function ($scope, $location, $routeParams, $analytics, SignupService) {
 
     $scope.user = {};
     $scope.error = null;
@@ -14,12 +14,17 @@ angular.module('webClientApp')
 
     var success = function() {
       // TODO (HammamSamara) redirect to a view that requests email confirmation
+      $analytics.eventTrack('Register');
       $location.path($routeParams.prev || '/');
     };
 
     var error = function(response) {
+      $analytics.eventTrack('Signup Error', {
+        category: 'errors',
+        label: angular.toJson(response.errors)
+      });
       $scope.error = 'حدث خطأ ما.'; // General form error.
-      $scope.errorMessages = response.errors; // Detailed error message from backend. 
+      $scope.errorMessages = response.errors; // Detailed error message from backend.
     };
 
   }]);
