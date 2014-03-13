@@ -12,7 +12,7 @@ angular.module('webClientApp')
     };
 
     var success = function() {
-      $analytics.eventTrack('Logged In');
+      $analytics.eventTrack('Logged In', {});
       $location.path($routeParams.prev || '/')
         // Remove the prev param when redirecting.
         .search('prev', null);

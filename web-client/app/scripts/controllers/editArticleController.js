@@ -29,7 +29,7 @@ angular.module('webClientApp')
 
 
     var success = function (resource) {
-      $analytics.eventTrack('Create Article');
+      $analytics.eventTrack('Create Article', {});
       $location.path('/articles/' + resource.id);
     };
 

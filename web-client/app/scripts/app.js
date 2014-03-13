@@ -144,7 +144,7 @@ angular.module('webClientApp', [
      * Logs the user out.
      */
     $rootScope.logout = function () {
-      $analytics.eventTrack('Logout');
+      $analytics.eventTrack('Logout', {});
       LoginService.logout();
     };
 
@@ -157,7 +157,8 @@ angular.module('webClientApp', [
      * @returns {boolean} true if the user is the owner of the resource.
      */
     $rootScope.isOwner = function (user, resource) {
-      return (!!user && !!resource && user.id === resource.user.id);
+      return (!!user && !!resource && !!resource.user &&
+              user.id === resource.user.id);
     };
 
     // If the user is already logged in init the auth headers.

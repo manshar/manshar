@@ -14,7 +14,7 @@ angular.module('webClientApp')
 
     var success = function() {
       // TODO (HammamSamara) redirect to a view that requests email confirmation
-      $analytics.eventTrack('Register');
+      $analytics.eventTrack('Register', {});
       $location.path($routeParams.prev || '/');
     };
 
