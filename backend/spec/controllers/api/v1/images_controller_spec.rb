@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Api::V1::ImagesController do
+  render_views
 
   before (:each) do
     @user = FactoryGirl.create(:user)
@@ -28,8 +29,9 @@ describe Api::V1::ImagesController do
     it 'should allow authenticated users to create images' do
       request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
       post :create, :image => @image_params
-      parsed_response = JSON.parse(response.body)
+
       response.should be_success
+      parsed_response = JSON.parse(response.body)
       image = Image.find(parsed_response['id'])
       assert image.user
     end

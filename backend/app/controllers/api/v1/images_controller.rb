@@ -6,14 +6,14 @@ class Api::V1::ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     authorize @image
-    render json: @image
+    render 'api/v1/images/show'
   end
 
   def create
     @image = current_user.images.new(image_params)
     authorize @image
     if @image.save
-      render json: @image, status: :created
+      render 'api/v1/images/show', status: :created
     else
       render json: @image.errors, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class Api::V1::ImagesController < ApplicationController
     @image = Image.find(params[:id])
     authorize @image
     if @image.update(image_params)
-      render json: @image
+      render 'api/v1/images/show'
     else
       render json: @image.errors, status: :unprocessable_entity
     end
