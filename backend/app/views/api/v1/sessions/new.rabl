@@ -1,0 +1,1 @@
+extends 'api/v1/registrations/new'

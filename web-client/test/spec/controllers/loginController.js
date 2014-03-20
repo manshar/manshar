@@ -52,7 +52,7 @@ describe('Controller: LoginCtrl', function () {
       createController();
       scope.login({});
 
-      expect(scope.error).toBe('Wrong username and/or password.');
+      expect(scope.error).toBe('خطأ في البريد الالكتروني أو كلمة المرور');
     });
 
   });

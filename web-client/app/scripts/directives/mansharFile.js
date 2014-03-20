@@ -12,6 +12,10 @@ angular.module('webClientApp')
       link: function (scope, element) {
 
         element.on('change', function(e) {
+          if(!e.target || !e.target.files) {
+            return;
+          }
+
           var selectedFile = e.target.files[0];
 
           if (selectedFile) {

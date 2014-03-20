@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('LoginCtrl', ['$scope', '$http', '$location', '$routeParams', 'LoginService',
-      function ($scope, $http, $location, $routeParams, LoginService) {
+  .controller('LoginCtrl', ['$scope', '$http', '$location', '$routeParams', '$analytics', 'LoginService',
+      function ($scope, $http, $location, $routeParams, $analytics, LoginService) {
 
     $scope.user = {};
     $scope.error = null;
@@ -12,13 +12,15 @@ angular.module('webClientApp')
     };
 
     var success = function() {
+      $analytics.eventTrack('Logged In', {});
       $location.path($routeParams.prev || '/')
         // Remove the prev param when redirecting.
         .search('prev', null);
     };
 
     var error = function() {
-      $scope.error = 'Wrong username and/or password.';
+      $analytics.eventTrack('Login Error', { category: 'errors' });
+      $scope.error = 'خطأ في البريد الالكتروني أو كلمة المرور';
     };
 
   }]);

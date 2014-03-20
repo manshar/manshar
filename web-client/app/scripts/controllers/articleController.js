@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ArticleCtrl', ['$scope', '$routeParams', '$location', 'Article', 'LoginService',
-      function ($scope, $routeParams, $location, Article, LoginService) {
+  .controller('ArticleCtrl', ['$scope', '$routeParams', '$location', 'Article',
+      function ($scope, $routeParams, $location, Article) {
 
-    $scope.isLoggedIn = LoginService.isLoggedIn();
     $scope.article = Article.get({'articleId': $routeParams.articleId});
 
     $scope.editArticle = function (articleId) {

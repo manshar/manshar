@@ -6,6 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
     <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
     <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
     <meta name="description" content="">
@@ -14,8 +15,9 @@
 
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/Medium.js/medium.css">
         <link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css">
+        <link rel="stylesheet" href="bower_components/grande.js/css/editor.css">
+        <link rel="stylesheet" href="bower_components/grande.js/css/menu.css">
         <!-- endbuild -->
 </head>
   <body>
@@ -29,30 +31,35 @@
     <![endif]-->
 
     <!-- site nav -->
-    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="right"/>
-    
+    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="right"
+        analytics-on="click" analytics-event="Toggle Drawer"/>
+
     <nav class="site-nav" snap-drawer-right>
+      <div class="profile-badge">
+        <a href="#" snap-close ng-show="isLoggedIn">
+          <img ng-src="{{currentUser.avatar_url}}" ng-show="currentUser"/>
+          <span>{{currentUser.name}}</span>
+        </a>
+      </div>
       <ul>
         <!-- TDOD: Convert to ng-repeat -->
         <li><a href="/#" snap-close>الصفحة الرئيسية</a></li>
         <li><a href="/#/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
-        <li><a href="#" snap-close ng-show="isLoggedIn">{{currentUser.email}}</a></li>
+        <li><a snap-close ng-show="isLoggedIn" ng-click="logout()"
+            analytics-on="click" analytics-event="Logout">تسجيل الخروج</a></li>
       </ul>
     </nav>
-      
+
     <!-- Add your site or application content here -->
     <snap-content snap-options="{disable: left, touchToDrag:false}">
       <div class="container scrollable" ng-view=""></div>
     </snap-content>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!-- Google Analytics: Configured in app.js run block. -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
     </script>
 
 
@@ -63,10 +70,12 @@
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/Medium.js/medium.js"></script>
         <script src="bower_components/snapjs/snap.js"></script>
+        <script src="bower_components/grande.js/js/grande.js"></script>
         <script src="bower_components/angular-snap/angular-snap.js"></script>
         <script src="bower_components/angular-truncate/dist/angular-truncate.js"></script>
+        <script src="bower_components/angulartics/src/angulartics.js"></script>
+        <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -84,7 +93,7 @@
         <script src="scripts/services/signupService.js"></script>
         <script src="scripts/services/storageService.js"></script>
 
-        <script src="scripts/directives/mediumEditor.js"></script>
+        <script src="scripts/directives/grandeEditor.js"></script>
         <script src="scripts/directives/mansharFile.js"></script>
 
         <script src="scripts/filters/nohtml.js"></script>

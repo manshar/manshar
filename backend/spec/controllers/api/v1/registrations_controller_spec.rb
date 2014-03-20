@@ -2,6 +2,7 @@ require 'spec_helper'
 
 
 describe Api::V1::RegistrationsController do
+  render_views
 
   before(:each) do
     @user = FactoryGirl.create(:user)
@@ -12,7 +13,7 @@ describe Api::V1::RegistrationsController do
     it 'should register with JSON request and returns auth_token' do
       post :create, { :user => {
           :email => 'tester@example.com',
-          :password => 'tester123', :password_confirmation => 'tester123',
+          :password => 'tester123',
           :name => 'Example Tester',
           :avatar => fixture_file_upload('images/test.png', 'image/png'),
           :bio => "A tester who is an example in all tests." } }
@@ -29,8 +30,7 @@ describe Api::V1::RegistrationsController do
 
     it 'should fail for an already used email' do
       post :create, {:user => { :email => @user.email,
-                                :password => 'tester123',
-                                :password_confirmation => 'tester123' } }
+                                :password => 'tester123' } }
       response.status.should eq(500)
 
       parsed_body = JSON.parse(response.body)

@@ -89,11 +89,17 @@ bower install
 ## Setup the database
 
 ```sh
+# Create postgres role and leave the password empty when prompted.
+createuser -P -s -e postgres
+
 cd backend
 
 bundle exec  rake db:create
 
 bundle exec rake db:migrate
+
+# Optional: Seed the Database with some test data.
+bundle exec rake db:seed
 ```
 
 ## Run the app.

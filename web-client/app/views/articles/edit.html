@@ -18,11 +18,14 @@
           manshar-file
             file-model="article.cover"
             preview-url="article.cover_url"
+          analytics-on="click"
+            analytics-event="Pick Article Cover"
         />
 
         <h1
           class="manshar-editor"
-          medium-editor
+          grande-editor
+            rtl="true"
             placeholder="عنوان المقال"
             mode="inline"
             max-length="100"
@@ -32,7 +35,8 @@
 
         <h2
           class="manshar-editor"
-          medium-editor
+          grande-editor
+            rtl="true"
             placeholder="عنوان المقال الفرعي"
             mode="inline"
             max-length="200"
@@ -49,7 +53,8 @@
 
   <article
     class="manshar-editor"
-    medium-editor
+    grande-editor
+      rtl="true"
       placeholder="اكتب مقالك هنا"
       mode="rich"
       ng-model="article.body"

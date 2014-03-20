@@ -11,12 +11,15 @@ angular.module('webClientApp', [
   'ngRoute',
   'AppConfig',
   'truncate',
-  'snap'
+  'snap',
+  'angulartics',
+  'angulartics.google.analytics'
 ])
   /**
    * Routing.
    */
-  .config(['$routeProvider', function ($routeProvider) {
+  .config(['$routeProvider',
+      function ($routeProvider) {
 
     /**
      * Checks proper access to the route and reject it if unauthenticated.
@@ -122,26 +125,53 @@ angular.module('webClientApp', [
   /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', 'LoginService', 'StorageService',
-      function ($location, $rootScope, LoginService, StorageService) {
+  .run(['$location', '$rootScope', '$analytics', 'LoginService', 'GA_TRACKING_ID',
+      function ($location, $rootScope, $analytics, LoginService, GA_TRACKING_ID) {
 
+    // ga is the Google analytics global variable.
+    if (window.ga) {
+      ga('create', GA_TRACKING_ID);
+    }
+
+    /**
+     * Holds data about page-wide attributes. Like pages title.
+     */
     $rootScope.page = {
-      title: 'منشر - منصة النشر العربية'
+      title: 'منصة النشر العربية'
     };
 
-    $rootScope.isLoggedIn = LoginService.isLoggedIn();
+    /**
+     * Logs the user out.
+     */
+    $rootScope.logout = function () {
+      $analytics.eventTrack('Logout', {});
+      LoginService.logout();
+    };
 
-    $rootScope.currentUser = {
-      // TODO We need to display user name not email
-      email: StorageService.get('user.email')
+    /**
+     * Returns true if the passed user is the same user that is referenced
+     * in the resource. This assumes that the resource always have a user
+     * property, otherwise it'll return false.
+     * @param {Object} user The object representing the user data.
+     * @param {Object} resource The object representing the resource (e.g. Article).
+     * @returns {boolean} true if the user is the owner of the resource.
+     */
+    $rootScope.isOwner = function (user, resource) {
+      return (!!user && !!resource && !!resource.user &&
+              user.id === resource.user.id);
     };
 
     // If the user is already logged in init the auth headers.
-    LoginService.initAuthHeaders();
+    // This also makes isLoggedIn and currentUser available on rootScope.
+    LoginService.init();
 
     // Listen to $routeChangeError and redirect the user.
     $rootScope.$on('$routeChangeError', function(event, current, previous, rejection) {
       if(rejection && rejection.redirectTo) {
+        $analytics.eventTrack('Unauthorized', {
+          category: 'errors',
+          label: rejection.previous
+        });
         $location.path(rejection.redirectTo).search('prev', rejection.previous);
       }
     });

@@ -7,9 +7,8 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   def create
     warden.authenticate!(:scope => resource_name)
-    render :status => 200,
-           :json => { :user => current_user,
-                      :authToken => current_user.authentication_token }
+    @user = current_user
+    render 'api/v1/registrations/new'
   end
 
   def destroy

@@ -39,6 +39,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: 'development',
           API_HOST: 'localhost:3000',
+          GA_TRACKING_ID: 'UA-XXXXXXXX-X'
         }
       }],
       production: [{
@@ -47,7 +48,8 @@ module.exports = function (grunt) {
         name: 'AppConfig',
         constants: {
           ENV: 'production',
-          API_HOST: 'api.manshar.me',
+          API_HOST: 'api.manshar.com',
+          GA_TRACKING_ID: 'UA-47379030-1'
         }
       }]
     },

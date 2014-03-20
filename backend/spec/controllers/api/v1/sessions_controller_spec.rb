@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Api::V1::SessionsController do
+  render_views
 
   before(:each) do
     @user = FactoryGirl.create(:user)

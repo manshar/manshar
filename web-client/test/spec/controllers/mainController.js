@@ -35,4 +35,12 @@ describe('Controller: MainCtrl', function () {
       expect(location.path()).toBe('/articles/1');
     });
   });
+
+  describe('MainCtrl.newArticle', function () {
+    it('should redirect the user to /articles/new', function () {
+      scope.newArticle();
+      expect(location.path()).toBe('/articles/new');
+    });
+  });
+
 });
