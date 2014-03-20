@@ -13,13 +13,12 @@
 <ul class="manshar-articles-list one-column">
   <li ng-repeat="article in articles" ng-click="showArticle(article.id)">
   	<div class="article-details">
-  		<div class="article-thumb">
-  			<img class="article-cover-thumb" ng-src="{{article.thumb_url}}" />
-  			<img class="article-author-thumb" ng-src="{{article.user.thumb_url}}" />
-			</div>
 	    <h1>{{article.title}}</h1>
 	    <h2 class="manshar-tagline">{{article.tagline}}</h2>
 	    <p class="manshar-snippet">{{article.body | nohtml | words:50}}</p>
+      <div class="article-meta">
+        <img width="50px" ng-src="{{article.user.thumb_url}}"/>
+      </div>
     </div>
   </li>
 </ul>

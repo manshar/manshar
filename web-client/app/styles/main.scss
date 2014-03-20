@@ -180,25 +180,16 @@ ul.manshar-articles-list {
     cursor: pointer;
 
     .article-details {
-      .article-thumb {
-        text-align: center;;
+      position: relative;
+      padding-left: 25px;
+      border-left: 1px solid #ddd;
 
-        .article-cover-thumb {
-          width: 100%;
-          max-width: 400px;
-          border-radius: 500px;
-        }
-
-        .article-author-thumb {
-          width: 75px;
-          max-width: 400px;
-          border-radius: 500px;
-          margin-right: -150px;
-          z-index: 50;
-          position: relative;
-          border: 7px solid white;
-        }
+      .article-meta {
+        position: absolute;
+        left: -50px;
+        top: 25px;
       }
+
     }
   }
 }
