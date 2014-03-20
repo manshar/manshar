@@ -4,27 +4,45 @@ describe('Controller: EditArticleCtrl', function () {
 
   beforeEach(module('webClientApp'));
 
-  var createController, scope, httpBackend, apiBase, routeParams, rootScope, location, ArticleModel;
+  var createController, scope, httpBackend, apiBase, routeParams, rootScope, location, ArticleModel, mock;
   var articleData = {id: 1, title: 'Hello World.', user: {id: 1}};
 
-  beforeEach(inject(function ($controller, $location, $rootScope, $httpBackend, $routeParams, Article, API_HOST) {
-    rootScope = $rootScope.$new();
-    location = $location;
-    routeParams = $routeParams;
-    apiBase = '//' + API_HOST + '/api/v1/';
-    httpBackend = $httpBackend;
-    ArticleModel = Article;
+  beforeEach(function() {
 
-    scope = $rootScope.$new();
-    createController = function () {
-      return $controller('EditArticleCtrl', {
-        $scope: scope,
-        $routeParams: routeParams,
-        $rootScope: rootScope,
-        $location: location
-      });
+
+    // Mock confirm.
+    mock = {
+      confirm: function() {},
+      localStorage: {
+        getItem: function (){},
+        setItem: function (){},
+        removeItem: function (){}
+      }
     };
-  }));
+
+    module(function($provide) {
+      $provide.value('$window', mock);
+    });
+
+    inject(function ($controller, $location, $rootScope, $httpBackend, $routeParams, Article, API_HOST) {
+      rootScope = $rootScope.$new();
+      location = $location;
+      routeParams = $routeParams;
+      apiBase = '//' + API_HOST + '/api/v1/';
+      httpBackend = $httpBackend;
+      ArticleModel = Article;
+
+      scope = $rootScope.$new();
+      createController = function () {
+        return $controller('EditArticleCtrl', {
+          $scope: scope,
+          $routeParams: routeParams,
+          $rootScope: rootScope,
+          $location: location
+        });
+      };
+    });
+  });
 
   afterEach(function() {
     httpBackend.verifyNoOutstandingExpectation();
@@ -114,6 +132,42 @@ describe('Controller: EditArticleCtrl', function () {
       expect(ArticleModel.save).toHaveBeenCalled();
       expect(location.path()).toBe('/articles/2');
     });
+  });
+
+  describe('EditArticleCtrl.deleteArticle', function () {
+    it('should delete an article when the user confirm', function () {
+      createController();
+      spyOn(mock, 'confirm').andCallFake(function() {return true;});
+      spyOn(ArticleModel, 'delete').andCallFake(function(params, data, success) {
+        success();
+      });
+      scope.deleteArticle({id: 1});
+      expect(mock.confirm).toHaveBeenCalled();
+      expect(ArticleModel.delete).toHaveBeenCalled();
+      expect(location.path()).toBe('/');
+    });
+
+    it('should not delete an article when the user does not confirm', function () {
+      createController();
+      spyOn(mock, 'confirm').andReturn(false);
+      spyOn(ArticleModel, 'delete');
+      scope.deleteArticle({id: 1});
+      expect(mock.confirm).toHaveBeenCalled();
+      expect(ArticleModel.delete).not.toHaveBeenCalled();
+    });
+
+    it('should set error on scope', function () {
+      createController();
+      spyOn(mock, 'confirm').andReturn(true);
+      spyOn(ArticleModel, 'delete').andCallFake(function(params, data, success, error) {
+        error({});
+      });
+      scope.deleteArticle({id: 1});
+      expect(mock.confirm).toHaveBeenCalled();
+      expect(ArticleModel.delete).toHaveBeenCalled();
+      expect(scope.error).toBe('حدث خطأ في حذف المقال.');
+    });
+
   });
 
 });

@@ -34,6 +34,7 @@ angular.module('webClientApp')
     };
 
     var deleteSuccess = function () {
+      $analytics.eventTrack('Delete Article', {});
       $location.path('/');
     };
 
@@ -43,6 +44,14 @@ angular.module('webClientApp')
         label: angular.toJson(response.errors)
       });
       $scope.error = 'حدث خطأ في حفظ المقال.';
+    };
+
+    var deleteError = function (response) {
+      $analytics.eventTrack('Delete Article', {
+        category: 'errors',
+        label: angular.toJson(response.errors)
+      });
+      $scope.error = 'حدث خطأ في حذف المقال.';
     };
 
     /**
@@ -59,9 +68,13 @@ angular.module('webClientApp')
       }
     };
 
+    /**
+     * Deletes an article.
+     * @param {Object} article Article data.
+     */
     $scope.deleteArticle = function(article) {
       if ($window.confirm('متأكد من حذف المقال؟')) {
-        Article.delete({ 'articleId': article.id }, deleteSuccess, error);
+        Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
       }
     };
 
