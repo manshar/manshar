@@ -27,6 +27,10 @@ a {
   cursor: pointer;
 }
 
+body, html {
+  height: 100%;
+}
+
 body {
   font-family: Niloofar, serif;
   background: #f9f9f9;
@@ -34,7 +38,6 @@ body {
 
 .container{
   @include span-columns(12);
-  position: relative;
   background-color: #f9f9f9;
   height: 100%;
 }
@@ -201,82 +204,91 @@ ul.manshar-articles-list {
 .manshar-article {
 
   background-color: #ffffff;
-
-  header {
-    position: relative;
-    overflow: hidden;
-  }
+  height: 100%;
 
   .manshar-article-image-container {
-    background: #f3f3f3;
-  }
-
-  .manshar-article-image-container .manshar-article-img {
-    position: absolute;
     height: 100%;
-    min-width: 100%;
-    top: 0;
-    z-index: 1;
-  }
-
-  .manshar-article-header-image-aspect-ratio {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .manshar-article-header {
     position: relative;
-    padding: 50px;
-    z-index: 99;
 
-    .author-details {
-      float: left;
+    .manshar-article-header {
+      width: 100%;
+
+      position: absolute;
+      bottom: 0;
       padding: 50px;
+      z-index: 99;
+      color: white;
 
-      .author-name {
-        color: white;
+      h1 {
+        font-size: 48pt;
+        padding: 20px 0;
+        text-shadow: 0px 1px 5px #000;
       }
 
-      img {
-        border-color: white;
+      h2 {
+        font-size: 26pt;
+        text-shadow: 0px 1px 5px #000;
+        font-weight: 100;
       }
+
+      .author-details {
+        float: left;
+        padding: 50px;
+
+        .author-name {
+          color: white;
+        }
+
+        img {
+          border-color: white;
+        }
+      }
+
+
     }
   }
 
-  article {
-    padding: 30px;
-    font-size: 22pt;
-    min-height: 300px !important;
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
-    font-weight: 100;
-    word-wrap: break-word;
+  .article-content-container {
+    background: white;
+    padding-bottom: 10px;
 
-    p {
-      margin-top: 36px;
+    article {
+      padding: 30px;
+      font-size: 22pt;
+      min-height: 300px !important;
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      font-weight: 100;
+      word-wrap: break-word;
+
+      blockquote {
+        border-right: #f88 5px solid;
+        padding: 10px 20px;
+        margin-right: 20px;
+        margin: 36px 0;
+        color: #999;
+        font-size: 18pt;
+
+      }
+
+      h1 {
+        font-size: 28pt;
+        padding-top: 20px;
+      }
+
+      h2 {
+        font-size: 22pt;
+      }
+
+      p {
+        margin-top: 36px;
+      }
     }
-  }
 
-  h1 {
-    font-size: 48pt;
-    min-height: 88pt !important;
-    color: white;
-    text-shadow: 0px 1px 5px #000;
-    font-family: NiloofarBold;
-  }
-
-  h2 {
-    font-size: 26pt;
-    min-height: 56pt !important;
-    color: #fff;
-    text-shadow: 0px 1px 5px #000;
-    font-weight: 100;
-  }
-
-  h3 {
-    font-size: 24pt;
+    h3 {
+      font-size: 24pt;
+    }
   }
 
 }
@@ -288,17 +300,16 @@ ul.manshar-articles-list {
   height: 65px;
   z-index: 2;
   display: block;
+}
 
-  .manshar-controls {
-    padding: 10px 0 0 10px;
-    text-align: left;
+.manshar-controls {
+  padding: 10px 0 0 10px;
+  text-align: left;
 
-    button {
-      @include button(simple, #e48184);
-      font-size: 14pt;
-      padding : 10px 10px;
-      width: 200px;
-    }
+  button {
+    @include button(simple, #e48184);
+    font-size: 14pt;
+    padding : 10px 10px;
   }
 }
 
@@ -397,5 +408,14 @@ ul.manshar-articles-list {
         padding: 2px;
       }
     }
+  }
+}
+
+.g-body .text-menu .options {
+  height: 40px;
+  width: 184px;
+
+  .url {
+    font-family: 'icomoon' !important;
   }
 }
