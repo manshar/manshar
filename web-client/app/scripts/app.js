@@ -100,7 +100,7 @@ angular.module('webClientApp', [
    * Intercept every http request and check for 401 Unauthorized
    * error. Clear the current user and redirect to /login page.
    */
-  .config(['$httpProvider', function ($httpProvider) {
+  .config(['$httpProvider', '$locationProvider', function ($httpProvider, $locationProvider) {
     var unAuthenticatedInterceptor = ['$location', '$q', function ($location, $q) {
 
       var success = function (response) {
@@ -121,6 +121,8 @@ angular.module('webClientApp', [
     }];
     $httpProvider.responseInterceptors.push(unAuthenticatedInterceptor);
     // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+
+    $locationProvider.hashPrefix('!');
   }])
   /**
    * Everytime the route change check if the user need to login.
