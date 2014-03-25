@@ -1,6 +1,5 @@
 'use strict';
 
-// server.js
 var express = require('express');
 
 var app = module.exports = express();
@@ -18,4 +17,6 @@ app.get('*', function(req, res){
         res.sendfile('index.html');
 });
 
-app.listen(80);
+var port = process.env.PORT || 3000;
+app.listen(port);
+console.log("Listening on port " + port);
