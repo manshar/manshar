@@ -47,6 +47,7 @@ angular.module('webClientApp', [
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
+        title: 'منصة النشر العربية',
         resolve: checkAccess({
           isPublic: true
         })
@@ -55,6 +56,7 @@ angular.module('webClientApp', [
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
+        title: 'تسجيل الدخول',
         resolve: checkAccess({
           isPublic: true
         })
@@ -63,6 +65,7 @@ angular.module('webClientApp', [
       .when('/signup', {
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl',
+        title: 'مستخدم جديد',
         resolve: checkAccess({
           isPublic: true
         })
@@ -71,6 +74,7 @@ angular.module('webClientApp', [
       .when('/articles/new', {
         templateUrl: 'views/articles/edit.html',
         controller: 'EditArticleCtrl',
+        title: 'مقال جديد',
         resolve: checkAccess({
           isPublic: false
         })
