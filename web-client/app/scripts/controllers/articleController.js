@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ArticleCtrl', ['$scope', '$routeParams', '$location', 'Article',
-      function ($scope, $routeParams, $location, Article) {
+  .controller('ArticleCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Article',
+      function ($scope, $rootScope, $routeParams, $location, Article) {
 
-    $scope.article = Article.get({'articleId': $routeParams.articleId});
+    $scope.article = Article.get({'articleId': $routeParams.articleId},
+        function(resource) {
+      $rootScope.page.title = resource.title;
+    });
 
     $scope.editArticle = function (articleId) {
       $location.path('/articles/' + articleId + '/edit');

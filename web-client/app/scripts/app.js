@@ -47,6 +47,7 @@ angular.module('webClientApp', [
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
+        title: 'منصة النشر العربية',
         resolve: checkAccess({
           isPublic: true
         })
@@ -55,6 +56,7 @@ angular.module('webClientApp', [
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
+        title: 'تسجيل الدخول',
         resolve: checkAccess({
           isPublic: true
         })
@@ -63,6 +65,7 @@ angular.module('webClientApp', [
       .when('/signup', {
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl',
+        title: 'مستخدم جديد',
         resolve: checkAccess({
           isPublic: true
         })
@@ -71,6 +74,7 @@ angular.module('webClientApp', [
       .when('/articles/new', {
         templateUrl: 'views/articles/edit.html',
         controller: 'EditArticleCtrl',
+        title: 'مقال جديد',
         resolve: checkAccess({
           isPublic: false
         })
@@ -100,7 +104,7 @@ angular.module('webClientApp', [
    * Intercept every http request and check for 401 Unauthorized
    * error. Clear the current user and redirect to /login page.
    */
-  .config(['$httpProvider', function ($httpProvider) {
+  .config(['$httpProvider', '$locationProvider', function ($httpProvider, $locationProvider) {
     var unAuthenticatedInterceptor = ['$location', '$q', function ($location, $q) {
 
       var success = function (response) {
@@ -121,6 +125,8 @@ angular.module('webClientApp', [
     }];
     $httpProvider.responseInterceptors.push(unAuthenticatedInterceptor);
     // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+
+    $locationProvider.hashPrefix('!');
   }])
   /**
    * Everytime the route change check if the user need to login.

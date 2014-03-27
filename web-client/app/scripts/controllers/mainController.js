@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('MainCtrl', ['$scope', '$location', 'Article',
-      function ($scope, $location, Article) {
+  .controller('MainCtrl', ['$scope', '$rootScope', '$location', 'Article',
+      function ($scope, $rootScope, $location, Article) {
     $scope.title = 'منشر';
     $scope.tagline = 'منصة نشر مخصصة بالعربية';
     $scope.articles = Article.query();

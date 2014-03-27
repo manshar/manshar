@@ -5,7 +5,9 @@
     "bower": "~1.2.7",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.11",
-    "grunt-ng-constant": "~0.4.7"
+    "grunt-ng-constant": "~0.4.7",
+    "prerender-node": "^0.1.18",
+    "express": "^3.5.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
