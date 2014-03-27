@@ -1,15 +1,6 @@
 <div class="manshar-article">
-  <header>
 
-    <div class="manshar-article-image-container">
-
-      <img class="manshar-article-header-image-aspect-ratio" src="data:image/gif;base64,R0lGODlhMgAVAPAAAP///wAAACH5BAEAAAAALAAAAAAyABUAAAIfhI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8dTAQA7" />
-
-      <img
-        class="manshar-article-img"
-        ng-src="{{article.cover_url}}"
-        alt="{{article.title}}"
-      />
+    <div class="manshar-article-image-container" manshar-cover url="{{article.cover_url}}">
 
       <div class="manshar-article-header">
 
@@ -48,23 +39,23 @@
 
     </div>
 
-  </header>
+  <div class="article-content-container">
+    <article
+      class="manshar-editor"
+      grande-editor
+        rtl="true"
+        placeholder="اكتب مقالك هنا"
+        mode="rich"
+        ng-model="article.body"
+      >
+    </article>
 
+    <div class="manshar-controls">
+      <button ng-click="saveArticle(article, true)">نشر</button>
+      <button ng-click="saveArticle(article, false)">حفظ مسودة</button>
+      <button ng-click="deleteArticle(article)">حذف</button>
+    </div>
 
-  <article
-    class="manshar-editor"
-    grande-editor
-      rtl="true"
-      placeholder="اكتب مقالك هنا"
-      mode="rich"
-      ng-model="article.body"
-    >
-  </article>
-
-  <div class="manshar-controls">
-    <button ng-click="saveArticle(article, true)">نشر</button>
-    <button ng-click="saveArticle(article, false)">حفظ مسودة</button>
-    <button ng-click="deleteArticle(article)">حذف</button>
   </div>
 
 </div>

@@ -1,35 +1,23 @@
 <div class="manshar-article">
-  <header>
 
-    <div class="manshar-article-image-container">
-
-      <img class="manshar-article-header-image-aspect-ratio" src="data:image/gif;base64,R0lGODlhMgAVAPAAAP///wAAACH5BAEAAAAALAAAAAAyABUAAAIfhI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8dTAQA7" />
-
-      <img
-        class="manshar-article-img"
-        ng-src="{{imagePrefix + article.cover_url}}"
-        alt="{{article.title}}"
-      />
-
-      <div class="manshar-article-header">
-        <div class="author-details">
-          <img ng-src="{{article.user.thumb_url}}" />
-          <div class="author-name">{{article.user.name}}</div>
-        </div>
-        <h1>{{article.title}}</h1>
-        <h2>{{article.tagline}}</h2>
+  <div class="manshar-article-image-container" manshar-cover url="{{article.cover_url}}">
+    <div class="manshar-article-header">
+      <div class="author-details">
+        <img ng-src="{{article.user.thumb_url}}" />
+        <div class="author-name">{{article.user.name}}</div>
       </div>
-
+      <h1>{{article.title}}</h1>
+      <h2>{{article.tagline}}</h2>
     </div>
+  </div>
 
-  </header>
+  <div class="article-content-container">
+    <article ng-bind-html="article.body">
+    </article>
 
-  <article ng-bind-html="article.body">
-  </article>
-
-  <div class="manshar-controls">
-    <!-- TODO(mkhatib): Only show this for the author of the article. -->
-    <button ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">تعديل</button>
+    <div class="manshar-controls">
+      <button ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">تعديل</button>
+    </div>
   </div>
 
 </div>
