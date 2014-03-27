@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$analytics', 'Article',
-      function ($rootScope, $scope, $routeParams, $location, $analytics, Article) {
+  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$analytics', '$window', 'Article',
+      function ($rootScope, $scope, $routeParams, $location, $analytics, $window, Article) {
 
     var isEdit = false;
 
@@ -33,12 +33,25 @@ angular.module('webClientApp')
       $location.path('/articles/' + resource.id);
     };
 
+    var deleteSuccess = function () {
+      $analytics.eventTrack('Delete Article', {});
+      $location.path('/');
+    };
+
     var error = function (response) {
       $analytics.eventTrack('Create Article', {
         category: 'errors',
         label: angular.toJson(response.errors)
       });
       $scope.error = 'حدث خطأ في حفظ المقال.';
+    };
+
+    var deleteError = function (response) {
+      $analytics.eventTrack('Delete Article', {
+        category: 'errors',
+        label: angular.toJson(response.errors)
+      });
+      $scope.error = 'حدث خطأ في حذف المقال.';
     };
 
     /**
@@ -55,6 +68,15 @@ angular.module('webClientApp')
       }
     };
 
+    /**
+     * Deletes an article.
+     * @param {Object} article Article data.
+     */
+    $scope.deleteArticle = function(article) {
+      if ($window.confirm('متأكد من حذف المقال؟')) {
+        Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
+      }
+    };
 
     /**
      * When the user logout while in edit mdoe redirect the user,
