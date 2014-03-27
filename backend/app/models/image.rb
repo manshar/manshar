@@ -1,4 +1,5 @@
 class Image < ActiveRecord::Base
+  include Utils
 
   dragonfly_accessor :asset do
     storage_options do |attachment|
@@ -8,5 +9,14 @@ class Image < ActiveRecord::Base
 
 
   belongs_to :user
+
+
+  def asset_abs_url size = nil
+    if size
+      abs_url asset.thumb(size).url, ENV['API_HOST']
+    else
+      abs_url asset.url, ENV['API_HOST']
+    end
+  end
 
 end
