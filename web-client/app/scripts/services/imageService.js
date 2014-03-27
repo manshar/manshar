@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('webClientApp')
-  .service('Article', ['$resource', '$http', '$q', 'API_HOST',
+  .service('Image', ['$resource', '$http', '$q', 'API_HOST',
       function ($resource, $http, $q, API_HOST) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
-      var ArticleResource = $resource(baseUrl + 'articles/:articleId');
+      var ImageResource = $resource(baseUrl + 'images/:imageId');
 
       /**
        * These configs are needed. AngularJS identity tranformer
@@ -19,24 +19,24 @@ angular.module('webClientApp')
 
       var createFormData = function (data) {
         var fd = new FormData();
-        for (var key in data.article) {
-          fd.append('article[' + key + ']', data.article[key]);
+        for (var key in data.image) {
+          fd.append('image[' + key + ']', data.image[key]);
         }
         return fd;
       };
 
       return {
         // No need to rewrite these. Just use what the $resource provide.
-        get: ArticleResource.get,
-        query: ArticleResource.query,
-        delete: ArticleResource.delete,
+        get: ImageResource.get,
+        query: ImageResource.query,
+        delete: ImageResource.delete,
 
         // Handling uploading files with the request.
         save: function (data, optSuccess, optError) {
 
           var delayedObj = {};
 
-          $http.post(baseUrl + 'articles',
+          $http.post(baseUrl + 'images',
                      createFormData(data), configs)
             .then(
 
@@ -62,7 +62,7 @@ angular.module('webClientApp')
 
           var delayedObj = {};
 
-          $http.put(baseUrl + 'articles/' + params.articleId,
+          $http.put(baseUrl + 'images/' + params.imageId,
                     createFormData(data), configs)
             .then(
 

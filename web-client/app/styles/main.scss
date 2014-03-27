@@ -1,16 +1,7 @@
 @import "bourbon";
 @import "neat";
 
-@font-face {
-  font-family: Niloofar;
-  src: url('/fonts/XB Niloofar.ttf');
-}
-
-@font-face {
-  font-family: NiloofarBold;
-  src: url('/fonts/XB NiloofarBd.ttf');
-}
-
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
 
 *{
   padding:0;
@@ -32,7 +23,7 @@ body, html {
 }
 
 body {
-  font-family: Niloofar, serif;
+  font-family: 'Droid Arabic Naskh', serif !important;
   background: #f9f9f9;
 }
 
@@ -244,7 +235,6 @@ ul.manshar-articles-list {
         }
       }
 
-
     }
   }
 
@@ -269,7 +259,30 @@ ul.manshar-articles-list {
         margin: 36px 0;
         color: #999;
         font-size: 18pt;
+      }
 
+      p {
+        margin: 36px auto;
+
+        span {
+          font-size: 18pt !important;
+        }
+      }
+
+      hr {
+        width: 200px;
+        height: 1px;
+        margin: 20px auto;
+        background-color: #eee;
+        border: none;
+      }
+
+      figure {
+        text-align: center;
+
+        img {
+          max-width: 100%;
+        }
       }
 
       h1 {
@@ -423,4 +436,9 @@ ul.manshar-articles-list {
   .url {
     font-family: 'icomoon' !important;
   }
+}
+
+.g-body .image-tooltip {
+  z-index: 9999;
+  position: fixed !important;
 }
