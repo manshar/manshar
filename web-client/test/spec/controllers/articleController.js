@@ -28,7 +28,12 @@ describe('Controller: ArticleCtrl', function () {
   });
 
   it('should load article/1', function () {
-    httpBackend.expectGET(apiBase + 'articles/1').respond({title: 'Hello World.'});
+    httpBackend.expectGET(apiBase + 'articles/1').respond({
+      title: 'Hello World.',
+      user: {
+        name: 'mk'
+      }
+    });
 
     routeParams.articleId = 1;
     createController();
