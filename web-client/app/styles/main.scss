@@ -201,6 +201,10 @@ ul.manshar-articles-list {
     height: 100%;
     position: relative;
 
+    &.half {
+      height: 50%;
+    }
+
     .manshar-article-header {
       width: 100%;
 
