@@ -143,7 +143,9 @@ angular.module('webClientApp', [
      * Holds data about page-wide attributes. Like pages title.
      */
     $rootScope.page = {
-      title: 'منصة النشر العربية'
+      title: 'منصة النشر العربية',
+      description: 'منصة نشر متخصصة باللغة العربية مفتوحة المصدر',
+      image: 'http://' + document.location.host + '/images/manshar@200x200.png'
     };
 
     /**
@@ -184,6 +186,7 @@ angular.module('webClientApp', [
 
     $rootScope.$on('$routeChangeSuccess', function (event, current) {
       $rootScope.page.title = current.$$route.title || $rootScope.page.title;
+      $rootScope.page.url = document.location.href;
     });
 
   }]);

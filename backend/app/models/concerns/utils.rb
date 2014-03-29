@@ -8,7 +8,7 @@ module Utils
   def abs_url url, host
     uri = url
     if uri && uri !~ /^http/
-      uri = "//#{host}#{uri}"
+      uri = "http://#{host}#{uri}"
     end
     uri
   end
