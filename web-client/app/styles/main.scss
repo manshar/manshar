@@ -20,6 +20,7 @@ a {
 
 body, html {
   height: 100%;
+  min-width: initial !important;
 }
 
 body {
@@ -59,7 +60,7 @@ body {
     }
 
     h1 {
-      font-size: 48pt;
+      font-size: 5em;
     }
   }
 }
@@ -101,7 +102,7 @@ body {
         color: white;
         bottom: 0;
         padding: 15px;
-        font-size: 16pt;
+        font-size: 1em;
         text-shadow: 1px 1px 1px #000;
       }
 
@@ -157,7 +158,7 @@ body {
   }
 
   .author-name {
-    font-size: 11pt;
+    font-size: 0.9em;
   }
 }
 
@@ -175,12 +176,11 @@ ul.manshar-articles-list {
 
     .article-details {
       position: relative;
-      padding-left: 25px;
       border-left: 1px solid #ddd;
 
       .article-meta {
         position: absolute;
-        left: -50px;
+        left: 0;
         top: 25px;
       }
 
@@ -189,7 +189,7 @@ ul.manshar-articles-list {
 }
 
 .manshar-snippet {
-  font-size: 16pt;
+  font-size: 1em;
 }
 
 .manshar-article {
@@ -200,6 +200,8 @@ ul.manshar-articles-list {
   .manshar-article-image-container {
     height: 100%;
     position: relative;
+    box-shadow: 0 0px 6px 0 #000;
+    background-color: #555;
 
     &.half {
       height: 50%;
@@ -213,25 +215,23 @@ ul.manshar-articles-list {
       padding: 50px;
       z-index: 99;
       color: white;
+      text-shadow: 0px 1px 3px #000;
+      text-align: center;
 
       h1 {
-        font-size: 48pt;
+        font-size: 3em;
         padding: 20px 0;
-        text-shadow: 0px 1px 5px #000;
       }
 
       h2 {
-        font-size: 26pt;
-        text-shadow: 0px 1px 5px #000;
+        font-size: 1.6em;
         font-weight: 100;
       }
 
       .author-details {
-        float: left;
-        padding: 50px;
-
         .author-name {
           color: white;
+          text-shadow: 0px 0px 2px #000;
         }
 
         img {
@@ -248,7 +248,7 @@ ul.manshar-articles-list {
 
     article {
       padding: 30px;
-      font-size: 22pt;
+      font-size: 1.3em;
       min-height: 300px !important;
       max-width: 960px;
       width: 100%;
@@ -262,14 +262,14 @@ ul.manshar-articles-list {
         margin-right: 20px;
         margin: 36px 0;
         color: #999;
-        font-size: 18pt;
+        font-size: 1.1em;
       }
 
       p {
         margin: 36px auto;
 
         span {
-          font-size: 18pt !important;
+          font-size: 1.3em !important;
         }
       }
 
@@ -290,17 +290,16 @@ ul.manshar-articles-list {
       }
 
       h1 {
-        font-size: 28pt;
+        font-size: 1.75em;
         padding-top: 20px;
       }
 
       h2 {
-        font-size: 22pt;
+        font-size: 1.4em;
       }
 
       ul, ol {
         margin-right: 70px;
-        font-size: 20pt;
       }
 
       p {
@@ -309,7 +308,7 @@ ul.manshar-articles-list {
     }
 
     h3 {
-      font-size: 24pt;
+      font-size: 1.5em;
     }
   }
 
@@ -330,7 +329,7 @@ ul.manshar-articles-list {
 
   button {
     @include button(simple, #e48184);
-    font-size: 14pt;
+    font-size: 0.6em;
     padding : 10px 10px;
   }
 }
@@ -387,7 +386,7 @@ ul.manshar-articles-list {
     input, .input{
       display: block;
       border: 2px solid #ECEBEC;
-      font-size: 20px;
+      font-size: 1.25em;
       margin: 20px 3px;
       padding: 10px;
       border-radius: 5px;
@@ -412,20 +411,20 @@ ul.manshar-articles-list {
 
     button {
       @include button(simple, #e48184);
-      font-size: 20px;
+      font-size: 1.25em;
       padding : 10px 125px;
     }
 
     .info{
       margin: 10px 0;
-      font-size: 11px;
+      font-size: 0.7em;
       color: #bbbaba;
 
       .signup-link {
         background-color: #F3EFEE;
         border-radius: 8px;
         color: #272F36;
-        font-size: 21px;
+        font-size: 1.25em;
         margin-left: 6px;
         padding: 2px;
       }
@@ -445,4 +444,23 @@ ul.manshar-articles-list {
 .g-body .image-tooltip {
   z-index: 9999;
   position: fixed !important;
+}
+
+
+/* For large displays (like medium tablets and up) */
+@media screen and (min-width: 40.5em) {
+
+  .manshar-article {
+    .manshar-article-image-container {
+      .manshar-article-header {
+        text-align: right;
+
+        .author-details {
+          float: left;
+          padding: 50px;
+        }
+      }
+    }
+  }
+
 }
