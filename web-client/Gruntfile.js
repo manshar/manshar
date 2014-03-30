@@ -337,6 +337,11 @@ module.exports = function (grunt) {
             }
             return path.join(dest, src);
           }
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/bower_components/grande.js/css/icomoon/',
+          src: ['**'],
+          dest: '<%= yeoman.dist %>/styles/icomoon/' // Copy icomoon fonts.
         }]
       },
       styles: {
