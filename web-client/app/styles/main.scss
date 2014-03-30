@@ -267,10 +267,13 @@ ul.manshar-articles-list {
 
       p {
         margin: 36px auto;
+      }
 
-        span {
-          font-size: 1.3em !important;
-        }
+      span {
+        // Chrome has a bug that adds font-size on span elements in
+        // content editable stuff. This will make sure it takes the same size
+        // as it is parent paragraph.
+        font-size: 1.0em !important;
       }
 
       hr {
