@@ -178,6 +178,10 @@ ul.manshar-articles-list {
       position: relative;
       border-left: 1px solid #ddd;
 
+      h1, h2 {
+        padding-left: 50px;
+      }
+
       .article-meta {
         position: absolute;
         left: 0;
@@ -274,6 +278,7 @@ ul.manshar-articles-list {
         // content editable stuff. This will make sure it takes the same size
         // as it is parent paragraph.
         font-size: 1.0em !important;
+        font-family: inherit !important;
       }
 
       hr {
@@ -356,10 +361,14 @@ ul.manshar-articles-list {
 
 
 .form-div {
-  @include span-columns(3);
-  @include shift(5);
 
-  padding-top:100px;
+  margin: auto;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  width: 300px;
+  height: 400px;
 
   header {
     @include row(table);
