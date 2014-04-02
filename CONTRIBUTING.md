@@ -7,7 +7,7 @@
 Homebrew is the best package manager out there for OS X.
 
 ```sh
-ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 ```
 
 ### Install Ruby
