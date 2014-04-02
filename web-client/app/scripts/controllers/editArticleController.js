@@ -79,6 +79,19 @@ angular.module('webClientApp')
     };
 
     /**
+     * Cancel creating an article.
+     */
+    $scope.cancel = function() {
+      // Warn the user when canceling editing an existing article or when
+      // canceling a new article with changed properties.
+      var isDirty = (isEdit || $scope.article.title || $scope.article.cover ||
+                     $scope.article.tagline || $scope.article.body);
+      if (!isDirty || $window.confirm('متأكد من إلغاء المقال؟')) {
+        $location.path('/');
+      }
+    };
+
+    /**
      * When the user logout while in edit mdoe redirect the user,
      */
     var loggedOutunbined = $rootScope.$on('user.loggedOut', function () {

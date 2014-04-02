@@ -170,4 +170,57 @@ describe('Controller: EditArticleCtrl', function () {
 
   });
 
+
+  describe('EditArticleCtrl.cancel', function () {
+    it('should confirm before canceling when editing', function () {
+      httpBackend.expectGET(apiBase + 'articles/1').respond({title: 'Hello World.'});
+      routeParams.articleId = 1;
+      createController();
+      httpBackend.flush();
+      spyOn(mock, 'confirm').andCallFake(function() {return true;});
+      scope.cancel();
+      expect(mock.confirm).toHaveBeenCalled();
+      expect(location.path()).toBe('/');
+    });
+
+    it('should not cancel if the user did not confirm', function () {
+      httpBackend.expectGET(apiBase + 'articles/1').respond({id: 1, title: 'Hello World.'});
+      routeParams.articleId = 1;
+      createController();
+      httpBackend.flush();
+      spyOn(mock, 'confirm').andCallFake(function() {return false;});
+      scope.cancel();
+      expect(mock.confirm).toHaveBeenCalled();
+      expect(location.path()).toBe('/articles/1');
+    });
+
+    it('should not confirm before canceling unchanged new article', function () {
+      createController();
+      spyOn(mock, 'confirm');
+      scope.cancel();
+      expect(mock.confirm).not.toHaveBeenCalled();
+      expect(location.path()).toBe('/');
+    });
+
+    it('should not cancel a changed new article when not confirming', function () {
+      location.path('/articles/new');
+      createController();
+      scope.article.title = 'hello';
+      spyOn(mock, 'confirm').andCallFake(function() {return false;});
+      scope.cancel();
+      expect(mock.confirm).toHaveBeenCalled();
+      expect(location.path()).toBe('/articles/new');
+    });
+
+    it('should cancel before a new changed article when confirming', function () {
+      createController();
+      scope.article.title = 'hello';
+      spyOn(mock, 'confirm').andCallFake(function() {return true;});
+      scope.cancel();
+      expect(mock.confirm).toHaveBeenCalled();
+      expect(location.path()).toBe('/');
+    });
+
+  });
+
 });
