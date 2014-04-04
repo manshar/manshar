@@ -73,7 +73,8 @@
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     </script>
 
-
+    <!-- Need to load shims before angular.js to allow progress events to work. -->
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
         <!-- build:js scripts/modules.js -->
@@ -87,6 +88,7 @@
         <script src="bower_components/angular-truncate/dist/angular-truncate.js"></script>
         <script src="bower_components/angulartics/src/angulartics.js"></script>
         <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
+        <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->

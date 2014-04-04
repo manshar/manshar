@@ -13,7 +13,8 @@ angular.module('webClientApp', [
   'truncate',
   'snap',
   'angulartics',
-  'angulartics.google.analytics'
+  'angulartics.google.analytics',
+  'angularFileUpload'
 ])
   /**
    * Routing.

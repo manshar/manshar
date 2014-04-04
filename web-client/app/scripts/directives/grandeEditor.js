@@ -27,20 +27,31 @@ angular.module('webClientApp')
           }
         };
 
-        var uploadCallback = function (filesList, insertImageCallback) {
+        var uploadCallback = function (filesList, successFn, progressFn) {
           if (scope.mode !== 'rich') {
             return;
           }
           var file = filesList[0];
           var image = {'asset': file};
+
           // Actually upload the image.
           Image.save({image: image},
             // Success.
             function(resource) {
-              insertImageCallback(resource.url);
+              if (successFn) {
+                successFn(resource.url);
+              }
               read(); // Update the ngModel.
-            }, function() {
+            },
+            // Fail.
+            function() {
               window.alert('Erorr uploading the image');
+            },
+            // Progress.
+            function(event) {
+              if (progressFn) {
+                progressFn(parseInt(100.0 * event.loaded / event.total));
+              }
             });
         };
 
