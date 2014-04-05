@@ -6,7 +6,7 @@ angular.module('webClientApp')
 
     $scope.article = Article.get({'articleId': $routeParams.articleId},
         function(resource) {
-      /*jshint camelcase: false */
+      /* jshint camelcase: false */
       $rootScope.page.title = resource.title;
       $rootScope.page.image = resource.cover_url;
       $rootScope.page.publishedTime = resource.created_at;
