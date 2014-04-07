@@ -6,6 +6,10 @@ Backend::Application.routes.draw do
     :confirmations => 'confirmations',
   }
 
+  concern :recommendable do
+    resources :recommendations, :except => [:new, :edit, :show, :update]
+  end
+
   namespace :api do
     namespace :v1 do
       devise_scope :user do
@@ -15,7 +19,11 @@ Backend::Application.routes.draw do
         match 'sessions', :to => 'sessions#destroy', :as => 'logout', :via => [:delete, :options]
       end
 
-      resources :articles
+      scope '/users/:user_id' do
+        resources :recommendations, :only => [:index]
+      end
+
+      resources :articles, concerns: :recommendable
       resources :images
     end
   end

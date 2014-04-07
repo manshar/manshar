@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :articles, :dependent => :destroy
   has_many :images, :dependent => :destroy
+  has_many :recommendations, :dependent => :destroy
 
   dragonfly_accessor :avatar do
     storage_options do |attachment|
