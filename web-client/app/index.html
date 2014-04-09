@@ -30,6 +30,8 @@
         <link rel="stylesheet" href="bower_components/grande.js/css/editor.css">
         <link rel="stylesheet" href="bower_components/grande.js/css/menu.css">
         <!-- endbuild -->
+        <!-- Load the hosted stylesheets for highlight.js -->
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
 </head>
   <body>
     <!--[if lt IE 7]>
@@ -73,6 +75,8 @@
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     </script>
 
+    <!-- Load the hosted compiled javasript for highlight.js -->
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
     <!-- Need to load shims before angular.js to allow progress events to work. -->
     <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -110,6 +114,7 @@
         <script src="scripts/directives/grandeEditor.js"></script>
         <script src="scripts/directives/mansharCover.js"></script>
         <script src="scripts/directives/mansharFile.js"></script>
+        <script src="scripts/directives/highlightCode.js"></script>
 
         <script src="scripts/filters/nohtml.js"></script>
 

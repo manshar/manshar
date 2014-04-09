@@ -260,6 +260,12 @@ ul.manshar-articles-list {
       font-weight: 100;
       word-wrap: break-word;
 
+      pre {
+        direction: ltr;
+        margin: 10px;
+        display: block;
+      }
+
       blockquote {
         border-right: #f88 5px solid;
         padding: 10px 20px;
@@ -442,6 +448,14 @@ ul.manshar-articles-list {
       }
     }
   }
+}
+
+// Load simple code style for the editor.
+// For rendering the code we use highlight.js
+.manshar-editor pre {
+  padding: 25px;
+  background-color: #333;
+  color: white;
 }
 
 .g-body .text-menu .options {

@@ -21,6 +21,7 @@
   "globals": {
     "angular": false,
     "Grande": false,
-    "ga": false
+    "ga": false,
+    "hljs": false
   }
 }
