@@ -11,21 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140106232326) do
+ActiveRecord::Schema.define(version: 20140406075648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "articles", force: true do |t|
-    t.string   "title",      default: "",    null: false
-    t.string   "tagline",    default: "",    null: false
-    t.text     "body",       default: "",    null: false
-    t.boolean  "published",  default: false, null: false
-    t.integer  "user_id",                    null: false
+    t.string   "title",                 default: "",    null: false
+    t.string   "tagline",               default: "",    null: false
+    t.text     "body",                  default: "",    null: false
+    t.boolean  "published",             default: false, null: false
+    t.integer  "user_id",                               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "cover_uid",                  null: false
+    t.string   "cover_uid",                             null: false
     t.string   "cover_name"
+    t.integer  "recommendations_count", default: 0
   end
 
   create_table "images", force: true do |t|
@@ -37,6 +38,15 @@ ActiveRecord::Schema.define(version: 20140106232326) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "recommendations", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recommendations", ["user_id", "article_id"], name: "index_recommendations_on_user_id_and_article_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -60,6 +70,7 @@ ActiveRecord::Schema.define(version: 20140106232326) do
     t.string   "bio",                    default: ""
     t.string   "avatar_uid",                          null: false
     t.string   "avatar_name"
+    t.integer  "recommendations_count",  default: 0
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

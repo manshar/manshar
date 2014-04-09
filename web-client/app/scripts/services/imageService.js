@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .service('Image', ['$resource', '$http', '$q', 'API_HOST',
-      function ($resource, $http, $q, API_HOST) {
+  .service('Image', ['$resource', '$http', '$q', '$upload', 'API_HOST',
+      function ($resource, $http, $q, $upload, API_HOST) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var ImageResource = $resource(baseUrl + 'images/:imageId');
@@ -32,28 +32,34 @@ angular.module('webClientApp')
         delete: ImageResource.delete,
 
         // Handling uploading files with the request.
-        save: function (data, optSuccess, optError) {
+        save: function (data, optSuccess, optError, optProgress) {
 
           var delayedObj = {};
 
-          $http.post(baseUrl + 'images',
-                     createFormData(data), configs)
-            .then(
+          var file = data.image.asset;
+          delete data.image.asset;
+          var dataDict = {};
+          for (var key in data.image) {
+            dataDict['image[' + key + ']'] = data.image[key];
+          }
 
-            // Success.
-            function (response) {
-              if (optSuccess) {
-                optSuccess(response.data);
-              }
-              angular.copy(response.data, delayedObj);
-            },
-
-            // Error.
-            function (response) {
-              if (optError) {
-                optError(response.data);
-              }
-            });
+          $upload.upload({
+            url : baseUrl + 'images',
+            method: 'POST',
+            headers: configs.headers,
+            data : dataDict,
+            file: file,
+            fileFormDataName: 'image[asset]'
+          }).success(function(data) {
+            if (optSuccess) {
+              optSuccess(data);
+            }
+            angular.copy(data, delayedObj);
+          }).progress(function(event) {
+            if (optProgress) {
+              optProgress(event);
+            }
+          });
 
           return delayedObj;
         },
