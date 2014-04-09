@@ -26,6 +26,7 @@ module.exports = function(config) {
       'app/bower_components/angular-snap/angular-snap.js',
       'app/bower_components/angulartics/src/angulartics.js',
       'app/bower_components/angulartics/src/angulartics-ga.js',
+      'app/bower_components/angular-file-upload/dist/angular-file-upload.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js'
