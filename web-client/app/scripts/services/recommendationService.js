@@ -6,9 +6,9 @@ angular.module('webClientApp')
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var ArticleRecommendationResource = $resource(
-          baseUrl + 'articles/:articleId/recommendations/:recommendationId', {
-            articleId: '@articleId'
-          });
+        baseUrl + 'articles/:articleId/recommendations/:recommendationId', {
+          articleId: '@articleId'
+        });
 
       return {
         query: ArticleRecommendationResource.query,
