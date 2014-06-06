@@ -1,6 +1,5 @@
-<div class="manshar-article">
-
-    <div class="manshar-article-image-container" ng-class="{half: !article.cover_url}" manshar-cover url="{{article.cover_url}}" ng>
+<form name="articleForm" class="manshar-article">
+    <div class="manshar-article-image-container" ng-class="{half: !article.cover_url}" manshar-cover url="{{article.cover_url}}">
 
       <div class="manshar-article-header">
 
@@ -14,6 +13,7 @@
         />
 
         <h1
+        name="myWidget"
           class="manshar-editor"
           grande-editor
             rtl="true"
@@ -21,6 +21,7 @@
             mode="inline"
             max-length="100"
             ng-model="article.title"
+            required
           >
         </h1>
 
@@ -32,6 +33,7 @@
             mode="inline"
             max-length="200"
             ng-model="article.tagline"
+            required
           >
         </h2>
 
@@ -47,6 +49,7 @@
         placeholder="اكتب مقالك هنا"
         mode="rich"
         ng-model="article.body"
+        required
       >
     </article>
 
@@ -58,5 +61,4 @@
     </div>
 
   </div>
-
-</div>
+</form>

@@ -1,6 +1,6 @@
 <div class="manshar-article">
 
-  <div class="manshar-article-image-container" manshar-cover url="{{article.cover_url}}">
+  <div class="manshar-article-image-container" ng-class="{'manshar-article-nocover': !article.cover_url}" manshar-cover url="{{article.cover_url}}">
     <div class="manshar-article-header">
       <div class="author-details">
         <img ng-src="{{article.user.thumb_url}}" />

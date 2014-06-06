@@ -124,7 +124,7 @@ angular.module('webClientApp', [
 
       return function (promise) { return promise.then(success, error); };
     }];
-    $httpProvider.responseInterceptors.push(unAuthenticatedInterceptor);
+    $httpProvider.interceptors.push(unAuthenticatedInterceptor);
     // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
 
     $locationProvider.hashPrefix('!');

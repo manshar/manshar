@@ -27,6 +27,9 @@ class Article < ActiveRecord::Base
   end
 
   def cover_abs_url size = nil
+    if cover.nil?
+      return
+    end
     if size
       abs_url cover.thumb(size).url, ENV['API_HOST']
     else
