@@ -101,18 +101,21 @@ angular.module('webClientApp', [
         redirectTo: '/'
       });
   }])
-  /**
-   * Intercept every http request and check for 401 Unauthorized
-   * error. Clear the current user and redirect to /login page.
-   */
-  .config(['$httpProvider', '$locationProvider', function ($httpProvider, $locationProvider) {
-    var unAuthenticatedInterceptor = ['$location', '$q', function ($location, $q) {
+  .factory('unAuthenticatedInterceptor', ['$location', '$q', function ($location, $q) {
+    return {
+      'request': function(config) {
+        return config;
+      },
 
-      var success = function (response) {
+      'requestError': function(response) {
+        console.error(response);
+      },
+
+      'response': function(response) {
         return response;
-      };
+      },
 
-      var error = function (response) {
+      'responseError': function(response) {
         if (response.status === 401) {
           $location.path('/login');
           return $q.reject(response);
@@ -120,11 +123,15 @@ angular.module('webClientApp', [
         else {
           return $q.reject(response);
         }
-      };
-
-      return function (promise) { return promise.then(success, error); };
-    }];
-    $httpProvider.responseInterceptors.push(unAuthenticatedInterceptor);
+      }
+    };
+  }])
+  /**
+   * Intercept every http request and check for 401 Unauthorized
+   * error. Clear the current user and redirect to /login page.
+   */
+  .config(['$httpProvider', '$locationProvider', function ($httpProvider, $locationProvider) {
+    $httpProvider.interceptors.push('unAuthenticatedInterceptor');
     // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
 
     $locationProvider.hashPrefix('!');
