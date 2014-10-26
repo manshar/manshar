@@ -33,6 +33,10 @@ body {
   @include span-columns(12);
   background-color: #f9f9f9;
   height: 100%;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; /* Chrome and Safari */
+  -moz-backface-visibility:hidden; /* Firefox */
+  -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 }
 
 .scrollable{
@@ -176,32 +180,60 @@ body {
   }
 }
 
+.card {
+  background-color: #fff;
+  box-shadow: 0 1px 5px -2px #000;
+
+  .header {
+    position: relative;
+    color: white;
+    text-shadow: 0px 1px 3px #000;
+
+    .image-cover {
+      height: 25em;
+    }
+
+    .title {
+      color: #fff;
+      bottom: 0;
+      padding: 0 1.5em 1.5em 1.5em;
+      position: absolute;
+      left: 0;
+      right: 0;
+
+      .manshar-tagline {
+        color: #eee;
+      }
+    }
+
+    .author-details {
+      .author-name {
+        color: white;
+        text-shadow: 0px 0px 2px #000;
+      }
+
+      img {
+        border-color: white;
+      }
+    }
+
+  }
+
+  .content {
+    padding: 1.5em;
+  }
+}
+
+
 ul.manshar-articles-list {
   width: 100%;
   margin: 0 auto;
   list-style: none;
-  padding: 15px;
   word-wrap: break-word;
 
   li {
-    margin: 50px 0;
+    margin: 2em 0;
     cursor: pointer;
-
-    .article-details {
-      position: relative;
-      border-left: 1px solid #ddd;
-
-      h1, h2 {
-        padding-left: 50px;
-      }
-
-      .article-meta {
-        position: absolute;
-        left: 0;
-        top: 25px;
-      }
-
-    }
   }
 }
 
@@ -220,8 +252,7 @@ ul.manshar-articles-list {
   .manshar-article-image-container {
     height: 100%;
     position: relative;
-    box-shadow: 0 0px 6px 0 #000;
-    background-color: #555;
+    background-color: #303030;
     z-index: 9;
 
     &.half {
@@ -236,8 +267,6 @@ ul.manshar-articles-list {
       right: 0;
       left: 0;
       z-index: 99;
-      color: white;
-      text-shadow: 0px 1px 3px #000;
 
       h1 {
         font-size: 3em;
@@ -247,17 +276,6 @@ ul.manshar-articles-list {
       h2 {
         font-size: 1.6em;
         font-weight: 100;
-      }
-
-      .author-details {
-        .author-name {
-          color: white;
-          text-shadow: 0px 0px 2px #000;
-        }
-
-        img {
-          border-color: white;
-        }
       }
 
     }
