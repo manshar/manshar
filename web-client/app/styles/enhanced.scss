@@ -1,0 +1,18 @@
+/* For large displays (like medium tablets and up) */
+
+body {
+  font-size: 18px;
+}
+
+.manshar-article {
+  .manshar-article-image-container {
+    .manshar-article-header {
+      text-align: right;
+
+      .author-details {
+        float: left;
+        padding: 50px;
+      }
+    }
+  }
+}

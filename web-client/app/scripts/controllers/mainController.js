@@ -4,7 +4,7 @@ angular.module('webClientApp')
   .controller('MainCtrl', ['$scope', '$rootScope', '$location', 'Article',
       function ($scope, $rootScope, $location, Article) {
     $scope.title = 'مَنْشَر';
-    $scope.tagline = 'منصة نشر مخصصة بالعربية';
+    $scope.tagline = 'منصة النشر العربية';
     $scope.articles = Article.query();
 
     $scope.newArticle = function () {

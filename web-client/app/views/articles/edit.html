@@ -2,7 +2,7 @@
 
     <div class="manshar-article-image-container" ng-class="{half: !article.cover_url}" manshar-cover url="{{article.cover_url}}" ng>
 
-      <div class="manshar-article-header">
+      <div class="manshar-article-header tray">
 
         <input
           type="file"
@@ -39,7 +39,7 @@
 
     </div>
 
-  <div class="article-content-container">
+  <div class="article-content-container tray">
     <article
       class="manshar-editor"
       grande-editor
@@ -50,13 +50,22 @@
       >
     </article>
 
-    <div class="manshar-controls">
-      <button ng-click="saveArticle(article, true)">نشر</button>
-      <button ng-click="saveArticle(article, false)">حفظ مسودة</button>
-      <button ng-click="deleteArticle(article)" ng-if="article.id">حذف</button>
-      <button ng-click="cancel()">إلغاء</button>
-    </div>
-
   </div>
 
+</div>
+
+
+<div class="metabar tray">
+  <div class="manshar-controls">
+    <button ng-click="saveArticle(article, true)">نشر</button>
+    <button ng-click="saveArticle(article, false)">
+      <i class="fa fa-floppy-o"></i>
+    </button>
+    <button ng-click="deleteArticle(article)" ng-if="article.id">
+      <i class="fa fa-times"></i>
+    </button>
+    <button ng-click="cancel()">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+  </div>
 </div>
