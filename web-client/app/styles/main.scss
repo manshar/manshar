@@ -26,6 +26,7 @@ body, html {
 body {
   font-family: 'Droid Arabic Naskh', serif !important;
   background: #f9f9f9;
+  font-size: 12px;
 }
 
 .container{
@@ -42,16 +43,20 @@ body {
   overflow-scrolling: touch;
 }
 
+.tray {
+  padding: 0 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
 .main-header {
-  text-align: center;
-  height: 300px;
-  background: #f3efee;
+  background: #fff;
+  box-shadow: 0 -2px 6px 0 #333;
+  position: relative;
 
   .hero-unit {
-    @include span-columns(6);
-    @include shift(3);
     vertical-align: middle;
-    height: 100%;
 
     &:before {
       content: "";
@@ -60,13 +65,21 @@ body {
     }
 
     h1 {
-      font-size: 5em;
+      font-size: 2.2em;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    p {
+      font-size: 0.9em;
+      display: inline-block;
+      vertical-align: middle;
     }
   }
 }
 
 .manshar-logo {
-  width: 64px;
+  width: 35px;
 }
 
 .manshar-tagline,
@@ -76,21 +89,22 @@ body {
 
 .site-nav-logo {
   position: fixed;
-  top: 15px;
-  right: 15px;
-  width: 42px;
+  top: 0.6667em;
+  left: 30px;
+  width: 3em;
   z-index: 5;
   cursor: pointer;
 }
 
 .site-nav {
-  background-color: #272F36;
+  background-color: #fff;
   color: #F2F1F0;
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   bottom: 0;
   width: 266px;
+  box-shadow: -4px 0 9px -7px #333 inset;
 
   .profile-badge {
     position: relative;
@@ -120,7 +134,7 @@ body {
     letter-spacing: 1px;
 
     a {
-      color: #F2F1F0;
+      color: #101010;
 
       &::before, &::after {
         display: inline-block;
@@ -163,7 +177,6 @@ body {
 }
 
 ul.manshar-articles-list {
-  max-width: 960px;
   width: 100%;
   margin: 0 auto;
   list-style: none;
@@ -197,8 +210,12 @@ ul.manshar-articles-list {
 }
 
 .manshar-article {
+  background: white;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; /* Chrome and Safari */
+  -moz-backface-visibility:hidden; /* Firefox */
+  -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 
-  background-color: #ffffff;
   height: 100%;
 
   .manshar-article-image-container {
@@ -206,6 +223,7 @@ ul.manshar-articles-list {
     position: relative;
     box-shadow: 0 0px 6px 0 #000;
     background-color: #555;
+    z-index: 9;
 
     &.half {
       height: 50%;
@@ -215,12 +233,12 @@ ul.manshar-articles-list {
       width: 100%;
 
       position: absolute;
-      bottom: 0;
-      padding: 50px;
+      bottom: 50px;
+      right: 0;
+      left: 0;
       z-index: 99;
       color: white;
       text-shadow: 0px 1px 3px #000;
-      text-align: center;
 
       h1 {
         font-size: 3em;
@@ -247,14 +265,17 @@ ul.manshar-articles-list {
   }
 
   .article-content-container {
-    background: white;
+    background: #f9f9f9;
     padding-bottom: 10px;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden; /* Chrome and Safari */
+    -moz-backface-visibility:hidden; /* Firefox */
+    -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 
     article {
-      padding: 30px;
+      padding: 30px 0;
       font-size: 1.3em;
       min-height: 300px !important;
-      max-width: 960px;
       width: 100%;
       margin: 0 auto;
       font-weight: 100;
@@ -329,22 +350,42 @@ ul.manshar-articles-list {
 }
 
 .metabar {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 65px;
   z-index: 2;
-  display: block;
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; /* Chrome and Safari */
+  -moz-backface-visibility:hidden; /* Firefox */
+  -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 }
 
 .manshar-controls {
-  padding: 10px 0 0 10px;
+  height: 18px;
   text-align: left;
+  margin-top: -1.3em;
+
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; /* Chrome and Safari */
+  -moz-backface-visibility:hidden; /* Firefox */
+  -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 
   button {
-    @include button(simple, #e48184);
-    font-size: 0.6em;
-    padding : 10px 10px;
+    font-size: 1.2em;
+    padding: 10px 10px;
+    border: 0;
+    box-shadow: 0 3px 14px -3px #000;
+    background-color: #CA1504;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    line-height: 1;
+    border-radius: 40px;
+
+    &:hover {
+      background-color: #DB2615;
+    }
   }
 }
 
@@ -470,23 +511,4 @@ ul.manshar-articles-list {
 .g-body .image-tooltip {
   z-index: 9999;
   position: fixed !important;
-}
-
-
-/* For large displays (like medium tablets and up) */
-@media screen and (min-width: 40.5em) {
-
-  .manshar-article {
-    .manshar-article-image-container {
-      .manshar-article-header {
-        text-align: right;
-
-        .author-details {
-          float: left;
-          padding: 50px;
-        }
-      }
-    }
-  }
-
 }

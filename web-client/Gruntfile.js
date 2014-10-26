@@ -200,7 +200,8 @@ module.exports = function (grunt) {
           loadPath: require('node-neat').includePaths
         },
         files: {
-          '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.scss'
+          '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.scss',
+          '.tmp/styles/enhanced.css': '<%= yeoman.app %>/styles/enhanced.scss'
         }
       }
     },

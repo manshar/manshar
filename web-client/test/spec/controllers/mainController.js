@@ -26,7 +26,7 @@ describe('Controller: MainCtrl', function () {
 
   it('should attach a title and a tagline to the scope', function() {
     expect(scope.title).toBe('مَنْشَر');
-    expect(scope.tagline).toBe('منصة نشر مخصصة بالعربية');
+    expect(scope.tagline).toBe('منصة النشر العربية');
   });
 
   describe('MainCtrl.showArticle', function () {

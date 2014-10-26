@@ -1,16 +1,17 @@
-<div class="metabar">
+<div class="metabar tray">
   <div class="manshar-controls">
-    <button ng-click="newArticle()" ng-show="isLoggedIn">مقال جديد</button>
+    <button ng-click="newArticle()" ng-show="isLoggedIn"><i class="fa fa-pencil"></i></button>
   </div>
 </div>
+
 <header class="main-header">
-  <div class="hero-unit">
+  <div class="hero-unit tray">
     <h1>{{title}}</h1>
     <p class="manshar-tagline">{{tagline}}</p>
   </div>
 </header>
 
-<ul class="manshar-articles-list one-column">
+<ul class="manshar-articles-list one-column tray">
   <li ng-repeat="article in articles" ng-click="showArticle(article.id)">
   	<div class="article-details">
 	    <h1>{{article.title}}</h1>

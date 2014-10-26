@@ -1,7 +1,7 @@
 <div class="manshar-article">
 
   <div class="manshar-article-image-container" manshar-cover url="{{article.cover_url}}">
-    <div class="manshar-article-header">
+    <div class="manshar-article-header tray">
       <div class="author-details">
         <img ng-src="{{article.user.thumb_url}}" />
         <div class="author-name">{{article.user.name}}</div>
@@ -11,13 +11,18 @@
     </div>
   </div>
 
-  <div class="article-content-container">
+  <div class="article-content-container tray">
     <article ng-bind-html="article.body" highlight-code>
     </article>
 
-    <div class="manshar-controls">
-      <button ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">تعديل</button>
-    </div>
   </div>
 
+</div>
+
+<div class="metabar tray">
+  <div class="manshar-controls">
+    <button ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">
+      <i class="fa fa-pencil"></i>
+    </button>
+  </div>
 </div>
