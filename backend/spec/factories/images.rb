@@ -6,6 +6,9 @@ FactoryGirl.define do
 
     title "My Image"
     caption "My Caption"
-    asset { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
+
+    # Uploading real data usually is pretty flacky and gives a lot of negative failures.
+    # asset { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
+    asset_uid '99'
   end
 end
