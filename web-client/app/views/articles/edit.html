@@ -1,40 +1,41 @@
 <div class="manshar-article">
 
-    <div class="manshar-article-image-container" ng-class="{half: !article.cover_url}" manshar-cover url="{{article.cover_url}}" ng>
+    <div class="manshar-article-image-container card" ng-class="{half: !article.cover_url}" manshar-cover url="{{article.cover_url}}">
 
-      <div class="manshar-article-header tray">
+      <div class="manshar-article-header tray header">
 
-        <input
-          type="file"
-          manshar-file
-            file-model="article.cover"
-            preview-url="article.cover_url"
-          analytics-on="click"
-            analytics-event="Pick Article Cover"
-        />
+        <div class="title">
+          <input
+            type="file"
+            manshar-file
+              file-model="article.cover"
+              preview-url="article.cover_url"
+            analytics-on="click"
+              analytics-event="Pick Article Cover"
+          />
 
-        <h1
-          class="manshar-editor"
-          grande-editor
-            rtl="true"
-            placeholder="عنوان المقال"
-            mode="inline"
-            max-length="100"
-            ng-model="article.title"
-          >
-        </h1>
+          <h1
+            class="manshar-editor"
+            grande-editor
+              rtl="true"
+              placeholder="عنوان المقال"
+              mode="inline"
+              max-length="100"
+              ng-model="article.title"
+            >
+          </h1>
 
-        <h2
-          class="manshar-editor"
-          grande-editor
-            rtl="true"
-            placeholder="عنوان المقال الفرعي"
-            mode="inline"
-            max-length="200"
-            ng-model="article.tagline"
-          >
-        </h2>
-
+          <h2
+            class="manshar-editor"
+            grande-editor
+              rtl="true"
+              placeholder="عنوان المقال الفرعي"
+              mode="inline"
+              max-length="200"
+              ng-model="article.tagline"
+            >
+          </h2>
+        </div>
       </div>
 
     </div>

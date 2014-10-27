@@ -4,15 +4,18 @@ body {
   font-size: 18px;
 }
 
-.manshar-article {
-  .manshar-article-image-container {
-    .manshar-article-header {
-      text-align: right;
+.card {
+  .header {
+    text-align: right;
 
-      .author-details {
-        float: left;
-        padding: 50px;
-      }
+
+    .image-cover {
+      height: 15em;
+    }
+
+    .author-details {
+      float: left;
+      padding-top: 2em;
     }
   }
 }

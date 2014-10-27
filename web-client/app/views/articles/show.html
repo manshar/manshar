@@ -1,14 +1,18 @@
 <div class="manshar-article">
 
-  <div class="manshar-article-image-container" manshar-cover url="{{article.cover_url}}">
-    <div class="manshar-article-header tray">
-      <div class="author-details">
-        <img ng-src="{{article.user.thumb_url}}" />
-        <div class="author-name">{{article.user.name}}</div>
+  <div class="manshar-article-image-container card" manshar-cover url="{{article.cover_url}}">
+
+    <div class="manshar-article-header tray header">
+      <div class="title">
+        <div class="author-details">
+          <img ng-src="{{article.user.thumb_url}}" />
+          <div class="author-name">{{article.user.name}}</div>
+        </div>
+        <h1>{{article.title}}</h1>
+        <h2>{{article.tagline}}</h2>
       </div>
-      <h1>{{article.title}}</h1>
-      <h2>{{article.tagline}}</h2>
     </div>
+
   </div>
 
   <div class="article-content-container tray">
