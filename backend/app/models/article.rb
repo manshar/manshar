@@ -16,6 +16,11 @@ class Article < ActiveRecord::Base
     Article.where(published: true)
   end
 
+  # Class Methods.
+  def self.drafts
+    Article.where(published: false)
+  end
+
   # Instance Methods.
   def publish!
     self.published = true

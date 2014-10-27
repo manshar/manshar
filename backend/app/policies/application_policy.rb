@@ -14,6 +14,10 @@ class ApplicationPolicy
     false
   end
 
+  def drafts?
+    false
+  end
+
   def create?
     false
   end

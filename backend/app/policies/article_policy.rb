@@ -1,7 +1,11 @@
 class ArticlePolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
-      scope
+      if owned?
+        scope
+      elsif scope
+        scope.where(published: true)
+      end
     end
   end
 
@@ -22,6 +26,10 @@ class ArticlePolicy < ApplicationPolicy
 
   def show?
     super || article.published || owned?
+  end
+
+  def drafts?
+    super || true
   end
 
   def update?

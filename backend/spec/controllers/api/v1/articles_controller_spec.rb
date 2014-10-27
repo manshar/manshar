@@ -14,8 +14,7 @@ describe Api::V1::ArticlesController do
       response.should be_success
       response.body.should eq([].to_json)
 
-      @article.published = true
-      @article.save
+      @article.publish!
 
       get :index
       response.should be_success
