@@ -27,6 +27,12 @@ body {
   font-family: 'Droid Arabic Naskh', serif !important;
   background: #f9f9f9;
   font-size: 12px;
+
+  /* Firefox seems to show a horizantal scroll for absolutely
+   * positioned elements outside the view. Grande.js adds .g-body element
+   * and hide it when its unused outside the view.
+   */
+  overflow-x: hidden;
 }
 
 .container{
