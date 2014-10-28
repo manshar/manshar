@@ -97,6 +97,14 @@ angular.module('webClientApp', [
         })
       })
 
+      .when('/profiles/:userId', {
+        templateUrl: 'views/profiles/show.html',
+        controller: 'ProfileCtrl',
+        resolve: checkAccess({
+          isPublic: true
+        })
+      })
+
       .otherwise({
         redirectTo: '/'
       });
