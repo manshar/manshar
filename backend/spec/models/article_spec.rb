@@ -15,16 +15,6 @@ describe Article do
 	  end
 	end
 
-  describe 'Article.drafts' do
-    it 'should return all draft articles' do
-      Article.drafts.load.should =~ [@article, @unpublished_article]
-      @article.publish!
-      Article.drafts.load.should =~ [@unpublished_article]
-      @unpublished_article.publish!
-      Article.drafts.load.should =~ []
-    end
-  end
-
 	describe 'Article.publish!' do
 	  it 'should mark the article as published' do
 	  	@unpublished_article.published.should eq(false)
