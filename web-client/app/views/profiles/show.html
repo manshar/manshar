@@ -21,3 +21,25 @@
     </li>
   </a>
 </ul>
+
+
+<ul class="manshar-articles-list one-column tray" ng-show="drafts">
+  <h1 class="header-label">
+    <span>المسودات</span>
+  </h1>
+  <a ng-href="/#!/articles/{{article.id}}" ng-repeat="article in drafts">
+    <li>
+
+      <div class="article-details article-card card draft">
+        <div class="header">
+          <div class="image-cover" manshar-cover url="{{article.cover_url}}"></div>
+
+          <div class="title">
+            <h1>{{article.title}}</h1>
+            <h2>{{article.tagline}}</h2>
+          </div>
+        </div>
+      </div>
+    </li>
+  </a>
+</ul>
