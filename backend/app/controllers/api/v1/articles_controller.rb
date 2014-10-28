@@ -8,7 +8,7 @@ class Api::V1::ArticlesController < ApplicationController
   def index
     # Use the custom Article.public method to return all articles that is
     # marked published.
-    @articles = policy_scope(Article.public)
+    @articles = Article.public
     render 'api/v1/articles/index'
   end
 

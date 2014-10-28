@@ -12,19 +12,24 @@
 </header>
 
 <ul class="manshar-articles-list one-column tray">
-  <li ng-repeat="article in articles" ng-click="showArticle(article.id)">
-
+  <li ng-repeat="article in articles">
     <div class="article-details article-card card">
       <div class="header">
-        <div class="image-cover" manshar-cover url="{{article.cover_url}}"></div>
+        <a ng-href="/#!/articles/{{article.id}}">
+          <div class="image-cover" manshar-cover url="{{article.cover_url}}"></div>
+        </a>
 
         <div class="title">
-          <div class="author-details">
-            <img ng-src="{{article.user.thumb_url}}" />
-            <div class="author-name">{{article.user.name}}</div>
-          </div>
-          <h1>{{article.title}}</h1>
-          <h2>{{article.tagline}}</h2>
+          <a ng-href="/#!/profiles/{{article.user.id}}">
+            <div class="author-details">
+              <img ng-src="{{article.user.thumb_url}}" />
+              <div class="author-name">{{article.user.name}}</div>
+            </div>
+          </a>
+          <a ng-href="/#!/articles/{{article.id}}">
+            <h1>{{article.title}}</h1>
+            <h2>{{article.tagline}}</h2>
+          </a>
         </div>
       </div>
     </div>

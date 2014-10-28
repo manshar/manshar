@@ -8,7 +8,6 @@ class ApplicationController < ActionController::API
   # :only respectively to whitelist them.
   before_filter :authenticate_user!
   after_filter :verify_authorized, except: [:index]
-  after_filter :verify_policy_scoped, :only => [:index]
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :not_found

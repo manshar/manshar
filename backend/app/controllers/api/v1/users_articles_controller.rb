@@ -1,6 +1,6 @@
 class Api::V1::UsersArticlesController < ApplicationController
   after_filter :verify_authorized, except: [:index, :drafts]
-  after_filter :verify_policy_scoped, :only => [:index, :drafts]
+  after_filter :verify_policy_scoped, :only => [:drafts]
 
   before_filter :authenticate_user!, except: [:index]
   respond_to :json
@@ -9,7 +9,7 @@ class Api::V1::UsersArticlesController < ApplicationController
   # GET /api/v1/users/1/articles.json
   def index
     if profile
-      @articles = policy_scope(profile.published_articles)
+      @articles = profile.published_articles
       render 'api/v1/articles/index'
     else
       raise ActiveRecord::RecordNotFound

@@ -53,7 +53,7 @@
 
     <nav class="site-nav" snap-drawer="left">
       <div class="profile-badge">
-        <a href="/#!" snap-close ng-show="isLoggedIn">
+        <a href="/#!/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn">
           <img ng-src="{{currentUser.avatar_url}}" ng-show="currentUser"/>
           <span>{{currentUser.name}}</span>
         </a>
@@ -68,8 +68,8 @@
     </nav>
 
     <!-- Add your site or application content here -->
-    <div snap-content snap-options="{disable: left, touchToDrag:false}">
-      <div class="container scrollable" ng-view=""></div>
+    <div class="page-wrapper" snap-content snap-options="{disable: left, touchToDrag:false}">
+      <div class="container scrollable page" ng-view></div>
     </div>
     <!-- Google Analytics: Configured in app.js run block. -->
      <script>
@@ -106,6 +106,7 @@
         <script src="scripts/controllers/mainController.js"></script>
         <script src="scripts/controllers/articleController.js"></script>
         <script src="scripts/controllers/editArticleController.js"></script>
+        <script src="scripts/controllers/profileController.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/signupController.js"></script>
 

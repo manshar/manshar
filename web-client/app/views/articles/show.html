@@ -4,10 +4,14 @@
 
     <div class="manshar-article-header tray header">
       <div class="title">
-        <div class="author-details">
-          <img ng-src="{{article.user.thumb_url}}" />
-          <div class="author-name">{{article.user.name}}</div>
-        </div>
+        <a ng-href="/#!/profiles/{{article.user.id}}">
+          <div class="author-details">
+            <img ng-src="{{article.user.thumb_url}}" />
+            <div class="author-name">
+              {{article.user.name}}
+            </div>
+          </div>
+        </a>
         <h1>{{article.title}}</h1>
         <h2>{{article.tagline}}</h2>
       </div>

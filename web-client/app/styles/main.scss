@@ -192,8 +192,12 @@ body {
 
   .header {
     position: relative;
-    color: white;
+    color: #fff;
     text-shadow: 0px 1px 3px #000;
+
+    a {
+      color: #fff;
+    }
 
     .image-cover {
       height: 25em;
@@ -229,7 +233,6 @@ body {
     padding: 1.5em;
   }
 }
-
 
 ul.manshar-articles-list {
   width: 100%;
@@ -367,6 +370,32 @@ ul.manshar-articles-list {
 
     h3 {
       font-size: 1.5em;
+    }
+  }
+
+}
+
+.manshar-profile {
+  text-align: center;
+  height: 60%;
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 1px 5px -1px;
+    position: relative;
+
+    h1 {
+      display: inline-block;
+      vertical-align: middle;
+      position: absolute;
+      bottom: 20%;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0px 1px 3px #000;
+      left: 0;
+      right: 0;
+      font-size: 5em;
     }
   }
 
