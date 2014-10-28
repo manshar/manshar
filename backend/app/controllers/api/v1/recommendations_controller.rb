@@ -10,8 +10,7 @@ class Api::V1::RecommendationsController < ApplicationController
   # GET /users/:user_id/recommendations
   # GET /users/:user_id/recommendations.json
   def index
-    @recommendations = @parent.recommendations
-    authorize @recommendations
+    @recommendations = policy_scope(@parent.recommendations)
     render 'api/v1/recommendations/index'
   end
 

@@ -7,7 +7,10 @@ FactoryGirl.define do
     sequence(:email) { |n| "user#{n}@example.com" }
     password 'testtest'
     password_confirmation 'testtest'
-    avatar { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
+
+    # Uploading real data usually is pretty flacky and gives a lot of negative failures.
+    # avatar { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
+    avatar_uid '222'
     confirmed
   end
 
@@ -15,6 +18,8 @@ FactoryGirl.define do
     sequence(:email) { |n| "user#{n}@example.com" }
     password 'testtest'
     password_confirmation 'testtest'
-    avatar { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
+    avatar_uid '333'
+    # Uploading real data usually is pretty flacky and gives a lot of negative failures.
+    # avatar { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'images', 'test.png'), 'image/png') }
   end
 end
