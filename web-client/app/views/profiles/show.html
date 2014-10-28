@@ -1,6 +1,9 @@
 <div class="manshar-profile">
   <div class="avatar" manshar-cover url="{{user.avatar_url}}">
-    <h1>{{user.name}}</h1>
+    <div class="title">
+      <h1>{{user.name}}</h1>
+      <h4>{{user.bio}}</h4>
+    </div>
   </div>
 </div>
 
@@ -23,7 +26,7 @@
 </ul>
 
 
-<ul class="manshar-articles-list one-column tray" ng-show="drafts">
+<ul class="manshar-articles-list one-column tray" ng-show="drafts[0]">
   <h1 class="header-label">
     <span>المسودات</span>
   </h1>

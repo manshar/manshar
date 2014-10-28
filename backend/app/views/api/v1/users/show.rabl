@@ -1,6 +1,6 @@
 object @user
 
-attributes :id, :name, :created_at
+attributes :id, :name, :bio, :created_at
 
 attribute :avatar_abs_url => :avatar_url
 
