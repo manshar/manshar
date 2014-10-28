@@ -60,6 +60,15 @@ body {
   position: relative;
 }
 
+.header-label {
+  font-size: 0.7em;
+  span {
+    color: #606060;
+    background-color: #eee;
+    padding: 0 10px;
+  }
+}
+
 .main-header {
   background: #fff;
   box-shadow: 0 -2px 6px 0 #333;
@@ -231,6 +240,13 @@ body {
 
   .content {
     padding: 1.5em;
+  }
+
+  &.draft {
+    .image-cover {
+      -webkit-filter: grayscale(100%);
+    }
+
   }
 }
 
