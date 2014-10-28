@@ -8,7 +8,8 @@ angular.module('webClientApp')
 
     // Only get drafts if the current profile being viewed and the logged in user
     // are the same person.
-    if ($rootScope.currentUser.id === parseInt($routeParams.userId)) {
+    if (($rootScope.currentUser &&
+         $rootScope.currentUser.id === parseInt($routeParams.userId))) {
       $scope.drafts = UserDraft.query({});
     }
 
