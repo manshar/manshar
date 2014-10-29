@@ -280,6 +280,20 @@ ul.manshar-articles-list {
     background-color: #303030;
     z-index: 9;
 
+    &.manshar-article-nocover{
+      height: 300px;
+
+      .manshar-article-header{
+        color:black;
+        text-shadow: none;
+        .author-details {
+          .author-name {
+            text-shadow:  none;
+          }
+        }
+      }
+    }
+
     &.half {
       height: 50%;
     }
@@ -302,7 +316,6 @@ ul.manshar-articles-list {
         font-size: 1.6em;
         font-weight: 100;
       }
-
     }
   }
 

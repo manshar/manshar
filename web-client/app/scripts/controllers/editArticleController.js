@@ -61,6 +61,11 @@ angular.module('webClientApp')
      */
     $scope.saveArticle = function(article, published) {
       article.published = published;
+      var formError = $scope.articleForm.$error;
+      if(formError && formError.required) {
+        $window.alert('تأكد من ادخال جميع المعلومات المطلوبة');
+        return;
+      }
       if(isEdit) {
         Article.update({ 'articleId': article.id }, { article: article }, success, error);
       } else {
