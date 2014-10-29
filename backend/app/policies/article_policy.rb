@@ -1,8 +1,14 @@
 class ArticlePolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
+
     def resolve
-      scope
+      if user
+        scope.where(user_id: user.id)
+      else
+        scope.where(published: true)
+      end
     end
+
   end
 
   attr_reader :user, :article
@@ -22,6 +28,10 @@ class ArticlePolicy < ApplicationPolicy
 
   def show?
     super || article.published || owned?
+  end
+
+  def drafts?
+    super || true
   end
 
   def update?

@@ -1,0 +1,25 @@
+/* For large displays (like medium tablets and up) */
+
+body {
+  font-size: 18px;
+}
+
+.card {
+  .header {
+    text-align: right;
+
+
+    .image-cover {
+      height: 15em;
+    }
+
+    .author-details {
+      float: left;
+      padding-top: 2em;
+    }
+  }
+}
+
+.manshar-profile {
+  height: 100%;
+}

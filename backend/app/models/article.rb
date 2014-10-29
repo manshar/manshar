@@ -11,10 +11,8 @@ class Article < ActiveRecord::Base
     end
   end
 
-  # Class Methods.
-  def self.public
-    Article.where(published: true)
-  end
+
+  scope :public, -> { where(published: true) }
 
   # Instance Methods.
   def publish!

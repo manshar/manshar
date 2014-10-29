@@ -11,7 +11,7 @@
     <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
     <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Open Graph Metadata -->
     <meta property="og:type" content="{{page.publishedTime ? 'article' : 'website'}}" />
@@ -30,8 +30,12 @@
         <link rel="stylesheet" href="bower_components/grande.js/css/editor.css">
         <link rel="stylesheet" href="bower_components/grande.js/css/menu.css">
         <!-- endbuild -->
+        <!-- build:css({.tmp,app}) styles/enhanced.css -->
+        <link rel="stylesheet" type="text/css" href="styles/enhanced.css" media="screen  and (min-width: 40.5em)" />
+        <!-- endbuild -->
         <!-- Load the hosted stylesheets for highlight.js -->
         <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
   <body>
     <!--[if lt IE 7]>
@@ -44,12 +48,12 @@
     <![endif]-->
 
     <!-- site nav -->
-    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="right"
+    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="left"
         analytics-on="click" analytics-event="Toggle Drawer"/>
 
-    <nav class="site-nav" snap-drawer-right>
+    <nav class="site-nav" snap-drawer="left">
       <div class="profile-badge">
-        <a href="/#!" snap-close ng-show="isLoggedIn">
+        <a href="/#!/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn">
           <img ng-src="{{currentUser.avatar_url}}" ng-show="currentUser"/>
           <span>{{currentUser.name}}</span>
         </a>
@@ -64,9 +68,9 @@
     </nav>
 
     <!-- Add your site or application content here -->
-    <snap-content snap-options="{disable: left, touchToDrag:false}">
-      <div class="container scrollable" ng-view=""></div>
-    </snap-content>
+    <div class="page-wrapper" snap-content snap-options="{disable: left, touchToDrag:false}">
+      <div class="container scrollable page" ng-view></div>
+    </div>
     <!-- Google Analytics: Configured in app.js run block. -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -102,11 +106,13 @@
         <script src="scripts/controllers/mainController.js"></script>
         <script src="scripts/controllers/articleController.js"></script>
         <script src="scripts/controllers/editArticleController.js"></script>
+        <script src="scripts/controllers/profileController.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/signupController.js"></script>
 
         <script src="scripts/services/articleService.js"></script>
         <script src="scripts/services/imageService.js"></script>
+        <script src="scripts/services/userService.js"></script>
         <script src="scripts/services/loginService.js"></script>
         <script src="scripts/services/signupService.js"></script>
         <script src="scripts/services/storageService.js"></script>

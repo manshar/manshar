@@ -9,7 +9,6 @@ class Api::V1::ArticlesController < ApplicationController
     # Use the custom Article.public method to return all articles that is
     # marked published.
     @articles = Article.public
-    authorize @articles
     render 'api/v1/articles/index'
   end
 

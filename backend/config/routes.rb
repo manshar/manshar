@@ -19,12 +19,19 @@ Backend::Application.routes.draw do
         match 'sessions', :to => 'sessions#destroy', :as => 'logout', :via => [:delete, :options]
       end
 
-      scope '/users/:user_id' do
-        resources :recommendations, :only => [:index]
-      end
-
       resources :articles, concerns: :recommendable
       resources :images
+      resources :users, only: [:index, :show]
+
+      scope '/users/:user_id' do
+        resources :recommendations, :only => [:index]
+        resources :articles, :only => [:index, :drafts], controller: 'users_articles'
+      end
+
+      scope '/me' do
+        match 'drafts' => 'users_articles#drafts', via: [:get, :options]
+        match 'articles' => 'users_articles#index', via: [:get, :options]
+      end
     end
   end
 

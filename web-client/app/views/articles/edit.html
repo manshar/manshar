@@ -1,47 +1,50 @@
 <form name="articleForm" class="manshar-article">
-    <div class="manshar-article-image-container" ng-class="{half: !article.cover_url}" manshar-cover url="{{article.cover_url}}">
 
-      <div class="manshar-article-header">
+    <div class="manshar-article-image-container card" ng-class="{half: !article.cover_url}" manshar-cover url="{{article.cover_url}}">
 
-        <input
-          type="file"
-          manshar-file
-            file-model="article.cover"
-            preview-url="article.cover_url"
-          analytics-on="click"
-            analytics-event="Pick Article Cover"
-        />
+      <div class="manshar-article-header tray header">
 
-        <h1
-        name="myWidget"
-          class="manshar-editor"
-          grande-editor
-            rtl="true"
-            placeholder="عنوان المقال"
-            mode="inline"
-            max-length="100"
-            ng-model="article.title"
-            required
-          >
-        </h1>
+        <div class="title">
+          <input
+            type="file"
+            manshar-file
+              file-model="article.cover"
+              preview-url="article.cover_url"
+            analytics-on="click"
+              analytics-event="Pick Article Cover"
+          />
 
-        <h2
-          class="manshar-editor"
-          grande-editor
-            rtl="true"
-            placeholder="عنوان المقال الفرعي"
-            mode="inline"
-            max-length="200"
-            ng-model="article.tagline"
-            required
-          >
-        </h2>
+          <h1
+            name="myWidget"
+            class="manshar-editor"
+            grande-editor
+              rtl="true"
+              placeholder="عنوان المقال"
+              mode="inline"
+              max-length="100"
+              ng-model="article.title"
+              required
+            >
+          </h1>
 
+          <h2
+            class="manshar-editor"
+            grande-editor
+              rtl="true"
+              placeholder="عنوان المقال الفرعي"
+              mode="inline"
+              max-length="200"
+              ng-model="article.tagline"
+              required
+            >
+          </h2>
+
+        </div>
       </div>
 
     </div>
 
-  <div class="article-content-container">
+  <div class="article-content-container tray">
     <article
       class="manshar-editor"
       grande-editor
@@ -53,12 +56,21 @@
       >
     </article>
 
-    <div class="manshar-controls">
-      <button ng-click="saveArticle(article, true)">نشر</button>
-      <button ng-click="saveArticle(article, false)">حفظ مسودة</button>
-      <button ng-click="deleteArticle(article)" ng-if="article.id">حذف</button>
-      <button ng-click="cancel()">إلغاء</button>
-    </div>
-
   </div>
 </form>
+
+
+<div class="metabar tray">
+  <div class="manshar-controls">
+    <button ng-click="saveArticle(article, true)">نشر</button>
+    <button ng-click="saveArticle(article, false)">
+      <i class="fa fa-floppy-o"></i>
+    </button>
+    <button ng-click="deleteArticle(article)" ng-if="article.id">
+      <i class="fa fa-times"></i>
+    </button>
+    <button ng-click="cancel()">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+  </div>
+</div>

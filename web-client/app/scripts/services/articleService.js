@@ -84,4 +84,26 @@ angular.module('webClientApp')
           return delayedObj;
         }
       };
+    }])
+
+
+  /**
+   * A service to retrieve a specific user articles.
+   * @param  {!angular.$resource} $resource
+   * @param  {string} API_HOST Manshar API host.
+   * @return {!angular.Service} Angualr service definition.
+   */
+  .service('UserArticle', ['$resource', 'API_HOST',
+      function ($resource, API_HOST) {
+
+      var baseUrl = '//' + API_HOST + '/api/v1/';
+      var UserArticleResource = $resource(
+        baseUrl + 'users/:userId/articles', {
+          userId: '@userId'
+        });
+
+      return {
+        query: UserArticleResource.query
+      };
     }]);
+

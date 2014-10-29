@@ -4,13 +4,14 @@ describe Article do
 
   before (:each) do
     @article = FactoryGirl.create(:article)
-    @article.publish!
     @unpublished_article = FactoryGirl.create(:article)
   end
 
 	describe 'Article.public' do
 	  it 'should return all public articles' do
-	  	Article.public.load.should eq([@article])
+      Article.public.load.should eq([])
+      @article.publish!
+	  	Article.public.load.should =~ [@article]
 	  end
 	end
 
