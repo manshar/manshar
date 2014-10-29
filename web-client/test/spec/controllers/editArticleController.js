@@ -33,6 +33,9 @@ describe('Controller: EditArticleCtrl', function () {
       ArticleModel = Article;
 
       scope = $rootScope.$new();
+
+      // Mock articleForm from the edit.html view for the test.
+      scope.articleForm = {};
       createController = function () {
         return $controller('EditArticleCtrl', {
           $scope: scope,
