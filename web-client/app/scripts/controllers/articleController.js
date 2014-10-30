@@ -4,7 +4,7 @@ angular.module('webClientApp')
   .controller('ArticleCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$filter', 'Article',
       function ($scope, $rootScope, $routeParams, $location, $filter, Article) {
 
-    $scope.article = Article.get({'articleId': $routeParams.articleId},
+    Article.get({'articleId': $routeParams.articleId},
         function(resource) {
       /* jshint camelcase: false */
       $rootScope.page.title = resource.title;
@@ -12,6 +12,8 @@ angular.module('webClientApp')
       $rootScope.page.publishedTime = resource.created_at;
       var cleanBody = $filter('nohtml')(resource.body);
       $rootScope.page.description = $filter('words')(cleanBody, 50);
+
+      $scope.article = resource;
     });
 
     $scope.editArticle = function (articleId) {

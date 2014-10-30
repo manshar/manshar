@@ -435,7 +435,7 @@ ul.manshar-articles-list {
 }
 
 .metabar {
-  z-index: 2;
+  z-index: 15;
   position: fixed;
   bottom: 50px;
   left: 0;
@@ -471,6 +471,17 @@ ul.manshar-articles-list {
     &:hover {
       background-color: #DB2615;
     }
+
+    &.recommend-button {
+      padding: 0;
+    }
+  }
+}
+
+.recommendation-button {
+
+  span {
+    font-size: 0.9em;
   }
 }
 
