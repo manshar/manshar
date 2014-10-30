@@ -29,7 +29,7 @@ angular.module('webClientApp')
           var userRecommendation = null;
           ArticleRecommendation.query({
             'articleId': scope.article.id
-          }).$promise.then(function (recommendations) {
+          }, function (recommendations) {
             userRecommendation = getUserRecommendation(scope.article, recommendations);
             scope.isRecommended = !!userRecommendation;
           });
@@ -44,7 +44,7 @@ angular.module('webClientApp')
               scope.article.recommendations_count--;
               scope.isRecommended = false;
             } else {
-              ArticleRecommendation.save({'articleId': scope.article.id}).$promise.then(
+              ArticleRecommendation.save({'articleId': scope.article.id},
                 function (recommendation) {
                   userRecommendation = recommendation;
                 });
