@@ -32,21 +32,8 @@ brew install rbenv-gemset
 rbenv install 2.0.0-p247
 ```
 
-### Install Postgres
+### [Install Postgres, NodeJS, and PhantomJS] (https://github.com/manshar/manshar/wiki/Installing-Postgres,-NodeJS,-and-PhantomJS)
 
-```sh
-brew install postgresql
-```
-
-### Install Node.js and Phantom.js
-
-We are using Phantom.js as a part of testing the javascript application.
-
-```sh
-brew install nodejs
-
-brew install phantomjs
-```
 
 ## Fork Manshar
 
