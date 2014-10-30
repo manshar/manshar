@@ -1,7 +1,9 @@
 class Article < ActiveRecord::Base
   include Utils
 
-  default_scope { order('created_at DESC') }
+  scope :top, -> { order('recommendations_count DESC').order('created_at DESC') }
+  scope :recents, -> { order('created_at DESC') }
+
   belongs_to :user
   has_many :recommendations, :dependent => :destroy
 
