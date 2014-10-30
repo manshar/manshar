@@ -7,7 +7,7 @@ Backend::Application.routes.draw do
   }
 
   concern :recommendable do
-    resources :recommendations, :except => [:new, :edit, :show, :update]
+    resources :recommendations, :except => [:new, :edit, :show, :update, :delete]
   end
 
   namespace :api do

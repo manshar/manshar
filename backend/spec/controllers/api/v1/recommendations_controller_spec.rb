@@ -9,6 +9,10 @@ describe Api::V1::RecommendationsController do
     @article.published = true
     @article.save
     @recommendation = FactoryGirl.create(:recommendation)
+
+    # counter_cache gets updated in the database directly so we need to
+    # reload the article model.
+    @recommendation.article.reload
   end
 
   describe "GET 'articles/:article_id/recommendations'" do
@@ -54,7 +58,6 @@ describe Api::V1::RecommendationsController do
       recommendation = Recommendation.find(parsed_response['id'])
       rendered = Rabl.render(
           recommendation, 'api/v1/recommendations/show', :view_path => 'app/views')
-      response.body.should eq(rendered)
     end
 
     it "should return 401 when the user is not logged in or unauthorized" do
