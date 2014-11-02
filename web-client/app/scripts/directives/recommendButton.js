@@ -3,12 +3,14 @@
 // TODO(mkhatib): Write tests.
 
 angular.module('webClientApp')
-  .directive('recommendButton', ['ArticleRecommendation', function (ArticleRecommendation) {
+  .directive('recommendButton', ['$rootScope', 'ArticleRecommendation', function ($rootScope, ArticleRecommendation) {
 
     var getUserRecommendation = function(article, recommendations) {
-      for (var i=0; i < recommendations.length ; i++) {
-        if (article.id === recommendations[i].article.id) {
-          return recommendations[i];
+      if ($rootScope.currentUser) {
+        for (var i=0; i < recommendations.length ; i++) {
+          if ($rootScope.isOwner($rootScope.currentUser, recommendations[i])) {
+            return recommendations[i];
+          }
         }
       }
       return null;
