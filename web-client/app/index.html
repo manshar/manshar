@@ -54,7 +54,7 @@
     <nav class="site-nav" snap-drawer="left">
       <div class="profile-badge">
         <a href="/#!/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn">
-          <img ng-src="{{currentUser.avatar_url}}" ng-show="currentUser"/>
+          <img ng-src="{{currentUser.thumb_url}}" ng-show="currentUser"/>
           <span>{{currentUser.name}}</span>
         </a>
       </div>
