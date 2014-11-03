@@ -23,7 +23,7 @@ module.exports = function (grunt) {
       webClientApp: {
         cwd: 'app',
         src: 'views/{,*/}*.html',
-        dest: 'test/spec/helpers/cachedTemplates.js'
+        dest: '<%= yeoman.app %>/scripts/cachedTemplates.js'
       }
     },
 
@@ -148,8 +148,9 @@ module.exports = function (grunt) {
       all: [
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js',
-        // Exclude the auto-generated stuff from ngconstant task.
-        '!<%= yeoman.app %>/scripts/appConfig.js'
+        // Exclude the auto-generated stuff from ngconstant and ngtemplate tasks.
+        '!<%= yeoman.app %>/scripts/appConfig.js',
+        '!<%= yeoman.app %>/scripts/cachedTemplates.js'
       ],
       test: {
         options: {
@@ -158,7 +159,7 @@ module.exports = function (grunt) {
         src: [
           'test/spec/{,*/}*.js',
           // Exclude the auto-generated stuff from ngtemplates task.
-          '!test/spec/helpers/cachedTemplates.js'
+          '!<%= yeoman.app %>/scripts/cachedTemplates.js'
         ]
       }
     },
