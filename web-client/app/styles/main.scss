@@ -26,7 +26,7 @@ body, html {
 body {
   font-family: 'Droid Arabic Naskh', serif !important;
   background: #f9f9f9;
-  font-size: 12px;
+  font-size: 16px;
 
   /* Firefox seems to show a horizantal scroll for absolutely
    * positioned elements outside the view. Grande.js adds .g-body element
@@ -218,9 +218,8 @@ body {
   .card {
     background-color: #fff;
     box-shadow: 0 1px 5px -2px #000;
-    display: inline-block;
-    width: 30%;
-    margin: 1.5%;    
+    margin: 1em;
+    cursor: default; 
 
     &:first-child, &:nth-child(7n+7) {
       border-top: 7px solid #05A19E;
@@ -247,22 +246,24 @@ body {
     }
     
     .header {
-      /*text-shadow: 0px 1px 3px #000;*/
-      padding: 7em 0;
       text-align: center;
+      height: 20em;
+      line-height: 20em;
+
+      .title {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+      }
 
       h1 {
-        height: 2em;
-        word-wrap: break-word;
-        overflow: hidden;
+        font-size: 1.5em;
         padding: 0 5px;
+        margin-bottom: 0.3em;
       }
 
       h2 {
-        font-size: 1.1em;
-        height: 2em;
-        word-wrap: break-word;
-        overflow: hidden;
+        font-size: 0.8em;
         padding: 0 5px;
       }
 
@@ -271,6 +272,11 @@ body {
         position: absolute;
         bottom: 0.8em;
         right: 1em;
+        color: #808080;
+
+        a {
+          color: #808080;
+        }
       }
 
       a {
@@ -293,16 +299,8 @@ body {
     .content {
       padding: 1.5em;
     }
-
-    &.draft {
-      .image-cover {
-        -webkit-filter: grayscale(100%);
-      }
-
-    }
   }
 }
-
 
 ul.manshar-articles-list {
   width: 100%;
@@ -331,19 +329,27 @@ ul.manshar-articles-list {
     height: 100%;
     position: relative;
     background-color: #303030;
+    color: #fff;
     z-index: 9;
+    text-shadow: 1px 0 5px #333;
 
     &.manshar-article-nocover{
-      height: 300px;
+      height: auto;
 
       .manshar-article-header{
-        color:#fff;
-        text-shadow: none;
+        color: #fff;
         .author-details {
           .author-name {
             text-shadow:  none;
           }
         }
+      }
+
+      .manshar-article-header {
+        position: initial;
+        z-index: 99;
+        padding-top: 5em;
+        padding-bottom: 5em; 
       }
     }
 
@@ -361,7 +367,7 @@ ul.manshar-articles-list {
       z-index: 99;
 
       h1 {
-        font-size: 3em;
+        font-size: 2em;
         padding: 20px 0;
       }
 
@@ -665,7 +671,7 @@ ul.manshar-articles-list {
 
 // Blinking cursor. 
 @keyframes blink {
-    from,to {
+    from, to {
       color: transparent;
     }
     50% {
@@ -674,7 +680,7 @@ ul.manshar-articles-list {
 }
 
 @-moz-keyframes blink {
-  from,to {
+  from, to {
     color: transparent;
   }
   50% {
@@ -683,7 +689,7 @@ ul.manshar-articles-list {
 }
 
 @-webkit-keyframes blink {
-  from,to {
+  from, to {
     color: transparent;
   }
   50% {
@@ -692,7 +698,7 @@ ul.manshar-articles-list {
 }
 
 @-ms-keyframes blink {
-  from,to {
+  from, to {
     color: transparent;
   }
   50% {
@@ -701,32 +707,10 @@ ul.manshar-articles-list {
 }
 
 @-o-keyframes blink {
-  from,to {
+  from, to {
     color: transparent;
   }
   50% {
    color: black;
-  }
-}
-
-//Media Queries.
-
-@media (max-width: 1280px) {
-  .card-list {
-    .card {
-      width: 47.5%;
-      margin: 1%;
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  .card-list {
-    .card {
-      width: 80%;
-      display: block;
-      margin: 0 auto;
-      margin-top: 10px;
-    }
   }
 }

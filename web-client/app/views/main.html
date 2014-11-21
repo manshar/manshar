@@ -20,12 +20,11 @@
           <a ng-href="/#!/articles/{{article.id}}">
             <h1>{{article.title}}</h1>
             <h2>{{article.tagline}}</h2>
-            <!-- {{article.user.thumb_url}}           -->
-            <h3>
-              <span>بقلم: </span>
-              <a ng-href="/#!/profiles/{{article.user.id}}">{{article.user.name}}</a>
-            </h3>   
           </a>
+          <h3>
+            <span>بقلم: </span>
+            <a ng-href="/#!/profiles/{{article.user.id}}">{{article.user.name}}</a>
+          </h3>   
         </div>
       </div>
     </div>
