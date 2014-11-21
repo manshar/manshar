@@ -36,4 +36,6 @@ matrix:
 after_success:
   - cd $MANSHAR_HOME
   - ./utils/travis/deploy.sh
+notifications:
+  slack: manshar:CPhqeSFN8hlY3duA8vlMzDeB
 
