@@ -221,30 +221,30 @@ body {
     margin: 1em;
     cursor: default; 
 
-    &:first-child, &:nth-child(7n+7) {
+    &:nth-child(6n+1){
       border-top: 7px solid #05A19E;
     }
 
-    &:nth-child(2), &:nth-child(8n+8) {
+    &:nth-child(6n+2) {
       border-top: 7px solid #FF80AB;
     }
 
-    &:nth-child(3), &:nth-child(9n+9) {
+    &:nth-child(6n+3) {
       border-top: 7px solid #428FCF;
     }
 
-    &:nth-child(4), &:nth-child(10n+10){
+    &:nth-child(6n+4){
       border-top: 7px solid #D81B60;
     }
 
-    &:nth-child(5), &:nth-child(11n+11){
+    &:nth-child(6n+5){
       border-top: 7px solid #90A4AE;
     }
 
-    &:nth-child(6), &:nth-child(12n+12){
+    &:nth-child(6n+6){
       border-top: 7px solid #FF9E80;
     }
-    
+
     .header {
       text-align: center;
       height: 20em;
