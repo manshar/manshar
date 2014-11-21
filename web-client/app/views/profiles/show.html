@@ -7,22 +7,19 @@
   </div>
 </div>
 
-<ul class="manshar-articles-list one-column tray">
-  <a ng-href="/#!/articles/{{article.id}}" ng-repeat="article in articles">
-    <li>
-
-      <div class="article-details article-card card">
-        <div class="header">
-          <div class="image-cover" manshar-cover url="{{article.card_cover_url}}"></div>
-
+<ul class="manshar-articles-list one-column card-list">
+    <li class="card" ng-repeat="article in articles">
+      <div class="article-details article-card">
+        <div class="header tray">
           <div class="title">
-            <h1>{{article.title}}</h1>
-            <h2>{{article.tagline}}</h2>
+            <a ng-href="/#!/articles/{{article.id}}">
+              <h1>{{article.title}}</h1>
+              <h2>{{article.tagline}}</h2>
+            </a>
           </div>
         </div>
       </div>
     </li>
-  </a>
 </ul>
 
 

@@ -6,29 +6,25 @@
 
 <header class="main-header">
   <div class="hero-unit tray">
+    <span id="typed-cursor" class="blinking">|</span>
     <h1>{{title}}</h1>
-    <p class="manshar-tagline">{{tagline}}</p>
+    <p class="manshar-tagline">{{tagline}}...</p>
   </div>
 </header>
 
-<ul class="manshar-articles-list one-column tray">
-  <li ng-repeat="article in articles">
-    <div class="article-details article-card card">
-      <div class="header">
-        <a ng-href="/#!/articles/{{article.id}}">
-          <div class="image-cover" manshar-cover url="{{article.card_cover_url}}"></div>
-        </a>
-
+<ul class="manshar-articles-list one-column card-list">
+  <li ng-repeat="article in articles" class="card">
+    <div class="article-details article-card">
+      <div class="header tray">
         <div class="title">
-          <a ng-href="/#!/profiles/{{article.user.id}}">
-            <div class="author-details">
-              <img ng-src="{{article.user.thumb_url}}" />
-              <div class="author-name">{{article.user.name}}</div>
-            </div>
-          </a>
           <a ng-href="/#!/articles/{{article.id}}">
             <h1>{{article.title}}</h1>
             <h2>{{article.tagline}}</h2>
+            <!-- {{article.user.thumb_url}}           -->
+            <h3>
+              <span>بقلم: </span>
+              <a ng-href="/#!/profiles/{{article.user.id}}">{{article.user.name}}</a>
+            </h3>   
           </a>
         </div>
       </div>

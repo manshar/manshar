@@ -73,6 +73,8 @@ body {
   background: #fff;
   box-shadow: 0 -2px 6px 0 #333;
   position: relative;
+  height: 20em;
+  color: #B3B3B3;
 
   .hero-unit {
     vertical-align: middle;
@@ -84,16 +86,33 @@ body {
     }
 
     h1 {
-      font-size: 2.2em;
       display: inline-block;
       vertical-align: middle;
+      font-size: 3.2em;
+      margin-top: 100px;
+      padding-right: 8px;
     }
 
     p {
-      font-size: 0.9em;
-      display: inline-block;
-      vertical-align: middle;
+      font-size: 1.2em;
     }
+
+    #typed-cursor {
+      position: absolute;
+      top: 70px;
+      font-weight: 100;
+      font-size: 5.5em;
+      width: 8px;
+      overflow: hidden;
+      &.blinking {
+        -webkit-animation: 1s blink step-end infinite;
+        -moz-animation: 1s blink step-end infinite;
+        -ms-animation: 1s blink step-end infinite;
+        -o-animation: 1s blink step-end infinite;
+        animation: 1s blink step-end infinite;
+      }
+
+    } 
   }
 }
 
@@ -101,7 +120,6 @@ body {
   width: 35px;
 }
 
-.manshar-tagline,
 .manshar-snippet {
   color: #666;
 }
@@ -183,6 +201,7 @@ body {
 
 .author-details {
   text-align: center;
+  color: #fff;
 
   img {
     width: 65px;
@@ -195,60 +214,95 @@ body {
   }
 }
 
-.card {
-  background-color: #fff;
-  box-shadow: 0 1px 5px -2px #000;
+.card-list {
+  .card {
+    background-color: #fff;
+    box-shadow: 0 1px 5px -2px #000;
+    display: inline-block;
+    width: 30%;
+    margin: 1.5%;    
 
-  .header {
-    position: relative;
-    color: #fff;
-    text-shadow: 0px 1px 3px #000;
-
-    a {
-      color: #fff;
+    &:first-child, &:nth-child(7n+7) {
+      border-top: 7px solid #05A19E;
     }
 
-    .image-cover {
-      height: 25em;
+    &:nth-child(2), &:nth-child(8n+8) {
+      border-top: 7px solid #FF80AB;
     }
 
-    .title {
-      color: #fff;
-      bottom: 0;
-      padding: 0 1.5em 1.5em 1.5em;
-      position: absolute;
-      left: 0;
-      right: 0;
+    &:nth-child(3), &:nth-child(9n+9) {
+      border-top: 7px solid #428FCF;
+    }
 
-      .manshar-tagline {
-        color: #eee;
+    &:nth-child(4), &:nth-child(10n+10){
+      border-top: 7px solid #D81B60;
+    }
+
+    &:nth-child(5), &:nth-child(11n+11){
+      border-top: 7px solid #90A4AE;
+    }
+
+    &:nth-child(6), &:nth-child(12n+12){
+      border-top: 7px solid #FF9E80;
+    }
+    
+    .header {
+      /*text-shadow: 0px 1px 3px #000;*/
+      padding: 7em 0;
+      text-align: center;
+
+      h1 {
+        height: 2em;
+        word-wrap: break-word;
+        overflow: hidden;
+        padding: 0 5px;
       }
-    }
 
-    .author-details {
-      .author-name {
-        color: white;
-        text-shadow: 0px 0px 2px #000;
+      h2 {
+        font-size: 1.1em;
+        height: 2em;
+        word-wrap: break-word;
+        overflow: hidden;
+        padding: 0 5px;
       }
 
-      img {
-        border-color: white;
+      h3 {
+        font-size: 0.7em;
+        position: absolute;
+        bottom: 0.8em;
+        right: 1em;
       }
+
+      a {
+        color: #5A4C4C;
+      }
+
+      .author-details {
+        .author-name {
+          color: #5A4C4C;
+          text-shadow: none;
+        }
+
+        img {
+          border-color: white;
+        }
+      }
+
     }
 
-  }
-
-  .content {
-    padding: 1.5em;
-  }
-
-  &.draft {
-    .image-cover {
-      -webkit-filter: grayscale(100%);
+    .content {
+      padding: 1.5em;
     }
 
+    &.draft {
+      .image-cover {
+        -webkit-filter: grayscale(100%);
+      }
+
+    }
   }
 }
+
 
 ul.manshar-articles-list {
   width: 100%;
@@ -257,7 +311,6 @@ ul.manshar-articles-list {
   word-wrap: break-word;
 
   li {
-    margin: 2em 0;
     cursor: pointer;
   }
 }
@@ -284,7 +337,7 @@ ul.manshar-articles-list {
       height: 300px;
 
       .manshar-article-header{
-        color:black;
+        color:#fff;
         text-shadow: none;
         .author-details {
           .author-name {
@@ -607,4 +660,73 @@ ul.manshar-articles-list {
 .g-body .image-tooltip {
   z-index: 9999;
   position: fixed !important;
+}
+
+
+// Blinking cursor. 
+@keyframes blink {
+    from,to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+}
+
+@-moz-keyframes blink {
+  from,to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
+}
+
+@-webkit-keyframes blink {
+  from,to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
+}
+
+@-ms-keyframes blink {
+  from,to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
+}
+
+@-o-keyframes blink {
+  from,to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
+}
+
+//Media Queries.
+
+@media (max-width: 1280px) {
+  .card-list {
+    .card {
+      width: 47.5%;
+      margin: 1%;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .card-list {
+    .card {
+      width: 80%;
+      display: block;
+      margin: 0 auto;
+      margin-top: 10px;
+    }
+  }
 }
