@@ -281,19 +281,11 @@ body {
       padding: 1.5em;
     }
 
-    &:hover {
-      .sharing-box {
-        display: block;
-      }
-    }
-
     .sharing-box {
       position: absolute;
       bottom: 0.5em;
       left: 1em;
-      font-size: 0.9em;
-      display: none;
-
+      font-size: 1.1em;
     }
   }
 }
