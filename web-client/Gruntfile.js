@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         constants: {
           ENV: 'development',
-          API_HOST: 'localhost:3000',
+          API_HOST: '<%= process.env.API_HOST || "localhost:3000" %>',
           GA_TRACKING_ID: 'UA-XXXXXXXX-X'
         }
       },
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         constants: {
           ENV: 'production',
-          API_HOST: 'api.manshar.com',
+          API_HOST: '<%= process.env.API_HOST || "api.manshar.com" %>',
           GA_TRACKING_ID: 'UA-47379030-1'
         }
       }
@@ -106,8 +106,7 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: grunt.option('port') || 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729,
         middleware: function (connect, options) {
           var optBase = (typeof options.base === 'string') ? [options.base] : options.base,
