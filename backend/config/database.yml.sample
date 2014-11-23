@@ -3,8 +3,10 @@ defaults: &defaults
   encoding: unicode
   database: manshar_development
   pool: 5
-  username: postgres
-  password:
+  username: <%= ENV.fetch('MANSHAR_DB_USERNAME', 'postgres') %>
+  password: <%= ENV.fetch('MANSHAR_DB_PASSWORD', '') %>
+  host: <%= ENV.fetch('MANSHAR_DB_1_PORT_5432_TCP_ADDR', 'localhost') %>
+  port: <%= ENV.fetch('MANSHAR_DB_1_PORT_5432_TCP_PORT', '5432') %>
 
 development:
   <<: *defaults
