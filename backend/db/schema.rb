@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606063503) do
+ActiveRecord::Schema.define(version: 20141123042623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 20140606063503) do
   end
 
   add_index "recommendations", ["user_id", "article_id"], name: "index_recommendations_on_user_id_and_article_id", unique: true, using: :btree
+
+  create_table "thumbs", force: true do |t|
+    t.string   "signature"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

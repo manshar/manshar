@@ -9,6 +9,9 @@ Dragonfly.app.configure do
 
   url_format "/media/:job/:sha/:name"
 
+  # Keep the images cached for 60 days.
+  response_header "Cache-Control", "public, max-age=5184000"
+
   if Rails.env == 'test'
     datastore :memory
   elsif Rails.env == 'production'
@@ -22,6 +25,28 @@ Dragonfly.app.configure do
       root_path: Rails.root.join('public/system/dragonfly', Rails.env),
       server_root: Rails.root.join('public')
   end
+
+  # Override the .url method...
+  define_url do |app, job, opts|
+    thumb = Thumb.find_by_signature(job.signature)
+    # If (fetch 'some_uid' then resize) has been stored already, give the datastore's remote url ...
+    if thumb
+      app.datastore.url_for(thumb.uid)
+    # ...otherwise give the local Dragonfly server url
+    else
+      app.server.url_for(job)
+    end
+  end
+
+  # Before serving from the local Dragonfly server...
+  before_serve do |job, env|
+    # ...store the thumbnail in the datastore...
+    uid = job.store
+
+    # ...keep track of its uid so next time we can serve directly from the datastore
+    Thumb.create!(uid: uid, signature: job.signature)
+  end
+
 end
 
 # Logger
