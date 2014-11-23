@@ -28,25 +28,4 @@ describe Api::V1::SessionsController do
     end
   end
 
-  describe 'DELETE "/sessions"' do
-    it 'should logout users with valid credentials' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
-      delete :destroy
-      parsed_response = JSON.parse(response.body)
-
-      response.should be_success
-      parsed_response.should be_empty
-    end
-
-    it 'should fail with invalid credentials' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="invalid-token"}
-      delete :destroy
-      parsed_response = JSON.parse(response.body)
-
-      response.status.should eq(401)
-      assert parsed_response.has_key?('errors')
-      parsed_response['errors'].should eq('Unauthorized.')
-    end
-  end
-
 end

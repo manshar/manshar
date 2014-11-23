@@ -11,11 +11,4 @@ class Api::V1::SessionsController < Devise::SessionsController
     render 'api/v1/registrations/new'
   end
 
-  def destroy
-    warden.authenticate!(:scope => resource_name)
-    current_user.update_column(:authentication_token, nil)
-    render :status => 200,
-           :json => {}
-  end
-
 end

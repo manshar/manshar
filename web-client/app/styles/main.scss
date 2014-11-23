@@ -26,7 +26,7 @@ body, html {
 body {
   font-family: 'Droid Arabic Naskh', serif !important;
   background: #f9f9f9;
-  font-size: 12px;
+  font-size: 16px;
 
   /* Firefox seems to show a horizantal scroll for absolutely
    * positioned elements outside the view. Grande.js adds .g-body element
@@ -73,26 +73,45 @@ body {
   background: #fff;
   box-shadow: 0 -2px 6px 0 #333;
   position: relative;
+  height: 20em;
+  color: #B3B3B3;
 
   .hero-unit {
+    height: 100%;
     vertical-align: middle;
 
-    &:before {
-      content: "";
-      display: block;
-      height: 20%;
-    }
-
     h1 {
-      font-size: 2.2em;
       display: inline-block;
       vertical-align: middle;
+      font-size: 3.2em;
+      margin-top: 100px;
+      padding-right: 8px;
     }
 
     p {
-      font-size: 0.9em;
-      display: inline-block;
-      vertical-align: middle;
+      font-size: 1.2em;
+    }
+
+    .action-button {
+      position: absolute;
+      bottom: -15px;
+    }
+
+    #typed-cursor {
+      position: absolute;
+      top: 70px;
+      font-weight: 100;
+      font-size: 5.5em;
+      width: 8px;
+      overflow: hidden;
+      &.blinking {
+        -webkit-animation: 1s blink step-end infinite;
+        -moz-animation: 1s blink step-end infinite;
+        -ms-animation: 1s blink step-end infinite;
+        -o-animation: 1s blink step-end infinite;
+        animation: 1s blink step-end infinite;
+      }
+
     }
   }
 }
@@ -101,7 +120,6 @@ body {
   width: 35px;
 }
 
-.manshar-tagline,
 .manshar-snippet {
   color: #666;
 }
@@ -109,21 +127,21 @@ body {
 .site-nav-logo {
   position: fixed;
   top: 0.6667em;
-  left: 30px;
-  width: 3em;
+  left: 0.6667em;
+  width: 2em;
   z-index: 5;
   cursor: pointer;
 }
 
 .site-nav {
-  background-color: #fff;
-  color: #F2F1F0;
+  background-color: #2d2d2d;
+  color: #fff;
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   width: 266px;
-  box-shadow: -4px 0 9px -7px #333 inset;
+  box-shadow: -5px 0 10px -4px #000 inset;
 
   .profile-badge {
     position: relative;
@@ -147,35 +165,16 @@ body {
   }
 
   ul {
-    margin: 20px 10px 0 0;
     list-style: none;
     line-height: 30px;
-    letter-spacing: 1px;
 
     a {
-      color: #101010;
+      color: #fff;
+      display: block;
+      padding: 0.5em 1.5em;
 
-      &::before, &::after {
-        display: inline-block;
-        opacity: 0;
-        transition: transform 0.3s, opacity 0.2s;
-      }
-
-      &::before {
-        margin-right: 10px;
-        content: '[';
-        transform: translateX(20px);
-      }
-
-      &::after {
-        margin-left: 10px;
-        content: ']';
-        transform: translateX(-20px);
-      }
-
-      &:hover::before,  &:hover::after,  &:focus::before,  &:focus::after {
-        opacity: 1;
-        transform: translateX(0px);
+      &:hover {
+        background-color: #1d1d1d;
       }
     }
   }
@@ -183,6 +182,7 @@ body {
 
 .author-details {
   text-align: center;
+  color: #fff;
 
   img {
     width: 65px;
@@ -195,56 +195,119 @@ body {
   }
 }
 
-.card {
-  background-color: #fff;
-  box-shadow: 0 1px 5px -2px #000;
+.card-list {
+  .card {
+    background-color: #fff;
+    box-shadow: 0 1px 5px -2px #000;
+    margin: 1em;
+    cursor: default;
 
-  .header {
-    position: relative;
-    color: #fff;
-    text-shadow: 0px 1px 3px #000;
-
-    a {
-      color: #fff;
+    &:nth-child(6n+1){
+      border-top: 7px solid #05A19E;
     }
 
-    .image-cover {
-      height: 25em;
+    &:nth-child(6n+2) {
+      border-top: 7px solid #FF80AB;
     }
 
-    .title {
-      color: #fff;
-      bottom: 0;
-      padding: 0 1.5em 1.5em 1.5em;
+    &:nth-child(6n+3) {
+      border-top: 7px solid #428FCF;
+    }
+
+    &:nth-child(6n+4){
+      border-top: 7px solid #D81B60;
+    }
+
+    &:nth-child(6n+5){
+      border-top: 7px solid #90A4AE;
+    }
+
+    &:nth-child(6n+6){
+      border-top: 7px solid #FF9E80;
+    }
+
+    .header {
+      text-align: center;
+      height: 20em;
+      line-height: 20em;
+
+      .title {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        padding: 0 5px;
+        margin-bottom: 0.3em;
+      }
+
+      h2 {
+        font-size: 0.8em;
+        padding: 0 5px;
+      }
+
+      h3 {
+        font-size: 0.7em;
+        position: absolute;
+        bottom: 0.8em;
+        right: 1em;
+        color: #808080;
+
+        a {
+          color: #808080;
+        }
+      }
+
+      a {
+        color: #5A4C4C;
+      }
+
+      .author-details {
+        .author-name {
+          color: #5A4C4C;
+          text-shadow: none;
+        }
+
+        img {
+          border-color: white;
+        }
+      }
+
+    }
+
+    .content {
+      padding: 1.5em;
+    }
+
+    .sharing-box {
       position: absolute;
-      left: 0;
-      right: 0;
+      bottom: 0.5em;
+      left: 1em;
+      font-size: 1.1em;
+    }
+  }
+}
 
-      .manshar-tagline {
-        color: #eee;
-      }
+.sharing-box {
+  font-size: 3em;
+  text-align: center;
+
+  i {
+    color: rgba(136,136,136,.3);
+    padding: 10px;
+
+    &.fa-facebook:hover {
+      color: #425f9c;
     }
 
-    .author-details {
-      .author-name {
-        color: white;
-        text-shadow: 0px 0px 2px #000;
-      }
-
-      img {
-        border-color: white;
-      }
+    &.fa-twitter:hover {
+      color: #55acee;
     }
 
-  }
-
-  .content {
-    padding: 1.5em;
-  }
-
-  &.draft {
-    .image-cover {
-      -webkit-filter: grayscale(100%);
+    &.fa-google-plus:hover {
+      color: #dd4b39;
     }
 
   }
@@ -252,12 +315,11 @@ body {
 
 ul.manshar-articles-list {
   width: 100%;
-  margin: 0 auto;
+  margin: 20px auto;
   list-style: none;
   word-wrap: break-word;
 
   li {
-    margin: 2em 0;
     cursor: pointer;
   }
 }
@@ -278,19 +340,27 @@ ul.manshar-articles-list {
     height: 100%;
     position: relative;
     background-color: #303030;
+    color: #fff;
     z-index: 9;
+    text-shadow: 1px 0 5px #333;
 
     &.manshar-article-nocover{
-      height: 300px;
+      height: auto;
 
       .manshar-article-header{
-        color:black;
-        text-shadow: none;
+        color: #fff;
         .author-details {
           .author-name {
             text-shadow:  none;
           }
         }
+      }
+
+      .manshar-article-header {
+        position: initial;
+        z-index: 99;
+        padding-top: 5em;
+        padding-bottom: 5em;
       }
     }
 
@@ -308,7 +378,7 @@ ul.manshar-articles-list {
       z-index: 99;
 
       h1 {
-        font-size: 3em;
+        font-size: 2em;
         padding: 20px 0;
       }
 
@@ -455,8 +525,10 @@ ul.manshar-articles-list {
   -webkit-backface-visibility:hidden; /* Chrome and Safari */
   -moz-backface-visibility:hidden; /* Firefox */
   -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
+}
 
-  button {
+button {
+  &.action-button {
     font-size: 1.2em;
     padding: 10px 10px;
     border: 0;
@@ -607,4 +679,51 @@ ul.manshar-articles-list {
 .g-body .image-tooltip {
   z-index: 9999;
   position: fixed !important;
+}
+
+
+// Blinking cursor.
+@keyframes blink {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
+}
+
+@-webkit-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
+}
+
+@-ms-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
+}
+
+@-o-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+   color: black;
+  }
 }

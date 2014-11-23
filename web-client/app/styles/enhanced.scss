@@ -4,22 +4,51 @@ body {
   font-size: 18px;
 }
 
-.card {
-  .header {
-    text-align: right;
+.card-list {
+  .card {
+    width: 47.5%;
+    margin: 1%;
 
+    display: inline-block;
+    vertical-align: top;
 
-    .image-cover {
-      height: 15em;
+    &:hover {
+      .sharing-box {
+        display: block;
+      }
     }
 
-    .author-details {
-      float: left;
-      padding-top: 2em;
+    .sharing-box {
+      font-size: 0.9em;
+      display: none;
     }
+
+  }
+}
+
+.manshar-article-header {
+  .image-cover {
+    height: 15em;
+  }
+
+  .author-details {
+    position: absolute;
+    bottom: 1em;
+    left: 1.5em;
   }
 }
 
 .manshar-profile {
   height: 100%;
+}
+
+// Media Queries.
+@media (min-width: 1280px) {
+  .card-list {
+    .card {
+      width: 30%;
+      margin: 1.3%;
+
+    }
+  }
 }
