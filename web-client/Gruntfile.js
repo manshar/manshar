@@ -7,6 +7,8 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+var modRewrite = require('connect-modrewrite');
+
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -100,7 +102,17 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35729,
+        middleware: function(connect, options) {
+          var middlewares;
+          middlewares = [];
+          middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
+          options.base.forEach(function(base) {
+            return middlewares.push(connect['static'](base));
+          });
+          return middlewares;
+        }
+
       },
       livereload: {
         options: {

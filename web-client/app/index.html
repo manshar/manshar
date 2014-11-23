@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html ng-app="webClientApp" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
+    <base href="/">
     <meta name="fragment" content="!">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
@@ -53,15 +54,15 @@
 
     <nav class="site-nav" snap-drawer="left">
       <div class="profile-badge">
-        <a href="/#!/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn">
+        <a href="/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn">
           <img ng-src="{{currentUser.thumb_url}}" ng-show="currentUser"/>
           <span>{{currentUser.name}}</span>
         </a>
       </div>
       <ul>
         <!-- TDOD: Convert to ng-repeat -->
-        <li><a href="/#!" snap-close>الصفحة الرئيسية</a></li>
-        <li><a href="/#!/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
+        <li><a href="/" snap-close>الصفحة الرئيسية</a></li>
+        <li><a href="/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
         <li><a snap-close ng-show="isLoggedIn" ng-click="logout()"
             analytics-on="click" analytics-event="Logout">تسجيل الخروج</a></li>
       </ul>

@@ -62,14 +62,14 @@
 
 <div class="metabar tray">
   <div class="manshar-controls">
-    <button ng-click="saveArticle(article, true)">نشر</button>
-    <button ng-click="saveArticle(article, false)">
+    <button class="action-button" ng-click="saveArticle(article, true)">نشر</button>
+    <button class="action-button" ng-click="saveArticle(article, false)">
       <i class="fa fa-floppy-o"></i>
     </button>
-    <button ng-click="deleteArticle(article)" ng-if="article.id">
+    <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id">
       <i class="fa fa-times"></i>
     </button>
-    <button ng-click="cancel()">
+    <button class="action-button" ng-click="cancel()">
       <i class="fa fa-arrow-left"></i>
     </button>
   </div>

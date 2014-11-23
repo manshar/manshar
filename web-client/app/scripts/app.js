@@ -142,7 +142,7 @@ angular.module('webClientApp', [
     $httpProvider.interceptors.push('unAuthenticatedInterceptor');
     // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
 
-    $locationProvider.hashPrefix('!');
+    $locationProvider.html5Mode(true).hashPrefix('!');
   }])
   /**
    * Everytime the route change check if the user need to login.
@@ -154,6 +154,8 @@ angular.module('webClientApp', [
     if (window.ga) {
       ga('create', GA_TRACKING_ID);
     }
+
+    $rootScope.linkPrefix = 'http://' + document.location.host;
 
     /**
      * Holds data about page-wide attributes. Like pages title.
