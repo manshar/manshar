@@ -4,7 +4,7 @@
 
     <div class="manshar-article-header tray header">
       <div class="title">
-        <a ng-href="/#!/profiles/{{article.user.id}}">
+        <a ng-href="/profiles/{{article.user.id}}">
           <div class="author-details">
             <img ng-src="{{article.user.thumb_url}}" />
             <div class="author-name">
@@ -23,16 +23,16 @@
     <article ng-bind-html="article.body" highlight-code>
     </article>
 
+    <div ng-include="'views/partials/_sharing_buttons.html'"></div>
   </div>
-
 </div>
 
 <div class="metabar tray">
   <div class="manshar-controls">
 
-    <button class="recommend-button" recommend-button article="article"></button>
+    <button class="action-button recommend-button" recommend-button article="article"></button>
 
-    <button ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">
+    <button class="action-button" ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">
       <i class="fa fa-pencil"></i>
     </button>
   </div>
