@@ -12,6 +12,17 @@ body {
     display: inline-block;
     vertical-align: top;
 
+    &:hover {
+      .sharing-box {
+        display: block;
+      }
+    }
+
+    .sharing-box {
+      font-size: 0.9em;
+      display: none;
+    }
+
   }
 }
 
