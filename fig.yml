@@ -3,7 +3,7 @@ db:
   ports:
     - "5432"
 backend:
-  build: backend/
+  image: manshar/manshar:manshar-backend-latest
   command: rails s
   environment:
     RACK_ENV: development
@@ -19,7 +19,7 @@ backend:
   links:
     - db
 web:
-  build: web-client/
+  image: manshar/manshar:manshar-web-client-latest
   command: grunt serve
   environment:
     NODE_ENV: development
