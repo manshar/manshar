@@ -1,0 +1,27 @@
+db:
+  image: postgres
+  ports:
+    - "5432"
+backend:
+  build: backend/
+  command: foreman start
+  environment:
+    RACK_ENV: production
+    PORT: 80
+    API_HOST: api2.manshar.com
+    WEB_CLIENT_HOST: www2.manshar.com
+  ports:
+    - "3000:3000"
+  links:
+    - db
+web:
+  build: web-client/
+  command: node server
+  environment:
+    NODE_ENV: production
+    API_HOST: api2.manshar.com
+    PORT: 80
+  ports:
+    - "9000:9000"
+  links:
+    - backend

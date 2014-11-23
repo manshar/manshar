@@ -69,4 +69,5 @@ group :test, :development do
   # gem 'guard-rspec'
   gem 'factory_girl_rails', '4.3.0'
   gem 'email_spec'
+  gem 'rb-readline'
 end
