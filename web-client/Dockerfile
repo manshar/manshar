@@ -11,8 +11,9 @@ RUN gem install sass
 ADD . /manshar-web-client
 
 
+RUN cd /manshar-web-client && npm cache clean
 RUN cd /manshar-web-client && npm install -g phantomjs
-RUN cd /manshar-web-client && npm install grunt --save-dev
+RUN cd /manshar-web-client && npm install -g grunt grunt-cli --save-dev
 RUN cd /manshar-web-client && npm install
 RUN cd /manshar-web-client && bower install --allow-root
 RUN cd /manshar-web-client && npm uninstall grunt-contrib-imagemin && npm install grunt-contrib-imagemin
