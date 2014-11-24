@@ -6,6 +6,7 @@
 
 angular.module('webClientApp', [
   'ngCookies',
+  'ngLocale',
   'ngResource',
   'ngSanitize',
   'ngRoute',
