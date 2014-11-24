@@ -20,7 +20,7 @@ RUN cd /manshar-web-client && npm uninstall grunt-contrib-imagemin && npm instal
 RUN cd /manshar-web-client && grunt
 
 # Define working directory.
-WORKDIR /manshar-web-client
+WORKDIR /manshar-web-client/$PWD_SUBDIR
 
 # Define default command.
 CMD ["grunt", "serve"]
