@@ -14,7 +14,6 @@ vendor/bundle/*
 public/uploads/
 public/assets/
 
-config/database.yml
 .env
 .env.production
 
