@@ -29,6 +29,7 @@ angular.module('webClientApp')
 
 
     var success = function (resource) {
+      $scope.inProgress = null;
       $analytics.eventTrack('Create Article', {});
       $location.path('/articles/' + resource.id);
     };
@@ -39,6 +40,7 @@ angular.module('webClientApp')
     };
 
     var error = function (response) {
+      $scope.inProgress = null;
       $analytics.eventTrack('Create Article', {
         category: 'errors',
         label: angular.toJson(response.errors)
@@ -47,6 +49,7 @@ angular.module('webClientApp')
     };
 
     var deleteError = function (response) {
+      $scope.inProgress = null;
       $analytics.eventTrack('Delete Article', {
         category: 'errors',
         label: angular.toJson(response.errors)
@@ -60,6 +63,12 @@ angular.module('webClientApp')
      * @param {boolean} published Whether to publish the article or save as a draft.
      */
     $scope.saveArticle = function(article, published) {
+      if (!published && article.published) {
+        if (!$window.confirm('هذه العملية ستنقل المقال إلى مسوداتك. يمكنك نشرها مجدداً بالضغط على نشر. هل تود نقل المقال للمسودات؟')) {
+          return;
+        }
+      }
+      $scope.inProgress = published ? 'publish' : 'save';
       article.published = published;
       var formError = $scope.articleForm.$error;
       if(formError && formError.required) {
@@ -78,8 +87,11 @@ angular.module('webClientApp')
      * @param {Object} article Article data.
      */
     $scope.deleteArticle = function(article) {
+      $scope.inProgress = 'delete';
       if ($window.confirm('متأكد من حذف المقال؟')) {
         Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
+      } else {
+        $scope.inProgress = null;
       }
     };
 
@@ -87,12 +99,15 @@ angular.module('webClientApp')
      * Cancel creating an article.
      */
     $scope.cancel = function() {
+      $scope.inProgress = 'cancel';
       // Warn the user when canceling editing an existing article or when
       // canceling a new article with changed properties.
       var isDirty = (isEdit || $scope.article.title || $scope.article.cover ||
                      $scope.article.tagline || $scope.article.body);
       if (!isDirty || $window.confirm('متأكد من إلغاء المقال؟')) {
         $location.path('/');
+      } else {
+        $scope.inProgress = null;
       }
     };
 

@@ -10,6 +10,11 @@
             <div class="author-name">
               {{article.user.name}}
             </div>
+            <h3>
+              <div class="date">
+                {{article.created_at | date:'fullDate'}}
+              </div>
+            </h3>
           </div>
         </a>
         <h1>{{article.title}}</h1>

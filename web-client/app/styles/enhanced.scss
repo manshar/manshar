@@ -26,6 +26,17 @@ body {
   }
 }
 
+
+.manshar-article {
+  .manshar-article-image-container {
+    .manshar-article-header {
+      h1, h2 {
+        width: 85%;
+      }
+    }
+  }
+}
+
 .manshar-article-header {
   .image-cover {
     height: 15em;
