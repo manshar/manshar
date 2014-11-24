@@ -17,7 +17,7 @@ angular.module('webClientApp')
         element.css({
           'background-size': 'cover',
           'background-repeat': 'no-repeat',
-          'background-position': '50% 50%'
+          'background-position': '50% 0%'
         });
       }
     };
