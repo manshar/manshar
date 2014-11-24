@@ -1,0 +1,32 @@
+db:
+  image: postgres
+  ports:
+    - "5432"
+backend:
+  image: manshar/manshar:manshar-backend-latest
+  command: rails s
+  environment:
+    RACK_ENV: production
+    PORT: 80
+    API_HOST: api2.manshar.com
+    WEB_CLIENT_HOST: www2.manshar.com
+  volumes:
+    - backend/:/manshar-backend
+  ports:
+    - "3000:3000"
+  links:
+    - db
+web:
+  image: manshar/manshar:manshar-web-client-latest
+  working_dir: /manshar-web-client/dist
+  command: node server
+  environment:
+    NODE_ENV: production
+    PORT: 80
+    API_HOST: api2.manshar.com
+  volumes:
+    - web-client/:/manshar-web-client
+  ports:
+    - "9000:9000"
+  links:
+    - backend
