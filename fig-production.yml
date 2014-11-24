@@ -4,29 +4,25 @@ db:
     - "5432"
 backend:
   image: manshar/manshar:manshar-backend-latest
-  command: rails s
+  command: foreman start
   environment:
     RACK_ENV: production
     PORT: 80
-    API_HOST: api2.manshar.com
-    WEB_CLIENT_HOST: www2.manshar.com
-  volumes:
-    - backend/:/manshar-backend
+    API_HOST: dev-api.manshar.com
+    WEB_CLIENT_HOST: dev-www.manshar.com
   ports:
     - "3000:3000"
   links:
     - db
 web:
   image: manshar/manshar:manshar-web-client-latest
-  working_dir: /manshar-web-client/dist
-  command: node server
+  working_dir: /manshar-web-client
+  command: /bin/sh -c "cd /manshar-web-client/dist/ && node server"
   environment:
     NODE_ENV: production
     PORT: 80
-    API_HOST: api2.manshar.com
-  volumes:
-    - web-client/:/manshar-web-client
+    API_HOST: dev-api.manshar.com
   ports:
-    - "9000:9000"
+    - "80:9000"
   links:
     - backend
