@@ -68,13 +68,13 @@ angular.module('webClientApp')
           return;
         }
       }
-      $scope.inProgress = published ? 'publish' : 'save';
       article.published = published;
       var formError = $scope.articleForm.$error;
       if(formError && formError.required) {
         $window.alert('تأكد من ادخال جميع المعلومات المطلوبة');
         return;
       }
+      $scope.inProgress = published ? 'publish' : 'save';
       if(isEdit) {
         Article.update({ 'articleId': article.id }, { article: article }, success, error);
       } else {
