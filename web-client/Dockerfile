@@ -19,6 +19,7 @@ RUN cd /manshar-web-client && bower install --allow-root
 RUN cd /manshar-web-client && npm uninstall grunt-contrib-imagemin && npm install grunt-contrib-imagemin
 RUN cd /manshar-web-client && grunt
 
+ENV PWD_SUBDIR dist
 # Define working directory.
 WORKDIR /manshar-web-client/$PWD_SUBDIR
 
