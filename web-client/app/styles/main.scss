@@ -84,12 +84,27 @@ body {
       display: inline-block;
       vertical-align: middle;
       font-size: 3.2em;
-      margin-top: 100px;
+      margin-top: 50px;
       padding-right: 8px;
     }
 
     p {
       font-size: 1.2em;
+    }
+
+    .links {
+      border-right: #f88 5px solid;
+      padding: 7px 10px;
+      margin-top: 10px;
+      color: #999;
+      font-size: 0.7em;
+
+      a {
+        color: #999;
+        &:hover {
+          color: #333;
+        }
+      }
     }
 
     .action-button {
@@ -101,7 +116,7 @@ body {
 
     #typed-cursor {
       position: absolute;
-      top: 70px;
+      top: 20px;
       font-weight: 100;
       font-size: 5.5em;
       width: 8px;
@@ -173,12 +188,27 @@ body {
     a {
       color: #fff;
       display: block;
-      padding: 0.5em 1.5em;
+      padding: 10px 20px;
 
       &:hover {
         background-color: #1d1d1d;
       }
     }
+
+    &.base-links {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+
+      li:last-child {
+        font-size: .6em;
+
+        i {
+          font-size: 1.8em;
+        }
+      }
+    }
+
   }
 }
 
