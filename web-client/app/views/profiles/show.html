@@ -12,7 +12,12 @@
       <div class="article-details article-card">
         <div class="header tray">
           <div class="title">
-            <a ng-href="/articles/{{article.id}}">
+            <a ng-href="/articles/{{article.id}}"
+                analytics-on="click"
+                analytics-event="click"
+                analytics-category="UI"
+                analytics-label="Article in Profile - {{article.title}}"
+                analytics-value="article-{{article.id}}">
               <h1>{{article.title}}</h1>
               <h2>{{article.tagline}}</h2>
             </a>

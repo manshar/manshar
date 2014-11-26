@@ -50,25 +50,28 @@
 
     <!-- site nav -->
     <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="left"
-        analytics-on="click" analytics-event="Toggle Drawer"/>
+        analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon"/>
 
     <nav class="site-nav" snap-drawer="left">
       <div class="profile-badge">
-        <a href="/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn">
+        <a href="/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn"
+            analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Profile Picture">
           <img ng-src="{{currentUser.thumb_url}}" ng-show="currentUser"/>
           <span>{{currentUser.name}}</span>
         </a>
       </div>
       <ul>
         <!-- TDOD: Convert to ng-repeat -->
-        <li><a href="/" snap-close>الصفحة الرئيسية</a></li>
-        <li><a href="/login" snap-close ng-show="!isLoggedIn">تسجيل الدخول</a></li>
+        <li><a href="/" snap-close
+            analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Main Page Link">الصفحة الرئيسية</a></li>
+        <li><a href="/login" snap-close ng-show="!isLoggedIn" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">تسجيل الدخول</a></li>
         <li><a snap-close ng-show="isLoggedIn" ng-click="logout()"
-            analytics-on="click" analytics-event="Logout">تسجيل الخروج</a></li>
+            analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link">تسجيل الخروج</a></li>
       </ul>
       <ul class="base-links">
-        <li><a href="http://www.manshar.org" target="blank">عن منشر</a></li>
-        <li><a href="http://www.github.com/manshar/manshar" target="blank"><i class="fa fa-github"></i> مشروع منشر مفتوح المصدر</a></li>
+        <li><a href="http://www.manshar.org" target="blank" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav About Manshar Link">عن منشر</a></li>
+        <li><a href="http://www.github.com/manshar/manshar" target="blank"
+          analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Open Source Link"><i class="fa fa-github"></i> مشروع منشر مفتوح المصدر</a></li>
       </ul>
     </nav>
 

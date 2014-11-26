@@ -171,7 +171,9 @@ angular.module('webClientApp', [
      * Logs the user out.
      */
     $rootScope.logout = function () {
-      $analytics.eventTrack('Logout', {});
+      $analytics.eventTrack('Logout', {
+        category: 'User'
+      });
       LoginService.logout();
     };
 

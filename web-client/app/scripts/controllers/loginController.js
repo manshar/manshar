@@ -12,14 +12,19 @@ angular.module('webClientApp')
     };
 
     var success = function() {
-      $analytics.eventTrack('Logged In', {});
+      $analytics.eventTrack('Login Success', {
+        category: 'User'
+      });
       $location.path($routeParams.prev || '/')
         // Remove the prev param when redirecting.
         .search('prev', null);
     };
 
-    var error = function() {
-      $analytics.eventTrack('Login Error', { category: 'errors' });
+    var error = function(response) {
+      $analytics.eventTrack('Login Error', {
+        category: 'User',
+        label: angular.toJson(response.errors)
+      });
       $scope.error = 'خطأ في البريد الالكتروني أو كلمة المرور';
     };
 
