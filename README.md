@@ -20,15 +20,4 @@ Manshar is built using AngualrJS on the frontend and Ruby on Rails on the backen
 ##Questions and Feedback
 If you have any questions abotu the project and how to contribute please email us at core@manshar.com we'll be happy to talk to you!
 
-## Contributors
 
-  * Mohmmad Khatib — @mkhatib
-  * Amr Tamimi — @amrnt
-  * Rasha Hussein — @RashaHussein
-  * Murad Taleeb  — @moradtaleeb
-  * Jamal Shaheen - @rubypirate
-  * Hammam Samara - @hammamsamara
-
-
-
-  
