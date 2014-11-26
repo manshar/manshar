@@ -14,13 +14,15 @@ angular.module('webClientApp')
 
     var success = function() {
       // TODO (HammamSamara) redirect to a view that requests email confirmation
-      $analytics.eventTrack('Register', {});
+      $analytics.eventTrack('Register Success', {
+        category: 'User'
+      });
       $location.path($routeParams.prev || '/');
     };
 
     var error = function(response) {
-      $analytics.eventTrack('Signup Error', {
-        category: 'errors',
+      $analytics.eventTrack('Register Error', {
+        category: 'User',
         label: angular.toJson(response.errors)
       });
       $scope.error = 'حدث خطأ ما.'; // General form error.

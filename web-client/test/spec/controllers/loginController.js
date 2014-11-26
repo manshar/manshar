@@ -4,7 +4,7 @@ describe('Controller: LoginCtrl', function () {
 
   beforeEach(module('webClientApp'));
 
-  var createController, scope, location, routeParams, LoginSrv;
+  var createController, scope, location, routeParams, LoginSrv, errorMessages;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $location, $rootScope, $routeParams, LoginService) {
@@ -20,6 +20,7 @@ describe('Controller: LoginCtrl', function () {
         $location: location
       });
     };
+    errorMessages = {errors:{'email': 'can\'t be blank'}};
   }));
 
   describe('LoginCtrl.login', function () {
@@ -45,7 +46,7 @@ describe('Controller: LoginCtrl', function () {
 
     it('should set error message when login fails', function () {
       spyOn(LoginSrv, 'login').andCallFake(function(user, success, error) {
-        error();
+        error(errorMessages);
       });
 
       routeParams.prev = '/articles/1';

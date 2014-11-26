@@ -17,10 +17,11 @@ describe('Controller: SignupCtrl', function () {
       return $controller('SignupCtrl', {
         $scope: scope,
         $routeParams: routeParams,
-        $location: location
+        $location: location,
+        SignupService: SignupSrv
       });
     };
-    errorMessages = {'errors':{'email': 'can\'t be blank'}};
+    errorMessages = {errors:{'email': 'can\'t be blank'}};
   }));
 
   describe('SignupCtrl.signup', function () {
@@ -46,6 +47,7 @@ describe('Controller: SignupCtrl', function () {
 
     it('should set error message when login fails', function () {
       spyOn(SignupSrv, 'signup').andCallFake(function(user, success, error) {
+        console.log('helooooooo');
         error(errorMessages);
       });
 

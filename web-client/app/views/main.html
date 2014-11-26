@@ -1,14 +1,30 @@
 <header class="main-header">
   <div class="hero-unit tray">
     <span id="typed-cursor" class="blinking">|</span>
-    <h1 ng-click="newArticle()">{{title}}</h1>
-    <p ng-click="newArticle()" class="manshar-tagline">{{tagline}}...</p>
+    <h1 ng-click="newArticle()"
+        analytics-on="click"
+        analytics-event="click"
+        analytics-category="UI"
+        analytics-label="Manshar Hero Title">{{title}}</h1>
+    <p ng-click="newArticle()" class="manshar-tagline"
+        analytics-on="click"
+        analytics-event="click"
+        analytics-category="UI"
+        analytics-label="Manshar Hero Tagline">{{tagline}}...</p>
     <p class="links">
-      <a href="http://www.manshar.org" target="blank">
+      <a href="http://www.manshar.org" target="blank"
+        analytics-on="click"
+        analytics-event="click"
+        analytics-category="UI"
+        analytics-label="Hero About Manshar Link">
         عن منشر
       </a>
     </p>
-    <button ng-click="newArticle()" class="action-button"><i class="fa fa-pencil"></i></button>
+    <button ng-click="newArticle()" class="action-button"
+        analytics-on="click"
+        analytics-event="click"
+        analytics-category="UI"
+        analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
   </div>
 </header>
 
@@ -17,13 +33,25 @@
     <div class="article-details article-card">
       <div class="header tray">
         <div class="title">
-            <a ng-href="/articles/{{article.id}}">
+          <a ng-href="/articles/{{article.id}}"
+              analytics-on="click"
+              analytics-event="click"
+              analytics-category="UI"
+              analytics-label="Article in Main Page - {{article.title}}"
+              analytics-value="article-{{article.id}}">
             <h1>{{article.title}}</h1>
             <h2>{{article.tagline}}</h2>
           </a>
           <h3>
             <span>بقلم: </span>
-            <a ng-href="/profiles/{{article.user.id}}">{{article.user.name}}</a>
+            <a ng-href="/profiles/{{article.user.id}}"
+              analytics-on="click"
+              analytics-event="click"
+              analytics-category="UI"
+              analytics-label="User in Main Page - {{article.user.name}}"
+              analytics-value="user-{{article.user.id}}">
+                {{article.user.name}}
+            </a>
             <div class="date">
               {{article.created_at | date:'EEEE, d MMMM'}}
             </div>

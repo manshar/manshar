@@ -28,30 +28,53 @@ angular.module('webClientApp')
     }
 
 
-    var success = function (resource) {
+    var createSuccess = function (resource) {
       $scope.inProgress = null;
-      $analytics.eventTrack('Create Article', {});
+      $analytics.eventTrack('Article Created', {
+        category: 'Article',
+        label: resource.title
+      });
       $location.path('/articles/' + resource.id);
     };
 
-    var deleteSuccess = function () {
-      $analytics.eventTrack('Delete Article', {});
-      $location.path('/');
+    var updateSuccess = function (resource) {
+      $scope.inProgress = null;
+      $analytics.eventTrack('Article Updated', {
+        category: 'Article',
+        label: resource.title
+      });
+      $location.path('/articles/' + resource.id);
     };
 
-    var error = function (response) {
+    var createError = function (response) {
       $scope.inProgress = null;
-      $analytics.eventTrack('Create Article', {
-        category: 'errors',
+      $analytics.eventTrack('Article Create Error', {
+        category: 'Article',
         label: angular.toJson(response.errors)
       });
       $scope.error = 'حدث خطأ في حفظ المقال.';
     };
 
+    var updateError = function (response) {
+      $scope.inProgress = null;
+      $analytics.eventTrack('Article Update Error', {
+        category: 'Article',
+        label: angular.toJson(response.errors)
+      });
+      $scope.error = 'حدث خطأ في حفظ المقال.';
+    };
+
+    var deleteSuccess = function () {
+      $analytics.eventTrack('Article Deleted', {
+        category: 'Article'
+      });
+      $location.path('/');
+    };
+
     var deleteError = function (response) {
       $scope.inProgress = null;
-      $analytics.eventTrack('Delete Article', {
-        category: 'errors',
+      $analytics.eventTrack('Delete Article Error', {
+        category: 'Article',
         label: angular.toJson(response.errors)
       });
       $scope.error = 'حدث خطأ في حذف المقال.';
@@ -76,9 +99,9 @@ angular.module('webClientApp')
       }
       $scope.inProgress = published ? 'publish' : 'save';
       if(isEdit) {
-        Article.update({ 'articleId': article.id }, { article: article }, success, error);
+        Article.update({ 'articleId': article.id }, { article: article }, updateSuccess, updateError);
       } else {
-        Article.save({ article: article }, success, error);
+        Article.save({ article: article }, createSuccess, createError);
       }
     };
 
