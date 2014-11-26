@@ -12,7 +12,7 @@ In addition to Manshar’s mission of spreading the culture of blogging in Arabi
 
 Manshar was started by [Mohammad Khatib](https://plus.google.com/+MohammadKhatib/posts), a Web Developer at Google, as an effort to contribute to solving the problem of lack of Arabic content online by providing better tools that makes it easier to create and consume Arabic content. 
 
-Visit [Manshar.org](www.manshar.org) to read about Manshar in Arabic.
+Visit [Manshar.org](http://www.manshar.org) to read about Manshar in Arabic.
 
 ##[Contributing to Manshar](https://github.com/manshar/manshar/blob/master/CONTRIBUTING.md)
 Manshar is built using AngualrJS on the frontend and Ruby on Rails on the backend. Frontend and backend are completely seperated to give you a better chance at contributing to the project if you're familiar with just one technology or if you want to contribute to one of them without wanting to deal with the other. 
