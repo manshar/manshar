@@ -93,7 +93,7 @@ angular.module('webClientApp')
       }
       article.published = published;
       var formError = $scope.articleForm.$error;
-      if(formError && formError.required) {
+      if(published && formError && formError.required) {
         $window.alert('تأكد من ادخال جميع المعلومات المطلوبة');
         return;
       }

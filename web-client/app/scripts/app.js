@@ -145,6 +145,15 @@ angular.module('webClientApp', [
 
     $locationProvider.html5Mode(true).hashPrefix('!');
   }])
+  .config(['$sceDelegateProvider', function ($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+      // Allow same origin resource loads.
+      'self',
+      // Allow loading from YouTube domain.
+      'http://www.youtube.com/embed/**',
+      'https://www.youtube.com/embed/**'
+    ]);
+  }])
   /**
    * Everytime the route change check if the user need to login.
    */
