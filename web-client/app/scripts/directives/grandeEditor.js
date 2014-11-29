@@ -56,11 +56,14 @@ angular.module('webClientApp')
         };
 
         new Grande(element, {
+          containerEl: document.getElementsByClassName('container')[0],
           placeholder: scope.placeholder || '',
           mode: scope.mode || 'rich',
           rtl: scope.rtl || false,
           imagesFromUrls: scope.mode === 'rich',
           allowImages: scope.mode === 'rich',
+          imageTooltipLabel: '<i class="fa fa-image"></i>',
+          urlInputPlaceholder: 'أدخل أو ألصق رابط',
           uploadCallback: uploadCallback
         });
 
