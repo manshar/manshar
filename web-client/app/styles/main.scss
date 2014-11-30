@@ -363,6 +363,15 @@ ul.manshar-articles-list {
   }
 }
 
+.dimmer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.4);
+}
+
 .manshar-snippet {
   font-size: 1em;
 }
@@ -378,16 +387,19 @@ ul.manshar-articles-list {
   .manshar-article-image-container {
     height: 100%;
     position: relative;
-    background-color: #303030;
     color: #fff;
     z-index: 9;
     text-shadow: 1px 0 5px #333;
+    margin-bottom: 2em;
 
     &.manshar-article-nocover{
       height: auto;
+      margin-bottom: 0;
+      color: #000;
+      text-shadow: none;
 
       .manshar-article-header{
-        color: #fff;
+        color: #000;
         .author-details {
           .author-name {
             text-shadow:  none;
@@ -398,8 +410,8 @@ ul.manshar-articles-list {
       .manshar-article-header {
         position: initial;
         z-index: 99;
-        padding-top: 5em;
-        padding-bottom: 5em;
+        padding-top: 2em;
+        padding-bottom: 2em;
       }
     }
 
@@ -442,7 +454,7 @@ ul.manshar-articles-list {
     -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 
     article {
-      margin: 30px auto;
+      margin: 0 auto;
       font-size: 1.3em;
       min-height: 300px !important;
       width: 100%;
@@ -489,6 +501,7 @@ ul.manshar-articles-list {
 
         img {
           max-width: 100%;
+          box-shadow: 0 3px 7px -1px #000;
         }
       }
 
@@ -754,6 +767,10 @@ button {
   padding-left: 25px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.g-placeholder {
+  color: #b3b3b3;
 }
 
 

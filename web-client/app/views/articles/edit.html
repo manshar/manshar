@@ -1,6 +1,7 @@
 <form name="articleForm" class="manshar-article">
 
     <div class="manshar-article-image-container card" ng-class="{'manshar-article-nocover': !article.cover_url}" manshar-cover url="{{article.cover_url}}">
+      <div class="dimmer" ng-show="article.cover_url"></div>
 
       <div class="manshar-article-header tray header">
 
