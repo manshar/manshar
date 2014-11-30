@@ -214,12 +214,12 @@ body {
 
 .author-details {
   text-align: center;
-  color: #fff;
+  color: #000;
 
   img {
     width: 65px;
     border-radius: 500px;
-    border: 2px solid white;
+    box-shadow: 0 2px 7px -2px #000;
   }
 
   .author-name {
@@ -392,7 +392,7 @@ ul.manshar-articles-list {
     text-shadow: 1px 0 5px #333;
     margin-bottom: 2em;
 
-    &.manshar-article-nocover{
+    &.manshar-article-nocover {
       height: auto;
       margin-bottom: 0;
       color: #000;
@@ -401,6 +401,8 @@ ul.manshar-articles-list {
       .manshar-article-header{
         color: #000;
         .author-details {
+          color: #303030;
+
           .author-name {
             text-shadow:  none;
           }
@@ -408,10 +410,11 @@ ul.manshar-articles-list {
       }
 
       .manshar-article-header {
-        position: initial;
+        position: relative;
         z-index: 99;
         padding-top: 2em;
         padding-bottom: 2em;
+        bottom: 0;
       }
     }
 
@@ -423,10 +426,14 @@ ul.manshar-articles-list {
       width: 100%;
 
       position: absolute;
-      bottom: 50px;
+      bottom: 2em;
       right: 0;
       left: 0;
       z-index: 99;
+
+      .author-details {
+        color: #fff;
+      }
 
       h1 {
         font-size: 2em;
