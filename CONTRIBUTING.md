@@ -1,4 +1,5 @@
 # Contributing to Manshar
+> Before you start working on a task, make sure it's assigned to you on the [issue tracker](https://www.pivotaltracker.com/n/projects/985678). You either assign it to yourself, or the project lead assigns it to you.
 
 ## Install the environment
 
