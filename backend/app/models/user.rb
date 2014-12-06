@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  include Utils
+  include Concerns::Utils
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
-  has_many :articles, :dependent => :destroy
-  has_many :images, :dependent => :destroy
-  has_many :recommendations, :dependent => :destroy
+  has_many :articles, dependent: :destroy
+  has_many :images, dependent: :destroy
+  has_many :recommendations, dependent: :destroy
 
   dragonfly_accessor :avatar do
     storage_options do |attachment|
@@ -18,11 +18,11 @@ class User < ActiveRecord::Base
   end
 
   def published_articles
-  	articles.where(published: true)
+  	articles.published
   end
 
   def drafts
-  	articles.where(published: false)
+  	articles.draft
   end
 
   def avatar_abs_url size = nil

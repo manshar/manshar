@@ -1,6 +1,8 @@
-class ApplicationController < ActionController::API
-  include ActionController::MimeResponds
-  include ActionController::StrongParameters
+class ApplicationController < ActionController::Base
+  respond_to :json, :html
+
+  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
   include Pundit
 
   # By default authenticate and authorize all requests. For actions that don't need
@@ -12,14 +14,13 @@ class ApplicationController < ActionController::API
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-
   private
 
-  def user_not_authorized
-    render :nothing => true, :status => :unauthorized
-  end
+    def user_not_authorized
+      render nothing: true, status: :unauthorized
+    end
 
-  def not_found
-  	render :nothing => true, :status => :not_found
-  end
+    def not_found
+    	render nothing: true, status: :not_found
+    end
 end

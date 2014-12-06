@@ -1,20 +1,19 @@
 class Article < ActiveRecord::Base
-  include Utils
-
-  scope :top, -> { order('recommendations_count DESC').order('created_at DESC') }
-  scope :recents, -> { order('created_at DESC') }
+  include Concerns::Utils
 
   belongs_to :user
-  has_many :recommendations, :dependent => :destroy
+  has_many :recommendations, dependent: :destroy
+
+  scope :published, -> { where(published: true) }
+  scope :draft, -> { where(published: false) }
+  scope :top, -> { order('recommendations_count DESC').order('created_at DESC') }
+  scope :recents, -> { order('created_at DESC') }
 
   dragonfly_accessor :cover do
     storage_options do |attachment|
       { headers: {"x-amz-acl" => "public-read-write"} }
     end
   end
-
-
-  scope :public, -> { where(published: true) }
 
   # Instance Methods.
   def publish!

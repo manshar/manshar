@@ -25,3 +25,5 @@ dist
 .sass-cache
 vendor/assets/bower_components
 
+dragonfly.log
+

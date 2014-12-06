@@ -1,19 +1,19 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
-gem 'rails-api'
+gem 'rails', '4.1.8'
 gem 'pg', platform: :ruby
 
 # Authentication and Registration mechanism.
-gem 'devise'
+gem 'devise', '3.0.0'
+gem 'responders'
 gem 'foreman'
 
 # Development and Test environment variables setup.
 gem 'dotenv-rails'
 
 # Allow for easy setup for Cross-Origin Response Sharing Policy.
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 
 # Provide a simple class-based authorization mechanism.
 gem 'pundit'
@@ -36,12 +36,13 @@ gem 'sass'
 group :production do
   gem 'rails_12factor'
   gem 'puma'
-	gem 'rack-cache', :require => 'rack/cache'
+	gem 'rack-cache', require: 'rack/cache'
 end
 
 group :test, :development do
-  gem 'rspec-rails'
+  gem 'spring'
+  gem 'rspec-rails', '2.14.0'
   gem 'guard-rspec'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '4.3.0'
   gem 'email_spec'
 end

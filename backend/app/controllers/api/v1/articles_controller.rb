@@ -1,23 +1,23 @@
 class Api::V1::ArticlesController < ApplicationController
-
-  before_filter :authenticate_user!, except: [:index, :show]
   respond_to :json
+
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_article, only: [:show, :update, :destroy]
 
   # GET /api/v1/articles
   # GET /api/v1/articles.json
   def index
-    # Use the custom Article.public method to return all articles that is
+    # Use the custom Article.published method to return all articles that is
     # marked published.
-    @articles = Article.public.recents
-    render 'api/v1/articles/index'
+    @articles = Article.published.recents
+    respond_with(@articles)
   end
 
   # GET /api/v1/articles/1
   # GET /api/v1/articles/1.json
   def show
-    @article = Article.find(params[:id])
     authorize @article
-    render 'api/v1/articles/show'
+    respond_with(@article)
   end
 
   # POST /api/v1/articles
@@ -35,7 +35,6 @@ class Api::V1::ArticlesController < ApplicationController
   # PATCH/PUT /api/v1/articles/1
   # PATCH/PUT /api/v1/articles/1.json
   def update
-    @article = Article.find(params[:id])
     authorize @article
     if @article.update(article_params)
       render 'api/v1/articles/show'
@@ -47,7 +46,6 @@ class Api::V1::ArticlesController < ApplicationController
   # DELETE /api/v1/articles/1
   # DELETE /api/v1/articles/1.json
   def destroy
-    @article = Article.find(params[:id])
     authorize @article
     @article.destroy
     head :no_content
@@ -56,8 +54,12 @@ class Api::V1::ArticlesController < ApplicationController
 
   private
 
-  def article_params
-    params.require(:article).permit(:title, :tagline, :body, :published, :cover)
-  end
+    def set_article
+      @article = Article.find(params[:id])
+    end
+
+    def article_params
+      params.require(:article).permit(:title, :tagline, :body, :published, :cover)
+    end
 
 end

@@ -6,8 +6,6 @@ describe Api::V1::ConfirmationsController do
   before (:each) do
     @user = FactoryGirl.create(:unconfirmed_user)
     @token = @user.confirmation_token
-    new_token = Devise.token_generator.digest(User, :confirmation_token, @token)
-    @user.update_attribute(:confirmation_token, new_token)
     @request.env['devise.mapping'] = Devise.mappings[:user]
   end
 

@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  include Utils
+  include Concerns::Utils
 
   dragonfly_accessor :asset do
     storage_options do |attachment|

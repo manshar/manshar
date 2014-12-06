@@ -4,12 +4,12 @@ describe Api::V1::SessionsController do
 
   it 'should route POST /sessions to sessions#create' do
     expect(post '/api/v1/sessions').
-      to route_to('api/v1/sessions#create')
+      to route_to('api/v1/sessions#create', format: :json)
   end
 
   it 'should route DELETE /sessions to sessions#destroy' do
     expect(delete '/api/v1/sessions').
-      to route_to('api/v1/sessions#destroy')
+      to route_to('api/v1/sessions#destroy', format: :json)
   end
 
 end
@@ -19,7 +19,7 @@ describe Api::V1::RegistrationsController do
 
   it 'should route POST /registrations to registrations#create' do
     expect(post '/api/v1/registrations').
-      to route_to('api/v1/registrations#create')
+      to route_to('api/v1/registrations#create', format: :json)
   end
 
 end
@@ -32,7 +32,8 @@ describe Api::V1::ConfirmationsController do
       to route_to({
         :controller => 'api/v1/confirmations',
         :action => 'show',
-        :confirmation_token => '12r25awf2'
+        :confirmation_token => '12r25awf2',
+        format: :json
       })
   end
 
