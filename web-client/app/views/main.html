@@ -56,6 +56,7 @@
               {{article.created_at | date:'EEEE, d MMMM'}}
             </div>
           </h3>
+          <span class="reading-time"> {{article.body | nohtml | timeToRead | number:0}} دقائق قراءة</span>
           <div ng-include="'views/partials/_sharing_buttons.html'"></div>
         </div>
       </div>
