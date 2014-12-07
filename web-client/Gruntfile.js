@@ -442,6 +442,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'ngconstant:development',
+      'ngtemplates:webClientApp',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -473,6 +474,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'ngconstant:production',
+    'ngtemplates:webClientApp',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
