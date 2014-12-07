@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123042623) do
+ActiveRecord::Schema.define(version: 20141205063002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20141123042623) do
     t.string   "cover_uid"
     t.string   "cover_name"
     t.integer  "recommendations_count", default: 0
+    t.integer  "comments_count",        default: 0
+  end
+
+  create_table "comments", force: true do |t|
+    t.string   "guid"
+    t.text     "body",       null: false
+    t.integer  "article_id", null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "images", force: true do |t|
@@ -78,6 +88,7 @@ ActiveRecord::Schema.define(version: 20141123042623) do
     t.string   "avatar_uid",                          null: false
     t.string   "avatar_name"
     t.integer  "recommendations_count",  default: 0
+    t.integer  "comments_count",         default: 0
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

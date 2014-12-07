@@ -26,6 +26,28 @@ body {
   }
 }
 
+.manshar-article {
+
+  .article-content-container {
+    transition: transform .3s;
+    &.anchored-comments-active {
+      transform: translateX(175px);
+    }
+  }
+
+}
+
+.comments-container {
+  left: 0;
+
+  .anchored-comment-box {
+    i {
+      font-size: 1.5em;
+    }
+
+  }
+}
+
 .manshar-article-header {
   .image-cover {
     height: 15em;

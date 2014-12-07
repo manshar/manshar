@@ -1,0 +1,25 @@
+<div class="main-comment-box anchored-comment-box"
+    ng-show="activeGuid"
+    click-outside="clickedOutside()">
+
+  <div>
+    <textarea
+      ng-model="newComment"
+      ng-keypress="handleKeypress($event)"
+      placeholder="اكتب تعليق"></textarea>
+  </div>
+
+  <ul>
+    <li ng-repeat="comment in comments|filter:{guid: activeGuid}">
+      <p class="author">
+        {{comment.user.name}}
+      </p>
+      <p>
+        {{comment.body}}
+      </p>
+      <span class="date">
+        {{comment.created_at | date:'EEEE, d MMMM'}}
+      </span>
+    </li>
+  </ul>
+</div>

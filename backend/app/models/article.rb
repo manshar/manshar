@@ -6,6 +6,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :user
   has_many :recommendations, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
 
   dragonfly_accessor :cover do
     storage_options do |attachment|
