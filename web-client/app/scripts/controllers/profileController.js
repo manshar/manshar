@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'UserArticle', 'UserDraft', 'User',
-      function ($scope, $rootScope, $location, $routeParams, UserArticle, UserDraft, User) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'UserArticle', 'UserDraft', 'User','$analytics', '$window', 'Article',
+      function ($scope, $rootScope, $location, $routeParams, UserArticle, UserDraft, User, $analytics, $window, Article) {
 
     User.get({'userId': $routeParams.userId},
         function(resource) {
@@ -23,5 +23,38 @@ angular.module('webClientApp')
     }
 
     $scope.articles = UserArticle.query({'userId': $routeParams.userId});
+
+    $scope.editArticle = function (articleId) {
+      $location.path('/articles/' + articleId + '/edit');
+    };
+
+    var deleteSuccess = function () {
+      $analytics.eventTrack('Article Deleted', {
+        category: 'Article'
+      });
+      $location.path('/');
+    };
+
+    var deleteError = function (response) {
+      $scope.inProgress = null;
+      $analytics.eventTrack('Delete Article Error', {
+        category: 'Article',
+        label: angular.toJson(response.errors)
+      });
+      $scope.error = 'حدث خطأ في حذف المقال.';
+    };
+
+    /**
+     * Deletes an article.
+     * @param {Object} article Article data.
+     */
+    $scope.deleteArticle = function(article) {
+      $scope.inProgress = 'delete';
+      if ($window.confirm('متأكد من حذف المقال؟')) {
+        Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
+      } else {
+        $scope.inProgress = null;
+      }
+    };
 
   }]);

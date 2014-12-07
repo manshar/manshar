@@ -25,7 +25,7 @@ body, html {
 
 body {
   font-family: 'Droid Arabic Naskh', serif !important;
-  background: #f9f9f9;
+  background: #fff;
   font-size: 16px;
 
   /* Firefox seems to show a horizantal scroll for absolutely
@@ -37,7 +37,7 @@ body {
 
 .container{
   @include span-columns(12);
-  background-color: #f9f9f9;
+  background-color: #fff;
   height: 100%;
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden; /* Chrome and Safari */
@@ -55,7 +55,7 @@ body {
 
 .tray {
   padding: 0 30px;
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   position: relative;
 }
@@ -225,6 +225,13 @@ body {
   .author-name {
     font-size: 0.9em;
   }
+
+  h3 {
+    .date{
+      font-size: 0.7em;
+      font-weight: 100;
+    }
+  }
 }
 
 .card-list {
@@ -233,6 +240,7 @@ body {
     box-shadow: 0 1px 5px -2px #000;
     margin: 1em;
     cursor: default;
+    position: relative;
 
     &:nth-child(6n+1){
       border-top: 7px solid #05A19E;
@@ -309,6 +317,10 @@ body {
           text-shadow: none;
         }
 
+        h3 {
+          font-size: 0.7em;
+        }
+
         img {
           border-color: white;
         }
@@ -325,6 +337,25 @@ body {
       bottom: 0.5em;
       left: 1em;
       font-size: 1.1em;
+    }
+
+    &.draft {
+      border-top: 7px solid #b6b6b6
+    }
+    
+    .profile-article-action {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      button{
+        &.action-button {
+          background-color: #fff;
+          color: #b6b6b6;
+          box-shadow: none;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
@@ -354,9 +385,10 @@ body {
 
 ul.manshar-articles-list {
   width: 100%;
-  margin: 20px auto;
+  padding: 20px;
   list-style: none;
   word-wrap: break-word;
+  background-color: #f9f9f9;
 
   li {
     cursor: pointer;
@@ -383,6 +415,7 @@ ul.manshar-articles-list {
   -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 
   height: 100%;
+  background-color: #fff;
 
   .manshar-article-image-container {
     height: 100%;
@@ -398,22 +431,11 @@ ul.manshar-articles-list {
       color: #000;
       text-shadow: none;
 
-      .manshar-article-header{
-        color: #000;
-        .author-details {
-          color: #303030;
-
-          .author-name {
-            text-shadow:  none;
-          }
-        }
-      }
-
       .manshar-article-header {
         position: relative;
         z-index: 99;
-        padding-top: 2em;
-        padding-bottom: 2em;
+        padding-top: 4em;
+        padding-bottom: 1em;
         bottom: 0;
       }
     }
@@ -431,19 +453,16 @@ ul.manshar-articles-list {
       left: 0;
       z-index: 99;
 
-      .author-details {
-        color: #fff;
-      }
-
       h1 {
         font-size: 2em;
-        padding: 20px 0;
+        padding: 20px 0 0;
         box-sizing: initial;
       }
 
       h2 {
         font-size: 1.6em;
         font-weight: 100;
+        color: #969696;
       }
 
       .date {
@@ -453,7 +472,7 @@ ul.manshar-articles-list {
   }
 
   .article-content-container {
-    background: #f9f9f9;
+    background: #fff;
     padding-bottom: 10px;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden; /* Chrome and Safari */
@@ -462,11 +481,12 @@ ul.manshar-articles-list {
 
     article {
       margin: 0 auto;
-      font-size: 1.3em;
+      font-size: 1.2em;
       min-height: 300px !important;
       width: 100%;
       font-weight: 100;
       word-wrap: break-word;
+      text-align: justify;
 
       pre {
         direction: ltr;
@@ -756,6 +776,7 @@ button {
 .g-body .image-tooltip {
   z-index: 9999;
   position: fixed !important;
+  color: #B3B3B3;
 }
 
 .g-body .image-tooltip .file-label {

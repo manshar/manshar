@@ -4,24 +4,6 @@
     <div class="dimmer" ng-show="article.cover_url"></div>
     <div class="manshar-article-header tray header">
       <div class="title">
-        <a ng-href="/profiles/{{article.user.id}}"
-            analytics-on="click"
-            analytics-event="click"
-            analytics-category="UI"
-            analytics-label="User in Article Page - {{article.title}}"
-            analytics-value="user-{{article.user.id}}">
-          <div class="author-details">
-            <img ng-src="{{article.user.thumb_url}}" />
-            <div class="author-name">
-              {{article.user.name}}
-            </div>
-            <h3>
-              <div class="date">
-                {{article.created_at | date:'fullDate'}}
-              </div>
-            </h3>
-          </div>
-        </a>
         <h1>{{article.title}}</h1>
         <h2>{{article.tagline}}</h2>
       </div>
@@ -33,6 +15,25 @@
     <article ng-bind-html="article.body" highlight-code>
     </article>
 
+    <a ng-href="/profiles/{{article.user.id}}"
+        analytics-on="click"
+        analytics-event="click"
+        analytics-category="UI"
+        analytics-label="User in Article Page - {{article.title}}"
+        analytics-value="user-{{article.user.id}}">
+      <div class="author-details">
+        <img ng-src="{{article.user.thumb_url}}" />
+        <div class="author-name">
+          {{article.user.name}}
+        </div>
+        <h3>
+          <div class="date">
+            {{article.created_at | date:'fullDate'}}
+          </div>
+        </h3>
+      </div>
+    </a>
+    
     <div ng-include="'views/partials/_sharing_buttons.html'"></div>
   </div>
 </div>
