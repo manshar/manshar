@@ -3,6 +3,7 @@
   <div class="manshar-article-image-container card" manshar-cover url="{{article.cover_url}}" ng-class="{'manshar-article-nocover': !article.cover_url}">
     <div class="dimmer" ng-show="article.cover_url"></div>
     <div class="manshar-article-header tray header">
+      <span class="reading-time"> {{article.body | nohtml | timeToRead | number:0}} دقائق قراءة</span>
       <div class="title">
         <h1>{{article.title}}</h1>
         <h2>{{article.tagline}}</h2>
