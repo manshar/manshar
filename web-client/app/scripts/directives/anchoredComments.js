@@ -53,6 +53,22 @@ angular.module('webClientApp')
     };
 
     /**
+     * Recalculate the positions of the comments.
+     * @param  {HTMLElement} container Element that contains the anchors.
+     */
+    var repositionComments = function(container) {
+      var comments = container.getElementsByClassName('anchored-comment-box');
+      for (var i = 0; i < comments.length; i++) {
+        var guid = comments[i].getAttribute('guid');
+        if (!guid) {
+          continue;
+        }
+        var srcElement = document.querySelector('[data-guid="' + guid + '"]');
+        comments[i].style.top = srcElement.offsetTop + 'px';
+      }
+    };
+
+    /**
      * Remove highlight from elements.
      */
     var clearHighlightedComment = function() {
@@ -67,7 +83,8 @@ angular.module('webClientApp')
       restrict: 'A',
       scope: {
         article: '=',
-        guidElementsClass: '@'
+        guidElementsClass: '@',
+        guidElementsContainerId: '@'
       },
       link: function (scope, element) {
         var mainCommentBox = element.find('div')[0];
@@ -81,6 +98,15 @@ angular.module('webClientApp')
           if (!newValue) {
             return;
           }
+
+          // When images get loaded in the guid elements container we need
+          // to reposition the comments to calculate for hte images hieght.
+          var guidContainer = document.getElementById(
+              scope.guidElementsContainerId);
+          angular.element(guidContainer).find('img').on('load', function() {
+            repositionComments(element[0]);
+          });
+
 
           // Get all comments for this article.
           ArticleComment.query({
