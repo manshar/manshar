@@ -13,7 +13,7 @@
   </div>
 
   <div class="article-content-container tray">
-    <article ng-bind-html="article.body" highlight-code>
+    <article id="article-body" ng-bind-html="article.body" highlight-code>
     </article>
 
     <a ng-href="/profiles/{{article.user.id}}"
@@ -34,11 +34,12 @@
         </h3>
       </div>
     </a>
-    
+
     <div ng-include="'views/partials/_sharing_buttons.html'"></div>
 
     <div anchored-comments
         article="article"
+        guid-elements-container-id="article-body"
         class="comments-container">
     </div>
 
