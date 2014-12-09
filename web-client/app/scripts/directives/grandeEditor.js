@@ -64,7 +64,9 @@ angular.module('webClientApp')
           allowImages: scope.mode === 'rich',
           imageTooltipLabel: '<i class="fa fa-image"></i>',
           urlInputPlaceholder: 'أدخل أو ألصق رابط',
-          uploadCallback: uploadCallback
+          uploadCallback: uploadCallback,
+          enableGuids: true,
+          guidAttribute: 'title'
         });
 
         // we're done if no ng-model.
