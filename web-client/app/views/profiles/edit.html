@@ -1,0 +1,13 @@
+<div class="form-div">
+  <div ng-include="'views/partials/_form_header.html'"></div>
+  <div class="form-errors" ng-show="error">
+    <ul>
+      <li ng-repeat="(key, data) in errorMessages">{{key}} {{data}}</li>
+    </ul>
+  </div>
+  <form id="signup-form" name="signupForm" ng-submit="update(user)">
+    <div ng-include="'views/partials/_user_form.html'"></div>
+
+    <button type="submit">تسجيل</button>
+  </form>
+</div>

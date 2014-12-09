@@ -1,9 +1,14 @@
 <div class="manshar-profile">
   <div class="avatar" manshar-cover url="{{user.cover_url}}">
-    <div class="title">
+    <div class="avatar blured" manshar-cover url="{{user.cover_url}}"></div>
+  </div>
+  <div class="title">
+      <img ng-src="{{user.cover_url}}"/>
       <h1>{{user.name}}</h1>
       <h4>{{user.bio}}</h4>
-    </div>
+      <button class="action-button" ng-click="editProfile()" ng-show="currentUser.id == user.id">
+        <i class="fa fa-pencil"></i>
+      </button>
   </div>
 </div>
 

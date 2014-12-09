@@ -26,6 +26,31 @@ body {
   }
 }
 
+.manshar-profile {
+  .avatar {
+    position: relative;
+
+    &.blured{
+      display: block;
+      position: absolute;
+      filter: blur(14px) brightness(0.75);
+      -webkit-filter: blur(14px) brightness(0.75);
+      -moz-filter: blur(14px) brightness(0.75);
+      -ms-filter: blur(14px) brightness(0.75);
+      -o-filter: blur(14px) brightness(0.75);
+    }
+  }
+
+  .title {
+    img {
+      display: block;
+      margin: 0 auto;
+      height: 300px;
+      margin-top: 100px;
+      box-shadow: 3px 3px 10px -2px #000;
+      border-radius: 1px;
+    }
+
 .manshar-article {
 
   .article-content-container {
