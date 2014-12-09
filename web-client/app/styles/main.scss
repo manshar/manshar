@@ -54,7 +54,7 @@ body {
 }
 
 .tray {
-  padding: 0 30px;
+  padding: 0 10px;
   max-width: 900px;
   margin: 0 auto;
   position: relative;
@@ -136,6 +136,72 @@ body {
       }
 
     }
+  }
+}
+
+.comment-highlighted {
+  background-color: #FFFDE7;
+}
+
+.comments-container {
+  font-size: 0.8em;
+  position: absolute;
+  top: 0;
+  left: 20px;
+
+  .main-comment-box {
+    background-color: #fff;
+    width: 350px;
+    box-shadow: 0 1px 5px -2px #333;
+    z-index: 2;
+
+    ul {
+      list-style: none;
+
+      li {
+        position: relative;
+        background-color: #fbfbfb;
+        padding: 1em 2em;
+        border-bottom: 1px solid #eee;
+
+        .date, .author {
+          color: #aaa;
+          font-size: 0.6em;
+        }
+
+        .date {
+          position: absolute;
+          top: 1em;
+          left: 2em;
+        }
+
+      }
+    }
+
+    textarea {
+      width: 100%;
+      height: 5em;
+      border: 1px solid #ddd;
+      display: block;
+      padding: 1em;
+      font-size: 1.2em;
+    }
+
+  }
+
+  .anchored-comment-box {
+    position: absolute;
+
+    i {
+      font-size: 1em;
+      color: #c0c0c0;
+      transform: scaleX(-1);
+
+      &:hover {
+        color: #000;
+      }
+    }
+
   }
 }
 
@@ -357,7 +423,7 @@ body {
     &.draft {
       border-top: 7px solid #b6b6b6
     }
-    
+
     .profile-article-action {
       position: absolute;
       bottom: 0;
@@ -431,6 +497,8 @@ ul.manshar-articles-list {
 
   height: 100%;
   background-color: #fff;
+
+  position: relative;
 
   .manshar-article-image-container {
     height: 100%;
@@ -507,6 +575,11 @@ ul.manshar-articles-list {
     -webkit-backface-visibility:hidden; /* Chrome and Safari */
     -moz-backface-visibility:hidden; /* Firefox */
     -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
+
+    transition: transform .3s;
+    &.anchored-comments-active {
+      transform: translateX(335px);
+    }
 
     article {
       margin: 0 auto;

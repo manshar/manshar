@@ -26,6 +26,7 @@ body {
   }
 }
 
+<<<<<<< HEAD
 .manshar-profile {
   .avatar {
     position: relative;
@@ -50,6 +51,27 @@ body {
       box-shadow: 3px 3px 10px -2px #000;
       border-radius: 1px;
     }
+=======
+.manshar-article {
+
+  .article-content-container {
+    transition: transform .3s;
+    &.anchored-comments-active {
+      transform: translateX(175px);
+    }
+  }
+
+}
+
+.comments-container {
+  left: 0;
+
+  .anchored-comment-box {
+    i {
+      font-size: 1.5em;
+    }
+
+>>>>>>> 813cf7c... Add comments end-to-end to manshar Articles body.
   }
 }
 
