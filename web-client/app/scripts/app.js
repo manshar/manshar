@@ -106,6 +106,14 @@ angular.module('webClientApp', [
         })
       })
 
+      .when('/profiles/:userId/edit', {
+        templateUrl: 'views/profiles/edit.html',
+        controller: 'EditProfileCtrl',
+        resolve: checkAccess({
+          isPublic: false
+        })
+      })
+
       .otherwise({
         redirectTo: '/'
       });

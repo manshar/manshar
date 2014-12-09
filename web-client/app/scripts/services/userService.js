@@ -8,15 +8,60 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('User', ['$resource', 'API_HOST',
-      function ($resource, API_HOST) {
+  .service('User', ['$rootScope', '$resource', '$http', 'API_HOST', 'StorageService',
+      function ($rootScope, $resource, $http, API_HOST, StorageService) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
-      var UserResource = $resource(baseUrl + 'users/:userId');
+      var UserResource = $resource(baseUrl + 'users/:userId', {}, {
+        update: {method: 'PUT'}
+      });
+
+
+      /**
+       * These configs are needed. AngularJS identity tranformer
+       * can automatically figure out that this is a multipart
+       * content and use the correct Content-Type.
+       */
+      var configs = {
+        headers: {'Content-Type': undefined},
+        transformRequest: angular.identity
+      };
+
+      var createFormData = function (data) {
+        var fd = new FormData();
+        for (var key in data.user) {
+          fd.append('user[' + key + ']', data.user[key]);
+        }
+        return fd;
+      };
 
       return {
         get: UserResource.get,
-        query: UserResource.query
+        query: UserResource.query,
+        update: function(userId, user, optSuccess, optError) {
+          $http.put(baseUrl + 'users/' + userId,
+                     createFormData({user: user}), configs)
+          .then(
+
+            // Success.
+            angular.bind(this, function(response) {
+              var userData = StorageService.get('userData');
+              userData.user = response.data;
+              $rootScope.currentUser = response.data;
+              StorageService.set('userData', userData);
+
+              if (optSuccess) {
+                optSuccess(response.data);
+              }
+            }),
+
+            // Error.
+            function(response) {
+              if(optError) {
+                optError(response.data);
+              }
+            });
+        }
       };
     }])
 

@@ -88,6 +88,11 @@ body {
       padding-right: 8px;
     }
 
+    .beta {
+      color: #ff8888;
+      font-weight: bolder;
+    }
+
     p {
       font-size: 1.2em;
     }
@@ -588,6 +593,7 @@ ul.manshar-articles-list {
 .manshar-profile {
   text-align: center;
   height: 60%;
+  position: relative;
 
   .avatar {
     width: 100%;
@@ -595,20 +601,32 @@ ul.manshar-articles-list {
     box-shadow: 0 1px 5px -1px;
     position: relative;
 
-    .title {
-      display: inline-block;
-      vertical-align: middle;
-      position: absolute;
-      bottom: 20%;
-      text-align: center;
-      color: #fff;
-      text-shadow: 0px 1px 3px #000;
-      left: 0;
-      right: 0;
-      font-size: 2em;
+    &.blured{
+      display: none;
     }
   }
 
+  .title {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    bottom: 20%;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0px 1px 3px #000;
+    left: 0;
+    right: 0;
+    font-size: 2em;
+
+    img {
+      display: none;
+    }
+
+    button {
+      background-color: #c0c0c0;
+      font-size: 0.8em;
+    }
+  }
 }
 
 .metabar {

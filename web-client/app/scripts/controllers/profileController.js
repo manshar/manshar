@@ -28,6 +28,10 @@ angular.module('webClientApp')
       $location.path('/articles/' + articleId + '/edit');
     };
 
+    $scope.editProfile = function () {
+      $location.path('/profiles/' + $rootScope.currentUser.id + '/edit');
+    };
+
     var deleteSuccess = function () {
       $analytics.eventTrack('Article Deleted', {
         category: 'Article'
