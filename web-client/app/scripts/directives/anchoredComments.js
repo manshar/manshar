@@ -20,12 +20,19 @@ angular.module('webClientApp')
 
     var COMMENT_HIGHLIGHT_CLASS = 'comment-highlighted';
     var ANCHORS_ACTIVE = 'anchored-comments-active';
+
     /**
      * Broadcasts a 'show-anchor' event to show a specific anchor.
      * @param  {Event} e Mouse event.
      */
     var showAnchor = function(e) {
-      $rootScope.$broadcast('show-anchor', e.target.getAttribute('data-guid'));
+      // Some elements (like img inside figure) won't have guid. So rely on
+      // their parent guids.
+      var guid = e.target.getAttribute('data-guid');
+      if (!guid && e.target.parentNode) {
+        guid = e.target.parentNode.getAttribute('data-guid');
+      }
+      $rootScope.$broadcast('show-anchor', guid);
     };
 
     /**
