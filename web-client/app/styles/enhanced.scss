@@ -60,6 +60,14 @@ body {
     &.anchored-comments-active {
       transform: translateX(350px);
     }
+
+    article {
+      figure {
+        iframe {
+          height: 450px;
+        }
+      }
+    }
   }
 
 }

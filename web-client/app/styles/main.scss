@@ -636,6 +636,13 @@ ul.manshar-articles-list {
           max-width: 100%;
           box-shadow: 0 3px 7px -1px #000;
         }
+
+        iframe {
+          border: none;
+          width: 100%;
+          height: 200px;
+        }
+
       }
 
       img {
