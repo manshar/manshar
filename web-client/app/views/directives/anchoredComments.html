@@ -3,10 +3,15 @@
     click-outside="clickedOutside()">
 
   <div>
-    <textarea
+    <textarea ng-show="currentUser"
       ng-model="newComment"
       ng-keypress="handleKeypress($event)"
       placeholder="اكتب تعليق"></textarea>
+  </div>
+  <div class="warning-note" ng-show="!currentUser.id">
+    يجب عليك
+    <a ng-href="login/?prev=/articles/{{article.id}}"> تسجيل الدخول</a>
+    لترك تعليق!
   </div>
 
   <ul>
