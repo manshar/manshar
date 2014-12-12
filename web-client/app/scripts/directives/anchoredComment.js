@@ -70,7 +70,7 @@ angular.module('webClientApp')
               scope.commentsCount++;
             }
           }
-        });
+        }, true);
 
       }
     };
