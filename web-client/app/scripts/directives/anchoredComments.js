@@ -97,7 +97,7 @@ angular.module('webClientApp')
         var mainCommentBox = element.find('div')[0];
         var textarea = element.find('textarea')[0];
 
-        $rootScope.$watch('currentUser', function(newValue) {
+        $rootScope.$watch('currentUser', function() {
           scope.currentUser = $rootScope.currentUser;
         });
 
