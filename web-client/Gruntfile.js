@@ -249,8 +249,14 @@ module.exports = function (grunt) {
         '<%= yeoman.dist %>/views/partials/{,*/}*.html'
       ],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>']
+        assetsDirs: ['<%= yeoman.dist %>'],
+        patterns: {
+          js: [
+            [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp))/gm, 'Update the JS to reference our revved images']
+          ]
+        }
       }
     },
 
@@ -474,8 +480,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'ngconstant:production',
-    'ngtemplates:webClientApp',
     'useminPrepare',
+    'ngtemplates:webClientApp',
     'concurrent:dist',
     'autoprefixer',
     'concat',

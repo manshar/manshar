@@ -98,6 +98,14 @@ angular.module('webClientApp', [
         })
       })
 
+      .when('/accounts/reset_password/:resetToken?', {
+        templateUrl: 'views/accounts/reset_password.html',
+        controller: 'PasswordController',
+        resolve: checkAccess({
+          isPublic: true
+        })
+      })
+
       .when('/profiles/:userId', {
         templateUrl: 'views/profiles/show.html',
         controller: 'ProfileCtrl',

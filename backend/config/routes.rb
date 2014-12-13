@@ -4,6 +4,7 @@ Backend::Application.routes.draw do
     :sessions => 'sessions',
     :registrations => 'registrations',
     :confirmations => 'confirmations',
+    :passwords => "passwords",
   }
 
   concern :recommendable do
@@ -19,6 +20,8 @@ Backend::Application.routes.draw do
       devise_scope :user do
         match 'confirm/:confirmation_token', :to => 'confirmations#show', :as => 'user_confirm', :via => [:get]
         match 'registrations', :to => 'registrations#create', :as => 'register', :via => [:post, :options]
+        match 'passwords', :to => 'passwords#create', :as => 'reset_password', :via => [:post, :options]
+        match 'passwords', :to => 'passwords#update', :as => 'update_password', :via => [:put, :options]
         match 'sessions', :to => 'sessions#create', :as => 'login', :via => [:post, :options]
         match 'sessions', :to => 'sessions#destroy', :as => 'logout', :via => [:delete, :options]
       end

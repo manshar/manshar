@@ -35,6 +35,12 @@ body {
   overflow-x: hidden;
 }
 
+input[type="email"],
+input[type="password"] {
+  direction: ltr;
+  text-align: right;
+}
+
 .container{
   @include span-columns(12);
   background-color: #fff;
@@ -812,12 +818,15 @@ button {
     @include row(table);
 
     img {
-      float: right;
+      display: inline-block;
+      vertical-align: middle;
     }
 
     h1 {
       color: #3A3A3A;
-      padding-right: 85px;
+      padding-right: 70px;
+      display: inline-block;
+      vertical-align: middle;
     }
   }
 
@@ -861,22 +870,24 @@ button {
 
     button {
       @include button(simple, #e48184);
-      font-size: 1.25em;
-      padding : 10px 125px;
+      font-size: 1em;
+      padding : 10px;
+      text-align: center;
+      width: 100%;
     }
 
     .info{
-      margin: 10px 0;
+      margin: 20px 0;
       font-size: 0.7em;
       color: #bbbaba;
+      text-align: center;
 
       .signup-link {
         background-color: #F3EFEE;
         border-radius: 8px;
         color: #272F36;
-        font-size: 1.25em;
-        margin-left: 6px;
-        padding: 2px;
+        font-size: 1.1em;
+        padding: 2px 10px;
       }
     }
   }
