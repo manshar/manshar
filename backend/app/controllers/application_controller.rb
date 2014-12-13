@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::StrongParameters
+  include ActionController::ImplicitRender
   include Pundit
+
+  respond_to :json
 
   # By default authenticate and authorize all requests. For actions that don't need
   # authentication or authorization use skip_before_filter :only and skip_after_filter

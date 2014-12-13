@@ -44,7 +44,7 @@
         ng-model="user.password"
         required
         pattern=".{8,}"
-        placeholder="كلمة المرور (٨ حروف على الأقل)" />
+        placeholder="كلمة المرور - ٨ حروف على الأقل" />
     </label>
 
     <label>
@@ -57,5 +57,11 @@
     </label>
 
     <button type="submit">تسجيل</button>
+
+    <p class="info">
+      <a href="/login" class="signup-link">سجل الدخول</a> أو
+      <a href="/accounts/reset_password" class="signup-link">استرجع كلمة المرور</a>
+    </p>
+
   </form>
 </div>
