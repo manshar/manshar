@@ -282,6 +282,13 @@ input[type="password"] {
       width: 100%;
       bottom: 0;
 
+      .terms {
+        font-size: 0.5em;
+        padding: 1px;
+        line-height: 1.5em;
+        color: #ff8888;
+      }
+
       li:last-child {
         font-size: .6em;
 
