@@ -142,7 +142,8 @@ angular.module('webClientApp', [
 
       'responseError': function(response) {
         if (response.status === 401) {
-          $location.path('/login');
+          var previous = $location.path();
+          $location.path('/login').search('prev', previous);
           return $q.reject(response);
         }
         else {
