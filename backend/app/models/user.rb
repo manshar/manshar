@@ -19,11 +19,11 @@ class User < ActiveRecord::Base
   end
 
   def published_articles
-  	articles.where(published: true)
+    articles.public.recents
   end
 
   def drafts
-  	articles.where(published: false)
+    articles.drafts.recents
   end
 
   def avatar_abs_url size = nil
