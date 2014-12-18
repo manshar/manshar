@@ -3,7 +3,9 @@ object @article
 attributes :id, :title, :tagline, :created_at, :updated_at,
   :published, :recommendations_count, :comments_count
 
-attributes :body unless locals[:listing]
+# TODO(mkhatib): This is only needed in listing to do the time to read.
+# Maybe implement this in the backend instead of frontend.
+attributes :body
 
 # Don't return cover for listings. We only need these when we are getting the
 # full article. This might change in the future but for now this is causing
