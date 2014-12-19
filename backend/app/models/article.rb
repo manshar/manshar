@@ -14,8 +14,8 @@ class Article < ActiveRecord::Base
     end
   end
 
-
   scope :public, -> { where(published: true) }
+  scope :drafts, -> { where(published: false) }
 
   # Instance Methods.
   def publish!
