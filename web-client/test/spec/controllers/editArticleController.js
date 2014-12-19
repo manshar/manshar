@@ -82,11 +82,6 @@ describe('Controller: EditArticleCtrl', function () {
   });
 
   it('should listen to logged out event and unbind it when destroied', function () {
-    // New Article.
-    createController();
-    rootScope.$emit('user.loggedOut');
-    expect(location.path()).toBe('/');
-
     // Edit Article.
     spyOn(scope, '$on').andCallFake(function (event) {
       expect(event).toBe('$destroy');
@@ -110,7 +105,7 @@ describe('Controller: EditArticleCtrl', function () {
       httpBackend.flush();
 
       spyOn(ArticleModel, 'update').andCallFake(function(params, data, success) {
-        success({id: 2});
+        success({id: 2, published: true});
       });
       scope.saveArticle(scope.article);
       expect(ArticleModel.update).toHaveBeenCalled();
@@ -119,21 +114,11 @@ describe('Controller: EditArticleCtrl', function () {
 
     it('should set error on scope', function () {
       createController();
-      spyOn(ArticleModel, 'save').andCallFake(function(data, success, error) {
+      spyOn(ArticleModel, 'update').andCallFake(function(params, data, success, error) {
         error({});
       });
       scope.saveArticle(scope.article);
       expect(scope.error).toBe('حدث خطأ في حفظ المقال.');
-    });
-
-    it('should create a new article using Article.save', function () {
-      createController();
-      spyOn(ArticleModel, 'save').andCallFake(function(data, success) {
-        success({id: 2});
-      });
-      scope.saveArticle(scope.article);
-      expect(ArticleModel.save).toHaveBeenCalled();
-      expect(location.path()).toBe('/articles/2');
     });
   });
 
@@ -182,19 +167,17 @@ describe('Controller: EditArticleCtrl', function () {
       httpBackend.flush();
       spyOn(mock, 'confirm').andCallFake(function() {return true;});
       scope.cancel();
-      expect(mock.confirm).toHaveBeenCalled();
+      expect(mock.confirm).not.toHaveBeenCalled();
       expect(location.path()).toBe('/');
-    });
 
-    it('should not cancel if the user did not confirm', function () {
-      httpBackend.expectGET(apiBase + 'articles/1').respond({id: 1, title: 'Hello World.'});
+      httpBackend.expectGET(apiBase + 'articles/1').respond({title: 'Hello World.'});
       routeParams.articleId = 1;
       createController();
       httpBackend.flush();
-      spyOn(mock, 'confirm').andCallFake(function() {return false;});
+      scope.article.title = 'Bye World.';
       scope.cancel();
       expect(mock.confirm).toHaveBeenCalled();
-      expect(location.path()).toBe('/articles/1');
+      expect(location.path()).toBe('/');
     });
 
     it('should not confirm before canceling unchanged new article', function () {
