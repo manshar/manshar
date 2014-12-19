@@ -766,6 +766,12 @@ ul.manshar-articles-list {
   -webkit-backface-visibility:hidden; /* Chrome and Safari */
   -moz-backface-visibility:hidden; /* Firefox */
   -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
+
+  .status {
+    font-size: .6em;
+    color: #666;
+    margin-left: 1em;
+  }
 }
 
 button {

@@ -62,14 +62,17 @@
 
 <div class="metabar tray">
   <div class="manshar-controls">
+    <span class="status" ng-show="!isSaving">
+      محفوظ كمسودة
+    </span>
+    <span class="status" ng-show="isSaving">
+      يتم حفظ المقال...
+    </span>
     <button class="action-button" ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
       <i>نشر</i>
     </button>
-    <button class="action-button" ng-click="saveArticle(article, false)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'save'}">
-      <i class="fa fa-floppy-o"></i>
-    </button>
     <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-      <i class="fa fa-times"></i>
+      <i class="fa fa-trash-o"></i>
     </button>
     <button class="action-button" ng-click="cancel()" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'cancel'}">
       <i class="fa fa-arrow-left"></i>

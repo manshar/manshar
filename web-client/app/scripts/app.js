@@ -75,7 +75,7 @@ angular.module('webClientApp', [
 
       .when('/articles/new', {
         templateUrl: 'views/articles/edit.html',
-        controller: 'EditArticleCtrl',
+        controller: 'NewArticleCtrl',
         title: 'مقال جديد',
         resolve: checkAccess({
           isPublic: false
