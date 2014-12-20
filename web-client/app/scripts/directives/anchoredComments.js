@@ -22,16 +22,27 @@ angular.module('webClientApp')
     var ANCHORS_ACTIVE = 'anchored-comments-active';
 
     /**
+     * Return the element or one of its ancestors with a data-guid tag.
+     * @param  {HTMLElement} element Element to start looking from.
+     * @return {HTMLElement} The element or one of its ancestor that has a guid.
+     */
+    var getAncestorWithGuid = function(element) {
+      var guid = element.getAttribute('data-guid');
+      if (!guid && element.parentNode) {
+        return getAncestorWithGuid(element.parentNode);
+      }
+      return element;
+    };
+
+    /**
      * Broadcasts a 'show-anchor' event to show a specific anchor.
      * @param  {Event} e Mouse event.
      */
     var showAnchor = function(e) {
       // Some elements (like img inside figure) won't have guid. So rely on
       // their parent guids.
-      var guid = e.target.getAttribute('data-guid');
-      if (!guid && e.target.parentNode) {
-        guid = e.target.parentNode.getAttribute('data-guid');
-      }
+      var guidElement = getAncestorWithGuid(e.target);
+      var guid = guidElement.getAttribute('data-guid');
       $rootScope.$broadcast('show-anchor', guid);
     };
 
