@@ -31,6 +31,18 @@ angular.module('webClientApp')
       }
     };
 
+    var listeners = [];
+    /**
+     * Cleans up event listeners we added on $rootScope when the directive
+     * is destroyed.
+     */
+    var cleanup = function() {
+      for (var i = 0; i < listeners.length; i++) {
+        listeners[i]();
+      }
+      listeners = [];
+    };
+
     return {
       templateUrl: '/views/directives/anchoredComment.html',
       restrict: 'A',
@@ -41,11 +53,12 @@ angular.module('webClientApp')
         scope.commentsCount = 0;
 
         // Shows the anchor icon for the user to click.
-        $rootScope.$on('show-anchor', function(e, data) {
+        var listener = $rootScope.$on('show-anchor', function(e, data) {
           $timeout(function() {
             scope.isActive = (data === scope.guid);
           });
         });
+        listeners.push(listener);
 
         // On clicking the bubble icon send an event to show the comment.
         var commentButton = element.find('div').find('i');
@@ -56,6 +69,10 @@ angular.module('webClientApp')
 
           $rootScope.$broadcast(
               'show-comment', {target: clickedEl, guid: scope.guid});
+        });
+        // Make sure to unbind events we binded to elements.
+        commentButton.on('$destroy', function() {
+          commentButton.off('click');
         });
 
         scope.$watch('$parent.comments', function(newValue) {
@@ -72,6 +89,7 @@ angular.module('webClientApp')
           }
         }, true);
 
+        scope.$on('$destroy', cleanup);
       }
     };
   }]);

@@ -57,6 +57,10 @@ angular.module('webClientApp')
 
       // Adding click and mouseover listeners to show anchor bubbles.
       angular.element(srcElement).on('click mouseover', showAnchor);
+      // Make sure to unbind events we binded to elements.
+      angular.element(srcElement).on('$destroy', function() {
+        angular.element(srcElement).off('click mouseover');
+      });
     };
 
     /**
@@ -83,6 +87,18 @@ angular.module('webClientApp')
       if (el) {
         angular.element(el).removeClass(COMMENT_HIGHLIGHT_CLASS);
       }
+    };
+
+    var listeners = [];
+    /**
+     * Cleans up event listeners we added on $rootScope when the directive
+     * is destroyed.
+     */
+    var cleanup = function() {
+      for (var i = 0; i < listeners.length; i++) {
+        listeners[i]();
+      }
+      listeners = [];
     };
 
     return {
@@ -135,7 +151,7 @@ angular.module('webClientApp')
         });
 
         // Listen to 'show-comment' event and activate the choosen comment.
-        $rootScope.$on('show-comment', function(e, data) {
+        var listener = $rootScope.$on('show-comment', function(e, data) {
           $timeout(function() {
             clearHighlightedComment();
 
@@ -152,6 +168,9 @@ angular.module('webClientApp')
             }, 50);
           });
         });
+        listeners.push(listener);
+
+        scope.$on('$destroy', cleanup);
 
         /**
          * On clicking outside the main comment box hide the sidebar.
