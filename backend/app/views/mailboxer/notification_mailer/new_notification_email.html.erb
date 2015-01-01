@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body dir="rtl">
+    <h1>
+      لديك تنبيه جديد على منشر:
+      <%= @notification.subject.html_safe? ? @notification.subject : strip_tags(@notification.subject) %>
+    </h1>
+    <blockquote>
+      <p>
+        <%= raw @notification.body %>
+      </p>
+    </blockquote>
+    <p>
+      قم بزيارة
+      <a href="http://<%=ENV['WEB_CLIENT_HOST']%>">
+        منشر
+      </a>
+    </p>
+  </body>
+</html>

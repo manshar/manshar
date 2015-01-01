@@ -32,6 +32,8 @@ gem 'oj'
 # And it is to get around installing sass on Travis.
 gem 'sass'
 
+# Used to manage notifications, emails and messaging.
+gem 'mailboxer', git: 'https://github.com/ging/mailboxer.git'
 
 group :production do
   gem 'rails_12factor'
