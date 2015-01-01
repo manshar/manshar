@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Utils
 
+  acts_as_messageable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :confirmable
@@ -32,5 +34,9 @@ class User < ActiveRecord::Base
     else
       abs_url avatar.url, ENV['API_HOST']
     end
+  end
+
+  def mailboxer_email(object)
+    email
   end
 end
