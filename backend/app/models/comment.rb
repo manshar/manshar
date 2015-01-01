@@ -18,7 +18,9 @@ class Comment < ActiveRecord::Base
 
     # Notify the article author of the new comment
     subject = "#{user.name} علق على مقالك '#{article.title}'"
-    body = "#{user.name} ترك تعليق على مقالك <a href='#{url}' target='blank'>'#{article.title}'</a>. التعليق هو:\n#{body}\n"
+    body = "#{user.name} ترك تعليق على مقالك <a href='#{url}' target='blank'>'#{article.title}'</a>. التعليق هو:\n\n <blockquote dir='rtl'>#{self.body}</blockquote>"
+
+    logger.info(body)
     if not user.id.equal? article.user.id
       article.user.notify(subject, body, self)
     end
@@ -26,10 +28,13 @@ class Comment < ActiveRecord::Base
     # Notify any users who have commented on the same section (i.e. guid).
     past_commenters = Comment.where(
         guid: guid).includes(:user).collect(&:user).uniq
-    body = "#{user.name} ترك تعليق على مقالك <a href='#{url}' target='blank'>'#{article.title}'</a> بعد تعليقك. التعليق هو:\n#{body}\n"
+    subject = "#{user.name} علق على مقال '#{article.title}'"
+    body = "#{user.name} ترك تعليق على مقال <a href='#{url}' target='blank'>'#{article.title}'</a> بعد تعليقك. التعليق هو:\n\n <blockquote dir='rtl'>#{self.body}</blockquote>"
     past_commenters.each do |commenter|
       # Don't notify the owner of the article they already have been notified.
-      if not commenter.id.equal? article.user.id
+      # Or the user who is adding the current comment.
+      if (not commenter.id.equal? article.user.id and
+          not commenter.id.equal? user.id)
         commenter.notify(subject, body, self)
       end
     end
