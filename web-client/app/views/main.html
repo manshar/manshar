@@ -26,6 +26,12 @@
         analytics-event="click"
         analytics-category="UI"
         analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
+
+    <div class="listing-types-tabs">
+      <a ng-click="orderArticles('popular')" ng-class="{'active': order == 'popular'}">الأكثر شعبية</a>
+      <a ng-click="orderArticles('best')" ng-class="{'active': order == 'best'}">الأفضل</a>
+      <a ng-click="orderArticles('recents')" ng-class="{'active': order == 'recents'}">الأحدث</a>
+    </div>
   </div>
 </header>
 

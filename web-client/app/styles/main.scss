@@ -142,6 +142,23 @@ input[type="password"] {
       }
 
     }
+
+    .listing-types-tabs {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+
+      a {
+        display: inline-block;
+        padding: .3em 1em;
+
+        &.active {
+          border-bottom: 4px solid #CA1504;
+          color: #CA1504;
+        }
+      }
+    }
   }
 }
 

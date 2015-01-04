@@ -47,7 +47,6 @@ describe('Controller: SignupCtrl', function () {
 
     it('should set error message when login fails', function () {
       spyOn(SignupSrv, 'signup').andCallFake(function(user, success, error) {
-        console.log('helooooooo');
         error(errorMessages);
       });
 
