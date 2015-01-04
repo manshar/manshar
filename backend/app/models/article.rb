@@ -1,8 +1,8 @@
 class Article < ActiveRecord::Base
   include Utils
 
-  scope :hot, -> { order('hotness DESC') }
-  scope :most_recommended, -> { order('recommendations_count DESC') }
+  scope :popular, -> { order('hotness DESC') }
+  scope :best, -> { order('recommendations_count DESC') }
   scope :recents, -> { order('created_at DESC') }
 
   belongs_to :user
