@@ -6,7 +6,6 @@ env:
   - MANSHAR_HOME=/home/travis/build/manshar/manshar
   - secure: Ek/EsKA4yC6RrhlHNhlSsztud+UxFxbvwiaEkqIo2MTo1ewr40/7k8JLuONgYNHL47/ZKvzqXfRiD+Zq18xIXNEO8KyIf3ASLmhMYOLQsPZIsmCSUgnBpwpfiO9tiuAf4ww5+A8sD4Ob4xnkLpwB961bBn1RyIKN6mymuxzdtPw=
 rvm:
-  - 1.9.3
   - 2.0.0
   - ruby-head
 before_install:
@@ -17,6 +16,7 @@ before_install:
   - cd $MANSHAR_HOME/backend
   - sudo apt-get update -qq
   - sudo apt-get install -qq nodejs
+  - sudo apt-get install redis-server
 before_script:
   - cd $MANSHAR_HOME/backend
   - cp config/database.yml.sample config/database.yml
@@ -27,6 +27,7 @@ before_script:
   - npm install
   - sh -e /etc/init.d/xvfb start
   - bower install
+  - sudo redis-server /etc/redis/redis.conf
 bundler_args: --without development
 script:
   - cd $MANSHAR_HOME/web-client && grunt test && cd $MANSHAR_HOME/backend && bundle exec rspec

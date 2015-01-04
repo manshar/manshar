@@ -8,7 +8,7 @@ class Api::V1::ArticlesController < ApplicationController
   def index
     # Use the custom Article.public method to return all articles that is
     # marked published.
-    @articles = Article.public.recents.preload(:user)
+    @articles = Article.public.hot.preload(:user)
     render 'api/v1/articles/index'
   end
 
@@ -26,6 +26,7 @@ class Api::V1::ArticlesController < ApplicationController
     @article = current_user.articles.new(article_params)
     authorize @article
     if @article.save
+      ArticleRankingWorker.perform_async(@article.id)
       render 'api/v1/articles/show', status: :created
     else
       render json: @article.errors, status: :unprocessable_entity

@@ -32,6 +32,9 @@ gem 'oj'
 # And it is to get around installing sass on Travis.
 gem 'sass'
 
+# Background and scheduled jobs.
+gem 'sidekiq'
+
 # Used to manage notifications, emails and messaging.
 gem 'mailboxer', git: 'https://github.com/ging/mailboxer.git'
 

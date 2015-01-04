@@ -20,6 +20,7 @@ class Api::V1::CommentsController < ApplicationController
     @comment.article_id = params[:article_id]
     authorize @comment
     if @comment.save
+      ArticleRankingWorker.perform_async(params[:article_id])
       render 'api/v1/comments/show', status: :created
     else
       render json: @comment.errors, status: :unprocessable_entity
@@ -43,7 +44,9 @@ class Api::V1::CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     authorize @comment
-    @comment.destroy
+    if @comment.destroy
+      ArticleRankingWorker.perform_async(params[:article_id])
+    end
 
     head :no_content
   end
