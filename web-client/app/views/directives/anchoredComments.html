@@ -25,6 +25,12 @@
       <span class="date">
         {{comment.created_at | date:'EEEE, d MMMM'}}
       </span>
+      <div class="actions">
+        <a class="delete-button" ng-click="deleteComment(comment)"
+            ng-show="$root.isOwner(currentUser, comment) || $root.isOwner(currentUser, article)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </div>
     </li>
   </ul>
 </div>

@@ -28,6 +28,14 @@ class User < ActiveRecord::Base
     articles.drafts.recents
   end
 
+  def admin
+    role == 'admin'
+  end
+
+  def staff
+    role == 'staff'
+  end
+
   def avatar_abs_url size = nil
     if size
       abs_url avatar.thumb(size).url, ENV['API_HOST']
