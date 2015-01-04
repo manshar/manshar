@@ -1,7 +1,7 @@
 object @article
 
 attributes :id, :title, :tagline, :created_at, :updated_at,
-  :published, :recommendations_count, :comments_count
+  :published, :recommendations_count, :comments_count, :hotness
 
 # TODO(mkhatib): This is only needed in listing to do the time to read.
 # Maybe implement this in the backend instead of frontend.
