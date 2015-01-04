@@ -15,8 +15,8 @@ angular.module('webClientApp')
    * @param  {ArticleComment} ArticleComment Manshar's article comments service.
    * @return {!angular.Directive} Angular directive description.
    */
-  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', 'ArticleComment',
-      function ($rootScope, $compile, $timeout, ArticleComment) {
+  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', '$window', 'ArticleComment',
+      function ($rootScope, $compile, $timeout, $window, ArticleComment) {
 
     var COMMENT_HIGHLIGHT_CLASS = 'comment-highlighted';
     var ANCHORS_ACTIVE = 'anchored-comments-active';
@@ -213,6 +213,23 @@ angular.module('webClientApp')
 
             e.preventDefault();
           }
+        };
+
+        /**
+         * Deletes a comment on an article.
+         * @param {Object} comment The comment object to delete.
+         */
+        scope.deleteComment = function(comment) {
+          ArticleComment.delete({
+            'articleId': scope.article.id,
+            'commentId': comment.id
+          }, function () {
+            var index = scope.comments.indexOf(comment);
+            scope.comments.splice(index, 1);
+          }, function (error) {
+            $window.alert('حدث خطأ ما. الرجاء المحاولة مجدداً');
+            console.log(error);
+          });
         };
 
       }
