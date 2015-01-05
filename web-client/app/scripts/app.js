@@ -23,26 +23,6 @@ angular.module('webClientApp', [
   .config(['$routeProvider',
       function ($routeProvider) {
 
-    /**
-     * Checks proper access to the route and reject it if unauthenticated.
-     */
-    var checkAccess = function(config) {
-      return {
-        load: ['$q', '$location', 'LoginService', function($q, $location, LoginService) {
-          if(LoginService.isAuthorized(config.isPublic)) {
-            var deferred = $q.defer();
-            deferred.resolve();
-            return deferred.promise;
-          } else {
-            return $q.reject({
-              redirectTo: '/login',
-              previous: $location.path()
-            });
-          }
-        }]
-      };
-    };
-
 
     $routeProvider
 
@@ -50,83 +30,66 @@ angular.module('webClientApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         title: 'منصة النشر العربية',
-        resolve: checkAccess({
-          isPublic: true
-        })
+        isPublic: true
       })
 
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         title: 'تسجيل الدخول',
-        resolve: checkAccess({
-          isPublic: true
-        })
+        isPublic: true
       })
 
       .when('/signup', {
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl',
         title: 'مستخدم جديد',
-        resolve: checkAccess({
-          isPublic: true
-        })
+        isPublic: true
       })
 
       .when('/articles/new', {
         templateUrl: 'views/articles/edit.html',
         controller: 'NewArticleCtrl',
         title: 'مقال جديد',
-        resolve: checkAccess({
-          isPublic: false
-        })
+        isPublic: false
       })
 
       .when('/articles/:articleId/edit', {
         templateUrl: 'views/articles/edit.html',
         controller: 'EditArticleCtrl',
-        resolve: checkAccess({
-          isPublic: false
-        })
+        isPublic: false
       })
 
       .when('/articles/:articleId', {
         templateUrl: 'views/articles/show.html',
         controller: 'ArticleCtrl',
-        resolve: checkAccess({
-          isPublic: true
-        })
+        isPublic: true
       })
 
       .when('/accounts/reset_password/:resetToken?', {
         templateUrl: 'views/accounts/reset_password.html',
         controller: 'PasswordController',
-        resolve: checkAccess({
-          isPublic: true
-        })
+        isPublic: true
       })
 
       .when('/profiles/:userId', {
         templateUrl: 'views/profiles/show.html',
         controller: 'ProfileCtrl',
-        resolve: checkAccess({
-          isPublic: true
-        })
+        isPublic: true
       })
 
       .when('/profiles/:userId/edit', {
         templateUrl: 'views/profiles/edit.html',
         controller: 'EditProfileCtrl',
-        resolve: checkAccess({
-          isPublic: false
-        })
+        isPublic: false
       })
 
       .otherwise({
         redirectTo: '/'
       });
   }])
-  .factory('unAuthenticatedInterceptor', ['$location', '$q', function ($location, $q) {
+  .factory('unAuthenticatedInterceptor', ['$location', '$q', '$rootScope',
+      function ($location, $q, $rootScope) {
     return {
       'request': function(config) {
         return config;
@@ -143,7 +106,7 @@ angular.module('webClientApp', [
       'responseError': function(response) {
         if (response.status === 401) {
           var previous = $location.path();
-          $location.path('/login').search('prev', previous);
+          $rootScope.$broadcast('unauthenticated', {'prev': previous});
           return $q.reject(response);
         }
         else {
@@ -158,7 +121,6 @@ angular.module('webClientApp', [
    */
   .config(['$httpProvider', '$locationProvider', function ($httpProvider, $locationProvider) {
     $httpProvider.interceptors.push('unAuthenticatedInterceptor');
-    // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
 
     $locationProvider.html5Mode(true).hashPrefix('!');
   }])
@@ -204,6 +166,16 @@ angular.module('webClientApp', [
     };
 
     /**
+     * Shows the login dialog.
+     * @param {string} optPrev Optional previous path to go back to after login.
+     */
+    $rootScope.showLoginDialog = function(optPrev) {
+      $rootScope.$broadcast('unauthenticated', {
+        'prev': optPrev
+      });
+    };
+
+    /**
      * Returns true if the passed user is the same user that is referenced
      * in the resource. This assumes that the resource always have a user
      * property, otherwise it'll return false.
@@ -220,14 +192,22 @@ angular.module('webClientApp', [
     // This also makes isLoggedIn and currentUser available on rootScope.
     LoginService.init();
 
-    // Listen to $routeChangeError and redirect the user.
-    $rootScope.$on('$routeChangeError', function(event, current, previous, rejection) {
-      if(rejection && rejection.redirectTo) {
-        $analytics.eventTrack('Unauthorized', {
-          category: 'errors',
-          label: rejection.previous
-        });
-        $location.path(rejection.redirectTo).search('prev', rejection.previous);
+    /**
+     * If the route to be accessed is private make sure the user is authenticated
+     * otherwise, broadcast 'unauthenticated' to show login modal.
+     */
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+      if (!LoginService.isAuthorized(next.isPublic)) {
+        event.preventDefault();
+        // Show the dialog instead of redirecting for all navigations.
+        // Except first time landing on the site on protected page.
+        if (current) {
+          $rootScope.$broadcast('unauthenticated', {
+            'prev': next.$$route.originalPath
+          });
+        } else {
+          $location.path('/login').search('prev', next.$$route.originalPath);
+        }
       }
     });
 

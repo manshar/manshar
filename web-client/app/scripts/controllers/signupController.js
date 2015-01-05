@@ -4,6 +4,7 @@ angular.module('webClientApp')
   .controller('SignupCtrl', ['$scope', '$location', '$routeParams', '$analytics', 'SignupService',
       function ($scope, $location, $routeParams, $analytics, SignupService) {
 
+    var isSignupPage = $location.path() === '/signup';
     $scope.user = {};
     $scope.error = null;
     $scope.errorMessages = {};
@@ -17,7 +18,9 @@ angular.module('webClientApp')
       $analytics.eventTrack('Register Success', {
         category: 'User'
       });
-      $location.path($routeParams.prev || '/');
+      if (isSignupPage) {
+        $location.path($routeParams.prev || '/');
+      }
     };
 
     var error = function(response) {

@@ -63,20 +63,6 @@ describe('App', function () {
 
     });
 
-    describe('401 HTTP Interceptor', function () {
-      it('should redirect the user to login', function () {
-        httpBackend.whenGET('/protected-resource').respond(401);
-        http.get('/protected-resource');
-        httpBackend.flush();
-        expect(location.path()).toBe('/login');
-
-        // Cover the else branch.
-        httpBackend.whenGET('/error-resource').respond(500);
-        http.get('/error-resource');
-        httpBackend.flush();
-      });
-    });
-
     describe('Run', function () {
       it('should initialize rootScope variables and functions', function () {
         expect(rootScope.page.title).toBe('منصة النشر العربية');

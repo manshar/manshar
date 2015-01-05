@@ -76,6 +76,7 @@
       </ul>
     </nav>
 
+    <div data-login-modal ng-if="!isLoginPage && !isSignupPage"></div>
     <!-- Add your site or application content here -->
     <div class="page-wrapper" snap-content snap-options="{disable: left, touchToDrag:false}">
       <div class="container scrollable page" ng-view></div>
@@ -134,13 +135,14 @@
         <script src="scripts/services/signupService.js"></script>
         <script src="scripts/services/storageService.js"></script>
 
-        <script src="scripts/directives/clickOutside.js"></script>
         <script src="scripts/directives/anchoredComment.js"></script>
         <script src="scripts/directives/anchoredComments.js"></script>
+        <script src="scripts/directives/clickOutside.js"></script>
         <script src="scripts/directives/grandeEditor.js"></script>
+        <script src="scripts/directives/highlightCode.js"></script>
+        <script src="scripts/directives/loginModal.js"></script>
         <script src="scripts/directives/mansharCover.js"></script>
         <script src="scripts/directives/mansharFile.js"></script>
-        <script src="scripts/directives/highlightCode.js"></script>
         <script src="scripts/directives/recommendButton.js"></script>
 
         <script src="scripts/filters/nohtml.js"></script>

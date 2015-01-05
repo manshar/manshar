@@ -49,10 +49,10 @@ angular.module('webClientApp')
               ArticleRecommendation.save({'articleId': scope.article.id},
                 function (recommendation) {
                   userRecommendation = recommendation;
+                  /* jshint camelcase: false */
+                  scope.article.recommendations_count++;
+                  scope.isRecommended = true;
                 });
-              /* jshint camelcase: false */
-              scope.article.recommendations_count++;
-              scope.isRecommended = true;
             }
           });
 

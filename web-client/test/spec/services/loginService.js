@@ -129,14 +129,6 @@ describe('Service: LoginService', function () {
         expect(LoginSrv.reset).toHaveBeenCalled();
       });
 
-      it('should work without a callback', function () {
-        spyOn(rootScope, '$emit');
-        LoginSrv.logout();
-        httpBackend.flush();
-        // Make sure the logout function sends out an event.
-        expect(rootScope.$emit).toHaveBeenCalledWith('user.loggedOut');
-      });
-
     });
 
     describe('Failure statuses', function () {

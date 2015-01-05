@@ -41,6 +41,10 @@ input[type="password"] {
   text-align: right;
 }
 
+a[ng-click] {
+  color: #3F51B5;
+}
+
 .container{
   @include span-columns(12);
   background-color: #fff;
@@ -72,6 +76,23 @@ input[type="password"] {
     color: #606060;
     background-color: #eee;
     padding: 0 10px;
+  }
+}
+
+.login-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(255,255,255,0.9);
+
+  .close-button {
+    color: #999;
+    padding: 1em;
+    cursor: pointer;
+    position: absolute;
   }
 }
 
@@ -124,6 +145,7 @@ input[type="password"] {
       bottom: -20px;
       width: 60px;
       height: 60px;
+      z-index: 99;
     }
 
     #typed-cursor {
@@ -152,6 +174,7 @@ input[type="password"] {
       a {
         display: inline-block;
         padding: .3em 1em;
+        color: #B3B3B3;
 
         &.active {
           border-bottom: 4px solid #CA1504;
@@ -305,7 +328,7 @@ input[type="password"] {
 
       .terms {
         font-size: 0.5em;
-        padding: 1px;
+        padding: 2em;
         line-height: 1.5em;
         color: #ff8888;
       }
@@ -860,12 +883,8 @@ button {
 .form-div {
 
   margin: auto;
-  position: absolute;
-  top: 100px;
-  left: 0;
-  right: 0;
+  margin-top: 3em;
   width: 300px;
-  height: 400px;
 
   header {
     @include row(table);
@@ -928,23 +947,24 @@ button {
       text-align: center;
       width: 100%;
     }
-
-    .info{
-      margin: 20px 0;
-      font-size: 0.7em;
-      color: #bbbaba;
-      text-align: center;
-
-      .signup-link {
-        background-color: #F3EFEE;
-        border-radius: 8px;
-        color: #272F36;
-        font-size: 1.1em;
-        padding: 2px 10px;
-      }
-    }
   }
 }
+
+.form-info {
+  margin: 20px 0;
+  font-size: 0.7em;
+  color: #bbbaba;
+  text-align: center;
+
+  .signup-link {
+    background-color: #F3EFEE;
+    border-radius: 8px;
+    color: #272F36;
+    font-size: 1.1em;
+    padding: 2px 10px;
+  }
+}
+
 
 // Load simple code style for the editor.
 // For rendering the code we use highlight.js
