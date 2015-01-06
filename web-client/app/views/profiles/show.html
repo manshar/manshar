@@ -36,6 +36,16 @@
             </h3>
           </div>
         </div>
+
+        <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
+          <button class="action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
+            <i class="fa fa-trash-o"></i>
+          </button>
+          <button class="action-button" ng-click="editArticle(article.id)">
+            <i class="fa fa-pencil"></i>
+          </button>
+        </div>
+
       </div>
     </li>
 </ul>
@@ -63,11 +73,11 @@
             </h3>
           </div>
         </div>
-        <div class="profile-article-action">
+        <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
           <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
             <i class="fa fa-trash-o"></i>
           </button>
-          <button class="action-button" ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">
+          <button class="action-button" ng-click="editArticle(article.id)">
             <i class="fa fa-pencil"></i>
           </button>
         </div>
