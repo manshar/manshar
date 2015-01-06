@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .service('SignupService', ['$http', 'API_HOST',
-      function ($http, API_HOST) {
+  .service('SignupService', ['$http', '$rootScope', 'API_HOST',
+      function ($http, $rootScope, API_HOST) {
 
     var baseUrl = '//' + API_HOST + '/api/v1/';
 
@@ -33,6 +33,7 @@ angular.module('webClientApp')
 
           // Success.
           angular.bind(this, function(response) {
+            $rootScope.$broadcast('user.signedUp');
             if (optSuccess) {
               optSuccess(response.data);
             }

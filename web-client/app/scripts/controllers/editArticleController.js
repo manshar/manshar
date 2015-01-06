@@ -168,8 +168,12 @@ angular.module('webClientApp')
      * When the user logout while in edit mdoe redirect the user,
      */
     var loggedOutunbined = $rootScope.$on('user.loggedOut', function () {
-      var location = '/articles/' + $routeParams.articleId;
-      $location.path(location);
+      if ($scope.article.published) {
+        var location = '/articles/' + $routeParams.articleId;
+        $location.path(location);
+      } else {
+        $location.path('/');
+      }
     });
 
     /**

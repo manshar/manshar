@@ -25,25 +25,6 @@ describe('Controller: SignupCtrl', function () {
   }));
 
   describe('SignupCtrl.signup', function () {
-    it('should signup user and redirect', function () {
-      spyOn(SignupSrv, 'signup').andCallFake(function(user, success) {
-        success();
-      });
-
-      routeParams.prev = '/articles/1';
-      createController();
-      scope.signup({});
-
-      expect(location.path()).toBe('/articles/1');
-
-      // Should redirect to / if prev parameter didn't exist.
-      delete routeParams.prev;
-      createController();
-      scope.signup({});
-
-      expect(location.path()).toBe('/');
-
-    });
 
     it('should set error message when login fails', function () {
       spyOn(SignupSrv, 'signup').andCallFake(function(user, success, error) {

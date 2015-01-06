@@ -4,6 +4,7 @@ angular.module('webClientApp')
   .controller('LoginCtrl', ['$scope', '$http', '$location', '$routeParams', '$analytics', 'LoginService',
       function ($scope, $http, $location, $routeParams, $analytics, LoginService) {
 
+    $scope.isLoginPage = $location.path() === '/login';
     $scope.user = {};
     $scope.error = null;
 
@@ -15,9 +16,11 @@ angular.module('webClientApp')
       $analytics.eventTrack('Login Success', {
         category: 'User'
       });
-      $location.path($routeParams.prev || '/')
-        // Remove the prev param when redirecting.
-        .search('prev', null);
+      if ($scope.isLoginPage) {
+        $location.path($routeParams.prev || '/')
+          // Remove the prev param when redirecting.
+          .search('prev', null);
+      }
     };
 
     var error = function(response) {

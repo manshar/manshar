@@ -10,7 +10,7 @@
   </div>
   <div class="warning-note" ng-show="!currentUser.id">
     يجب عليك
-    <a ng-href="login/?prev=/articles/{{article.id}}"> تسجيل الدخول</a>
+    <a ng-click="$root.showLoginDialog()"> تسجيل الدخول</a>
     لترك تعليق!
   </div>
 

@@ -25,6 +25,7 @@ angular.module('webClientApp')
           // Success.
           angular.bind(this, function(response) {
             this.storeAuthData(response.data);
+            $rootScope.$broadcast('user.loggedIn');
             if (optSuccess) {
               optSuccess(response.data);
             }
@@ -45,7 +46,7 @@ angular.module('webClientApp')
           // Success.
           angular.bind(this, function(response) {
             this.reset();
-            $rootScope.$emit('user.loggedOut');
+            $rootScope.$broadcast('user.loggedOut');
             if(optSuccess) {
               optSuccess(response.data);
             }

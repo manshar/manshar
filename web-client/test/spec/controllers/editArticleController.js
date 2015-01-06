@@ -81,7 +81,7 @@ describe('Controller: EditArticleCtrl', function () {
     expect(location.path()).toBe('/articles/1');
   });
 
-  it('should listen to logged out event and unbind it when destroied', function () {
+  it('should listen to logged out event and unbind it when destroyed', function () {
     // Edit Article.
     spyOn(scope, '$on').andCallFake(function (event) {
       expect(event).toBe('$destroy');
@@ -92,7 +92,7 @@ describe('Controller: EditArticleCtrl', function () {
     createController();
     httpBackend.flush();
     rootScope.$emit('user.loggedOut');
-    expect(location.path()).toBe('/articles/' + articleData.id);
+    expect(location.path()).toBe('/');
 
     expect(scope.$on).toHaveBeenCalled();
   });
