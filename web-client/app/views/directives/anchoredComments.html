@@ -17,7 +17,7 @@
   <ul>
     <li ng-repeat="comment in comments|filter:{guid: activeGuid}">
       <p class="author">
-        {{comment.user.name}}
+      <a ng-href="/profiles/{{comment.user.id}}">{{comment.user.name}}</a>
       </p>
       <p>
         {{comment.body}}
