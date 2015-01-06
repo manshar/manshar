@@ -3,51 +3,51 @@
     <div class="avatar blured" manshar-cover url="{{user.cover_url}}"></div>
   </div>
   <div class="title">
-      <img ng-src="{{user.cover_url}}"/>
-      <h1>{{user.name}}</h1>
-      <h4>{{user.bio}}</h4>
-      <button class="action-button" ng-click="editProfile()" ng-show="currentUser.id == user.id">
-        <i class="fa fa-pencil"></i>
-      </button>
+    <img ng-src="{{user.cover_url}}"/>
+    <h1>{{user.name}}</h1>
+    <h4>{{user.bio}}</h4>
+    <button class="action-button" ng-click="editProfile()" ng-show="currentUser.id == user.id">
+      <i class="fa fa-pencil"></i>
+    </button>
   </div>
 </div>
 
 <ul class="manshar-articles-list one-column card-list">
-    <li class="card" ng-repeat="article in articles">
-      <div class="article-details article-card">
-        <div class="header tray">
-          <div class="title">
-            <a ng-href="/articles/{{article.id}}"
-                analytics-on="click"
-                analytics-event="click"
-                analytics-category="UI"
-                analytics-label="Article in Profile - {{article.title}}"
-                analytics-value="article-{{article.id}}">
-              <h1>{{article.title}}</h1>
-              <h2>{{article.tagline}}</h2>
-            </a>
-            <h3>
-              <div class="date">
-                <span>
-                  بتاريخ:
-                </span>
-                {{article.created_at | date:'dd-MM-yyyy'}}
-              </div>
-            </h3>
-          </div>
+  <li class="card" ng-repeat="article in articles">
+    <div class="article-details article-card">
+      <div class="header tray">
+        <div class="title">
+          <a ng-href="/articles/{{article.id}}"
+              analytics-on="click"
+              analytics-event="click"
+              analytics-category="UI"
+              analytics-label="Article in Profile - {{article.title}}"
+              analytics-value="article-{{article.id}}">
+            <h1>{{article.title}}</h1>
+            <h2>{{article.tagline}}</h2>
+          </a>
+          <h3>
+            <div class="date">
+              <span>
+                بتاريخ:
+              </span>
+              {{article.created_at | date:'dd-MM-yyyy'}}
+            </div>
+          </h3>
         </div>
-
-        <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
-          <button class="action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-            <i class="fa fa-trash-o"></i>
-          </button>
-          <button class="action-button" ng-click="editArticle(article.id)">
-            <i class="fa fa-pencil"></i>
-          </button>
-        </div>
-
       </div>
-    </li>
+
+      <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
+        <button class="action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
+          <i class="fa fa-trash-o"></i>
+        </button>
+        <button class="action-button" ng-click="editArticle(article.id)">
+          <i class="fa fa-pencil"></i>
+        </button>
+      </div>
+
+    </div>
+  </li>
 </ul>
 
 
@@ -55,32 +55,32 @@
   <h1 class="header-label">
     <span>المسودات</span>
   </h1>
-    <li ng-repeat="article in drafts" class="card draft">
-      <div class="article-details article-card">
-        <div class="header tray">
-          <div class="title">
-            <a ng-href="/articles/{{article.id}}">
-              <h1>{{article.title || "بدون عنوان"}}</h1>
-              <h2>{{article.tagline}}</h2>
-            </a>
-            <h3>
-              <div class="date">
-                <span>
-                  بتاريخ:
-                </span>
-                {{article.created_at | date:'dd-MM-yyyy'}}
-              </div>
-            </h3>
-          </div>
-        </div>
-        <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
-          <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-            <i class="fa fa-trash-o"></i>
-          </button>
-          <button class="action-button" ng-click="editArticle(article.id)">
-            <i class="fa fa-pencil"></i>
-          </button>
+  <li ng-repeat="article in drafts" class="card draft">
+    <div class="article-details article-card">
+      <div class="header tray">
+        <div class="title">
+          <a ng-href="/articles/{{article.id}}">
+            <h1>{{article.title || "بدون عنوان"}}</h1>
+            <h2>{{article.tagline}}</h2>
+          </a>
+          <h3>
+            <div class="date">
+              <span>
+                بتاريخ:
+              </span>
+              {{article.created_at | date:'dd-MM-yyyy'}}
+            </div>
+          </h3>
         </div>
       </div>
-    </li>
+      <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
+        <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
+          <i class="fa fa-trash-o"></i>
+        </button>
+        <button class="action-button" ng-click="editArticle(article.id)">
+          <i class="fa fa-pencil"></i>
+        </button>
+      </div>
+    </div>
+  </li>
 </ul>

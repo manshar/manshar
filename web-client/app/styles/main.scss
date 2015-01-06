@@ -493,6 +493,15 @@ a[ng-click] {
       color: #aaa;
     }
 
+    .stats-box {
+      position: absolute;
+      top: 1.2em;
+      left: 1.4em;
+      font-size: 0.6em;
+      font-weight: bold;
+      color: #aaa;
+    }
+
     .sharing-box {
       position: absolute;
       bottom: 0.5em;
@@ -710,7 +719,7 @@ ul.manshar-articles-list {
 
         img {
           max-width: 100%;
-          box-shadow: 0 3px 7px -1px #000;
+          box-shadow: 0 1px 5px -1px #000;
         }
 
         iframe {

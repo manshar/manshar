@@ -60,6 +60,14 @@
             </div>
           </h3>
           <span class="reading-time" ng-hide="article.loading"> {{article.body | nohtml | timeToRead | number:0}} دقائق قراءة</span>
+          <div class="stats-box">
+            <span ng-show="article.recommendations_count">
+              <i class="fa fa-thumbs-o-up"></i> {{article.recommendations_count}}
+            </span>
+            <span ng-show="article.comments_count">
+              <i class="fa fa-comment-o"></i> {{article.comments_count}}
+            </span>
+          </div>
           <div ng-include="'views/partials/_sharing_buttons.html'"></div>
         </div>
       </div>
