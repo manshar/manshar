@@ -38,4 +38,9 @@ class Article < ActiveRecord::Base
       abs_url cover.url, ENV['API_HOST']
     end
   end
+
+  def next
+    Article.public.popular.where('hotness < ?', hotness).first
+  end
+
 end

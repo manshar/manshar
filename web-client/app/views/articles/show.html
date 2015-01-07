@@ -9,7 +9,6 @@
         <h2>{{article.tagline}}</h2>
       </div>
     </div>
-
   </div>
 
   <div class="article-content-container tray">
@@ -44,6 +43,23 @@
     </div>
 
   </div>
+
+  <div class="next-article-container" ng-show="article.next.id">
+    <a href="/articles/{{article.next.id}}">
+      <div class="manshar-article-image-container card" manshar-cover url="{{article.next.original_cover_url}}" ng-class="{'manshar-article-nocover': !article.next.original_cover_url}">
+        <div class="dimmer" ng-show="article.next.original_cover_url"></div>
+        <div class="manshar-article-header tray header">
+          <h5>اقرأ أيضاً</h5>
+          <span class="reading-time"> {{article.next.body | nohtml | timeToRead | number:0}} دقائق قراءة</span>
+          <div class="title">
+            <h1>{{article.next.title}}</h1>
+            <h2>{{article.next.tagline}}</h2>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
 </div>
 
 <div class="metabar tray">
