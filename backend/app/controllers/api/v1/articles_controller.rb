@@ -17,6 +17,7 @@ class Api::V1::ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     authorize @article
+    @next = @article.next
     render 'api/v1/articles/show'
   end
 

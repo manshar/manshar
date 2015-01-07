@@ -3,6 +3,7 @@ object @article
 attributes :id, :title, :tagline, :created_at, :updated_at,
   :published, :recommendations_count, :comments_count, :hotness
 
+attribute :cover_abs_url => :original_cover_url
 # TODO(mkhatib): This is only needed in listing to do the time to read.
 # Maybe implement this in the backend instead of frontend.
 attributes :body
@@ -11,7 +12,6 @@ attributes :body
 # full article. This might change in the future but for now this is causing
 # a lot of queries to be executed when listing articles.
 unless locals[:listing]
-  attribute :cover_abs_url => :original_cover_url
 
   node :thumb_url do |article|
     article.cover_abs_url '400x400#'
@@ -23,6 +23,10 @@ unless locals[:listing]
 
   node :card_cover_url do |article|
     article.cover_abs_url '1140x270#'
+  end
+
+  child @next => :next do
+    extends('api/v1/articles/show', :locals => { :listing => true })
   end
 end
 

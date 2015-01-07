@@ -45,6 +45,10 @@ a[ng-click] {
   color: #3F51B5;
 }
 
+button {
+  cursor: pointer;
+}
+
 .container{
   @include span-columns(12);
   background-color: #fff;
@@ -589,13 +593,31 @@ ul.manshar-articles-list {
 
   position: relative;
 
+  .next-article-container {
+    font-size: .8em;
+    position: relative;
+    height: 300px;
+
+    .manshar-article-image-container {
+      &.manshar-article-nocover {
+        background-color: #fdfdfd;
+        height: 100%;
+        box-shadow: 0 1px 5px 0 #999;
+
+        .manshar-article-header {
+          padding-top: 2em;
+        }
+
+      }
+    }
+  }
+
   .manshar-article-image-container {
     height: 100%;
     position: relative;
     color: #fff;
     z-index: 9;
     text-shadow: 1px 0 5px #333;
-    margin-bottom: 2em;
 
     &.manshar-article-nocover {
       height: auto;
@@ -659,7 +681,7 @@ ul.manshar-articles-list {
 
   .article-content-container {
     background: #fff;
-    padding-bottom: 10px;
+    padding-bottom: 2em;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden; /* Chrome and Safari */
     -moz-backface-visibility:hidden; /* Firefox */
