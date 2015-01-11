@@ -250,16 +250,33 @@ button {
   .anchored-comment-box {
     position: absolute;
 
-    i {
-      font-size: 1em;
-      color: #c0c0c0;
-      transform: scaleX(-1);
+    .icon-count-container {
+
+      position: relative;
+      cursor: pointer;
 
       &:hover {
-        color: #000;
+        i {
+          color: #000;
+        }
+      }
+
+      i {
+        font-size: 1em;
+        color: #909090;
+        transform: scaleX(-1);
+      }
+      span {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        left: 0;
+        text-align: center;
+        color: #fff;
+        font-size: 0.7em;
+        cursor: pointer;
       }
     }
-
   }
 }
 
