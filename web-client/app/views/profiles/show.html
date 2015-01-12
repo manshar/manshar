@@ -10,9 +10,14 @@
       <i class="fa fa-pencil"></i>
     </button>
   </div>
+  <div class="listing-types-tabs">
+    <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>
+    <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>
+    <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>
+  </div>
 </div>
 
-<ul class="manshar-articles-list one-column card-list">
+<ul class="manshar-articles-list one-column card-list" id="articles-list">
   <li class="card" ng-repeat="article in articles">
     <div class="article-details article-card">
       <div class="header tray">
@@ -37,7 +42,7 @@
         </div>
       </div>
 
-      <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
+      <div class="profile-article-action" ng-show="isOwner(currentUser, article) && activeTab == 'published'">
         <button class="action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
           <i class="fa fa-trash-o"></i>
         </button>
@@ -51,7 +56,7 @@
 </ul>
 
 
-<ul class="manshar-articles-list one-column card-list" ng-show="drafts[0] && currentUser.id == user.id">
+<ul class="manshar-articles-list one-column card-list" ng-show="drafts[0] && currentUser.id == user.id && activeTab == 'published'">
   <h1 class="header-label">
     <span>المسودات</span>
   </h1>
