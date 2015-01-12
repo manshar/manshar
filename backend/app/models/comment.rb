@@ -8,6 +8,11 @@ class Comment < ActiveRecord::Base
   has_many :notifications, -> { where notified_object_type: 'Comment'},
       foreign_key: :notified_object_id
 
+  # Comments for published articles.
+  def self.published
+    joins(:article).where(:articles => {:published => true})
+  end
+
   after_commit :create_notification, on: :create
 
   # TODO(mkhatib): Link to the specific location of the comment and handle it

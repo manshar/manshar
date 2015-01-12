@@ -12,6 +12,11 @@ class Recommendation < ActiveRecord::Base
 
   after_commit :maybe_create_notification, on: :create
 
+  # Recommendations for published articles.
+  def self.published
+    joins(:article).where(:articles => {:published => true})
+  end
+
   private
 
   # Only notify the user when they get 5, 10, 15, 20... recommendations.

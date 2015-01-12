@@ -19,6 +19,7 @@ describe Api::V1::CommentsController do
     }
     # counter_cache gets updated in the database directly so we need to
     # reload the article model.
+    @comment.article.publish!
     @comment.article.reload
   end
 
