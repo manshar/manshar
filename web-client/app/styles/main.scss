@@ -168,23 +168,23 @@ button {
       }
 
     }
+  }
+}
 
-    .listing-types-tabs {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
+.listing-types-tabs {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 
-      a {
-        display: inline-block;
-        padding: .3em 1em;
-        color: #B3B3B3;
+  a {
+    display: inline-block;
+    padding: .3em 1em;
+    color: #B3B3B3;
 
-        &.active {
-          border-bottom: 4px solid #CA1504;
-          color: #CA1504;
-        }
-      }
+    &.active {
+      border-bottom: 4px solid #CA1504;
+      color: #CA1504;
     }
   }
 }
@@ -833,6 +833,15 @@ ul.manshar-articles-list {
     button {
       background-color: #c0c0c0;
       font-size: 0.8em;
+    }
+  }
+
+  .listing-types-tabs {
+    a {
+      &.active {
+        color: #fff;
+        border-bottom-color: #fff;
+      }
     }
   }
 }
