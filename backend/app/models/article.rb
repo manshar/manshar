@@ -1,9 +1,11 @@
 class Article < ActiveRecord::Base
   include Utils
 
+  before_save :published_post
+
   scope :popular, -> { order('hotness DESC') }
   scope :best, -> { order('recommendations_count DESC') }
-  scope :recents, -> { order('created_at DESC') }
+  scope :recents, -> { order('published_at DESC') }
 
   belongs_to :user
   has_many :recommendations, :dependent => :destroy
@@ -18,10 +20,18 @@ class Article < ActiveRecord::Base
   scope :public, -> { where(published: true) }
   scope :drafts, -> { where(published: false) }
 
+
   # Instance Methods.
   def publish!
     self.published = true
     self.save
+  end
+
+  # Add published at date only for the published posts. 
+  def published_post
+    if self.published && self.published_at.nil?
+      self.published_at = Time.now
+    end
   end
 
   def draft?
