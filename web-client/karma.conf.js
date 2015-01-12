@@ -16,6 +16,7 @@ module.exports = function(config) {
     files: [
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/angular-animate/angular-animate.js',
       'app/bower_components/angular-i18n/angular-locale_ar.js',
       'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-cookies/angular-cookies.js',
@@ -28,6 +29,7 @@ module.exports = function(config) {
       'app/bower_components/angulartics/src/angulartics.js',
       'app/bower_components/angulartics/src/angulartics-ga.js',
       'app/bower_components/angular-file-upload/dist/angular-file-upload.js',
+      'app/bower_components/angular-loading-bar/build/loading-bar.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js'

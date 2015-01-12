@@ -41,10 +41,6 @@ input[type="password"] {
   text-align: right;
 }
 
-a[ng-click] {
-  color: #3F51B5;
-}
-
 button {
   cursor: pointer;
 }
@@ -60,7 +56,8 @@ button {
 }
 
 .scrollable{
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   transition-property: top, bottom;
   transition-duration: .2s, .2s;
   transition-timing-function: linear, linear;
@@ -290,8 +287,8 @@ button {
 
 .site-nav-logo {
   position: fixed;
-  top: 0.6667em;
-  left: 0.6667em;
+  top: 1em;
+  left: 1em;
   width: 2em;
   z-index: 5;
   cursor: pointer;
@@ -794,6 +791,11 @@ ul.manshar-articles-list {
     h3 {
       font-size: 1.5em;
     }
+
+    .article-actions {
+      text-align: center;
+      margin: 2em 0 .5em 0;
+    }
   }
 
 }
@@ -867,6 +869,8 @@ ul.manshar-articles-list {
 }
 
 button {
+  font-family: 'Droid Arabic Naskh', serif !important;
+
   &.action-button {
     font-size: 1.2em;
     padding: 10px 10px;
@@ -878,6 +882,10 @@ button {
     height: 50px;
     line-height: 1;
     border-radius: 40px;
+
+    &.long-form {
+      width: 200px;
+    }
 
     &:hover {
       background-color: #DB2615;
@@ -900,6 +908,10 @@ button {
     &[disabled] {
       background-color: #ccc;
     }
+
+    .label {
+      padding-right: 5px;
+    }
   }
 }
 
@@ -908,15 +920,6 @@ button {
   span {
     font-size: 0.9em;
   }
-}
-
-/* Match medium.css editor */
-.manshar-article article p:first-child {
-  margin-top: 0;
-}
-
-.manshar-article article p:last-child{
-  margin-bottom: 0;
 }
 
 /* TODO(mkhatib): Consider removing Medium styles all together. */

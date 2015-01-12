@@ -34,6 +34,15 @@
       </div>
     </a>
 
+    <div class="article-actions">
+      <button class="action-button recommend-button long-form" recommend-button article="article"
+          analytics-on="click"
+          analytics-event="click"
+          analytics-category="UI"
+          analytics-label="Recommend Button in Article Page - {{article.title}}"
+          analytics-value="recommend-{{article.id}}">
+      </button>
+    </div>
     <div ng-include="'views/partials/_sharing_buttons.html'"></div>
 
     <div anchored-comments
@@ -64,15 +73,6 @@
 
 <div class="metabar tray">
   <div class="manshar-controls">
-
-    <button class="action-button recommend-button" recommend-button article="article"
-        analytics-on="click"
-        analytics-event="click"
-        analytics-category="UI"
-        analytics-label="Recommend Button in Article Page - {{article.title}}"
-        analytics-value="recommend-{{article.id}}">
-    </button>
-
     <button class="action-button" ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">
       <i class="fa fa-pencil"></i>
     </button>
