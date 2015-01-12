@@ -15,7 +15,7 @@ else
   wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   git remote add web-client-heroku git@heroku.com:manshar-web-client.git
   git remote add backend-heroku git@heroku.com:manshar-backend.git
-  git remote add   git@heroku.com:manshar-workers.git
+  git remote add workers-heroku git@heroku.com:manshar-workers.git
   echo "Host heroku.com" >> ~/.ssh/config
   echo "   StrictHostKeyChecking no" >> ~/.ssh/config
   echo "   CheckHostIP no" >> ~/.ssh/config
