@@ -43,7 +43,7 @@ angular.module('webClientApp')
       // their parent guids.
       var guidElement = getAncestorWithGuid(e.target);
       var guid = guidElement.getAttribute('data-guid');
-      $rootScope.$broadcast('show-anchor', guid);
+      $rootScope.$emit('show-anchor', guid);
     };
 
     /**
@@ -137,28 +137,35 @@ angular.module('webClientApp')
             return;
           }
 
-          // When images get loaded in the guid elements container we need
-          // to reposition the comments to calculate for hte images hieght.
-          var guidContainer = document.getElementById(
-              scope.guidElementsContainerId);
-          angular.element(guidContainer).find('img').on('load', function() {
-            repositionComments(element[0]);
-          });
+          // Need to render the anchors after making sure the page has
+          // rendered fully.
+          $timeout(function() {
+
+            // When images get loaded in the guid elements container we need
+            // to reposition the comments to calculate for hte images hieght.
+            var guidContainer = document.getElementById(
+                scope.guidElementsContainerId);
+            angular.element(guidContainer).find('img').on('load', function() {
+              repositionComments(element[0]);
+            });
 
 
-          // Get all comments for this article.
-          ArticleComment.query({
-            'articleId': scope.article.id
-          }, function(comments) {
-            scope.comments = comments;
-          });
+            // Get all comments for this article.
+            ArticleComment.query({
+              'articleId': scope.article.id
+            }, function(comments) {
+              scope.comments = comments;
+            });
 
-          // Loop over all elements with the GUID class.
-          var elements = document.getElementsByClassName(
-              scope.guidElementsClass);
-          for (var i = 0; i < elements.length; i++) {
-            createNewComment(elements[i], scope, element[0]);
-          }
+            // Loop over all elements with the GUID class.
+            var elements = document.getElementsByClassName(
+                scope.guidElementsClass);
+            for (var i = 0; i < elements.length; i++) {
+              createNewComment(elements[i], scope, element[0]);
+            }
+
+          }, 200);
+
         });
 
         // Listen to 'show-comment' event and activate the choosen comment.

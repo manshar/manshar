@@ -113,10 +113,16 @@ body {
     left: 0;
 
     .anchored-comment-box {
-      i {
-        font-size: 1.5em;
+      .icon-count-container {
+        i {
+          font-size: 1.5em;
+        }
+        span {
+          top: -3px;
+          color: #fff;
+          font-size: .9em;
+        }
       }
-
     }
   }
 

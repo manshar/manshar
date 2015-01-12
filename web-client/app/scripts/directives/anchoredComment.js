@@ -61,13 +61,13 @@ angular.module('webClientApp')
         listeners.push(listener);
 
         // On clicking the bubble icon send an event to show the comment.
-        var commentButton = element.find('div').find('i');
+        var commentButton = element.find('div').find('span');
         commentButton.on('click', function(e) {
           // Get the clicked anchor.
           var clickedEl = getParentWithClassName(
               'anchored-comment-box', e.target);
 
-          $rootScope.$broadcast(
+          $rootScope.$emit(
               'show-comment', {target: clickedEl, guid: scope.guid});
         });
         // Make sure to unbind events we binded to elements.
@@ -75,11 +75,10 @@ angular.module('webClientApp')
           commentButton.off('click');
         });
 
-        scope.$watch('$parent.comments', function(newValue) {
-          if (!newValue) {
-            return;
-          }
-
+        // All we care about here is the length of the array to update
+        // the counts of the comments on each anchor.
+        scope.$watch('$parent.comments.length', function() {
+          scope.commentsCount = 0;
           // Calculate how many comments this GUID have.
           var comments = scope.$parent.comments;
           for (var i = 0; i < comments.length; i++) {
@@ -87,7 +86,7 @@ angular.module('webClientApp')
               scope.commentsCount++;
             }
           }
-        }, true);
+        });
 
         scope.$on('$destroy', cleanup);
       }
