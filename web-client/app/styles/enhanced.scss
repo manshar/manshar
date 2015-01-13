@@ -55,6 +55,21 @@ body {
 
 .manshar-article {
 
+  .manshar-article-image-container{
+    .manshar-article-header{
+      h1 {
+        font-size: 2em;
+      }
+
+      .reading-time {
+        font-size: 0.8em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    } 
+  }
   .article-content-container {
     transition: transform .3s;
     &.anchored-comments-active {
@@ -62,14 +77,30 @@ body {
     }
 
     article {
+      font-size: 1.2em;
       figure {
         iframe {
           height: 450px;
         }
       }
+      blockquote {
+        font-size: 1.1em;
+      }
+    }
+
+    h1 {
+      font-size: 1.75em;
+    }
+
+    h2 {
+      font-size: 1.4em;
+    }
+
+    p {
+      margin: 36px auto;
+      margin-top: 36px;
     }
   }
-
 }
 
 .comments-container {

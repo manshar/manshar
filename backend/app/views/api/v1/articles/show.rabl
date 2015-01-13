@@ -1,6 +1,6 @@
 object @article
 
-attributes :id, :title, :tagline, :created_at, :updated_at,
+attributes :id, :title, :tagline, :created_at, :updated_at, :published_at,
   :published, :recommendations_count, :comments_count, :hotness
 
 attribute :cover_abs_url => :original_cover_url

@@ -80,7 +80,7 @@ angular.module('webClientApp')
         scope.$watch('$parent.comments.length', function() {
           scope.commentsCount = 0;
           // Calculate how many comments this GUID have.
-          var comments = scope.$parent.comments;
+          var comments = scope.$parent.comments || [];
           for (var i = 0; i < comments.length; i++) {
             if (comments[i].guid === scope.guid) {
               scope.commentsCount++;

@@ -56,7 +56,7 @@
                 {{article.user.name}}
             </a>
             <div class="date">
-              {{article.created_at | date:'EEEE, d MMMM'}}
+              {{article.published_at | date:'EEEE, d MMMM'}}
             </div>
           </h3>
           <span class="reading-time" ng-hide="article.loading"> {{article.body | nohtml | timeToRead }} </span>
