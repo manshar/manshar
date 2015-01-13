@@ -30,7 +30,7 @@ class ArticleRankingWorker
       hotness = ArticleRankingWorker.hot(
           article.recommendations_count,
           article.comments_count,
-          article.created_at)
+          article.published_at)
       puts "Updating ranking for #{article.id} = #{hotness}..."
       article.update_attributes(hotness: hotness)
     else
@@ -38,7 +38,7 @@ class ArticleRankingWorker
         hotness = ArticleRankingWorker.hot(
             article.recommendations_count,
             article.comments_count,
-            article.created_at)
+            article.published_at)
         puts "Updating ranking for #{article.id} = #{hotness}..."
         article.update_attributes(hotness: hotness)
       end
