@@ -670,20 +670,20 @@ ul.manshar-articles-list {
       z-index: 99;
 
       h1 {
-        font-size: 2em;
+        font-size: 1.5em;
         padding: 20px 0 0;
         box-sizing: initial;
       }
 
       h2 {
-        font-size: 1.6em;
+        font-size: 1.1em;
         font-weight: 100;
         color: #fff;
       }
 
       .reading-time {
         color: #fff;
-        font-size: 0.8em;
+        font-size: 0.6em;
         font-weight: bold;
       }
 
@@ -708,7 +708,7 @@ ul.manshar-articles-list {
 
     article {
       margin: 0 auto;
-      font-size: 1.2em;
+      font-size: 1em;
       min-height: 300px !important;
       width: 100%;
       font-weight: 100;
@@ -719,6 +719,7 @@ ul.manshar-articles-list {
         direction: ltr;
         margin: 10px;
         display: block;
+        padding-top: 1em;
       }
 
       blockquote {
@@ -727,11 +728,12 @@ ul.manshar-articles-list {
         margin-right: 20px;
         margin: 36px 0;
         color: #999;
-        font-size: 1.1em;
+        font-size: 0.9em;
       }
 
       p {
-        margin: 36px auto;
+        margin: 1em auto;
+        margin-top: 1.4em;
       }
 
       span {
@@ -771,20 +773,20 @@ ul.manshar-articles-list {
       }
 
       h1 {
-        font-size: 1.75em;
+        font-size: 1.4em;
         padding-top: 20px;
+        text-align: right;
       }
 
       h2 {
-        font-size: 1.4em;
+        font-size: 1.2em;
+        text-align: right;
+        padding-top: 1em;
       }
 
       ul, ol {
-        margin-right: 70px;
-      }
-
-      p {
-        margin-top: 36px;
+        margin-right: 1.8em;
+        padding-top: 1em;
       }
     }
 
