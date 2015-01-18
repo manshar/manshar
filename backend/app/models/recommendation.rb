@@ -34,7 +34,8 @@ class Recommendation < ActiveRecord::Base
       url = "http://#{host}/articles/#{article.id}"
       subject = "#{article.recommendations_count} توصيات على مقالك '#{article.title}'"
       body = "وصل مقالك <a href='#{url}' target='blank'>'#{article.title}'</a> ل #{article.recommendations_count} توصيات."
-      article.user.notify(subject, body, self)
+      SendEmailsWorker.perform_async(
+          subject, body, article.user_id, self.class.name, self.id)
     end
   end
 

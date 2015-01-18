@@ -69,7 +69,7 @@
       يتم حفظ المقال...
     </span>
     <button class="action-button" ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
-      <i>نشر</i>
+      <span>نشر</span>
     </button>
     <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
       <i class="fa fa-trash-o"></i>

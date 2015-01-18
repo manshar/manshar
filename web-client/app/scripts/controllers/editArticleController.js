@@ -64,10 +64,24 @@ angular.module('webClientApp')
         $scope.isSaving = false;
       }, 1000);
       $scope.inProgress = null;
-      $analytics.eventTrack('Article Updated', {
-        category: 'Article',
-        label: resource.title
-      });
+
+      if (resource.published) {
+        // First time this gets published.
+        if (!$scope.article.published_at) {
+          $scope.article.published_at = resource.published_at;
+          $analytics.eventTrack('New Article Published', {
+            category: 'Article',
+            label: resource.title
+          });
+        } else {
+          // The article has been already published, moved to draft and now
+          // republished again.
+          $analytics.eventTrack('Article Re-Published', {
+            category: 'Article',
+            label: resource.title
+          });
+        }
+      }
 
       if (resource.published) {
         $location.path('/articles/' + resource.id);

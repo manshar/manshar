@@ -577,6 +577,7 @@ ul.manshar-articles-list {
   list-style: none;
   word-wrap: break-word;
   background-color: #f9f9f9;
+  margin: 0 auto;
 
   li {
     cursor: pointer;
@@ -788,11 +789,13 @@ ul.manshar-articles-list {
         margin-right: 1.8em;
         padding-top: 1em;
       }
+
+      h3 {
+        font-size: 1.5em;
+      }
+
     }
 
-    h3 {
-      font-size: 1.5em;
-    }
 
     .article-actions {
       text-align: center;
@@ -918,6 +921,10 @@ button {
 
     &[disabled] {
       background-color: #ccc;
+    }
+
+    span {
+      font-size: .8em;
     }
 
     .label {

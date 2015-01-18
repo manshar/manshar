@@ -25,9 +25,9 @@ class Comment < ActiveRecord::Base
     subject = "#{user.name} علق على مقالك '#{article.title}'"
     body = "#{user.name} ترك تعليق على مقالك <a href='#{url}' target='blank'>'#{article.title}'</a>. التعليق هو:\n\n <blockquote dir='rtl'>#{self.body}</blockquote>"
 
-    logger.info(body)
     if not user.id.equal? article.user.id
-      article.user.notify(subject, body, self)
+      SendEmailsWorker.perform_async(
+          subject, body, article.user_id, self.class.name, self.id)
     end
 
     # Notify any users who have commented on the same section (i.e. guid).
@@ -40,7 +40,8 @@ class Comment < ActiveRecord::Base
       # Or the user who is adding the current comment.
       if (not commenter.id.equal? article.user.id and
           not commenter.id.equal? user.id)
-        commenter.notify(subject, body, self)
+        SendEmailsWorker.perform_async(
+            subject, body, commenter.id, self.class.name, self.id)
       end
     end
 
