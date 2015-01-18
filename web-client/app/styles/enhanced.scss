@@ -68,7 +68,7 @@ body {
       h2 {
         font-size: 1.6em;
       }
-    } 
+    }
   }
   .article-content-container {
     transition: transform .3s;
@@ -86,19 +86,20 @@ body {
       blockquote {
         font-size: 1.1em;
       }
-    }
 
-    h1 {
-      font-size: 1.75em;
-    }
+      h1 {
+        font-size: 1.75em;
+      }
 
-    h2 {
-      font-size: 1.4em;
-    }
+      h2 {
+        font-size: 1.4em;
+      }
 
-    p {
-      margin: 36px auto;
-      margin-top: 36px;
+      p {
+        margin: 36px auto;
+        margin-top: 36px;
+      }
+
     }
   }
 }
