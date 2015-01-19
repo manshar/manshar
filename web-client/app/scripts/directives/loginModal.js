@@ -6,7 +6,7 @@ angular.module('webClientApp')
 
     return {
       restrict: 'A',
-      templateUrl: '/views/directives/loginModal.html',
+      templateUrl: 'views/directives/loginModal.html',
       link: function (scope) {
         var prev = null;
         var showDialog = function (event, data) {

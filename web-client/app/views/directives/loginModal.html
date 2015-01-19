@@ -1,9 +1,9 @@
 <div ng-if="visible" class="login-modal">
   <i class="fa fa-close close-button" ng-click="hideDialog()"></i>
 
-  <div ng-include="'/views/partials/_login_form.html'" ng-show="activeView =='login'"></div>
-  <div ng-include="'/views/partials/_signup_form.html'" ng-show="activeView =='signup'"></div>
-  <div ng-include="'/views/partials/_reset_form.html'" ng-show="activeView =='reset'"></div>
+  <div ng-include="'views/partials/_login_form.html'" ng-show="activeView =='login'"></div>
+  <div ng-include="'views/partials/_signup_form.html'" ng-show="activeView =='signup'"></div>
+  <div ng-include="'views/partials/_reset_form.html'" ng-show="activeView =='reset'"></div>
 
   <p class="form-info" ng-init="activeView = 'login'">
     <a class="signup-link" ng-show="activeView != 'login'" ng-click="activeView = 'login'">سجل الدخول</a> {{ activeView != 'login' ? 'أو' : '' }}

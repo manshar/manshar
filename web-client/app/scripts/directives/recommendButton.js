@@ -17,7 +17,7 @@ angular.module('webClientApp')
     };
 
     return {
-      templateUrl: '/views/directives/recommendButton.html',
+      templateUrl: 'views/directives/recommendButton.html',
       restrict: 'A',
       scope: {
         article: '='

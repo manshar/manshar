@@ -113,7 +113,7 @@ angular.module('webClientApp')
     };
 
     return {
-      templateUrl: '/views/directives/anchoredComments.html',
+      templateUrl: 'views/directives/anchoredComments.html',
       restrict: 'A',
       scope: {
         article: '=',

@@ -44,7 +44,7 @@ angular.module('webClientApp')
     };
 
     return {
-      templateUrl: '/views/directives/anchoredComment.html',
+      templateUrl: 'views/directives/anchoredComment.html',
       restrict: 'A',
       scope: {
         guid: '@'
