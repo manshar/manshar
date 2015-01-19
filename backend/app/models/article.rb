@@ -1,8 +1,7 @@
 class Article < ActiveRecord::Base
   include Utils
 
-  before_save :published_post
-
+  before_save :published_post, :time_to_read
   scope :popular, -> { order('hotness DESC') }
   scope :best, -> { order('recommendations_count DESC') }
   scope :recents, -> { order('published_at DESC') }
@@ -51,6 +50,14 @@ class Article < ActiveRecord::Base
 
   def next
     Article.public.popular.where('hotness < ?', hotness).first
+  end
+  
+  def time_to_read
+    self.reading_time = (word_count / 200.0).round 
+  end
+  
+  def word_count
+    self.body.split.size
   end
 
 end
