@@ -59,7 +59,7 @@
               {{article.published_at | date:'EEEE, d MMMM'}}
             </div>
           </h3>
-          <span class="reading-time" ng-hide="article.loading"> {{article.body | nohtml | timeToRead }} </span>
+          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }} </span>
           <div class="stats-box">
             <span ng-show="article.recommendations_count">
               <i class="fa fa-thumbs-o-up"></i> {{article.recommendations_count}}
