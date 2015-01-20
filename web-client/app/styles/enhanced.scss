@@ -124,6 +124,89 @@ body {
   height: 100%;
 }
 
+.tabular {
+
+  &.categories-list {
+    width: 745px;
+    margin: 0 auto;
+    margin-top: 2em;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .form-div {
+    display: block;
+    width: auto;
+
+    form {
+      padding: 5px 0;
+      display: block;
+
+      label {
+        margin: 0 5px;
+
+        &:first-child, &:last-child {
+          margin: 0;
+        }
+
+        &.file-field {
+          height: 50px;
+          width: 90px;
+          position: relative;
+
+          &.with-image {
+            input {
+              border: none;
+              opacity: 0.75;
+            }
+          }
+
+          img {
+            height: 50px;
+            width: 90px;
+          }
+
+          input {
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 2em 0.4em;
+          }
+
+        }
+      }
+
+      input, .input, textarea, button {
+        margin: 0;
+        display: inline-block;
+        vertical-align: top;
+        width: 240px;
+        height: 50px;
+      }
+
+      .actions {
+        display: inline-block;
+
+        button {
+          width: 100px;
+        }
+      }
+    }
+
+    &.category {
+      img {
+        width: 100px;
+      }
+    }
+  }
+}
+
+
 // Media Queries.
 @media (min-width: 1280px) {
 

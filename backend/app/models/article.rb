@@ -16,9 +16,10 @@ class Article < ActiveRecord::Base
     end
   end
 
+  abs_url_for :cover
+
   scope :public, -> { where(published: true) }
   scope :drafts, -> { where(published: false) }
-
 
   # Instance Methods.
   def publish!
@@ -26,7 +27,7 @@ class Article < ActiveRecord::Base
     self.save
   end
 
-  # Add published at date only for the published posts. 
+  # Add published at date only for the published posts.
   def published_post
     if self.published && self.published_at.nil?
       self.published_at = Time.now
@@ -35,17 +36,6 @@ class Article < ActiveRecord::Base
 
   def draft?
     not self.published
-  end
-
-  def cover_abs_url size = nil
-    if cover.nil?
-      return
-    end
-    if size
-      abs_url cover.thumb(size).url, ENV['API_HOST']
-    else
-      abs_url cover.url, ENV['API_HOST']
-    end
   end
 
   def next

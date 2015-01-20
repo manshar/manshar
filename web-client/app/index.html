@@ -71,6 +71,7 @@
       </ul>
       <ul class="base-links">
         <li class="terms">منشر غير مسؤول عن محتوى المقالات ويتحمل الكاتب كامل المسؤولية عن كون المعلومات في المقال صحيحة ويجب عليه عدم استخدام أي محتوى لا يمتلكه ويتحمل الكاتب كامل المسؤولية اذا حصل ذلك</li>
+        <li ng-show="currentUser.admin"><a snap-close href="admin" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Admin Link">إدارة الموقع</a></li>
         <li><a href="http://www.manshar.org" target="blank" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav About Manshar Link">عن منشر</a></li>
         <li><a href="http://www.github.com/manshar/manshar" target="blank"
           analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Open Source Link"><i class="fa fa-github"></i> مشروع منشر مفتوح المصدر</a></li>
@@ -118,6 +119,7 @@
         <script src="scripts/appConfig.js"></script>
         <script src="scripts/cachedTemplates.js"></script>
 
+        <script src="scripts/controllers/admin/manageCategoriesCtrl.js"></script>
         <script src="scripts/controllers/mainController.js"></script>
         <script src="scripts/controllers/articleController.js"></script>
         <script src="scripts/controllers/newArticleController.js"></script>
@@ -129,6 +131,7 @@
         <script src="scripts/controllers/signupController.js"></script>
 
         <script src="scripts/services/articleService.js"></script>
+        <script src="scripts/services/categoryService.js"></script>
         <script src="scripts/services/commentService.js"></script>
         <script src="scripts/services/recommendationService.js"></script>
         <script src="scripts/services/imageService.js"></script>

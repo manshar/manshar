@@ -1,0 +1,44 @@
+<div class="form-div category">
+  <form ng-submit="saveCategory(category)">
+
+    <label class="file-field" ng-class="{'with-image': category.image_url}">
+        <img ng-if="category.image_url" ng-src="{{category.image_url}}" />
+        <input
+          type="file"
+          manshar-file
+            file-model="category.image"
+            preview-url="category.image_url"
+        />
+    </label>
+
+    <label>
+      <input
+        type="text"
+        ng-model="category.title"
+        required
+        autofocus
+        placeholder="اسم الفئة"
+      />
+    </label>
+
+    <label>
+      <textarea
+        ng-model="category.description"
+        class="input"
+        cols= "20"
+        required
+        placeholder="شرح عن الفئة"></textarea>
+    </label>
+
+    <div class="actions">
+      <button
+        type="submit">
+        {{category.id ? 'حفظ' : 'فئة جديدة'}}
+      </button>
+
+      <a ng-click="deleteCategory(category)" ng-if="category.id">
+        <i class="fa fa-trash-o"></i>
+      </a>
+    </div>
+  </form>
+</div>

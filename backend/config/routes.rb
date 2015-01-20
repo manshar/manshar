@@ -29,6 +29,7 @@ Backend::Application.routes.draw do
       resources :articles, concerns: [:recommendable, :commentable]
       resources :images
       resources :users, only: [:index, :show, :update]
+      resources :categories, except: [:new, :edit]
 
       scope '/users/:user_id' do
         resources :recommendations, :only => [:index]
