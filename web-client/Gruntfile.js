@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       webClientApp: {
         cwd: 'app',
-        src: 'views/{,*/}*.html',
+        src: 'views/{,**/}*.html',
         dest: '<%= yeoman.app %>/scripts/cachedTemplates.js'
       }
     },
