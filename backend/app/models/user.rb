@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
       { headers: {"x-amz-acl" => "public-read-write"} }
     end
   end
+  abs_url_for :avatar
 
   def published_articles
     articles.public.recents
@@ -34,14 +35,6 @@ class User < ActiveRecord::Base
 
   def staff
     role == 'staff'
-  end
-
-  def avatar_abs_url size = nil
-    if size
-      abs_url avatar.thumb(size).url, ENV['API_HOST']
-    else
-      abs_url avatar.url, ENV['API_HOST']
-    end
   end
 
   def mailboxer_email(object)

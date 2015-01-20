@@ -86,6 +86,19 @@ angular.module('webClientApp', [
         isPublic: false
       })
 
+      .when('/admin', {
+        templateUrl: 'views/admin/dashboard.html',
+        isPublic: false,
+        isAdmin: true
+      })
+
+      .when('/admin/manage/categories', {
+        templateUrl: 'views/admin/manage/categories.html',
+        controller: 'ManageCategoriesCtrl',
+        isPublic: false,
+        isAdmin: true
+      })
+
       .otherwise({
         redirectTo: '/'
       });
@@ -208,7 +221,7 @@ angular.module('webClientApp', [
      * otherwise, broadcast 'unauthenticated' to show login modal.
      */
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
-      if (!LoginService.isAuthorized(next.isPublic)) {
+      if (!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
         event.preventDefault();
         // Show the dialog instead of redirecting for all navigations.
         // Except first time landing on the site on protected page.

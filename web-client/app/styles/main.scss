@@ -45,6 +45,14 @@ button {
   cursor: pointer;
 }
 
+button,
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  font-family: 'Droid Arabic Naskh', serif !important;
+}
+
 .container{
   @include span-columns(12);
   background-color: #fff;
@@ -881,8 +889,6 @@ ul.manshar-articles-list {
 }
 
 button {
-  font-family: 'Droid Arabic Naskh', serif !important;
-
   &.action-button {
     font-size: 1.2em;
     padding: 10px 10px;
@@ -946,11 +952,13 @@ button {
   opacity: 1 !important;
 }
 
-
 .form-div {
 
+  &.center {
+    margin-top: 3em;
+  }
+
   margin: auto;
-  margin-top: 3em;
   width: 300px;
 
   header {
@@ -977,19 +985,27 @@ button {
     text-align: center;
   }
 
-  form{
+  form {
     @include row(table);
-    padding: 10px 0;
 
-    input, .input{
+    label {
+      display: inline-block;
+      vertical-align: top;
+      margin: 5px 0;
+    }
+
+    input, .input {
       display: block;
-      border: 2px solid #ECEBEC;
-      font-size: 1.25em;
-      margin: 20px 3px;
+      border: 1px solid #ECEBEC;
+      font-size: 0.8em;
       padding: 10px;
       border-radius: 5px;
       width: 300px;
       transition: 300ms ease;
+
+      &[type="file"] {
+        font-size: 0.7em;
+      }
 
       &:invalid {
         border-left: 4px solid #ECEBEC;
@@ -1007,11 +1023,29 @@ button {
       }
     }
 
-    button {
-      @include button(simple, #e48184);
-      font-size: 1em;
+    button, a.button {
+      @include button(simple, #CA1504);
+      font-size: 0.8em;
       padding : 10px;
       text-align: center;
+      width: 100%;
+    }
+
+    .actions {
+      text-align: center;
+
+      button {
+        width: 88%;
+      }
+      a {
+        padding: .5em;
+        display: inline-block;
+      }
+    }
+  }
+
+  &.category {
+    img {
       width: 100%;
     }
   }
@@ -1032,6 +1066,13 @@ button {
   }
 }
 
+.admin-dashboard {
+  margin-top: 2em;
+
+  .header-label {
+    margin: 1em 0;
+  }
+}
 
 // Load simple code style for the editor.
 // For rendering the code we use highlight.js

@@ -8,8 +8,9 @@ angular.module('webClientApp')
 
     return {
 
-      isAuthorized: function(isPublic) {
-        return isPublic || this.isLoggedIn();
+      isAuthorized: function(isPublic, isAdmin) {
+        return ((isPublic || this.isLoggedIn()) &&
+                (!isAdmin || $rootScope.currentUser.admin));
       },
 
       isLoggedIn: function() {

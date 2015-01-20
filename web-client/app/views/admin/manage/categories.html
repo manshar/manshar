@@ -1,0 +1,14 @@
+<div>
+  <ul class="categories-list tabular">
+    <h1 class="header-label">
+      <span>إدارة الفئات</span>
+    </h1>
+
+    <li>
+      <div ng-include="'views/admin/manage/_category_form.html'"></div>
+    </li>
+    <li ng-repeat="category in categories">
+      <div ng-include="'views/admin/manage/_category_form.html'"></div>
+    </li>
+  </ul>
+</div>
