@@ -59,7 +59,7 @@
         <div class="dimmer" ng-show="article.next.original_cover_url"></div>
         <div class="manshar-article-header tray header">
           <h5>اقرأ أيضاً</h5>
-          <span class="reading-time"> {{article.next.body | nohtml | timeToRead | number:0}} دقائق قراءة</span>
+          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }} </span>
           <div class="title">
             <h1>{{article.next.title}}</h1>
             <h2>{{article.next.tagline}}</h2>
