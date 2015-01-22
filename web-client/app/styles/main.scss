@@ -228,6 +228,14 @@ input[type="password"] {
           left: 2em;
         }
 
+        .author {
+          a {
+            color: #000;
+            font-size: 0.6rem;
+            border-bottom: 1px solid #CBCBCB;
+          }
+        }
+
         .actions {
           text-align: left;
         }
@@ -798,6 +806,11 @@ ul.manshar-articles-list {
 
       h3 {
         font-size: 1.5em;
+      }
+
+      a {
+          border-bottom: 1px solid black;
+          color: #333332;
       }
 
     }
