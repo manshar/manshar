@@ -8,7 +8,7 @@ angular.module('webClientApp')
         function(resource) {
       /* jshint camelcase: false */
       $rootScope.page.title = resource.title;
-      $rootScope.page.image = resource.image_url;
+      $rootScope.page.image = resource.original_image_url;
       $rootScope.page.publishedTime = resource.created_at;
       $rootScope.page.description = resource.description;
 
