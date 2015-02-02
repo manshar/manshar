@@ -20,6 +20,10 @@ angular.module('webClientApp')
       var createFormData = function (data) {
         var fd = new FormData();
         for (var key in data.category) {
+          // Remove special keys for angular resources.
+          if (key.trim() === '' || key.indexOf('$') === 0 || key === 'toJSON') {
+            continue;
+          }
           fd.append('category[' + key + ']', data.category[key]);
         }
         return fd;

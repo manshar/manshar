@@ -27,7 +27,7 @@ module Utils
           if image.nil?
             return
           end
-          if size.nil?
+          if not size.nil?
             abs_url image.thumb(size).url, ENV['API_HOST']
           else
             abs_url image.url, ENV['API_HOST']

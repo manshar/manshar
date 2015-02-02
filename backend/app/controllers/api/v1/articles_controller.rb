@@ -1,14 +1,19 @@
 class Api::V1::ArticlesController < ApplicationController
 
   before_filter :authenticate_user!, except: [:index, :show]
+  before_filter :load_query, only: [:index]
   respond_to :json
 
   # GET /api/v1/articles
   # GET /api/v1/articles.json
+  # GET /api/v1/categories/1/articles
+  # GET /api/v1/categories/1/articles.json
+  # GET /api/v1/categories/1/topics/1/articles
+  # GET /api/v1/categories/1/topics/1/articles.json
   def index
     # Use the custom Article.public method to return all articles that is
     # marked published.
-    @articles = Article.public.try(params[:order] || :best).preload(:user)
+    @articles = @query.public.try(params[:order] || :best).preload(:user, :topic)
     render 'api/v1/articles/index'
   end
 
@@ -58,8 +63,18 @@ class Api::V1::ArticlesController < ApplicationController
 
   private
 
+  def load_query
+    if params[:topic_id]
+      @query = Topic.find(params[:topic_id]).articles.public
+    elsif params[:category_id]
+      @query = Category.find(params[:category_id]).articles.public
+    else
+      @query = Article.public
+    end
+  end
+
   def article_params
-    params.require(:article).permit(:title, :tagline, :body, :published, :cover)
+    params.require(:article).permit(:title, :tagline, :body, :published, :cover, :topic_id)
   end
 
 end

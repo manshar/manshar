@@ -1,0 +1,80 @@
+<div data-modal-dialog visible="visible">
+  <div>
+    <h1 class="header-label">
+      <span>اختر الفئة</span><em ng-if="allowCreateTopics"> أو أكمل <a ng-click="selectTopic({})"> بدون موضوع</a></em>
+    </h1>
+    <ul class="category-list card-list">
+      <li class="category card category-{{category.id}}" ng-click="selectCategory(category)" ng-repeat="category in categories" ng-class="{'selected': selectedCategory == category}">
+        <style type="text/css">
+          .category-list.card-list .card.category-{{category.id}} {
+            border-color: {{category.color}};
+            color: {{category.color}};
+          }
+          .category-list.card-list .card.category-{{category.id}}:hover,
+          .category-list.card-list .card.category-{{category.id}}.selected {
+            background-color: {{category.color}};
+            color: #fff;
+          }
+
+        </style>
+        <div>
+          <i class="fa {{category.icon_cssclass}}"></i>
+        </div>
+        <div class="title">
+          {{category.title}}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div ng-show="selectedCategory && !pickOnlyCategory">
+    <style type="text/css">
+      .topic-list.card-list .card.topic {
+        border-color: {{selectedCategory.color}};
+        color: {{selectedCategory.color}};
+      }
+      .topic-list.card-list .card.topic:hover {
+        background-color: {{selectedCategory.color}};
+        color: #fff;
+      }
+
+      .topic-list.card-list .card.topic.new-topic:hover {
+        background-color: white;
+        color: initial;
+      }
+
+    </style>
+    <h1 class="header-label">
+      <span>اختر الموضوع</span>
+    </h1>
+    <ul class="card-list topic-list">
+      <li ng-if="allowCreateTopics" class="tabular topic card new-topic">
+        <div class="form-div">
+          <form ng-submit="saveTopic(newTopic)">
+            <label>
+              <input
+                type="text"
+                ng-model="newTopic.title"
+                required
+                autofocus
+                placeholder="عنوان الموضوع"
+              />
+            </label>
+            <div class="actions">
+              <button
+                type="submit">
+                موضوع جديد
+              </button>
+            </div>
+          </form>
+        </div>
+      </li>
+      <li class="card topic" ng-click="selectTopic(topic)" ng-repeat="topic in topics">
+        <div class="title">
+          {{topic.title}}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>

@@ -1,9 +1,11 @@
 class Category < ActiveRecord::Base
   include Utils
 
-  # has_many :topics, :counter_cache => topics_count
-  # has_many :articles, :through => :topics,
-      # :counter_cache => :articles_count
+  has_many :topics, :counter_cache => :topics_count, dependent: :destroy
+  has_many :articles, :through => :topics,
+      :counter_cache => :articles_count
+
+  validates_uniqueness_of :title
 
   dragonfly_accessor :icon do
     storage_options do |attachment|

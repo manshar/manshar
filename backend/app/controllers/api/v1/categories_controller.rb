@@ -53,7 +53,8 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :description, :image, :icon)
+    params.require(:category).permit(
+        :title, :description, :color, :icon_cssclass, :image, :icon)
   end
 
 end

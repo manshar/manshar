@@ -32,3 +32,7 @@ end
 child :user do
 	extends('api/v1/users/show', :locals => { :listing => locals[:listing] })
 end
+
+child :topic do
+  extends('api/v1/topics/show', :locals => { :listing => locals[:listing] })
+end

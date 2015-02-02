@@ -27,50 +27,9 @@
       <a ng-click="orderArticles('popular')" ng-class="{'active': order == 'popular'}">الأكثر شعبية</a>
       <a ng-click="orderArticles('best')" ng-class="{'active': order == 'best'}">الأفضل</a>
       <a ng-click="orderArticles('recents')" ng-class="{'active': order == 'recents'}">الأحدث</a>
+      <a ng-click="showCategoriesPicker()">استعرض الفئات</a>
     </div>
   </div>
 </header>
 
-<ul class="manshar-articles-list one-column card-list">
-  <li ng-repeat="article in articles" class="card" ng-class="{'loading': article.loading, 'blinking': article.loading}">
-    <div class="article-details article-card">
-      <div class="header tray">
-        <div class="title">
-          <a ng-href="{{ article.loading ? '#' : ('/articles/' + article.id) }}"
-              analytics-on="click"
-              analytics-event="click"
-              analytics-category="UI"
-              analytics-label="Article in Main Page - {{article.title}}"
-              analytics-value="article-{{article.id}}">
-            <h1>{{article.title}}</h1>
-            <h2>{{article.tagline}}</h2>
-          </a>
-          <h3>
-            <span ng-hide="article.loading">بقلم: </span>
-            <a ng-hide="article.loading" ng-href="/profiles/{{article.user.id}}"
-              analytics-on="click"
-              analytics-event="click"
-              analytics-category="UI"
-              analytics-label="User in Main Page - {{article.user.name}}"
-              analytics-value="user-{{article.user.id}}">
-                {{article.user.name}}
-            </a>
-            <div class="date">
-              {{article.published_at | date:'EEEE, d MMMM'}}
-            </div>
-          </h3>
-          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }} </span>
-          <div class="stats-box">
-            <span ng-show="article.recommendations_count">
-              <i class="fa fa-thumbs-o-up"></i> {{article.recommendations_count}}
-            </span>
-            <span ng-show="article.comments_count">
-              <i class="fa fa-comment-o"></i> {{article.comments_count}}
-            </span>
-          </div>
-          <div ng-include="'views/partials/_sharing_buttons.html'"></div>
-        </div>
-      </div>
-    </div>
-  </li>
-</ul>
+<div ng-include="'views/partials/_articles_list.html'"></div>

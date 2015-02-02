@@ -53,6 +53,12 @@ body {
   }
 }
 
+.modal {
+  .content {
+    padding: 3em;
+  }
+}
+
 .manshar-article {
 
   .manshar-article-image-container{
@@ -104,6 +110,24 @@ body {
   }
 }
 
+.article-meta {
+  text-align: center;
+  .meta-box {
+    text-align: right;
+    display: inline-block;
+    margin-left: 2em;
+
+    &:last-child {
+      margin-left: 0;
+    }
+    .meta-details {
+      &.card {
+        width: 350px;
+      }
+    }
+  }
+}
+
 .comments-container {
   left: 20px;
 
@@ -127,7 +151,7 @@ body {
 .tabular {
 
   &.categories-list {
-    width: 745px;
+    width: 940px;
     margin: 0 auto;
     margin-top: 2em;
   }
@@ -187,13 +211,18 @@ body {
         vertical-align: top;
         width: 240px;
         height: 50px;
+
+        &.color-field, &.icon-class-field {
+          width: 80px;
+        }
+
       }
 
       .actions {
         display: inline-block;
 
         button {
-          width: 100px;
+          width: auto;
         }
       }
     }
@@ -206,6 +235,36 @@ body {
   }
 }
 
+.category-list {
+  .card.category {
+    width: 180px;
+    height: 180px;
+    padding: 2em;
+
+    i {
+      font-size: 4em;
+    }
+  }
+}
+
+.topic-list {
+  .card.topic {
+    margin: 0.5em;
+    cursor: pointer;
+    width: auto;
+    padding: 1em;
+    text-align: center;
+
+    &:hover {
+      background-color: #E1F5FE;
+    }
+
+    &.new-topic {
+      width: 400px;
+      padding: 0.3em 0.8em;
+    }
+  }
+}
 
 // Media Queries.
 @media (min-width: 1280px) {
