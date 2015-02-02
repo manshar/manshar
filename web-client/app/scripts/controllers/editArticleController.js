@@ -41,16 +41,18 @@ angular.module('webClientApp')
     // Load the article if we are editing.
     $scope.article = {};
     if($routeParams.articleId) {
-      $scope.article = Article.get({'articleId': $routeParams.articleId}, function (resource) {
+      Article.get({'articleId': $routeParams.articleId}, function (resource) {
         authorizeUser(resource);
         lastSavedArticle = angular.copy(resource);
-
+        $scope.article = resource;
         // Warn the user that editing an article will move it to draft until
         // they publish it again.
         $timeout(function () {
           if (resource.published) {
             if (!$window.confirm(confirmEditMessage)) {
               $location.path('/articles/' + resource.id);
+            } else {
+              $scope.article.published = false;
             }
           }
         });
@@ -69,6 +71,7 @@ angular.module('webClientApp')
         // First time this gets published.
         if (!$scope.article.published_at) {
           $scope.article.published_at = resource.published_at;
+          $scope.article.topic = resource.topic;
           $analytics.eventTrack('New Article Published', {
             category: 'Article',
             label: resource.title
@@ -113,6 +116,7 @@ angular.module('webClientApp')
       $scope.error = 'حدث خطأ في حذف المقال.';
     };
 
+    var publishingAfterTopicPicked = false;
     /**
      * Saves/Updates article data.
      * @param {Object} article Article data.
@@ -126,13 +130,20 @@ angular.module('webClientApp')
         $window.alert('تأكد من ادخال جميع المعلومات المطلوبة');
         return;
       }
-      if (!silent) {
-        $scope.inProgress = published ? 'publish' : 'save';
-      }
 
-      Article.update(
-          { 'articleId': article.id }, { article: article },
-          updateSuccess, updateError);
+      // First time publishing article.
+      if (published && !article.published_at && !article.topic) {
+        publishingAfterTopicPicked = published;
+        $rootScope.$emit('openTopicPicker', {allowCreateTopics: true});
+      } else {
+        if (!silent) {
+          $scope.inProgress = published ? 'publish' : 'save';
+        }
+
+        Article.update(
+            { 'articleId': article.id }, { article: article },
+            updateSuccess, updateError);
+      }
     };
 
     /**
@@ -162,6 +173,9 @@ angular.module('webClientApp')
       }
     };
 
+    $scope.changeTopic = function() {
+      $rootScope.$emit('openTopicPicker', {allowCreateTopics: true});
+    };
 
     /**
      * Start the auto save interval and save its promise to destroy it when the
@@ -178,10 +192,17 @@ angular.module('webClientApp')
     }, 5000);
 
 
+    var topicSelectedUnbind = $rootScope.$on('topicSelected', function(event, data) {
+      $scope.article.topic_id = data.topic.id;
+      $scope.article.topic = data.topic;
+      $scope.article.published_at = publishingAfterTopicPicked;
+      $scope.saveArticle($scope.article, publishingAfterTopicPicked);
+    });
+
     /**
      * When the user logout while in edit mdoe redirect the user,
      */
-    var loggedOutunbined = $rootScope.$on('user.loggedOut', function () {
+    var loggedOutUnbined = $rootScope.$on('user.loggedOut', function () {
       if ($scope.article.published) {
         var location = '/articles/' + $routeParams.articleId;
         $location.path(location);
@@ -196,7 +217,8 @@ angular.module('webClientApp')
      */
     var onDestroy = function () {
       $interval.cancel(autoSavePromise);
-      loggedOutunbined();
+      loggedOutUnbined();
+      topicSelectedUnbind();
     };
 
     // Make sure to cleanup the binding. Otherwise the event listener will

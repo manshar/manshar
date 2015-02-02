@@ -15,24 +15,51 @@
     <article id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code>
     </article>
 
-    <a ng-href="/profiles/{{article.user.id}}"
-        analytics-on="click"
-        analytics-event="click"
-        analytics-category="UI"
-        analytics-label="User in Article Page - {{article.title}}"
-        analytics-value="user-{{article.user.id}}">
-      <div class="author-details">
-        <img ng-src="{{article.user.thumb_url}}" />
-        <div class="author-name">
-          {{article.user.name}}
-        </div>
-        <h3>
-          <div class="date">
-            {{article.published_at | date:'fullDate'}}
+    <div class="article-meta card-list">
+      <div class="meta-box" ng-show="article.topic">
+        <h1 class="header-label">
+          <span>نشرت في</span>
+        </h1>
+        <div class="meta-details card topic" style="background-color: {{article.topic.category.color}}">
+          <a class="meta-thumb" ng-href="/categories/{{article.topic.category.id}}">
+            <img ng-src="{{article.topic.category.image_thumb_url}}" />
+          </a>
+          <div class="meta-text">
+            <div class="meta-name">
+              <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
+                <h3>{{article.topic.title}}</h3>
+              </a>
+            </div>
+            <div class="meta-more">
+              <a ng-href="/categories/{{article.topic.category.id}}">
+                {{article.topic.category.title}}
+              </a>
+            </div>
           </div>
-        </h3>
+        </div>
       </div>
-    </a>
+
+      <div class="meta-box">
+        <h1 class="header-label">
+          <span>بقلم</span>
+        </h1>
+        <div class="meta-details card">
+          <a class="meta-thumb" ng-href="/profiles/{{article.user.id}}">
+            <img ng-src="{{article.user.thumb_url}}" />
+          </a>
+          <div class="meta-text">
+            <div class="meta-name">
+              <a ng-href="/profiles/{{article.user.id}}">
+                <h3>{{article.user.name}}</h3>
+              </a>
+            </div>
+            <div class="meta-more">
+              {{article.published_at | date:'fullDate'}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="article-actions">
       <button class="action-button recommend-button long-form" recommend-button article="article"

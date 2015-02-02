@@ -1,0 +1,29 @@
+'use strict';
+
+angular.module('webClientApp')
+  .controller('TopicCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$filter', 'Category', 'Topic', 'TopicArticle',
+      function ($scope, $rootScope, $routeParams, $location, $filter, Category, Topic, TopicArticle) {
+
+    Topic.get({
+      'categoryId': $routeParams.categoryId,
+      'topicId': $routeParams.topicId
+    }, function(resource) {
+      /* jshint camelcase: false */
+      $rootScope.page.title = resource.title;
+      $rootScope.page.image = resource.category.image_url;
+      $rootScope.page.publishedTime = resource.created_at;
+      $rootScope.page.description = resource.category.description;
+
+      $scope.topic = resource;
+    });
+
+    // Get all articles in this category.
+    $scope.articles = [{ loading: true }, { loading: true },
+        { loading: true }];
+    TopicArticle.query({
+      'categoryId': $routeParams.categoryId,
+      'topicId': $routeParams.topicId
+    }, function(articles) {
+      $scope.articles = articles;
+    });
+  }]);

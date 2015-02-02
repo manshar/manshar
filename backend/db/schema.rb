@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119022501) do
+ActiveRecord::Schema.define(version: 20150131052250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20150119022501) do
     t.float    "hotness",               default: 0.0
     t.datetime "published_at"
     t.integer  "reading_time"
+    t.integer  "topic_id"
   end
 
   create_table "categories", force: true do |t|
-    t.string   "title",                      null: false
+    t.string   "title",                              null: false
     t.text     "description"
     t.string   "image_uid"
     t.string   "icon_uid"
@@ -42,6 +43,8 @@ ActiveRecord::Schema.define(version: 20150119022501) do
     t.integer  "articles_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "color",          default: "#a7a7a7"
+    t.string   "icon_cssclass",  default: "fa-tag"
   end
 
   create_table "comments", force: true do |t|
@@ -128,6 +131,14 @@ ActiveRecord::Schema.define(version: 20150119022501) do
   create_table "thumbs", force: true do |t|
     t.string   "signature"
     t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topics", force: true do |t|
+    t.string   "title",                      null: false
+    t.integer  "articles_count", default: 0
+    t.integer  "category_id",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

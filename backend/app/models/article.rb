@@ -9,6 +9,8 @@ class Article < ActiveRecord::Base
   belongs_to :user
   has_many :recommendations, :dependent => :destroy
   has_many :comments, :dependent => :destroy
+  belongs_to :topic
+  has_one :category, through: :topic, autosave: false
 
   dragonfly_accessor :cover do
     storage_options do |attachment|
@@ -45,11 +47,11 @@ class Article < ActiveRecord::Base
     end
     next_article
   end
-  
+
   def time_to_read
-    self.reading_time = (word_count / 200.0).round 
+    self.reading_time = (word_count / 200.0).round
   end
-  
+
   def word_count
     self.body.split.size
   end

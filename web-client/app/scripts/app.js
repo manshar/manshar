@@ -86,6 +86,18 @@ angular.module('webClientApp', [
         isPublic: false
       })
 
+      .when('/categories/:categoryId', {
+        templateUrl: 'views/categories/show.html',
+        controller: 'CategoryCtrl',
+        isPublic: true
+      })
+
+      .when('/categories/:categoryId/topics/:topicId', {
+        templateUrl: 'views/topics/show.html',
+        controller: 'TopicCtrl',
+        isPublic: true
+      })
+
       .when('/admin', {
         templateUrl: 'views/admin/dashboard.html',
         isPublic: false,

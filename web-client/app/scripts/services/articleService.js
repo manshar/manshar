@@ -20,6 +20,10 @@ angular.module('webClientApp')
       var createFormData = function (data) {
         var fd = new FormData();
         for (var key in data.article) {
+          // Remove special keys for angular resources.
+          if (key.trim() === '' || key.indexOf('$') === 0 || key === 'toJSON') {
+            continue;
+          }
           fd.append('article[' + key + ']', data.article[key]);
         }
         return fd;
@@ -104,6 +108,47 @@ angular.module('webClientApp')
 
       return {
         query: UserArticleResource.query
+      };
+    }])
+
+  /**
+   * A service to retrieve a specific category articles.
+   * @param  {!angular.$resource} $resource
+   * @param  {string} API_HOST Manshar API host.
+   * @return {!angular.Service} Angualr service definition.
+   */
+  .service('CategoryArticle', ['$resource', 'API_HOST',
+      function ($resource, API_HOST) {
+
+      var baseUrl = '//' + API_HOST + '/api/v1/';
+      var CategoryArticleResource = $resource(
+        baseUrl + 'categories/:categoryId/articles', {
+          categoryId: '@categoryId'
+        });
+
+      return {
+        query: CategoryArticleResource.query
+      };
+    }])
+
+  /**
+   * A service to retrieve a specific topic articles.
+   * @param  {!angular.$resource} $resource
+   * @param  {string} API_HOST Manshar API host.
+   * @return {!angular.Service} Angualr service definition.
+   */
+  .service('TopicArticle', ['$resource', 'API_HOST',
+      function ($resource, API_HOST) {
+
+      var baseUrl = '//' + API_HOST + '/api/v1/';
+      var TopicArticleResource = $resource(
+        baseUrl + 'categories/:categoryId/topics/:topicId/articles', {
+          categoryId: '@categoryId',
+          topicId: '@topicId'
+        });
+
+      return {
+        query: TopicArticleResource.query
       };
     }]);
 
