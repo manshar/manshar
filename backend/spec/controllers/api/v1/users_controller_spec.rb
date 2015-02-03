@@ -8,19 +8,11 @@ describe Api::V1::UsersController do
   end
 
   describe 'GET users' do
-    it 'should return all users' do
+    it 'should return only publishers' do
       get :index
       response.should be_success
       rendered = Rabl.render(
-          [@user], 'api/v1/users/index', :view_path => 'app/views')
-      response.body.should eq(rendered)
-
-      another_user = FactoryGirl.create(:user)
-
-      get :index
-      response.should be_success
-      rendered = Rabl.render(
-          [@user, another_user], 'api/v1/users/index', :view_path => 'app/views')
+          [], 'api/v1/users/index', :view_path => 'app/views')
       response.body.should eq(rendered)
     end
   end

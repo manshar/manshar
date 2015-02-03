@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   include Utils
 
+  scope :publishers, -> { where('published_articles_count > 0') }
+  scope :top, -> { order('published_articles_count DESC') }
+
   acts_as_messageable
 
   devise :database_authenticatable, :registerable,

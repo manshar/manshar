@@ -2,6 +2,8 @@ class Article < ActiveRecord::Base
   include Utils
 
   before_save :published_post, :time_to_read
+  after_save :update_published_articles_count
+
   scope :popular, -> { order('hotness DESC') }
   scope :best, -> { order('recommendations_count DESC') }
   scope :recents, -> { order('published_at DESC') }
@@ -54,6 +56,10 @@ class Article < ActiveRecord::Base
 
   def word_count
     self.body.split.size
+  end
+
+  def update_published_articles_count
+    self.user.published_articles_count = self.user.published_articles.count
   end
 
 end

@@ -13,7 +13,7 @@ class Api::V1::ArticlesController < ApplicationController
   def index
     # Use the custom Article.public method to return all articles that is
     # marked published.
-    @articles = @query.public.try(params[:order] || :best).preload(:user, :topic)
+    @articles = @query.public.try(order_param).preload(:user, :topic)
     render 'api/v1/articles/index'
   end
 
@@ -74,7 +74,19 @@ class Api::V1::ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :tagline, :body, :published, :cover, :topic_id)
+    params.require(
+      :article).permit(
+        :title, :tagline, :body, :published, :cover, :topic_id)
   end
 
+  def order_param
+    # It is important not to allow other values for order otherwise
+    # users can run malicious method on all articles :-).
+    permitted_orders = ['popular', 'best', 'recents']
+    if permitted_orders.include?(params[:order])
+      params[:order]
+    else
+      :best
+    end
+  end
 end

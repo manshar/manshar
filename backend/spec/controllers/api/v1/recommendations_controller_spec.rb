@@ -13,7 +13,8 @@ describe Api::V1::RecommendationsController do
     # counter_cache gets updated in the database directly so we need to
     # reload the article model.
     @recommendation.article.publish!
-    @recommendation.article.reload
+    @recommendation.article
+    @recommendation.reload
   end
 
   describe "GET 'articles/:article_id/recommendations'" do

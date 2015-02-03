@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<ul class="manshar-articles-list one-column card-list" id="articles-list">
+<ul class="cards-list-container one-column card-list" id="articles-list">
   <li class="card" ng-repeat="article in articles">
     <div class="article-details article-card">
       <div class="header tray">
@@ -56,7 +56,7 @@
 </ul>
 
 
-<ul class="manshar-articles-list one-column card-list" ng-show="drafts[0] && currentUser.id == user.id && activeTab == 'published'">
+<ul class="cards-list-container one-column card-list" ng-show="drafts[0] && currentUser.id == user.id && activeTab == 'published'">
   <h1 class="header-label">
     <span>المسودات</span>
   </h1>

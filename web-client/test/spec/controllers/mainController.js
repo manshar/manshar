@@ -16,6 +16,9 @@ describe('Controller: MainCtrl', function () {
 
     httpBackend.expectGET(apiBase + 'articles?order=popular').
         respond([{title: 'Hello World.'}, {title: 'Hey.'}]);
+    httpBackend.expectGET(apiBase + 'users').
+        respond([{}]);
+
     MainCtrl = $controller('MainCtrl', { $scope: scope });
     httpBackend.flush();
   }));

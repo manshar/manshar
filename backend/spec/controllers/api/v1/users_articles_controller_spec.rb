@@ -9,6 +9,7 @@ describe Api::V1::UsersArticlesController do
     @another_article = FactoryGirl.create(:article)
     @published_article = FactoryGirl.create(:article)
     @published_article.publish!
+    @published_article.reload
   end
 
   describe 'GET users/:id/articles' do
@@ -18,6 +19,7 @@ describe Api::V1::UsersArticlesController do
       response.body.should eq([].to_json)
 
       @article.publish!
+      @article.reload
 
       get :index, :user_id => @article.user.id
       response.should be_success
@@ -38,6 +40,7 @@ describe Api::V1::UsersArticlesController do
       response.body.should eq([].to_json)
 
       @article.publish!
+      @article.reload
 
       get :index
       response.should be_success

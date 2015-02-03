@@ -8,6 +8,7 @@ describe Api::V1::CommentsController do
     @article = FactoryGirl.create(:article)
     @article.published = true
     @article.save
+    @article.reload
     @comment = FactoryGirl.create(:comment)
 
     @comment_params = {
@@ -20,7 +21,7 @@ describe Api::V1::CommentsController do
     # counter_cache gets updated in the database directly so we need to
     # reload the article model.
     @comment.article.publish!
-    @comment.article.reload
+    @comment.reload
   end
 
   describe "GET 'articles/:article_id/comments'" do

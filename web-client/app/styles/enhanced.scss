@@ -26,6 +26,25 @@ body {
   }
 }
 
+.users-card-list {
+  &.card-list {
+    .card {
+      width: 30%;
+
+      .header {
+        height: 12em;
+
+        .title {
+          a {
+            padding: 4em 1em;
+          }
+        }
+      }
+    }
+  }
+}
+
+
 .manshar-profile {
   .avatar {
     position: relative;
@@ -266,6 +285,26 @@ body {
   }
 }
 
+.listing-types-tabs {
+  a {
+    span {
+      display: inline-block;
+    }
+
+    i {
+      display: none;
+    }
+
+    &.active {
+      i {
+        display: inline-block;
+      }
+    }
+
+    padding: .3em 1em;
+  }
+}
+
 // Media Queries.
 @media (min-width: 1280px) {
 
@@ -304,7 +343,25 @@ body {
     .card {
       width: 30%;
       margin: 1.3%;
-
     }
   }
+
+  .users-card-list {
+    &.card-list {
+      .card {
+        width: 20%;
+        .header {
+          height: 15em;
+
+          .title {
+            a {
+              padding: 5.5em 1em;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
 }
