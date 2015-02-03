@@ -1,15 +1,19 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', '$location', 'Article',
-      function ($scope, $rootScope, $location, Article) {
+  .controller('MainCtrl', ['$scope', '$rootScope', '$location', 'Article', 'User',
+      function ($scope, $rootScope, $location, Article, User) {
     $scope.order = 'popular';
     $scope.title = 'مَنْشَر';
     $scope.tagline = 'منصة النشر العربية';
     $scope.articles = [{ loading: true }, { loading: true },
         { loading: true }];
+
+    $scope.activeTab = $scope.order;
     Article.query({'order': $scope.order}, function(articles) {
       $scope.articles = articles;
+
+      $scope.publishers = User.query();
     });
 
     $scope.newArticle = function () {
@@ -21,12 +25,17 @@ angular.module('webClientApp')
     };
 
     $scope.orderArticles = function (order) {
+      $scope.activeTab = order;
       $scope.articles = [{ loading: true }, { loading: true },
           { loading: true }];
       $scope.order = order;
       Article.query({'order': order}, function(articles) {
         $scope.articles = articles;
       });
+    };
+
+    $scope.selectTab = function(tab) {
+      $scope.activeTab = tab;
     };
 
     $scope.showCategoriesPicker = function() {

@@ -255,11 +255,19 @@ input[type="password"] {
   text-align: center;
 
   a {
+    span {
+      display: none;
+    }
+
     display: inline-block;
-    padding: .3em 1em;
+    padding: .3em 0.5em;
     color: #B3B3B3;
 
     &.active {
+      span {
+        display: inline-block;
+      }
+
       border-bottom: 4px solid #CA1504;
       color: #CA1504;
     }
@@ -493,29 +501,6 @@ input[type="password"] {
     }
   }
 }
-/*
-
-.author-details {
-  text-align: center;
-  color: #000;
-
-  img {
-    width: 65px;
-    border-radius: 500px;
-    box-shadow: 0 2px 7px -2px #000;
-  }
-
-  .author-name {
-    font-size: 0.9em;
-  }
-
-  h3 {
-    .date{
-      font-size: 0.7em;
-      font-weight: 100;
-    }
-  }
-}*/
 
 .card-list {
   .card {
@@ -524,6 +509,15 @@ input[type="password"] {
     margin: 1em .5em;
     cursor: default;
     position: relative;
+
+    .cover {
+      height: 100%;
+      width: 100%;
+    }
+
+    &.with-cover * {
+      color: #fff !important;
+    }
 
     &.loading {
       .header {
@@ -663,6 +657,37 @@ input[type="password"] {
   }
 }
 
+.users-card-list {
+  &.card-list {
+    .card {
+      display: inline-block;
+      width: 45%;
+
+      .header {
+        height: 10em;
+
+        .stats-box {
+          font-size: .9em;
+        }
+
+        .title {
+          position: absolute;
+          z-index: 9;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+
+          a {
+            display: inline-block;
+            padding: 3em 0.5em;
+          }
+        }
+      }
+    }
+  }
+}
+
 .sharing-box {
   font-size: 3em;
   text-align: center;
@@ -686,8 +711,9 @@ input[type="password"] {
   }
 }
 
-ul.manshar-articles-list {
+ul.cards-list-container {
   width: 100%;
+  min-height: 70%;
   padding: 20px;
   list-style: none;
   word-wrap: break-word;

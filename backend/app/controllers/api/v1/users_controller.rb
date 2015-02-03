@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
   # GET /api/v1/users
   # GET /api/v1/users.json
   def index
-    @users = User.all
+    @users = User.top.publishers
     render 'api/v1/users/index'
   end
 
@@ -29,8 +29,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update_user_params
-    params.require(:user).permit(
-        :name, :bio, :avatar)
+    params.require(:user).permit(:name, :bio, :avatar)
   end
 
 end

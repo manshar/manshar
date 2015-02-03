@@ -15,6 +15,7 @@ describe Api::V1::ArticlesController do
       response.body.should eq([].to_json)
 
       @article.publish!
+      @article.reload
 
       get :index
       response.should be_success
@@ -43,6 +44,8 @@ describe Api::V1::ArticlesController do
     it 'should allow users to access published articles without authentication' do
       request.env['HTTP_AUTHORIZATION'] = nil
       @article.publish!
+      @article.reload
+
       get :show, :id => @article.id
       response.should be_success
       rendered = Rabl.render(
