@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resources :articles, concerns: [:recommendable, :commentable]
         resources :images
         resources :users, only: [:index, :show, :update]
+        resources :links, except: [:show]
 
         resources :categories, except: [:new, :edit] do
           resources :articles, only: [:index]
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
         scope '/users/:user_id' do
           resources :recommendations, :only => [:index]
           resources :comments, :only => [:index]
+          resources :links, :only => [:index]
           resources :articles, :only => [:index, :drafts], controller: 'users_articles'
         end
 
