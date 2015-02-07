@@ -39,6 +39,18 @@
         </a>
       </p>
     </div>
+    <div class="category-nav-actions">
+      <a href="/categories/{{topic.category.id}}">
+        <i class="fa fa-arrow-right"></i>
+      </a>
+      <a ng-click="showCategoriesPicker()">
+        <i class="fa fa-th-large"></i>
+      </a>
+    </div>
+    <a href="/articles/new" class="write-new-button" style="background-color: {{topic.category.color|darker:-0.2}}">
+      <i class="fa fa-pencil"></i>
+      اكتب مقال جديد
+    </a>
   </header>
 
   <div ng-include="'views/partials/_articles_list.html'"></div>

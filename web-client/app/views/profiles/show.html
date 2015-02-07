@@ -8,16 +8,21 @@
     <h4>{{user.bio}}</h4>
     <button class="action-button" ng-click="editProfile()" ng-show="currentUser.id == user.id">
       <i class="fa fa-pencil"></i>
+      تعديل معلومات صفحتك
     </button>
   </div>
-  <div class="listing-types-tabs">
+  <div class="listing-types-tabs profile-tabs">
     <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>
     <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>
     <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>
   </div>
 </div>
 
-<ul class="cards-list-container one-column card-list" id="articles-list">
+<ul class="cards-list-container one-column card-list profile-list" id="articles-list">
+  <a href="/articles/new" class="write-new-button">
+    <i class="fa fa-pencil"></i>
+    اكتب مقال جديد
+  </a>
   <li class="card" ng-repeat="article in articles">
     <div class="article-details article-card">
       <div class="header tray">
