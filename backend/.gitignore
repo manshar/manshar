@@ -14,7 +14,10 @@ vendor/bundle/*
 public/uploads/
 public/assets/
 
-config/database.yml
+# We need to start tracking this as it'll be part of heroku configuration for
+# Database pool.
+# config/database.yml
+
 .env
 .env.production
 

@@ -8,6 +8,7 @@ class AddProviderAndUidToUsers < ActiveRecord::Migration
     User.find_each do |user|
       if user.uid.blank?
         user.uid = user.email
+        user.provider = 'email'
         user.save!
       end
     end
