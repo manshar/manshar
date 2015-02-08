@@ -196,10 +196,6 @@ Devise.setup do |config|
   # Require the `devise-encryptable` gem when using anything other than bcrypt
   # config.encryptor = :sha512
 
-  # ==> Configuration for :token_authenticatable
-  # Defines name of the authentication token params key
-  # config.token_authentication_key = :auth_token
-
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
@@ -246,40 +242,5 @@ Devise.setup do |config|
   config.warden do |manager|
     manager.failure_app = UnauthorizedResponder
   end
-
-
-  # ==> Mountable engine configurations
-  # When using Devise inside an engine, let's call it `MyEngine`, and this engine
-  # is mountable, there are some extra configurations to be taken into account.
-  # The following options are available, assuming the engine is mounted as:
-  #
-  #     mount MyEngine, at: '/my_engine'
-  #
-  # The router that invoked `devise_for`, in the example above, would be:
-  # config.router_name = :my_engine
-  #
-  # When using omniauth, Devise cannot automatically set Omniauth path,
-  # so you need to do it manually. For the users scope, it would be:
-  # config.omniauth_path_prefix = '/my_engine/users/auth'
-
-  # This sets up devise to use the auth_token from the HTTP_AUTHORIZATION header.
-  # Ref: http://goo.gl/6VDFVn
-  # require 'devise/strategies/token_authenticatable'
-  # module Devise
-  #   module Strategies
-  #     class TokenAuthenticatable < Authenticatable
-  #       def params_auth_hash
-  #         return_params = if params[scope].kind_of?(Hash) && params[scope].has_key?(authentication_keys.first)
-  #           params[scope]
-  #         else
-  #           params
-  #         end
-  #         token = ActionController::HttpAuthentication::Token.token_and_options(request)
-  #         return_params.merge!(:auth_token => token[0]) if token
-  #         return_params
-  #       end
-  #     end
-  #   end
-  # end
 
 end

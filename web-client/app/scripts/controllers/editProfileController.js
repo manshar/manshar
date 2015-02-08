@@ -26,7 +26,7 @@ angular.module('webClientApp')
       $analytics.eventTrack('Update Success', {
         category: 'User'
       });
-      $location.path($routeParams.prev || '/');
+      $location.path('/profiles/' + $routeParams.userId);
     };
 
     var error = function(response) {

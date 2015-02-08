@@ -54,8 +54,15 @@
     <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="left"
         analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon"/>
     <nav class="site-nav" snap-drawer="left">
+      <div class="profile-badge" ng-if="user.thumb_url">
+        <a href="/profiles/{{user.id}}" snap-close ng-show="user.signedIn"
+            analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Profile Picture">
+          <img ng-src="{{user.thumb_url}}" ng-show="user"/>
+          <span>{{user.name}}</span>
+        </a>
+      </div>
       <ul>
-        <li><a href="/profiles/{{user.id}}" snap-close>{{user.name || user.email }}</a></li>
+        <li ng-if="!user.thumb_url"><a href="/profiles/{{user.id}}" snap-close>{{user.name || user.email }}</a></li>
         <!-- TDOD: Convert to ng-repeat -->
         <li><a href="/" snap-close
             analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Main Page Link">الصفحة الرئيسية</a></li>
@@ -139,7 +146,6 @@
         <script src="scripts/services/userService.js"></script>
         <script src="scripts/services/loginService.js"></script>
         <script src="scripts/services/signupService.js"></script>
-        <script src="scripts/services/storageService.js"></script>
 
         <script src="scripts/directives/anchoredComment.js"></script>
         <script src="scripts/directives/anchoredComments.js"></script>

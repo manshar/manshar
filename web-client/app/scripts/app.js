@@ -235,8 +235,8 @@ angular.module('webClientApp', [
   /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'GA_TRACKING_ID',
-      function ($location, $rootScope, $analytics, $auth, LoginService, GA_TRACKING_ID) {
+  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'User', 'GA_TRACKING_ID',
+      function ($location, $rootScope, $analytics, $auth, LoginService, User, GA_TRACKING_ID) {
 
     // ga is the Google analytics global variable.
     if (window.ga) {
@@ -299,7 +299,6 @@ angular.module('webClientApp', [
             'prev': next.$$route.originalPath
           });
         } else {
-          console.log('NOT LOGGED IN');
           var prev = next.$$route && next.$$route.originalPath;
           $location.path('/login').search('prev', prev);
         }
@@ -318,5 +317,14 @@ angular.module('webClientApp', [
       $rootScope.page.title = current.$$route.title || $rootScope.page.title;
       $rootScope.page.url = document.location.href;
     });
+
+    var getLoggedInUserProfile = function(event, data) {
+      User.get({'userId': data.id}, function(user) {
+        angular.extend($rootScope.user, user);
+      });
+    };
+
+    $rootScope.$on('auth:validation-success', getLoggedInUserProfile);
+    $rootScope.$on('auth:login-success', getLoggedInUserProfile);
 
   }]);

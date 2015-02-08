@@ -52,7 +52,6 @@ Dragonfly.app.configure do
   # Before serving from the local Dragonfly server...
   before_serve do |job, env|
     # ...store the thumbnail in the datastore...
-    puts job
     uid = job.store
 
     # ...keep track of its uid so next time we can serve directly from the datastore

@@ -7,7 +7,7 @@ angular.module('webClientApp')
 
       isAuthorized: function(isPublic, isAdmin) {
         return ((isPublic || this.isLoggedIn()) &&
-                (!isAdmin || $rootScope.user.role === 'admin'));
+                (!isAdmin || $rootScope.user.admin));
       },
 
       isLoggedIn: function() {

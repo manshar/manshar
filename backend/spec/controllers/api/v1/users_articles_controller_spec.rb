@@ -41,7 +41,9 @@ describe Api::V1::UsersArticlesController, :type => :controller  do
       response.body.should eq([].to_json)
 
       @article.publish!
+      @article = Article.find(@article.id)
       @article.reload
+      get :index
 
       get :index
       response.should be_success

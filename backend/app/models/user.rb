@@ -64,20 +64,20 @@ class User < ActiveRecord::Base
    # In v0.1.32.beta1 of devise_token_auth. There's a bug where expiry is not
    # working properly.
    # TODO(mkhatib): Drop this when new stable release is released.
-   def build_auth_header(token, client_id='default')
-     client_id ||= 'default'
+  def build_auth_header(token, client_id='default')
+    client_id ||= 'default'
 
-     # client may use expiry to prevent validation request if expired
-     # must be cast as string or headers will break
-     expiry = self.tokens[client_id]['expiry'] || self.tokens[client_id][:expiry]
+    # client may use expiry to prevent validation request if expired
+    # must be cast as string or headers will break
+    expiry = self.tokens[client_id]['expiry'] || self.tokens[client_id][:expiry]
 
-     return {
-       "access-token" => token,
-       "token-type"   => "Bearer",
-       "client"       => client_id,
-       "expiry"       => expiry.to_s,
-       "uid"          => self.uid
-     }
-   end
+    return {
+     "access-token" => token,
+     "token-type"   => "Bearer",
+     "client"       => client_id,
+     "expiry"       => expiry.to_s,
+     "uid"          => self.uid
+    }
+  end
 
 end

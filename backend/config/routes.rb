@@ -5,12 +5,6 @@ Rails.application.routes.draw do
       confirmations:  'api/v1/confirmations',
       omniauth_callbacks:  'api/v1/omniauth_callbacks'
     }
-    # devise_for :users, controllers: {
-    #   sessions: 'sessions',
-    #   registrations: 'registrations',
-    #   confirmations: 'confirmations',
-    #   passwords: "passwords",
-    # }
 
     concern :recommendable do
       resources :recommendations, except: [:new, :edit, :show, :update, :delete]
@@ -22,14 +16,6 @@ Rails.application.routes.draw do
 
     namespace :api do
       namespace :v1 do
-        # devise_scope :user do
-        #   match 'confirm/:confirmation_token', :to => 'confirmations#show', :as => 'user_confirm', :via => [:get]
-        #   match 'registrations', :to => 'registrations#create', :as => 'register', :via => [:post, :options]
-        #   match 'passwords', :to => 'passwords#create', :as => 'reset_password', :via => [:post, :options]
-        #   match 'passwords', :to => 'passwords#update', :as => 'update_password', :via => [:put, :options]
-        #   match 'sessions', :to => 'sessions#create', :as => 'login', :via => [:post, :options]
-        #   match 'sessions', :to => 'sessions#destroy', :as => 'logout', :via => [:delete, :options]
-        # end
 
         resources :articles, concerns: [:recommendable, :commentable]
         resources :images

@@ -39,7 +39,7 @@ angular.module('webClientApp')
       // TODO(mkhatib): This is pretty ugly. Clean it up and move strings into
       // a constant file definition.
       var confirmationMessage = 'A confirmation email was sent to your account';
-      var invalidMessage = 'Invalid login credentials';
+      var invalidMessage = 'credentials';
       var message = response.errors && response.errors[0] || '';
       if (message.indexOf(confirmationMessage) !== -1) {
         $scope.error = 'يجب عليك تفعيل حسابك. تم إرسال رسالة لبريدك الإلكتروني. تأكد من فحص مجلد السبام.';
