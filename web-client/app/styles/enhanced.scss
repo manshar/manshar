@@ -6,8 +6,9 @@ body {
 
 .card-list {
   .card {
-    width: 47.5%;
-    margin: 1%;
+    width: 48%;
+    margin: 0.5em 0;
+    margin-right: 1.3333333333%;
 
     display: inline-block;
     vertical-align: top;
@@ -26,10 +27,19 @@ body {
   }
 }
 
+.profile-list {
+  .write-new-button {
+    margin: 0;
+    margin-right: 2em;
+  }
+}
+
 .users-card-list {
   &.card-list {
     .card {
-      width: 30%;
+      width: 24%;
+      margin: 0.5em 0;
+      margin-right: 0.8%;
 
       .header {
         height: 12em;
@@ -342,14 +352,18 @@ body {
   .card-list {
     .card {
       width: 30%;
-      margin: 1.3%;
+      margin: 1em 0;
+      margin-right: 2.5%;
     }
   }
 
   .users-card-list {
     &.card-list {
       .card {
-        width: 20%;
+        width: 19%;
+        margin: 0.5em 0;
+        margin-right: 0.8333333333%;
+
         .header {
           height: 15em;
 

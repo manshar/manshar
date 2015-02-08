@@ -81,6 +81,13 @@ input[type="password"] {
 
 .header-label {
   font-size: 0.7em;
+  text-align: right;
+
+  &.category-header-label{
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
   span {
     color: #606060;
     background-color: #eee;
@@ -109,7 +116,32 @@ input[type="password"] {
   }
 }
 
+.write-new-button {
+  display: block;
+  color: white;
+  background: #ca1504;
+  font-weight: bold;
+  width: 160px;
+  text-align: center;
+  padding: 0.5em;
+  box-sizing: content-box;
+  margin: 0 auto;
+  margin-top: 1.2em;
+
+  .fa {
+    padding-left: 0.3em;
+  }
+}
+
+.profile-list {
+  .write-new-button {
+    margin-top: 0;
+  }
+}
+
 .category-list {
+  text-align: center;
+
   .card.category {
     cursor: pointer;
     width: 110px;
@@ -124,6 +156,18 @@ input[type="password"] {
     i {
       font-size: 2em;
     }
+  }
+}
+
+.category-nav-actions {
+  position: absolute;
+  font-size: 1.3em;
+  top: 0.6em;
+  right: 1em;
+
+  a {
+    padding-right: 0.4em;
+    color: #fff;
   }
 }
 
@@ -253,6 +297,12 @@ input[type="password"] {
   bottom: 0;
   width: 100%;
   text-align: center;
+
+  &.profile-tabs {
+    a {
+      color: #fff;
+    }
+  }
 
   a {
     span {
@@ -506,9 +556,9 @@ input[type="password"] {
   .card {
     background-color: #fff;
     box-shadow: 0 2px 10px 0 rgba(0,0,0,.1);
-    margin: 1em .5em;
     cursor: default;
     position: relative;
+    margin: 0.7em;
 
     .cover {
       height: 100%;
@@ -622,8 +672,8 @@ input[type="password"] {
 
     .stats-box {
       position: absolute;
-      top: 1.2em;
-      left: 1.4em;
+      top: 0.5em;
+      right: 0.5em;
       font-size: 0.6em;
       font-weight: bold;
       color: #aaa;
@@ -661,13 +711,22 @@ input[type="password"] {
   &.card-list {
     .card {
       display: inline-block;
-      width: 45%;
+      width: 32%;
+      margin: 0.1em 0;
+      margin-right: 1%;
 
       .header {
         height: 10em;
 
         .stats-box {
           font-size: .9em;
+        }
+
+        h1 {
+          position: absolute;
+          right: 0;
+          left: 0;
+          bottom: 0.5em;
         }
 
         .title {
@@ -713,8 +772,7 @@ input[type="password"] {
 
 ul.cards-list-container {
   width: 100%;
-  min-height: 70%;
-  padding: 20px;
+  padding-top: 20px;
   list-style: none;
   word-wrap: break-word;
   background-color: #f9f9f9;
@@ -985,7 +1043,14 @@ ul.cards-list-container {
 
     button {
       background-color: #c0c0c0;
-      font-size: 0.8em;
+      font-size: 0.4em;
+      width: 190px;
+      border-radius: 0;
+      color: #000;
+
+      &:hover {
+        color: #fff;
+      }
     }
   }
 
