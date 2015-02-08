@@ -25,4 +25,8 @@ angular.module('webClientApp')
         function(articles) {
       $scope.articles = articles;
     });
+
+    $scope.showCategoriesPicker = function() {
+      $rootScope.$emit('openTopicPicker', {pickOnlyCategory: true});
+    };
   }]);

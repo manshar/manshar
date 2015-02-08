@@ -59,14 +59,10 @@
         <div class="title">
           <a ng-href="/profiles/{{user.id}}">
             <h1>{{user.name}}</h1>
-            <h2>{{user.bio}}</h2>
           </a>
           <div class="stats-box">
             <span ng-show="user.published_articles_count">
               <i class="fa fa-pencil-square-o"></i> {{user.published_articles_count}}
-            </span>
-            <span ng-show="user.recommendations_count">
-              <i class="fa fa-thumbs-o-up"></i> {{user.recommendations_count}}
             </span>
             <span ng-show="user.comments_count">
               <i class="fa fa-comment-o"></i> {{user.comments_count}}

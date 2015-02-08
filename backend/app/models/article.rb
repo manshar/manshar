@@ -59,6 +59,7 @@ class Article < ActiveRecord::Base
 
   def update_published_articles_count
     self.user.published_articles_count = self.user.published_articles.count
+    self.user.save
   end
 
 end
