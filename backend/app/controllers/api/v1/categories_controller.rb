@@ -1,7 +1,7 @@
 class Api::V1::CategoriesController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:index, :show]
-  skip_after_filter :verify_authorized, only: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
+  after_action :verify_authorized, except: [:index, :show]
   respond_to :json
 
   # GET /api/v1/categories

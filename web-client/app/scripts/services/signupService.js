@@ -1,43 +1,44 @@
 'use strict';
 
 angular.module('webClientApp')
-  .service('SignupService', ['$http', '$rootScope', 'API_HOST',
-      function ($http, $rootScope, API_HOST) {
+  .service('SignupService', ['$http', '$rootScope', '$auth', 'API_HOST',
+      function ($http, $rootScope, $auth, API_HOST) {
 
-    var baseUrl = '//' + API_HOST + '/api/v1/';
-
-    /**
-     * These configs are needed. AngularJS identity tranformer
-     * can automatically figure out that this is a multipart
-     * content and use the correct Content-Type.
-     */
-    var configs = {
-      headers: {'Content-Type': undefined},
-      transformRequest: angular.identity
-    };
-
-    var createFormData = function (data) {
-      var fd = new FormData();
-      for (var key in data.user) {
-        // Remove special keys for angular resources.
-        if (key.trim() === '' || key.indexOf('$') === 0 || key === 'toJSON') {
-          continue;
-        }
-        fd.append('user[' + key + ']', data.user[key]);
-      }
-      return fd;
-    };
+    var baseUrl = '//' + API_HOST;
 
     return {
 
-      signup: function(user, optSuccess, optError) {
-        $http.post(baseUrl + 'registrations.json',
-                   createFormData({user: user}), configs)
+      resendConfirmation: function(email, optSuccess, optError) {
+        $http.post(baseUrl + '/auth/confirmation', {
+          'confirm_success_url': 'http://' + document.location.host + '/login',
+          'user': {
+            'email': email
+          }
+        })
         .then(
 
           // Success.
           angular.bind(this, function(response) {
             $rootScope.$broadcast('user.signedUp');
+            if (optSuccess) {
+              optSuccess(response.data);
+            }
+          }),
+
+          // Error.
+          function(response) {
+            if(optError) {
+              optError(response.data);
+            }
+          });
+      },
+
+      signup: function(user, optSuccess, optError) {
+        $auth.submitRegistration(user)
+        .then(
+
+          // Success.
+          angular.bind(this, function(response) {
             if (optSuccess) {
               optSuccess(response.data);
             }

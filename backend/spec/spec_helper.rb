@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'email_spec'
+require 'minitest/autorun'
 require 'rspec/rails'
 require 'rspec/autorun'
 
@@ -43,4 +44,6 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  config.expect_with(:rspec) { |c| c.syntax = :should }
 end

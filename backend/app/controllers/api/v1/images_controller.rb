@@ -1,6 +1,7 @@
 class Api::V1::ImagesController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:show]
+  after_action :verify_authorized
+  before_action :authenticate_user!
   respond_to :json
 
   def show

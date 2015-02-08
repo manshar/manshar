@@ -8,8 +8,8 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('User', ['$rootScope', '$resource', '$http', 'API_HOST', 'StorageService',
-      function ($rootScope, $resource, $http, API_HOST, StorageService) {
+  .service('User', ['$rootScope', '$resource', '$http', 'API_HOST',
+      function ($rootScope, $resource, $http, API_HOST) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserResource = $resource(baseUrl + 'users/:userId', {}, {
@@ -49,11 +49,6 @@ angular.module('webClientApp')
 
             // Success.
             angular.bind(this, function(response) {
-              var userData = StorageService.get('userData');
-              userData.user = response.data;
-              $rootScope.currentUser = response.data;
-              StorageService.set('userData', userData);
-
               if (optSuccess) {
                 optSuccess(response.data);
               }

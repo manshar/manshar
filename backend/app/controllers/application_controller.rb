@@ -1,28 +1,30 @@
-class ApplicationController < ActionController::API
-  include ActionController::MimeResponds
-  include ActionController::StrongParameters
-  include ActionController::ImplicitRender
+class ApplicationController < ActionController::Base
   include Pundit
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   respond_to :json
-
-  # By default authenticate and authorize all requests. For actions that don't need
-  # authentication or authorization use skip_before_filter :only and skip_after_filter
-  # :only respectively to whitelist them.
-  before_filter :authenticate_user!
-  after_filter :verify_authorized, except: [:index]
+  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-
   private
 
-  def user_not_authorized
-    render :nothing => true, :status => :unauthorized
-  end
+    def user_not_authorized
+      render nothing: true, status: :unauthorized
+    end
 
-  def not_found
-  	render :nothing => true, :status => :not_found
-  end
+    def not_found
+    	render nothing: true, status: :not_found
+    end
+
+    def configure_permitted_parameters
+      [:bio, :avatar, :name].each do |attribute|
+        devise_parameter_sanitizer.for(:sign_up) << attribute
+        devise_parameter_sanitizer.for(:account_update) << attribute
+      end
+    end
+
 end

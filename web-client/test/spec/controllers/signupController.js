@@ -6,6 +6,22 @@ describe('Controller: SignupCtrl', function () {
 
   var createController, scope, location, routeParams, SignupSrv, errorMessages;
 
+  module(function($provide) {
+    $provide.service('$auth', function() {
+      this.apiUrl = jasmine.createSpy('apiUrl');
+      this.initialize = jasmine.createSpy('initialize');
+      this.authenticate = jasmine.createSpy('authenticate');
+      this.validateUser = jasmine.createSpy('validateUser');
+      this.submitRegistration = jasmine.createSpy('submitRegistration');
+      this.submitLogin = jasmine.createSpy('submitLogin');
+      this.signOut = jasmine.createSpy('signOut');
+      this.requestPasswordReset = jasmine.createSpy('requestPasswordReset');
+      this.updatePassword = jasmine.createSpy('updatePassword');
+      this.updateAccount = jasmine.createSpy('updateAccount');
+      this.destroyAccount = jasmine.createSpy('destroyAccount');
+    });
+  });
+
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $location, $rootScope, $routeParams, SignupService) {
     routeParams = $routeParams;

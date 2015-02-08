@@ -3,12 +3,12 @@
     click-outside="clickedOutside()">
 
   <div>
-    <textarea ng-show="currentUser"
+    <textarea ng-show="user.signedIn"
       ng-model="newComment"
       ng-keypress="handleKeypress($event)"
       placeholder="اكتب تعليق"></textarea>
   </div>
-  <div class="warning-note" ng-show="!currentUser.id">
+  <div class="warning-note" ng-show="!user.id">
     يجب عليك
     <a ng-click="$root.showLoginDialog()"> تسجيل الدخول</a>
     لترك تعليق!
@@ -27,7 +27,7 @@
       </span>
       <div class="actions">
         <a class="delete-button" ng-click="deleteComment(comment)"
-            ng-show="$root.isOwner(currentUser, comment) || $root.isOwner(currentUser, article)">
+            ng-show="$root.isOwner(user, comment) || $root.isOwner(user, article)">
           <i class="fa fa-trash-o"></i>
         </a>
       </div>

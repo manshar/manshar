@@ -1,23 +1,30 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('LoginCtrl', ['$scope', '$http', '$location', '$routeParams', '$analytics', 'LoginService',
-      function ($scope, $http, $location, $routeParams, $analytics, LoginService) {
+  .controller('LoginCtrl', ['$scope', '$http', '$location', '$routeParams', '$analytics', 'LoginService', 'SignupService',
+      function ($scope, $http, $location, $routeParams, $analytics, LoginService, SignupService) {
 
     $scope.isLoginPage = $location.path() === '/login';
-    $scope.user = {};
     $scope.error = null;
 
     $scope.login = function(user) {
       LoginService.login(user, success, error);
     };
 
-    var success = function() {
+    $scope.$on('auth:login-success', function(event, data) {
+      success(data);
+    });
+
+    $scope.$on('auth:login-error', function(event, data) {
+      error(data);
+    });
+
+    var success = function(user) {
       $analytics.eventTrack('Login Success', {
         category: 'User'
       });
       if ($scope.isLoginPage) {
-        $location.path($routeParams.prev || '/')
+        $location.path($routeParams.prev || '/profiles/' + user.id)
           // Remove the prev param when redirecting.
           .search('prev', null);
       }
@@ -28,7 +35,30 @@ angular.module('webClientApp')
         category: 'User',
         label: angular.toJson(response.errors)
       });
-      $scope.error = 'خطأ في البريد الالكتروني أو كلمة المرور';
+
+      // TODO(mkhatib): This is pretty ugly. Clean it up and move strings into
+      // a constant file definition.
+      var confirmationMessage = 'A confirmation email was sent to your account';
+      var invalidMessage = 'credentials';
+      var message = response.errors && response.errors[0] || '';
+      if (message.indexOf(confirmationMessage) !== -1) {
+        $scope.error = 'يجب عليك تفعيل حسابك. تم إرسال رسالة لبريدك الإلكتروني. تأكد من فحص مجلد السبام.';
+        $scope.nonConfirmed = true;
+      } else if (message.indexOf(invalidMessage) !== -1) {
+        $scope.error = 'خطأ في البريد الالكتروني أو كلمة المرور';
+      } else {
+        $scope.error = response.errors[0] || 'حدث خطأ ما. الرجاء المحاولة مرة أخرى';
+      }
+      $scope.flash = null;
+    };
+
+    $scope.resendConfirmation = function(user) {
+      SignupService.resendConfirmation(user.email, function() {
+        $scope.flash = 'تم إرسال رسالة إلى بريدك الإلكتروني لتفعيل حسابك.';
+        $scope.flashNote = '(تأكد من مجلد السبام)';
+        $scope.nonConfirmed = false;
+        $scope.error = null;
+      });
     };
 
   }]);

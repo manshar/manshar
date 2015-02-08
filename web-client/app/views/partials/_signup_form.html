@@ -6,56 +6,39 @@
       <li ng-repeat="(key, data) in errorMessages">{{key}} {{data}}</li>
     </ul>
   </div>
-  <form id="signup-form" name="signupForm" ng-submit="signup(user)">
-
-    <label>
-        صورتك
-        <input
-          type="file"
-          required
-          manshar-file
-            file-model="user.avatar"
-          analytics-on="click"
-            analytics-event="Pick User Avatar"
-        />
-    </label>
-
-    <label>
-      <input
-        type="text"
-        ng-model="user.name"
-        autofocus
-        required
-        placeholder="الاسم" />
-    </label>
-
+  <div class="form-flash" ng-show="flash">
+    {{flash}}
+    <p class="note">{{flashNote}}</p>
+  </div>
+  <form id="signup-form" name="signupForm" ng-submit="signup(userForm)" ng-hide="flash">
 
     <label>
       <input
         type="email"
-        ng-model="user.email"
+        ng-model="userForm.email"
         required
-        placeholder="الايميل" />
+        placeholder="البريد الإلكتروني" />
     </label>
 
     <label>
       <input
         type="password"
-        ng-model="user.password"
+        ng-model="userForm.password"
         required
         pattern=".{8,}"
         placeholder="كلمة المرور - ٨ حروف على الأقل" />
     </label>
 
     <label>
-      <textarea
-        ng-model="user.bio"
-        class="input"
-        cols= "23"
+      <input
+        type="text"
+        ng-model="userForm.name"
+        autofocus
         required
-        placeholder="السيرة الذاتية"></textarea>
+        placeholder="الاسم بالعربية"
+        pattern="([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufc3f]|[\ufe70-\ufefc])+(\s*([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufc3f]|[\ufe70-\ufefc])*?)*" title="أدخل الاسم بالعربية"/>
     </label>
 
-    <button type="submit">تسجيل</button>
+    <button type="submit">تسجيل حساب جديد</button>
   </form>
 </div>

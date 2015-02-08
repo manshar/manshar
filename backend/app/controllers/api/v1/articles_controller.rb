@@ -1,8 +1,10 @@
 class Api::V1::ArticlesController < ApplicationController
-
-  before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :load_query, only: [:index]
   respond_to :json
+
+  after_action :verify_authorized, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_article, only: [:show, :update, :destroy]
+  before_action :load_query, only: [:index]
 
   # GET /api/v1/articles
   # GET /api/v1/articles.json
@@ -11,16 +13,15 @@ class Api::V1::ArticlesController < ApplicationController
   # GET /api/v1/categories/1/topics/1/articles
   # GET /api/v1/categories/1/topics/1/articles.json
   def index
-    # Use the custom Article.public method to return all articles that is
+    # Use the custom Article.published method to return all articles that is
     # marked published.
-    @articles = @query.public.try(order_param).preload(:user, :topic)
+    @articles = @query.publishings.try(order_param).preload(:user, :topic)
     render 'api/v1/articles/index'
   end
 
   # GET /api/v1/articles/1
   # GET /api/v1/articles/1.json
   def show
-    @article = Article.find(params[:id])
     authorize @article
     @next = @article.next
     render 'api/v1/articles/show'
@@ -42,7 +43,6 @@ class Api::V1::ArticlesController < ApplicationController
   # PATCH/PUT /api/v1/articles/1
   # PATCH/PUT /api/v1/articles/1.json
   def update
-    @article = Article.find(params[:id])
     authorize @article
     if @article.update(article_params)
       render 'api/v1/articles/show'
@@ -54,7 +54,6 @@ class Api::V1::ArticlesController < ApplicationController
   # DELETE /api/v1/articles/1
   # DELETE /api/v1/articles/1.json
   def destroy
-    @article = Article.find(params[:id])
     authorize @article
     @article.destroy
     head :no_content
@@ -63,30 +62,35 @@ class Api::V1::ArticlesController < ApplicationController
 
   private
 
-  def load_query
-    if params[:topic_id]
-      @query = Topic.find(params[:topic_id]).articles.public
-    elsif params[:category_id]
-      @query = Category.find(params[:category_id]).articles.public
-    else
-      @query = Article.public
+    def set_article
+      @article = Article.find(params[:id])
     end
-  end
 
-  def article_params
-    params.require(
-      :article).permit(
-        :title, :tagline, :body, :published, :cover, :topic_id)
-  end
-
-  def order_param
-    # It is important not to allow other values for order otherwise
-    # users can run malicious method on all articles :-).
-    permitted_orders = ['popular', 'best', 'recents']
-    if permitted_orders.include?(params[:order])
-      params[:order]
-    else
-      :best
+    def load_query
+      if params[:topic_id]
+        @query = Topic.find(params[:topic_id]).articles.publishings
+      elsif params[:category_id]
+        @query = Category.find(params[:category_id]).articles.publishings
+      else
+        @query = Article.publishings
+      end
     end
-  end
+
+    def article_params
+      params.require(
+        :article).permit(
+          :title, :tagline, :body, :published, :cover, :topic_id)
+    end
+
+    def order_param
+      # It is important not to allow other values for order otherwise
+      # users can run malicious method on all articles :-).
+      permitted_orders = ['popular', 'best', 'recents']
+      if permitted_orders.include?(params[:order])
+        params[:order]
+      else
+        :best
+      end
+    end
+
 end

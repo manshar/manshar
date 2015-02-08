@@ -1190,8 +1190,48 @@ button {
     text-align: center;
   }
 
+  .form-flash {
+    background: #4CAF50;
+    color: #FFFFFF;
+    line-height: 40px;
+    padding: 4px;
+    text-align: center;
+
+    .note {
+      font-size: .7em;
+    }
+  }
+
+  .oauth-providers {
+    a {
+      display: inline-block;
+      width: 49%;
+      padding: 0.5em;
+      text-align: center;
+      color: #fff;
+      font-size: 0.8em;
+
+      &.google-login-button {
+        background-color: #D50000;
+
+        &:hover {
+          background-color: #B71C1C;
+        }
+      }
+
+      &.facebook-login-button {
+        background-color: #3F51B5;
+
+        &:hover {
+          background-color: #1A237E;
+        }
+      }
+    }
+  }
+
   form {
     @include row(table);
+    margin: 1em 0;
 
     label {
       display: inline-block;

@@ -1,12 +1,12 @@
 <div class="manshar-profile">
-  <div class="avatar" manshar-cover url="{{user.cover_url}}">
-    <div class="avatar blured" manshar-cover url="{{user.cover_url}}"></div>
+  <div class="avatar" manshar-cover url="{{profile.cover_url}}">
+    <div class="avatar blured" manshar-cover url="{{profile.cover_url}}"></div>
   </div>
   <div class="title">
-    <img ng-src="{{user.cover_url}}"/>
-    <h1>{{user.name}}</h1>
-    <h4>{{user.bio}}</h4>
-    <button class="action-button" ng-click="editProfile()" ng-show="currentUser.id == user.id">
+    <img ng-src="{{profile.cover_url}}"/>
+    <h1>{{profile.name}}</h1>
+    <h4>{{profile.bio}}</h4>
+    <button class="action-button" ng-click="editProfile()" ng-show="user.id == profile.id">
       <i class="fa fa-pencil"></i>
       تعديل معلومات صفحتك
     </button>
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="profile-article-action" ng-show="isOwner(currentUser, article) && activeTab == 'published'">
+      <div class="profile-article-action" ng-show="isOwner(user, article) && activeTab == 'published'">
         <button class="action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
           <i class="fa fa-trash-o"></i>
         </button>
@@ -61,7 +61,7 @@
 </ul>
 
 
-<ul class="cards-list-container one-column card-list" ng-show="drafts[0] && currentUser.id == user.id && activeTab == 'published'">
+<ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
   <h1 class="header-label">
     <span>المسودات</span>
   </h1>
@@ -83,7 +83,7 @@
           </h3>
         </div>
       </div>
-      <div class="profile-article-action" ng-show="isOwner(currentUser, article)">
+      <div class="profile-article-action" ng-show="isOwner(user, article)">
         <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
           <i class="fa fa-trash-o"></i>
         </button>

@@ -28,7 +28,7 @@ angular.module('webClientApp')
      * If the current user is not the owner redirect the user to view.
      */
     var authorizeUser = function (article) {
-      if (!$rootScope.isOwner($rootScope.currentUser, article)) {
+      if (!$rootScope.isOwner($rootScope.user, article)) {
         $location.path('/articles/' + article.id);
       }
     };
@@ -58,7 +58,6 @@ angular.module('webClientApp')
         });
       });
     }
-
 
     var updateSuccess = function (resource) {
       lastSavedArticle = angular.copy(resource);
@@ -202,7 +201,7 @@ angular.module('webClientApp')
     /**
      * When the user logout while in edit mdoe redirect the user,
      */
-    var loggedOutUnbined = $rootScope.$on('user.loggedOut', function () {
+    var loggedOutUnbined = $rootScope.$on('auth:logout-success', function () {
       if ($scope.article.published) {
         var location = '/articles/' + $routeParams.articleId;
         $location.path(location);

@@ -1,29 +1,28 @@
 class Article < ActiveRecord::Base
-  include Utils
+  include Concerns::Utils
 
-  before_save :published_post, :time_to_read
-  after_save :update_published_articles_count
+  belongs_to :user
+  belongs_to :topic
+  has_one :category, through: :topic, autosave: false
+  has_many :recommendations, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  scope :publishings, -> { where(published: true) }
+  scope :drafts, -> { where(published: false) }
 
   scope :popular, -> { order('hotness DESC') }
   scope :best, -> { order('recommendations_count DESC') }
   scope :recents, -> { order('published_at DESC') }
 
-  belongs_to :user
-  has_many :recommendations, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
-  belongs_to :topic
-  has_one :category, through: :topic, autosave: false
+  before_save :published_post, :time_to_read
+  after_save :update_published_articles_count
 
   dragonfly_accessor :cover do
     storage_options do |attachment|
       { headers: {"x-amz-acl" => "public-read-write"} }
     end
   end
-
   abs_url_for :cover
-
-  scope :public, -> { where(published: true) }
-  scope :drafts, -> { where(published: false) }
 
   # Instance Methods.
   def publish!
@@ -43,9 +42,9 @@ class Article < ActiveRecord::Base
   end
 
   def next
-    next_article = Article.public.popular.where('hotness < ?', hotness).first
+    next_article = Article.publishings.popular.where('hotness < ?', hotness).first
     if next_article.nil?
-        next_article = Article.public.popular.where('hotness > ?', hotness).first
+        next_article = Article.publishings.popular.where('hotness > ?', hotness).first
     end
     next_article
   end

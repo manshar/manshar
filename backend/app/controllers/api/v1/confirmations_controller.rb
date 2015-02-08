@@ -1,19 +1,60 @@
-class Api::V1::ConfirmationsController < Devise::ConfirmationsController
+class Api::V1::ConfirmationsController < DeviseTokenAuth::ConfirmationsController
 
-  skip_before_filter :authenticate_user_from_token!, :only => [:show]
-  skip_after_filter :verify_authorized
 
-  respond_to :json
-
-  def show
-    self.resource = resource_class.confirm_by_token(params[:confirmation_token])
-
-    if resource.errors.empty?
-      sign_in(resource_name, resource)
-      redirect_to('http://' + ENV['WEB_CLIENT_HOST'])
-    else
-      render :json => resource.errors, :status => :bad_request
+  # TODO(mkhatib): Drop the whole controller once devise_token_auth gem
+  # supports resending confirmation emails.
+  def create
+    unless resource_params[:email]
+      return render json: {
+        success: false,
+        errors: ['You must provide an email address.']
+      }, status: 400
     end
-  end
 
+    unless params[:confirm_success_url]
+      return render json: {
+        success: false,
+        errors: ['Missing redirect url.']
+      }, status: 400
+    end
+
+    if resource_class.case_insensitive_keys.include?(:email)
+      email = resource_params[:email].downcase
+    else
+      email = resource_params[:email]
+    end
+
+    q = "uid = ? AND provider='email'"
+
+    # fix for mysql default case insensitivity
+    if ActiveRecord::Base.connection.adapter_name.downcase.starts_with? 'mysql'
+      q = "BINARY uid = ? AND provider='email'"
+    end
+
+    @resource = resource_class.where(q, email).first
+
+    errors = nil
+
+    if @resource
+      @resource.send_confirmation_instructions({
+        redirect_url: params[:confirm_success_url],
+        client_config: params[:config_name]
+      })
+    else
+      errors = ["Unable to find user with email '#{email}'."]
+    end
+
+    if errors
+      render json: {
+        success: false,
+        errors: errors
+      }, status: 400
+    else
+      render json: {
+        status: 'success',
+        data:   @resource.as_json
+      }
+    end
+
+  end
 end

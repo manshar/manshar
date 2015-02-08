@@ -1,4 +1,4 @@
-module Utils
+module Concerns::Utils
   extend ActiveSupport::Concern
 
   # Returns an absolute URL with the host and the passed url.

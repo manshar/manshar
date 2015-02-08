@@ -8,24 +8,25 @@ angular.module('webClientApp')
      * If the current user is not the owner redirect the user to view.
      */
     var authorizeUser = function (user) {
-      if ($rootScope.currentUser.id !== user.id) {
+      var id = parseInt($rootScope.user.id);
+      if (id !== user.id) {
         $location.path('/profiles/' + user.id);
       }
     };
 
-    $scope.user = User.get({'userId': $routeParams.userId}, authorizeUser);
+    $scope.profile = User.get({'userId': $routeParams.userId}, authorizeUser);
     $scope.error = null;
     $scope.errorMessages = {};
 
-    $scope.update = function(user) {
-      User.update($scope.user.id, user, success, error);
+    $scope.update = function(profile) {
+      User.update($scope.profile.id, profile, success, error);
     };
 
     var success = function() {
       $analytics.eventTrack('Update Success', {
         category: 'User'
       });
-      $location.path($routeParams.prev || '/');
+      $location.path('/profiles/' + $routeParams.userId);
     };
 
     var error = function(response) {

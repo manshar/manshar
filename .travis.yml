@@ -4,6 +4,8 @@ env:
   - DISPLAY=:99.0
   global:
   - MANSHAR_HOME=/home/travis/build/manshar/manshar
+  - SECRET_TOKEN=a59d98c49d5a9b6ccf7e14cc35cb005e1ba9ab6656070e4c05e5df95d07afd44f98fd48552a68ac83e6dc3440691db011ef635c0c1a74102964686e7d51f3bf3
+  - DRAGONFLY_SECRET=c2jq0a9cj039jc01mamc09qjc930ur10fjafj0a9fj09fj23qnweocn0qwf0qfjq
   - secure: Ek/EsKA4yC6RrhlHNhlSsztud+UxFxbvwiaEkqIo2MTo1ewr40/7k8JLuONgYNHL47/ZKvzqXfRiD+Zq18xIXNEO8KyIf3ASLmhMYOLQsPZIsmCSUgnBpwpfiO9tiuAf4ww5+A8sD4Ob4xnkLpwB961bBn1RyIKN6mymuxzdtPw=
 rvm:
   - 2.0.0

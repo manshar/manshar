@@ -10,7 +10,7 @@ angular.module('webClientApp')
       $rootScope.page.image = resource.cover_url;
       $rootScope.page.publishedTime = resource.created_at;
       $rootScope.page.description = resource.bio;
-      $scope.user = resource;
+      $scope.profile = resource;
     });
 
     $scope.editArticle = function (articleId) {
@@ -18,7 +18,7 @@ angular.module('webClientApp')
     };
 
     $scope.editProfile = function () {
-      $location.path('/profiles/' + $rootScope.currentUser.id + '/edit');
+      $location.path('/profiles/' + $rootScope.user.id + '/edit');
     };
 
     var deleteSuccess = function () {
@@ -88,8 +88,8 @@ angular.module('webClientApp')
       $scope.activeTab = 'published';
       // Only get drafts if the current profile being viewed and the logged in user
       // are the same person.
-      if (($rootScope.currentUser &&
-           $rootScope.currentUser.id === parseInt($routeParams.userId))) {
+      if (($rootScope.user &&
+           $rootScope.user.id === parseInt($routeParams.userId))) {
         $scope.drafts = UserDraft.query({});
       }
 

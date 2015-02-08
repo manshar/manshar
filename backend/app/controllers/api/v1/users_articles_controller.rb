@@ -1,9 +1,8 @@
 class Api::V1::UsersArticlesController < ApplicationController
-  after_filter :verify_authorized, except: [:index, :drafts]
-  after_filter :verify_policy_scoped, :only => [:drafts]
-
-  before_filter :authenticate_user!, except: [:index]
   respond_to :json
+
+  after_action :verify_policy_scoped, :only => [:drafts]
+  before_action :authenticate_user!, except: [:index]
 
   # GET /api/v1/users/1/articles
   # GET /api/v1/users/1/articles.json
@@ -24,12 +23,13 @@ class Api::V1::UsersArticlesController < ApplicationController
   end
 
   private
-  def profile
-    if params[:user_id].nil?
-      current_user
-    else
-      User.find(params[:user_id])
+
+    def profile
+      if params[:user_id].nil?
+        current_user
+      else
+        User.find(params[:user_id])
+      end
     end
-  end
 
 end

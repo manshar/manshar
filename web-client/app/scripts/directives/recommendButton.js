@@ -6,9 +6,9 @@ angular.module('webClientApp')
   .directive('recommendButton', ['$rootScope', 'ArticleRecommendation', function ($rootScope, ArticleRecommendation) {
 
     var getUserRecommendation = function(article, recommendations) {
-      if ($rootScope.currentUser) {
+      if ($rootScope.user) {
         for (var i=0; i < recommendations.length ; i++) {
-          if ($rootScope.isOwner($rootScope.currentUser, recommendations[i])) {
+          if ($rootScope.isOwner($rootScope.user, recommendations[i])) {
             return recommendations[i];
           }
         }

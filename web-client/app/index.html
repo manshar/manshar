@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html ng-app="webClientApp" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <base href="/">
+    <base href="/" target="_blank">>
     <meta name="fragment" content="!">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
@@ -53,26 +53,26 @@
     <!-- site nav -->
     <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="left"
         analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon"/>
-
     <nav class="site-nav" snap-drawer="left">
-      <div class="profile-badge">
-        <a href="/profiles/{{currentUser.id}}" snap-close ng-show="isLoggedIn"
+      <div class="profile-badge" ng-if="user.thumb_url">
+        <a href="/profiles/{{user.id}}" snap-close ng-show="user.signedIn"
             analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Profile Picture">
-          <img ng-src="{{currentUser.thumb_url}}" ng-show="currentUser"/>
-          <span>{{currentUser.name}}</span>
+          <img ng-src="{{user.thumb_url}}" ng-show="user"/>
+          <span>{{user.name}}</span>
         </a>
       </div>
       <ul>
+        <li ng-if="!user.thumb_url"><a href="/profiles/{{user.id}}" snap-close>{{user.name || user.email }}</a></li>
         <!-- TDOD: Convert to ng-repeat -->
         <li><a href="/" snap-close
             analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Main Page Link">الصفحة الرئيسية</a></li>
-        <li><a href="/login" snap-close ng-show="!isLoggedIn" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">تسجيل الدخول</a></li>
-        <li><a snap-close ng-show="isLoggedIn" ng-click="logout()"
+        <li><a href="/login" snap-close ng-show="!user.signedIn" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">تسجيل الدخول</a></li>
+        <li><a snap-close ng-show="user.signedIn" ng-click="logout()"
             analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link">تسجيل الخروج</a></li>
       </ul>
       <ul class="base-links">
         <li class="terms">منشر غير مسؤول عن محتوى المقالات ويتحمل الكاتب كامل المسؤولية عن كون المعلومات في المقال صحيحة ويجب عليه عدم استخدام أي محتوى لا يمتلكه ويتحمل الكاتب كامل المسؤولية اذا حصل ذلك</li>
-        <li ng-show="currentUser.admin"><a snap-close href="admin" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Admin Link">إدارة الموقع</a></li>
+        <li ng-show="user.admin"><a snap-close href="admin" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Admin Link">إدارة الموقع</a></li>
         <li><a href="http://www.manshar.org" target="blank" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav About Manshar Link">عن منشر</a></li>
         <li><a href="http://www.github.com/manshar/manshar" target="blank"
           analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Open Source Link"><i class="fa fa-github"></i> مشروع منشر مفتوح المصدر</a></li>
@@ -99,8 +99,8 @@
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
 
@@ -114,6 +114,8 @@
         <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
         <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
         <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+        <script src="bower_components/angular-cookie/angular-cookie.js"></script>
+        <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -128,7 +130,8 @@
         <script src="scripts/controllers/newArticleController.js"></script>
         <script src="scripts/controllers/editArticleController.js"></script>
         <script src="scripts/controllers/profileController.js"></script>
-        <script src="scripts/controllers/passwordController.js"></script>
+        <script src="scripts/controllers/resetPasswordController.js"></script>
+        <script src="scripts/controllers/updatePasswordController.js"></script>
         <script src="scripts/controllers/editProfileController.js"></script>
         <script src="scripts/controllers/loginController.js"></script>
         <script src="scripts/controllers/signupController.js"></script>
@@ -141,10 +144,8 @@
         <script src="scripts/services/recommendationService.js"></script>
         <script src="scripts/services/imageService.js"></script>
         <script src="scripts/services/userService.js"></script>
-        <script src="scripts/services/passwordService.js"></script>
         <script src="scripts/services/loginService.js"></script>
         <script src="scripts/services/signupService.js"></script>
-        <script src="scripts/services/storageService.js"></script>
 
         <script src="scripts/directives/anchoredComment.js"></script>
         <script src="scripts/directives/anchoredComments.js"></script>

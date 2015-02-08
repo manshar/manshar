@@ -1,8 +1,9 @@
 class Api::V1::CommentsController < ApplicationController
-
-  before_filter :authenticate_user!, except: [:index]
-  before_filter :load_parent
   respond_to :json
+
+  after_action :verify_authorized, except: [:index]
+  before_action :authenticate_user!, except: [:index]
+  before_action :load_parent
 
   # GET /api/v1/articles/1/comments
   # GET /api/v1/articles/1/comments.json

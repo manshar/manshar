@@ -50,7 +50,7 @@
           <div class="meta-text">
             <div class="meta-name">
               <a ng-href="/profiles/{{article.user.id}}">
-                <h3>{{article.user.name}}</h3>
+                <h3>{{article.user.name || 'غير معروف'}}</h3>
               </a>
             </div>
             <div class="meta-more">
@@ -100,7 +100,7 @@
 
 <div class="metabar tray">
   <div class="manshar-controls">
-    <button class="action-button" ng-click="editArticle(article.id)" ng-show="isOwner(currentUser, article)">
+    <button class="action-button" ng-click="editArticle(article.id)" ng-show="isOwner(user, article)">
       <i class="fa fa-pencil"></i>
     </button>
   </div>

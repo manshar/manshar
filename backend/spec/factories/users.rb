@@ -5,6 +5,7 @@ FactoryGirl.define do
     end
 
     sequence(:email) { |n| "user#{n}@example.com" }
+    sequence(:uid) { |n| "uid#{n}" }
     password 'testtest'
     password_confirmation 'testtest'
 
@@ -16,6 +17,7 @@ FactoryGirl.define do
 
   factory :unconfirmed_user, class: User do
     sequence(:email) { |n| "user#{n}@example.com" }
+    sequence(:uid) { |n| "uid#{n}" }
     password 'testtest'
     password_confirmation 'testtest'
     avatar_uid '333'

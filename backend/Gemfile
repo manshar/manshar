@@ -1,19 +1,22 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
-gem 'rails-api'
+gem 'rails', '4.2'
 gem 'pg', platform: :ruby
 
 # Authentication and Registration mechanism.
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise.git'
+gem 'devise_token_auth', '0.1.30'
+gem 'omniauth-facebook'
+gem 'omniauth-gplus', '~> 2.0'
+
 gem 'foreman'
 
 # Development and Test environment variables setup.
 gem 'dotenv-rails'
 
 # Allow for easy setup for Cross-Origin Response Sharing Policy.
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 
 # Provide a simple class-based authorization mechanism.
 gem 'pundit'
@@ -36,17 +39,18 @@ gem 'sass'
 gem 'sidekiq'
 
 # Used to manage notifications, emails and messaging.
-gem 'mailboxer', git: 'https://github.com/ging/mailboxer.git'
+gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-foreigner'
 
 group :production do
   gem 'rails_12factor'
   gem 'puma'
-	gem 'rack-cache', :require => 'rack/cache'
+	gem 'rack-cache', require: 'rack/cache'
 end
 
 group :test, :development do
-  gem 'rspec-rails'
-  gem 'guard-rspec'
-  gem 'factory_girl_rails'
+  gem 'spring'
+  gem 'rspec-rails', '~> 3.1'
+  # gem 'guard-rspec'
+  gem 'factory_girl_rails', '4.3.0'
   gem 'email_spec'
 end

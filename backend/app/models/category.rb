@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  include Utils
+  include Concerns::Utils
 
   has_many :topics, :counter_cache => :topics_count, dependent: :destroy
   has_many :articles, :through => :topics,

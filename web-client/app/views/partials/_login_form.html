@@ -2,12 +2,30 @@
 
   <div ng-include="'views/partials/_form_header.html'"></div>
   <div class="form-errors" ng-show="error">{{error}}</div>
-
-  <form id="login-form" ng-submit="login(user)" name="loginForm">
+  <div class="form-flash" ng-show="flash">
+    {{flash}}
+    <p class="note">{{flashNote}}</p>
+  </div>
+  <form>
+    <button ng-click="resendConfirmation(userForm)" ng-show="nonConfirmed">
+      أرسل التفعيل مرة أخرى
+    </button>
+  </form>
+  <div class="oauth-providers">
+    <a ng-click="authenticate('gplus')" class="google-login-button">
+      <i class="fa fa-google"></i>
+      تسجيل الدخول
+    </a>
+    <a ng-click="authenticate('facebook')" class="facebook-login-button">
+      <i class="fa fa-facebook"></i>
+      تسجيل الدخول
+    </a>
+  </div>
+  <form id="login-form" ng-submit="login(userForm)" name="loginForm">
     <label>
       <input
         type="email"
-        ng-model="user.email"
+        ng-model="userForm.email"
         required
         autofocus
         placeholder="البريد الالكتروني"
@@ -17,7 +35,7 @@
     <label>
       <input
         type="password"
-        ng-model="user.password"
+        ng-model="userForm.password"
         required
         placeholder="كلمة المرور"
       />

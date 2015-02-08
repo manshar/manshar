@@ -9,6 +9,22 @@ describe('Controller: EditArticleCtrl', function () {
 
   beforeEach(function() {
 
+    module(function($provide) {
+      $provide.service('$auth', function() {
+        this.apiUrl = jasmine.createSpy('apiUrl');
+        this.initialize = jasmine.createSpy('initialize');
+        this.authenticate = jasmine.createSpy('authenticate');
+        this.validateUser = jasmine.createSpy('validateUser');
+        this.submitRegistration = jasmine.createSpy('submitRegistration');
+        this.submitLogin = jasmine.createSpy('submitLogin');
+        this.signOut = jasmine.createSpy('signOut');
+        this.requestPasswordReset = jasmine.createSpy('requestPasswordReset');
+        this.updatePassword = jasmine.createSpy('updatePassword');
+        this.updateAccount = jasmine.createSpy('updateAccount');
+        this.destroyAccount = jasmine.createSpy('destroyAccount');
+      });
+    });
+
 
     // Mock confirm.
     mock = {
@@ -65,7 +81,7 @@ describe('Controller: EditArticleCtrl', function () {
     // Edit Article.
     httpBackend.expectGET(apiBase + 'articles/' + articleData.id).respond(articleData);
     routeParams.articleId = articleData.id;
-    rootScope.currentUser = {id: 1};
+    rootScope.user = {id: 1};
     createController();
     httpBackend.flush();
     expect(scope.article.title).toBe('Hello World.');
@@ -75,7 +91,7 @@ describe('Controller: EditArticleCtrl', function () {
   it('should redirect unauthorized user to view', function () {
     httpBackend.expectGET(apiBase + 'articles/1').respond(articleData);
     routeParams.articleId = articleData.id;
-    rootScope.currentUser = {id: 2};
+    rootScope.user = {id: 2};
     createController();
     httpBackend.flush();
     expect(location.path()).toBe('/articles/1');
@@ -88,11 +104,11 @@ describe('Controller: EditArticleCtrl', function () {
     });
     httpBackend.expectGET(apiBase + 'articles/' + articleData.id).respond(articleData);
     routeParams.articleId = articleData.id;
-    rootScope.currentUser = {id: 1};
+    rootScope.user = {id: 1};
     createController();
     httpBackend.flush();
     rootScope.$emit('user.loggedOut');
-    expect(location.path()).toBe('/');
+    expect(location.path()).toBe('');
 
     expect(scope.$on).toHaveBeenCalled();
   });

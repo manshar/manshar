@@ -1,9 +1,9 @@
 class Api::V1::TopicsController < ApplicationController
-
-  before_filter :load_category, only: [:index, :create]
-  before_filter :authenticate_user!, except: [:index, :show]
-  skip_after_filter :verify_authorized, only: [:index, :show]
   respond_to :json
+
+  before_action :load_category, only: [:index, :create]
+  before_action :authenticate_user!, except: [:index, :show]
+  after_action :verify_authorized, except: [:index, :show]
 
   # GET /api/v1/category/1/topics
   # GET /api/v1/category/1/topics.json

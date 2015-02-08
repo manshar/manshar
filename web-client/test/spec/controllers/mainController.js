@@ -7,6 +7,22 @@ describe('Controller: MainCtrl', function () {
 
   var MainCtrl, httpBackend, scope, apiBase, location;
 
+  module(function($provide) {
+    $provide.service('$auth', function() {
+      this.apiUrl = jasmine.createSpy('apiUrl');
+      this.initialize = jasmine.createSpy('initialize');
+      this.authenticate = jasmine.createSpy('authenticate');
+      this.validateUser = jasmine.createSpy('validateUser');
+      this.submitRegistration = jasmine.createSpy('submitRegistration');
+      this.submitLogin = jasmine.createSpy('submitLogin');
+      this.signOut = jasmine.createSpy('signOut');
+      this.requestPasswordReset = jasmine.createSpy('requestPasswordReset');
+      this.updatePassword = jasmine.createSpy('updatePassword');
+      this.updateAccount = jasmine.createSpy('updateAccount');
+      this.destroyAccount = jasmine.createSpy('destroyAccount');
+    });
+  });
+
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($httpBackend, $location, $controller, $rootScope, API_HOST) {
     location = $location;

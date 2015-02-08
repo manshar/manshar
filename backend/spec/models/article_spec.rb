@@ -7,11 +7,11 @@ describe Article do
     @unpublished_article = FactoryGirl.create(:article)
   end
 
-	describe 'Article.public' do
-	  it 'should return all public articles' do
-      Article.public.load.should eq([])
+	describe 'Article.published' do
+	  it 'should return all published articles' do
+      Article.publishings.load.should eq([])
       @article.publish!
-	  	Article.public.load.should =~ [@article]
+	  	Article.publishings.load.should =~ [@article]
 	  end
 	end
 

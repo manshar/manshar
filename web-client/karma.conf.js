@@ -30,6 +30,8 @@ module.exports = function(config) {
       'app/bower_components/angulartics/src/angulartics-ga.js',
       'app/bower_components/angular-file-upload/dist/angular-file-upload.js',
       'app/bower_components/angular-loading-bar/build/loading-bar.js',
+      'app/bower_components/ng-token-auth/dist/ng-token-auth.js',
+      'app/bower_components/angular-cookie/angular-cookie.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js'

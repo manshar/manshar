@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  include Utils
+  include Concerns::Utils
 
   belongs_to :user
 
