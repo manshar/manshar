@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::ArticlesController do
+describe Api::V1::ArticlesController, :type => :controller do
   render_views
 
   before (:each) do
@@ -10,13 +10,14 @@ describe Api::V1::ArticlesController do
 
   describe 'GET articles' do
     it 'should return all published articles without authentication' do
-      get :index
+      get :index, format: :json
       response.should be_success
       response.body.should eq([].to_json)
 
       @article.publish!
+      @article.reload
 
-      get :index
+      get :index, format: :json
       response.should be_success
       rendered = Rabl.render(
           [@article], 'api/v1/articles/index', :view_path => 'app/views')
@@ -26,14 +27,16 @@ describe Api::V1::ArticlesController do
 
   describe 'GET articles/:id' do
     it 'should return 401 for accessing other users unpublished article' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
-      get :show, :id => @article.id
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
+      get :show, :id => @article.id, format: :json
       response.code.should eq('401')
     end
 
     it 'should allow users to access their drafts' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@article.user.authentication_token}"}
-      get :show, :id => @article.id
+      auth_headers = @article.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
+      get :show, :id => @article.id, format: :json
       response.code.should eq('200')
       rendered = Rabl.render(
           @article, 'api/v1/articles/show', :view_path => 'app/views')
@@ -41,9 +44,10 @@ describe Api::V1::ArticlesController do
     end
 
     it 'should allow users to access published articles without authentication' do
-      request.env['HTTP_AUTHORIZATION'] = nil
       @article.publish!
-      get :show, :id => @article.id
+      @article.reload
+
+      get :show, :id => @article.id, format: :json
       response.should be_success
       rendered = Rabl.render(
           @article, 'api/v1/articles/show', :view_path => 'app/views')
@@ -61,7 +65,8 @@ describe Api::V1::ArticlesController do
     end
 
     it 'should create a draft article by default for authorized user' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       post :create, { :article => {
         :title => 'Hello There', :tagline => 'My awesome tagline',
         :cover => fixture_file_upload('images/test.png', 'image/png'),
@@ -76,7 +81,8 @@ describe Api::V1::ArticlesController do
     end
 
     it 'should publish a new article if specified' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       post :create, { :article => {
           :title => 'Hello There', :tagline => 'My awesome tagline',
           :body => 'What is going on?', :published => true,
@@ -93,13 +99,15 @@ describe Api::V1::ArticlesController do
       put :update, { :id => @article.id, :article => { :title => 'My New Title' } }
       response.code.should eq('401')
 
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       put :update, { :id => @article.id, :article => { :title => 'My New Title' } }
       response.code.should eq('401')
     end
 
     it 'should update successfully for owners' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@article.user.authentication_token}"}
+      auth_headers = @article.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       put :update, { :id => @article.id, :article => { :title => 'My New Title' } }
       response.should be_success
       parsed_response = JSON.parse(response.body)
@@ -115,13 +123,15 @@ describe Api::V1::ArticlesController do
       delete :destroy, { :id => @article.id }
       response.code.should eq('401')
 
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       delete :destroy, { :id => @article.id }
       response.code.should eq('401')
     end
 
     it 'should update successfully for owners' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@article.user.authentication_token}"}
+      auth_headers = @article.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       delete :destroy, { :id => @article.id }
       response.should be_success
       article = Article.find_by_id(@article.id)

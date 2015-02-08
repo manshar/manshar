@@ -56,20 +56,47 @@
       >
     </article>
 
+
+    <div class="article-meta card-list" ng-show="article.topic.title || article.published_at">
+      <div class="meta-box">
+        <h1 class="header-label">
+          <span>نشرت في</span>
+        </h1>
+        <a ng-click="changeTopic()">
+          <div class="meta-details card">
+            <p class="meta-thumb">
+              <img ng-src="{{article.topic.category.image_thumb_url}}" ng-show="article.topic.category.image_thumb_url"/>
+            </p>
+            <div class="meta-text">
+              <div class="meta-name">
+                <h3>{{article.topic.title || 'اختر موضوع لنشر تحته'}}</h3>
+              </div>
+              <div class="meta-more">
+                {{article.topic.category.title}}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
   </div>
 </form>
 
 
 <div class="metabar tray">
   <div class="manshar-controls">
+    <span class="status" ng-show="!isSaving">
+      محفوظ كمسودة
+    </span>
+    <span class="status" ng-show="isSaving">
+      يتم حفظ المقال...
+    </span>
     <button class="action-button" ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
-      <i>نشر</i>
-    </button>
-    <button class="action-button" ng-click="saveArticle(article, false)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'save'}">
-      <i class="fa fa-floppy-o"></i>
+      <span>نشر</span>
     </button>
     <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-      <i class="fa fa-times"></i>
+      <i class="fa fa-trash-o"></i>
     </button>
     <button class="action-button" ng-click="cancel()" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'cancel'}">
       <i class="fa fa-arrow-left"></i>

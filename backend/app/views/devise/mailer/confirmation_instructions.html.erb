@@ -2,4 +2,4 @@
 
 <p>يمكنك تفعيل حسابك على منشر من خلال الرابط بالأسفل:</p>
 
-<p><%= link_to 'فعل حسابي', api_v1_user_confirm_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to 'فعل حسابي', confirmation_url(@resource, {confirmation_token: @token, config: message['client-config'].to_s, redirect_url: message['redirect-url']}).html_safe %></p>

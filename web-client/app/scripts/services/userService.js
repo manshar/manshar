@@ -8,15 +8,59 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('User', ['$resource', 'API_HOST',
-      function ($resource, API_HOST) {
+  .service('User', ['$rootScope', '$resource', '$http', 'API_HOST',
+      function ($rootScope, $resource, $http, API_HOST) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
-      var UserResource = $resource(baseUrl + 'users/:userId');
+      var UserResource = $resource(baseUrl + 'users/:userId', {}, {
+        update: {method: 'PUT'}
+      });
+
+
+      /**
+       * These configs are needed. AngularJS identity tranformer
+       * can automatically figure out that this is a multipart
+       * content and use the correct Content-Type.
+       */
+      var configs = {
+        headers: {'Content-Type': undefined},
+        transformRequest: angular.identity
+      };
+
+      var createFormData = function (data) {
+        var fd = new FormData();
+        for (var key in data.user) {
+          // Remove special keys for angular resources.
+          if (key.trim() === '' || key.indexOf('$') === 0 || key === 'toJSON') {
+            continue;
+          }
+          fd.append('user[' + key + ']', data.user[key]);
+        }
+        return fd;
+      };
 
       return {
         get: UserResource.get,
-        query: UserResource.query
+        query: UserResource.query,
+        update: function(userId, user, optSuccess, optError) {
+          $http.put(baseUrl + 'users/' + userId,
+                     createFormData({user: user}), configs)
+          .then(
+
+            // Success.
+            angular.bind(this, function(response) {
+              if (optSuccess) {
+                optSuccess(response.data);
+              }
+            }),
+
+            // Error.
+            function(response) {
+              if(optError) {
+                optError(response.data);
+              }
+            });
+        }
       };
     }])
 

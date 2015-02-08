@@ -1,4 +1,7 @@
 <div class="recommendation-button">
-  <span ng-hide="article.recommendations_count == 0">{{article.recommendations_count}}</span><i class="fa" ng-class="{'fa-thumbs-o-up': !isRecommended, 'fa-thumbs-up': isRecommended}"></i>
+  <span class="count" ng-hide="article.recommendations_count == 0">{{article.recommendations_count}}</span>
+  <i class="fa" ng-class="{'fa-thumbs-o-up': !isRecommended, 'fa-thumbs-up': isRecommended}"></i>
+  <span class="label" ng-hide="isRecommended">قدم توصية</span>
+  <span class="label" ng-show="isRecommended">تمت التوصية</span>
 </div>
 

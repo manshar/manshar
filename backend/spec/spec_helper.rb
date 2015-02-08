@@ -44,4 +44,6 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  config.expect_with(:rspec) { |c| c.syntax = :should }
 end

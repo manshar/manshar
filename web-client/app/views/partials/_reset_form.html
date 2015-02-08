@@ -1,0 +1,20 @@
+<div class="form-div center" ng-controller="ResetPasswordController">
+  <div ng-include="'views/partials/_form_header.html'"></div>
+  <div class="form-errors" ng-show="error">{{error}}</div>
+
+  <form id="login-form" ng-submit="reset(userForm)" name="loginForm">
+    <label>
+      <input
+        type="email"
+        ng-model="userForm.email"
+        required
+        autofocus
+        placeholder="البريد الالكتروني"
+      />
+    </label>
+
+    <button
+      type="submit">
+      استعادة كلمة المرور</button>
+  </form>
+</div>

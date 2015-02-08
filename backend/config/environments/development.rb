@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.i18n.default_locale = :ar
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -37,6 +37,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  OmniAuth.config.full_host = "http://#{ENV['API_HOST']}"
+
   # Allow Cross-Origin Resource Sharing header to allow cross
   # domain xhr requests.
   config.middleware.insert_before Warden::Manager, Rack::Cors do
@@ -44,6 +46,7 @@ Rails.application.configure do
       origins '*'
       resource '*',
       :headers => :any,
+      :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
       :methods => [:get, :delete, :post, :put, :options]
     end
   end

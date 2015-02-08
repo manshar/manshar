@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2'
 gem 'pg', platform: :ruby
 
 # Authentication and Registration mechanism.
-gem 'devise', '3.0.0'
-gem 'responders'
+gem 'devise', git: 'https://github.com/plataformatec/devise.git'
+gem 'devise_token_auth', '0.1.30'
+gem 'omniauth-facebook'
+gem 'omniauth-gplus', '~> 2.0'
+
 gem 'foreman'
 
 # Development and Test environment variables setup.
@@ -32,6 +35,11 @@ gem 'oj'
 # And it is to get around installing sass on Travis.
 gem 'sass'
 
+# Background and scheduled jobs.
+gem 'sidekiq'
+
+# Used to manage notifications, emails and messaging.
+gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-foreigner'
 
 group :production do
   gem 'rails_12factor'
@@ -41,8 +49,8 @@ end
 
 group :test, :development do
   gem 'spring'
-  gem 'rspec-rails', '2.14.0'
-  gem 'guard-rspec'
+  gem 'rspec-rails', '~> 3.1'
+  # gem 'guard-rspec'
   gem 'factory_girl_rails', '4.3.0'
   gem 'email_spec'
 end

@@ -25,6 +25,8 @@ brew install ruby-build
 brew install rbenv # Follow the instructions after installing rbenv
 
 brew install rbenv-gemset
+
+brew install redis # Make sure to also run redis afterwards.
 ```
 
 #### Install Ruby 2.0

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::UsersArticlesController do
+describe Api::V1::UsersArticlesController, :type => :controller  do
   render_views
 
   before (:each) do
@@ -9,6 +9,7 @@ describe Api::V1::UsersArticlesController do
     @another_article = FactoryGirl.create(:article)
     @published_article = FactoryGirl.create(:article)
     @published_article.publish!
+    @published_article.reload
   end
 
   describe 'GET users/:id/articles' do
@@ -18,6 +19,7 @@ describe Api::V1::UsersArticlesController do
       response.body.should eq([].to_json)
 
       @article.publish!
+      @article.reload
 
       get :index, :user_id => @article.user.id
       response.should be_success
@@ -32,12 +34,14 @@ describe Api::V1::UsersArticlesController do
       get :index
       response.code.should eq('404')
 
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@article.user.authentication_token}"}
+      auth_headers = @article.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       get :index
       response.should be_success
       response.body.should eq([].to_json)
 
       @article.publish!
+      @article.reload
 
       get :index
       response.should be_success
@@ -52,14 +56,16 @@ describe Api::V1::UsersArticlesController do
       get :drafts
       response.code.should eq('401')
 
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       get :drafts
       response.should be_success
       response.body.should eq([].to_json)
     end
 
     it 'should return all drafts for the current user' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@article.user.authentication_token}"}
+      auth_headers = @article.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       get :drafts
       response.should be_success
       rendered = Rabl.render(

@@ -1,0 +1,36 @@
+<div class="main-comment-box anchored-comment-box"
+    ng-show="activeGuid"
+    click-outside="clickedOutside()">
+
+  <div>
+    <textarea ng-show="user.signedIn"
+      ng-model="newComment"
+      ng-keypress="handleKeypress($event)"
+      placeholder="اكتب تعليق"></textarea>
+  </div>
+  <div class="warning-note" ng-show="!user.id">
+    يجب عليك
+    <a ng-click="$root.showLoginDialog()"> تسجيل الدخول</a>
+    لترك تعليق!
+  </div>
+
+  <ul>
+    <li ng-repeat="comment in comments|filter:{guid: activeGuid}">
+      <p class="author">
+      <a ng-href="/profiles/{{comment.user.id}}">{{comment.user.name}}</a>
+      </p>
+      <p>
+        {{comment.body}}
+      </p>
+      <span class="date">
+        {{comment.created_at | date:'EEEE, d MMMM'}}
+      </span>
+      <div class="actions">
+        <a class="delete-button" ng-click="deleteComment(comment)"
+            ng-show="$root.isOwner(user, comment) || $root.isOwner(user, article)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -12,6 +12,17 @@ Dragonfly.app.configure do
   # Keep the images cached for 60 days.
   response_header "Cache-Control", "public, max-age=5184000"
 
+  # List of allowed file paths when using fetch_file (strings or regexps)
+  fetch_file_whitelist [
+    /public/
+  ]
+
+  fetch_url_whitelist [
+    /www\.manshar\.com/,
+    /api\.manshar\.com/,
+    /dsi4xlu0p7t9b\.cloudfront\.net/
+  ]
+
   if Rails.env == 'test'
     datastore :memory
   elsif Rails.env == 'production'
@@ -41,6 +52,7 @@ Dragonfly.app.configure do
   # Before serving from the local Dragonfly server...
   before_serve do |job, env|
     # ...store the thumbnail in the datastore...
+    puts job
     uid = job.store
 
     # ...keep track of its uid so next time we can serve directly from the datastore

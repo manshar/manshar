@@ -9,9 +9,9 @@ describe Article do
 
 	describe 'Article.published' do
 	  it 'should return all published articles' do
-      Article.published.load.should eq([])
+      Article.publishings.load.should eq([])
       @article.publish!
-	  	Article.published.load.should =~ [@article]
+	  	Article.publishings.load.should =~ [@article]
 	  end
 	end
 

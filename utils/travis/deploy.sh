@@ -15,6 +15,7 @@ else
   wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   git remote add web-client-heroku git@heroku.com:manshar-web-client.git
   git remote add backend-heroku git@heroku.com:manshar-backend.git
+  git remote add workers-heroku git@heroku.com:manshar-workers.git
   echo "Host heroku.com" >> ~/.ssh/config
   echo "   StrictHostKeyChecking no" >> ~/.ssh/config
   echo "   CheckHostIP no" >> ~/.ssh/config
@@ -40,4 +41,9 @@ else
   git checkout master
   yes | git push backend-heroku `git subtree split --prefix backend master`:master --force
   heroku run rake db:migrate --app manshar-backend
+
+  # Deploy Manshar Workers.
+  git checkout master
+  yes | git push workers-heroku `git subtree split --prefix backend master`:master --force
+  heroku run rake db:migrate --app manshar-workers
 fi

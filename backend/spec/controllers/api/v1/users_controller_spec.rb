@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::UsersController do
+describe Api::V1::UsersController, :type => :controller  do
   render_views
 
   before (:each) do
@@ -8,26 +8,18 @@ describe Api::V1::UsersController do
   end
 
   describe 'GET users' do
-    it 'should return all users' do
-      get :index
+    it 'should return only publishers' do
+      get :index, format: :json
       response.should be_success
       rendered = Rabl.render(
-          [@user], 'api/v1/users/index', :view_path => 'app/views')
-      response.body.should eq(rendered)
-
-      another_user = FactoryGirl.create(:user)
-
-      get :index
-      response.should be_success
-      rendered = Rabl.render(
-          [@user, another_user], 'api/v1/users/index', :view_path => 'app/views')
+          [], 'api/v1/users/index', :view_path => 'app/views')
       response.body.should eq(rendered)
     end
   end
 
   describe 'GET users/:id' do
     it 'should return the user' do
-      get :show, :id => @user.id
+      get :show, :id => @user.id, format: :json
       response.should be_success
       rendered = Rabl.render(
           @user, 'api/v1/users/show', :view_path => 'app/views')

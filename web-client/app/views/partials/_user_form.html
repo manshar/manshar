@@ -1,0 +1,28 @@
+<label>
+    صورتك
+    <input
+      type="file"
+      manshar-file
+        file-model="profile.avatar"
+      analytics-on="click"
+        analytics-event="Pick User Avatar"
+    />
+</label>
+
+<label>
+  <input
+    type="text"
+    ng-model="profile.name"
+    autofocus
+    required
+    placeholder="الاسم" />
+</label>
+
+<label>
+  <textarea
+    ng-model="profile.bio"
+    class="input"
+    cols= "23"
+    required
+    placeholder="السيرة الذاتية"></textarea>
+</label>

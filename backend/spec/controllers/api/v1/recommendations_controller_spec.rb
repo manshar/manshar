@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::RecommendationsController do
+describe Api::V1::RecommendationsController, :type => :controller  do
   render_views
 
   before :each do
@@ -12,7 +12,9 @@ describe Api::V1::RecommendationsController do
 
     # counter_cache gets updated in the database directly so we need to
     # reload the article model.
-    @recommendation.article.reload
+    @recommendation.article.publish!
+    @recommendation.article
+    @recommendation.reload
   end
 
   describe "GET 'articles/:article_id/recommendations'" do
@@ -45,13 +47,15 @@ describe Api::V1::RecommendationsController do
 
   describe "POST 'articles/:article_id/recommendations'" do
     it "should error if the user already recommended the article" do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@recommendation.user.authentication_token}"}
+      auth_headers = @recommendation.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       post :create, :article_id => @recommendation.article_id
       response.code.should eq('422')
     end
 
     it "should create an article recommendation of the current user" do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       post :create, :article_id => @recommendation.article_id
       response.should be_success
       parsed_response = JSON.parse(response.body)
@@ -61,7 +65,6 @@ describe Api::V1::RecommendationsController do
     end
 
     it "should return 401 when the user is not logged in or unauthorized" do
-      request.env['HTTP_AUTHORIZATION'] = nil
       post :create, :article_id => @recommendation.article_id
       response.code.should eq('401')
     end
@@ -70,13 +73,15 @@ describe Api::V1::RecommendationsController do
   describe "DELETE 'articles/:article_id/recommendations/:id'" do
 
     it "should return 401 when the user is not logged in or unauthorized" do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       delete :destroy, :article_id => @recommendation.article_id, :id => @recommendation.id
       response.code.should eq('401')
     end
 
     it "should delete an article recommendation of the current user" do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@recommendation.user.authentication_token}"}
+      auth_headers = @recommendation.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       delete :destroy, :article_id => @recommendation.article_id, :id => @recommendation.id
       response.should be_success
 

@@ -26,14 +26,134 @@ body {
   }
 }
 
+.users-card-list {
+  &.card-list {
+    .card {
+      width: 30%;
 
-.manshar-article {
-  .manshar-article-image-container {
-    .manshar-article-header {
-      h1, h2 {
-        width: 85%;
+      .header {
+        height: 12em;
+
+        .title {
+          a {
+            padding: 4em 1em;
+          }
+        }
       }
     }
+  }
+}
+
+
+.manshar-profile {
+  .avatar {
+    position: relative;
+
+    &.blured{
+      display: block;
+      position: absolute;
+      filter: blur(14px) brightness(0.75);
+      -webkit-filter: blur(14px) brightness(0.75);
+      -moz-filter: blur(14px) brightness(0.75);
+      -ms-filter: blur(14px) brightness(0.75);
+      -o-filter: blur(14px) brightness(0.75);
+    }
+  }
+
+  .title {
+    img {
+      display: block;
+      margin: 0 auto;
+      height: 300px;
+      margin-top: 100px;
+      box-shadow: 3px 3px 10px -2px #000;
+      border-radius: 1px;
+    }
+  }
+}
+
+.modal {
+  .content {
+    padding: 3em;
+  }
+}
+
+.manshar-article {
+
+  .manshar-article-image-container{
+    .manshar-article-header{
+      h1 {
+        font-size: 2em;
+      }
+
+      .reading-time {
+        font-size: 0.8em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  }
+  .article-content-container {
+    transition: transform .3s;
+    &.anchored-comments-active {
+      transform: translateX(350px);
+    }
+
+    article {
+      font-size: 1.2em;
+      figure {
+        iframe {
+          height: 450px;
+        }
+      }
+      blockquote {
+        font-size: 1.1em;
+      }
+
+      h1 {
+        font-size: 1.75em;
+      }
+
+      h2 {
+        font-size: 1.4em;
+      }
+
+      p {
+        margin: 36px auto;
+        margin-top: 36px;
+      }
+
+    }
+  }
+}
+
+.article-meta {
+  text-align: center;
+  .meta-box {
+    text-align: right;
+    display: inline-block;
+    margin-left: 2em;
+
+    &:last-child {
+      margin-left: 0;
+    }
+    .meta-details {
+      &.card {
+        width: 350px;
+      }
+    }
+  }
+}
+
+.comments-container {
+  left: 20px;
+
+  .anchored-comment-box {
+    i {
+    }
+
   }
 }
 
@@ -41,25 +161,207 @@ body {
   .image-cover {
     height: 15em;
   }
-
-  .author-details {
-    position: absolute;
-    bottom: 1em;
-    left: 1.5em;
-  }
 }
 
 .manshar-profile {
   height: 100%;
 }
 
+.tabular {
+
+  &.categories-list {
+    width: 940px;
+    margin: 0 auto;
+    margin-top: 2em;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .form-div {
+    display: block;
+    width: auto;
+
+    form {
+      padding: 5px 0;
+      display: block;
+
+      label {
+        margin: 0 5px;
+
+        &:first-child, &:last-child {
+          margin: 0;
+        }
+
+        &.file-field {
+          height: 50px;
+          width: 90px;
+          position: relative;
+
+          &.with-image {
+            input {
+              border: none;
+              opacity: 0.75;
+            }
+          }
+
+          img {
+            height: 50px;
+            width: 90px;
+          }
+
+          input {
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 2em 0.4em;
+          }
+
+        }
+      }
+
+      input, .input, textarea, button {
+        margin: 0;
+        display: inline-block;
+        vertical-align: top;
+        width: 240px;
+        height: 50px;
+
+        &.color-field, &.icon-class-field {
+          width: 80px;
+        }
+
+      }
+
+      .actions {
+        display: inline-block;
+
+        button {
+          width: auto;
+        }
+      }
+    }
+
+    &.category {
+      img {
+        width: 100px;
+      }
+    }
+  }
+}
+
+.category-list {
+  .card.category {
+    width: 180px;
+    height: 160px;
+    padding: 2em;
+
+    i {
+      font-size: 4em;
+    }
+  }
+}
+
+.topic-list {
+  .card.topic {
+    margin: 0.5em;
+    cursor: pointer;
+    width: auto;
+    padding: 1em;
+    text-align: center;
+
+    &:hover {
+      background-color: #E1F5FE;
+    }
+
+    &.new-topic {
+      width: 400px;
+      padding: 0.3em 0.8em;
+    }
+  }
+}
+
+.listing-types-tabs {
+  a {
+    span {
+      display: inline-block;
+    }
+
+    i {
+      display: none;
+    }
+
+    &.active {
+      i {
+        display: inline-block;
+      }
+    }
+
+    padding: .3em 1em;
+  }
+}
+
 // Media Queries.
 @media (min-width: 1280px) {
+
+  .tray {
+    padding: 0 10px;
+  }
+  .manshar-article {
+
+    .article-content-container {
+      transition: transform .3s;
+      &.anchored-comments-active {
+        transform: translateX(175px);
+      }
+    }
+
+  }
+
+  .comments-container {
+    left: 0;
+
+    .anchored-comment-box {
+      .icon-count-container {
+        i {
+          font-size: 1.5em;
+        }
+        span {
+          top: -3px;
+          color: #fff;
+          font-size: .9em;
+        }
+      }
+    }
+  }
+
   .card-list {
     .card {
       width: 30%;
       margin: 1.3%;
-
     }
   }
+
+  .users-card-list {
+    &.card-list {
+      .card {
+        width: 20%;
+        .header {
+          height: 15em;
+
+          .title {
+            a {
+              padding: 5.5em 1em;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
 }

@@ -1,0 +1,44 @@
+<div class="category-page">
+  <style type="text/css">
+    .category-page {
+      min-height: 100%;
+    }
+
+    .category-page,
+    .category-page .cards-list-container,
+    .category-page .main-header {
+      background-color: {{category.color}};
+    }
+
+    .category-page .card {
+      border-top: none !important;
+      color: {{category.color}} !important;
+      padding: 0 .8em;
+    }
+
+    .category-page .card.topic:hover {
+      background-color: {{category.color|darker:-0.2}} !important;
+      color: #fff !important;
+    }
+
+    .category-page .card.topic {
+      width: auto;
+    }
+  </style>
+  <header class="main-header">
+    <div class="hero-unit tray">
+      <h1>
+        <i class="fa {{category.icon_cssclass}}"></i>
+        {{category.title}}
+      </h1>
+      <p class="manshar-tagline">{{category.description}}</p>
+      <p class="topics card-list">
+        <a ng-href="/categories/{{topic.category.id}}/topics/{{topic.id}}" ng-repeat="topic in topics" class="card topic">
+          {{topic.title}}
+        </a>
+      </p>
+    </div>
+  </header>
+
+  <div ng-include="'views/partials/_articles_list.html'"></div>
+</div>

@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '0529cf2539572f618c4c80210bcd53690309233a8d5f67e21f3bb3c25f790e40251bcb4d5ad12924f3030a6bb0398c61f39c83ff6a5e2e5131d34ffeb81074c4'
+  config.secret_key = '0529cf2539572f618c4c80210bcd53690309233a8d5f67e21f3bb3c25f790e40251bcb4d5ad12924f3030a6bb0398c61f39c83ff6a5e2e5131d34ffeb81074c4'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -106,7 +106,7 @@ Devise.setup do |config|
   # able to access the website for two days without confirming his account,
   # access will be blocked just in the third day. Default is 0.days, meaning
   # the user cannot access the website without confirming his account.
-  config.allow_unconfirmed_access_for = 2.days
+  config.allow_unconfirmed_access_for = 5.days
 
   # A period that the user is allowed to confirm their account before their
   # token becomes invalid. For example, if set to 3.days, the user can confirm
@@ -198,7 +198,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
-  config.token_authentication_key = :auth_token
+  # config.token_authentication_key = :auth_token
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
@@ -264,22 +264,22 @@ Devise.setup do |config|
 
   # This sets up devise to use the auth_token from the HTTP_AUTHORIZATION header.
   # Ref: http://goo.gl/6VDFVn
-  require 'devise/strategies/token_authenticatable'
-  module Devise
-    module Strategies
-      class TokenAuthenticatable < Authenticatable
-        def params_auth_hash
-          return_params = if params[scope].kind_of?(Hash) && params[scope].has_key?(authentication_keys.first)
-            params[scope]
-          else
-            params
-          end
-          token = ActionController::HttpAuthentication::Token.token_and_options(request)
-          return_params.merge!(:auth_token => token[0]) if token
-          return_params
-        end
-      end
-    end
-  end
+  # require 'devise/strategies/token_authenticatable'
+  # module Devise
+  #   module Strategies
+  #     class TokenAuthenticatable < Authenticatable
+  #       def params_auth_hash
+  #         return_params = if params[scope].kind_of?(Hash) && params[scope].has_key?(authentication_keys.first)
+  #           params[scope]
+  #         else
+  #           params
+  #         end
+  #         token = ActionController::HttpAuthentication::Token.token_and_options(request)
+  #         return_params.merge!(:auth_token => token[0]) if token
+  #         return_params
+  #       end
+  #     end
+  #   end
+  # end
 
 end

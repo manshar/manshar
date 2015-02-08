@@ -1,0 +1,45 @@
+<div class="category-page">
+  <style type="text/css">
+    .category-page {
+      min-height: 100%;
+    }
+
+    .category-page,
+    .category-page .cards-list-container,
+    .category-page .main-header {
+      background-color: {{topic.category.color}};
+    }
+
+    .category-page .card {
+      color: {{topic.category.color}} !important;
+      padding: 0 .8em;
+    }
+
+    .category-page .card.topic:hover {
+      background-color: {{topic.category.color|darker:-0.2}} !important;
+      color: #fff !important;
+    }
+
+    .category-page .card.topic {
+      width: auto;
+    }
+
+    .category-page .card .category-topic {
+      display: none;
+    }
+  </style>
+  <header class="main-header">
+    <div class="hero-unit tray">
+      <h1>{{topic.title}}</h1>
+      <p class="manshar-tagline topics card-list">
+        <span>في</span>
+        <a class="card topic" ng-href="/categories/{{topic.category.id}}">
+          <i class="fa {{topic.category.icon_cssclass}}"></i>
+          {{topic.category.title}}
+        </a>
+      </p>
+    </div>
+  </header>
+
+  <div ng-include="'views/partials/_articles_list.html'"></div>
+</div>

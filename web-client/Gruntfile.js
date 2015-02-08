@@ -17,6 +17,9 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // Load Google CDN tasks.
+  grunt.loadNpmTasks('grunt-google-cdn');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -24,7 +27,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       webClientApp: {
         cwd: 'app',
-        src: 'views/{,*/}*.html',
+        src: 'views/{,**/}*.html',
         dest: '<%= yeoman.app %>/scripts/cachedTemplates.js'
       }
     },
@@ -102,14 +105,19 @@ module.exports = function (grunt) {
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729,
-        middleware: function(connect, options) {
-          var middlewares;
-          middlewares = [];
-          middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
-          options.base.forEach(function(base) {
-            return middlewares.push(connect['static'](base));
-          });
-          return middlewares;
+        middleware: function (connect, options) {
+          var optBase = (typeof options.base === 'string') ? [options.base] : options.base,
+              middleware = [modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg\\.gif|\\swf$ / [L]'])]
+                .concat(optBase.map(function (path) {
+                  if (path.indexOf('rewrite|') === -1) {
+                    return connect.static(path);
+                  } else {
+                    path = path.replace(/\\/g, '/').split('|');
+                    return connect().use(path[1], connect.static(path[2]));
+                  }
+                }));
+
+          return middleware;
         }
 
       },
@@ -118,6 +126,8 @@ module.exports = function (grunt) {
           open: true,
           base: [
             '.tmp',
+            'rewrite|/bower_components|./bower_components',
+            'rewrite|/app/styles|./app/styles', // for sourcemaps
             '<%= yeoman.app %>'
           ]
         }
@@ -249,8 +259,14 @@ module.exports = function (grunt) {
         '<%= yeoman.dist %>/views/partials/{,*/}*.html'
       ],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>']
+        assetsDirs: ['<%= yeoman.dist %>'],
+        patterns: {
+          js: [
+            [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp))/gm, 'Update the JS to reference our revved images']
+          ]
+        }
       }
     },
 
@@ -311,6 +327,9 @@ module.exports = function (grunt) {
 
     // Replace Google CDN references
     cdnify: {
+      options: {
+        cdn: require('google-cdn-data')
+      },
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
       }
@@ -442,6 +461,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'ngconstant:development',
+      'ngtemplates:webClientApp',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -474,6 +494,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'ngconstant:production',
     'useminPrepare',
+    'ngtemplates:webClientApp',
     'concurrent:dist',
     'autoprefixer',
     'concat',

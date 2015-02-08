@@ -1,61 +1,7 @@
-<div class="form-div">
-  <div ng-include="'views/partials/_form_header.html'"></div>
-  <div class="form-errors" ng-show="error">
-    <ul>
-      <!-- TODO(HammamSamara) Will enhance this once we have Arabic strings from backend -->
-      <li ng-repeat="(key, data) in errorMessages">{{key}} {{data}}</li>
-    </ul>
-  </div>
-  <form id="signup-form" name="signupForm" ng-submit="signup(user)">
-
-    <label>
-        صورتك
-        <input
-          type="file"
-          required
-          manshar-file
-            file-model="user.avatar"
-          analytics-on="click"
-            analytics-event="Pick User Avatar"
-        />
-    </label>
-
-    <label>
-      <input
-        type="text"
-        ng-model="user.name"
-        autofocus
-        required
-        placeholder="الاسم" />
-    </label>
-
-
-    <label>
-      <input
-        type="email"
-        ng-model="user.email"
-        required
-        placeholder="الايميل" />
-    </label>
-
-    <label>
-      <input
-        type="password"
-        ng-model="user.password"
-        required
-        pattern=".{8,}"
-        placeholder="كلمة المرور (٨ حروف على الأقل)" />
-    </label>
-
-    <label>
-      <textarea
-        ng-model="user.bio"
-        class="input"
-        cols= "23"
-        required
-        placeholder="السيرة الذاتية"></textarea>
-    </label>
-
-    <button type="submit">تسجيل</button>
-  </form>
+<div>
+  <div ng-include="'views/partials/_signup_form.html'"></div>
+  <p class="form-info">
+    <a href="/login" class="signup-link">سجل الدخول</a> أو
+    <a href="/accounts/reset_password" class="signup-link">استرجع كلمة المرور</a>
+  </p>
 </div>

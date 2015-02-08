@@ -4,7 +4,6 @@ angular.module('webClientApp')
   .controller('SignupCtrl', ['$scope', '$location', '$routeParams', '$analytics', 'SignupService',
       function ($scope, $location, $routeParams, $analytics, SignupService) {
 
-    $scope.user = {};
     $scope.error = null;
     $scope.errorMessages = {};
 
@@ -13,11 +12,12 @@ angular.module('webClientApp')
     };
 
     var success = function() {
-      // TODO (HammamSamara) redirect to a view that requests email confirmation
       $analytics.eventTrack('Register Success', {
         category: 'User'
       });
-      $location.path($routeParams.prev || '/');
+
+      $scope.flash = 'تم إرسال رسالة إلى بريدك الإلكتروني لتفعيل حسابك.';
+      $scope.flashNote = '(تأكد من مجلد السبام)';
     };
 
     var error = function(response) {

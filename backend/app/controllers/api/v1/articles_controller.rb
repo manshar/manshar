@@ -1,23 +1,30 @@
 class Api::V1::ArticlesController < ApplicationController
   respond_to :json
 
+  after_action :verify_authorized, except: [:index]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_article, only: [:show, :update, :destroy]
+  before_action :load_query, only: [:index]
 
   # GET /api/v1/articles
   # GET /api/v1/articles.json
+  # GET /api/v1/categories/1/articles
+  # GET /api/v1/categories/1/articles.json
+  # GET /api/v1/categories/1/topics/1/articles
+  # GET /api/v1/categories/1/topics/1/articles.json
   def index
     # Use the custom Article.published method to return all articles that is
     # marked published.
-    @articles = Article.published.recents
-    respond_with(@articles)
+    @articles = @query.publishings.try(order_param).preload(:user, :topic)
+    render 'api/v1/articles/index'
   end
 
   # GET /api/v1/articles/1
   # GET /api/v1/articles/1.json
   def show
     authorize @article
-    respond_with(@article)
+    @next = @article.next
+    render 'api/v1/articles/show'
   end
 
   # POST /api/v1/articles
@@ -26,6 +33,7 @@ class Api::V1::ArticlesController < ApplicationController
     @article = current_user.articles.new(article_params)
     authorize @article
     if @article.save
+      ArticleRankingWorker.perform_async(@article.id)
       render 'api/v1/articles/show', status: :created
     else
       render json: @article.errors, status: :unprocessable_entity
@@ -58,8 +66,31 @@ class Api::V1::ArticlesController < ApplicationController
       @article = Article.find(params[:id])
     end
 
+    def load_query
+      if params[:topic_id]
+        @query = Topic.find(params[:topic_id]).articles.publishings
+      elsif params[:category_id]
+        @query = Category.find(params[:category_id]).articles.publishings
+      else
+        @query = Article.publishings
+      end
+    end
+
     def article_params
-      params.require(:article).permit(:title, :tagline, :body, :published, :cover)
+      params.require(
+        :article).permit(
+          :title, :tagline, :body, :published, :cover, :topic_id)
+    end
+
+    def order_param
+      # It is important not to allow other values for order otherwise
+      # users can run malicious method on all articles :-).
+      permitted_orders = ['popular', 'best', 'recents']
+      if permitted_orders.include?(params[:order])
+        params[:order]
+      else
+        :best
+      end
     end
 
 end

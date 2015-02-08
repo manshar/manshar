@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::ImagesController do
+describe Api::V1::ImagesController, :type => :controller  do
   render_views
 
   before (:each) do
@@ -15,6 +15,8 @@ describe Api::V1::ImagesController do
 
   describe 'GET images' do
     it 'should allow to view images' do
+      auth_headers = @image.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       get :show, :id => @image.id
       response.should be_success
     end
@@ -27,7 +29,8 @@ describe Api::V1::ImagesController do
     end
 
     it 'should allow authenticated users to create images' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       post :create, :image => @image_params
 
       response.should be_success
@@ -42,13 +45,15 @@ describe Api::V1::ImagesController do
       put :update, { :id => @image.id, :image => @image_params }
       response.code.should eq('401')
 
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       put :update, { :id => @image.id, :image => @image_params }
       response.code.should eq('401')
     end
 
     it 'should allow owners to edit their images' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@image.user.authentication_token}"}
+      auth_headers = @image.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       put :update, { :id => @image.id, :image => @image_params }
       response.should be_success
     end
@@ -59,13 +64,15 @@ describe Api::V1::ImagesController do
       delete :destroy, :id => @image.id
       response.code.should eq('401')
 
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@user.authentication_token}"}
+      auth_headers = @user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       delete :update, :id => @image.id
       response.code.should eq('401')
      end
 
     it 'should allow owners to delete their images' do
-      request.env['HTTP_AUTHORIZATION'] = %Q{Token token="#{@image.user.authentication_token}"}
+      auth_headers = @image.user.create_new_auth_token
+      request.headers.merge!(auth_headers)
       delete :destroy, :id => @image.id
       response.should be_success
     end
