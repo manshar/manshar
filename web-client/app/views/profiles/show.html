@@ -18,48 +18,25 @@
   </div>
 </div>
 
-<ul class="cards-list-container one-column card-list profile-list" id="articles-list">
-  <a href="/articles/new" class="write-new-button">
+
+<div class="profile-list">
+  <a href="/articles/new" class="write-new-button" ng-show="user.id == profile.id">
     <i class="fa fa-pencil"></i>
     اكتب مقال جديد
   </a>
-  <li class="card" ng-repeat="article in articles">
-    <div class="article-details article-card">
-      <div class="header tray">
-        <div class="title">
-          <a ng-href="/articles/{{article.id}}"
-              analytics-on="click"
-              analytics-event="click"
-              analytics-category="UI"
-              analytics-label="Article in Profile - {{article.title}}"
-              analytics-value="article-{{article.id}}">
-            <h1>{{article.title}}</h1>
-            <h2>{{article.tagline}}</h2>
-          </a>
-          <h3>
-            <div class="date">
-              <span>
-                بتاريخ:
-              </span>
-              {{article.published_at | date:'dd-MM-yyyy'}}
-            </div>
-          </h3>
-        </div>
-      </div>
 
-      <div class="profile-article-action" ng-show="isOwner(user, article) && activeTab == 'published'">
-        <button class="action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-          <i class="fa fa-trash-o"></i>
-        </button>
-        <button class="action-button" ng-click="editArticle(article.id)">
-          <i class="fa fa-pencil"></i>
-        </button>
-      </div>
+  <div ng-show="!articles[0]" class="no-articles-container">
+    <h3 ng-show="activeTab == 'published'">لا يوجد أي منشورات</h3>
+    <h3 ng-show="activeTab == 'recommendations'">لا يوجد أي توصيات</h3>
+    <h3 ng-show="activeTab == 'discussions'">لا يوجد أي مناقشات</h3>
+    <h4>
+      <a href="/">تصفح أشهر المقالات</a>
+    </h4>
+  </div>
 
-    </div>
-  </li>
-</ul>
+  <div ng-include="'views/partials/_articles_list.html'"></div>
 
+</div>
 
 <ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
   <h1 class="header-label">

@@ -27,6 +27,14 @@
     .category-page .card .category-topic {
       display: none;
     }
+
+    .category-page .write-new-button {
+      background-color: {{topic.category.color|darker:-0.2}};
+    }
+
+    .category-page .write-new-button:hover {
+      background-color: {{topic.category.color|darker:-0.4}};
+    }
   </style>
   <header class="main-header">
     <div class="hero-unit tray">
@@ -47,7 +55,7 @@
         <i class="fa fa-th-large"></i>
       </a>
     </div>
-    <a href="/articles/new" class="write-new-button" style="background-color: {{topic.category.color|darker:-0.2}}">
+    <a href="/articles/new" class="write-new-button">
       <i class="fa fa-pencil"></i>
       اكتب مقال جديد
     </a>

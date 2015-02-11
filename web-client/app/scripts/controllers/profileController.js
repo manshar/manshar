@@ -56,6 +56,8 @@ angular.module('webClientApp')
 
     $scope.loadRecommendations = function() {
       $scope.activeTab = 'recommendations';
+      $scope.articles = [{ loading: true }, { loading: true },
+          { loading: true }];
       var articles = [];
       UserRecommendation.query({'userId': $routeParams.userId}, function(recommendations) {
         angular.forEach(recommendations, function (recommendation) {
@@ -67,6 +69,8 @@ angular.module('webClientApp')
 
     $scope.loadDiscussions = function() {
       $scope.activeTab = 'discussions';
+      $scope.articles = [{ loading: true }, { loading: true },
+            { loading: true }];
       var articles = [];
       UserComment.query({'userId': $routeParams.userId}, function(comments) {
         angular.forEach(comments, function (comment) {
@@ -85,6 +89,8 @@ angular.module('webClientApp')
     };
 
     $scope.loadArticles = function() {
+      $scope.articles = [{ loading: true }, { loading: true },
+            { loading: true }];
       $scope.activeTab = 'published';
       // Only get drafts if the current profile being viewed and the logged in user
       // are the same person.

@@ -42,9 +42,10 @@ class Article < ActiveRecord::Base
   end
 
   def next
-    next_article = Article.publishings.popular.where('hotness < ?', hotness).first
+    query = Article.publishings.popular
+    next_article = query.where('hotness < ?', hotness).first
     if next_article.nil?
-        next_article = Article.publishings.popular.where('hotness > ?', hotness).first
+      next_article = query.where('hotness > ?', hotness).first
     end
     next_article
   end

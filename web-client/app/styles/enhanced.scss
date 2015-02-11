@@ -29,7 +29,6 @@ body {
 
 .profile-list {
   .write-new-button {
-    margin: 0;
     margin-right: 2em;
   }
 }
@@ -144,11 +143,8 @@ body {
   .meta-box {
     text-align: right;
     display: inline-block;
-    margin-left: 2em;
+    margin: 1em;
 
-    &:last-child {
-      margin-left: 0;
-    }
     .meta-details {
       &.card {
         width: 350px;
@@ -337,13 +333,12 @@ body {
 
     .anchored-comment-box {
       .icon-count-container {
-        i {
-          font-size: 1.5em;
-        }
+        top: 0;
+        left: 0;
+
         span {
-          top: -3px;
-          color: #fff;
-          font-size: .9em;
+          top: -6px;
+          font-size: 1em;
         }
       }
     }

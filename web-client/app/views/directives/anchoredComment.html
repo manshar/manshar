@@ -1,6 +1,6 @@
 <div class="anchored-comment-box" ng-show="isActive || commentsCount">
-  <span class="icon-count-container">
+  <span class="icon-count-container" ng-class="{'filled': commentsCount}">
     <i class="fa" ng-class="{'fa-comment': commentsCount, 'fa-comment-o': !commentsCount}"></i>
-    <span ng-show="commentsCount">{{commentsCount}}</span>
+    <span>{{commentsCount > 0 ? commentsCount : '+'}}</span>
   </span>
 </div>

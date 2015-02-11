@@ -10,7 +10,9 @@ class Api::V1::CommentsController < ApplicationController
   # GET /api/v1/users/1/comments
   # GET /api/v1/users/1/comments.json
   def index
-    @comments = policy_scope(@parent.comments)
+    @load_content = preload_content
+    @comments = policy_scope(
+        @parent.comments.preload(preload_content))
     render 'api/v1/comments/index'
   end
 
@@ -63,6 +65,12 @@ class Api::V1::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :guid)
+  end
+
+  # When the request is for articles comments, preload the user object
+  # otherwise preload the article.
+  def preload_content
+    params[:article_id] ? :user : :article
   end
 
 end
