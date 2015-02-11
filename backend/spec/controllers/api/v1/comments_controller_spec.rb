@@ -32,8 +32,9 @@ describe Api::V1::CommentsController, :type => :controller  do
 
       get :index, :article_id => @comment.article_id
       response.should be_success
+      @load_content = :user
       rendered = Rabl.render(
-          [@comment], 'api/v1/comments/index', :view_path => 'app/views')
+          [@comment], 'api/v1/comments/index', :view_path => 'app/views', scope: self)
       response.body.should eq(rendered)
     end
   end
@@ -46,8 +47,9 @@ describe Api::V1::CommentsController, :type => :controller  do
 
       get :index, :user_id => @comment.user_id
       response.should be_success
+      @load_content = :article
       rendered = Rabl.render(
-          [@comment], 'api/v1/comments/index', :view_path => 'app/views')
+          [@comment], 'api/v1/comments/index', :view_path => 'app/views', scope: self)
       response.body.should eq(rendered)
     end
   end

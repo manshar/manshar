@@ -289,18 +289,29 @@ angular.module('webClientApp', [
     };
 
     var checkAccess = function(event, next, current) {
-      // Is user logged in?
-      if(!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
+
+      /**
+       * First load to the AngularJS the user might have not been loaded
+       * so need to call the callback after validateUser promise is resolved.
+       */
+      var firstLoadCallback = function() {
+        if (!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
+          $location.path('/login').search('prev', $location.path());
+        }
+      };
+
+      // If this is the first load of the site.
+      if(!current) {
+        $auth.validateUser().then(firstLoadCallback, firstLoadCallback);
+      }
+      else if(!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
         event.preventDefault();
         // Show the dialog instead of redirecting for all navigations.
         // Except first time landing on the site on protected page.
         if (current) {
           $rootScope.$broadcast('showLoginDialog', {
-            'prev': next.$$route.originalPath
+            'prev': $location.path()
           });
-        } else {
-          var prev = next.$$route && next.$$route.originalPath;
-          $location.path('/login').search('prev', prev);
         }
       }
     };

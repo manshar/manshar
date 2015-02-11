@@ -25,8 +25,9 @@ describe Api::V1::RecommendationsController, :type => :controller  do
 
       get :index, :article_id => @recommendation.article_id
       response.should be_success
+      @load_content = :user
       rendered = Rabl.render(
-          [@recommendation], 'api/v1/recommendations/index', :view_path => 'app/views')
+          [@recommendation], 'api/v1/recommendations/index', :view_path => 'app/views', scope: self)
       response.body.should eq(rendered)
     end
   end
@@ -39,8 +40,9 @@ describe Api::V1::RecommendationsController, :type => :controller  do
 
       get :index, :user_id => @recommendation.user_id
       response.should be_success
+      @load_content = :article
       rendered = Rabl.render(
-          [@recommendation], 'api/v1/recommendations/index', :view_path => 'app/views')
+          [@recommendation], 'api/v1/recommendations/index', :view_path => 'app/views', scope: self)
       response.body.should eq(rendered)
     end
   end

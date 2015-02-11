@@ -62,12 +62,13 @@ angular.module('webClientApp')
           return delayedObj;
         },
 
-        update: function (params, data, optSuccess, optError) {
+        update: function (params, data, optSuccess, optError, optConfig) {
 
           var delayedObj = {};
+          optConfig = optConfig || {};
 
           $http.put(baseUrl + 'articles/' + params.articleId,
-                    createFormData(data), configs)
+                    createFormData(data), angular.extend(optConfig, configs))
             .then(
 
             // Success.

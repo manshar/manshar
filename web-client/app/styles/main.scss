@@ -131,11 +131,28 @@ input[type="password"] {
   .fa {
     padding-left: 0.3em;
   }
+
+  &:hover {
+    background: #DB2615;
+  }
 }
 
 .profile-list {
+  background: #fafafa;
   .write-new-button {
-    margin-top: 0;
+    margin-top: 2em;
+    display: inline-block;
+  }
+
+  .no-articles-container {
+    text-align: center;
+    height: 200px;
+    color: #909090;
+
+    a {
+      color: #000;
+      text-decoration: underline;
+    }
   }
 }
 
@@ -396,27 +413,34 @@ input[type="password"] {
     .icon-count-container {
 
       position: relative;
+      top: -2em;
+      left: 2em;
       cursor: pointer;
-
+      color: #d7d7d7;
       &:hover {
-        i {
-          color: #000;
-        }
+        color: #000;
       }
 
       i {
-        font-size: 1em;
-        color: #909090;
+        font-size: 2em;
         transform: scaleX(-1);
+
       }
+
+      &.filled {
+        color: #9a9a9a;
+        span {
+          color: #fff;
+        }
+      }
+
       span {
         position: absolute;
-        top: 2px;
+        top: -5px;
         right: 0;
         left: 0;
         text-align: center;
-        color: #fff;
-        font-size: 0.7em;
+        font-size: 1em;
         cursor: pointer;
       }
     }
@@ -953,11 +977,12 @@ ul.cards-list-container {
       }
 
       figure {
+        padding: 1em;
         text-align: center;
 
         img {
           max-width: 100%;
-          box-shadow: 0 1px 5px -1px #000;
+          box-shadow: 0 0 5px -1px rgba(0,0,0,.1);
         }
 
         iframe {
@@ -1035,7 +1060,7 @@ ul.cards-list-container {
     text-shadow: 0px 1px 3px #000;
     left: 0;
     right: 0;
-    font-size: 2em;
+    font-size: 1.2em;
 
     img {
       display: none;
@@ -1043,7 +1068,7 @@ ul.cards-list-container {
 
     button {
       background-color: #c0c0c0;
-      font-size: 0.4em;
+      font-size: 0.6em;
       width: 190px;
       border-radius: 0;
       color: #000;
@@ -1147,6 +1172,14 @@ button {
   span {
     font-size: 0.9em;
   }
+}
+
+form.manshar-article article.manshar-editor {
+  /**
+   * Adding lots of padding to the bottom of the main article editor to allow
+   * the user to scroll down rather being stuck at the end of the page.
+   */
+  padding-bottom: 70%;
 }
 
 /* TODO(mkhatib): Consider removing Medium styles all together. */

@@ -141,7 +141,7 @@ angular.module('webClientApp')
 
         Article.update(
             { 'articleId': article.id }, { article: article },
-            updateSuccess, updateError);
+            updateSuccess, updateError, {ignoreLoadingBar: !published});
       }
     };
 
