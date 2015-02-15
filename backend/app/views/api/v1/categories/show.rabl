@@ -1,14 +1,20 @@
 object @category
 
-attributes :id, :title, :description, :color, :icon_cssclass,
-    :created_at, :updated_at, :articles_count, :topics_count
+attributes :id, :title, :color, :icon_cssclass
 
-node :image_thumb_url do |category|
-  category.image_abs_url '300x300#'
-end
+unless locals[:listing]
 
-attribute :image_abs_url => :original_image_url
+  attributes :created_at, :updated_at, :articles_count, :topics_count,
+      :description
 
-node :icon_url do |category|
-  category.icon_abs_url '32x32#'
+  attribute :image_abs_url => :original_image_url
+
+  node :image_thumb_url do |category|
+    category.image_abs_url '300x300#'
+  end
+
+  node :icon_url do |category|
+    category.icon_abs_url '32x32#'
+  end
+
 end

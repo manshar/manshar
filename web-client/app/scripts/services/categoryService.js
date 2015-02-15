@@ -5,7 +5,10 @@ angular.module('webClientApp')
       function ($resource, $http, $q, API_HOST) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
-      var CategoryResource = $resource(baseUrl + 'categories/:categoryId');
+      var CategoryResource = $resource(baseUrl + 'categories/:categoryId', {}, {
+        get: {cache: true},
+        query: {cache: true, isArray: true}
+      });
 
       /**
        * These configs are needed. AngularJS identity tranformer

@@ -8,12 +8,15 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('User', ['$rootScope', '$resource', '$http', 'API_HOST',
-      function ($rootScope, $resource, $http, API_HOST) {
+  .service('User', ['$rootScope', '$resource', '$http', '$cacheFactory', 'API_HOST',
+      function ($rootScope, $resource, $http, $cacheFactory, API_HOST) {
 
+      var $httpDefaultCache = $cacheFactory.get('$http');
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserResource = $resource(baseUrl + 'users/:userId', {}, {
-        update: {method: 'PUT'}
+        update: {method: 'PUT'},
+        get: {cache: true},
+        query: {cache: true, isArray: true}
       });
 
 
@@ -43,12 +46,12 @@ angular.module('webClientApp')
         get: UserResource.get,
         query: UserResource.query,
         update: function(userId, user, optSuccess, optError) {
-          $http.put(baseUrl + 'users/' + userId,
-                     createFormData({user: user}), configs)
-          .then(
+          var url = baseUrl + 'users/' + userId;
+          $http.put(url, createFormData({user: user}), configs).then(
 
             // Success.
             angular.bind(this, function(response) {
+              $httpDefaultCache.put(url, response.data);
               if (optSuccess) {
                 optSuccess(response.data);
               }
@@ -75,7 +78,10 @@ angular.module('webClientApp')
       function ($resource, API_HOST) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
-      var UserDraftResource = $resource(baseUrl + 'me/drafts');
+      var UserDraftResource = $resource(baseUrl + 'me/drafts', {}, {
+        get: {cache: true},
+        query: {cache: true, isArray: true}
+      });
 
       return {
         query: UserDraftResource.query

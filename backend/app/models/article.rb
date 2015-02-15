@@ -24,6 +24,23 @@ class Article < ActiveRecord::Base
   end
   abs_url_for :cover
 
+
+  def user_name
+    user.name
+  end
+  persistize :user_name
+
+  def topic_title
+    topic ? topic.title : nil
+  end
+  persistize :topic_title
+
+  def category_color
+    topic ? topic.category.color : nil
+  end
+  persistize :category_color
+
+
   # Instance Methods.
   def publish!
     self.published = true

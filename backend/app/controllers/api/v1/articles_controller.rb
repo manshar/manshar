@@ -15,7 +15,7 @@ class Api::V1::ArticlesController < ApplicationController
   def index
     # Use the custom Article.published method to return all articles that is
     # marked published.
-    @articles = @query.publishings.try(order_param).preload(:user, :topic)
+    @articles = @query.publishings.try(order_param)
     render 'api/v1/articles/index'
   end
 
