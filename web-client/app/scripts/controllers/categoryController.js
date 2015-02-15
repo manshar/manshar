@@ -29,4 +29,19 @@ angular.module('webClientApp')
     $scope.showCategoriesPicker = function() {
       $rootScope.$emit('openTopicPicker', {pickOnlyCategory: true});
     };
+
+    var categorySelectedUnbind = $rootScope.$on('categorySelected',
+        function(event, data) {
+      $location.path('/categories/' + data.category.id);
+    });
+
+    /**
+     * Make sure to cleanup the binded events and intervals when the user
+     * leaves to another controller.
+     */
+    var onDestroy = function () {
+      categorySelectedUnbind();
+    };
+    $scope.$on('$destroy', onDestroy);
+
   }]);
