@@ -140,6 +140,7 @@ describe('Controller: EditArticleCtrl', function () {
 
   describe('EditArticleCtrl.deleteArticle', function () {
     it('should delete an article when the user confirm', function () {
+      rootScope.user = {id: 1};
       createController();
       spyOn(mock, 'confirm').andCallFake(function() {return true;});
       spyOn(ArticleModel, 'delete').andCallFake(function(params, data, success) {
@@ -148,7 +149,7 @@ describe('Controller: EditArticleCtrl', function () {
       scope.deleteArticle({id: 1});
       expect(mock.confirm).toHaveBeenCalled();
       expect(ArticleModel.delete).toHaveBeenCalled();
-      expect(location.path()).toBe('/');
+      expect(location.path()).toBe('/profiles/1');
     });
 
     it('should not delete an article when the user does not confirm', function () {
