@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :topic
-  has_one :category, through: :topic, autosave: false
+  belongs_to :category
   has_many :recommendations, dependent: :destroy
   has_many :comments, dependent: :destroy
 

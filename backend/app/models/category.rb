@@ -2,8 +2,7 @@ class Category < ActiveRecord::Base
   include Concerns::Utils
 
   has_many :topics, :counter_cache => :topics_count, dependent: :destroy
-  has_many :articles, :through => :topics,
-      :counter_cache => :articles_count
+  has_many :articles, :counter_cache => :articles_count
 
   validates_uniqueness_of :title
 
