@@ -15,7 +15,7 @@ class Api::V1::ArticlesController < ApplicationController
   def index
     # Use the custom Article.published method to return all articles that is
     # marked published.
-    @articles = @query.publishings.try(order_param)
+    @articles = @query.publishings.try(order_param).page(params[:page])
     render 'api/v1/articles/index'
   end
 
@@ -79,7 +79,7 @@ class Api::V1::ArticlesController < ApplicationController
     def article_params
       params.require(
         :article).permit(
-          :title, :tagline, :body, :published, :cover, :topic_id)
+          :title, :tagline, :body, :published, :cover, :topic_id, :category_id)
     end
 
     def order_param

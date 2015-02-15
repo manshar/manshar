@@ -44,6 +44,9 @@ gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-
 # Helps with denormalizing attributes and store them along with the object.
 gem "persistize"
 
+# Helps with pagination for models.
+gem 'kaminari'
+
 group :production do
   gem 'rails_12factor'
   gem 'puma'

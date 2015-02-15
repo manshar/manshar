@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
   include Concerns::Utils
+  paginates_per 15
 
   belongs_to :user
   belongs_to :topic
@@ -36,7 +37,7 @@ class Article < ActiveRecord::Base
   persistize :topic_title
 
   def category_color
-    topic ? topic.category.color : nil
+    category ? category.color : nil
   end
   persistize :category_color
 

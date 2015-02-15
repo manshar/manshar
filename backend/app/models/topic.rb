@@ -1,4 +1,5 @@
 class Topic < ActiveRecord::Base
+  paginates_per 100
 
   belongs_to :category
   has_many :articles, dependent: :nullify

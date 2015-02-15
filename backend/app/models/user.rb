@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include Concerns::Utils
+  paginates_per 50
 
   devise :database_authenticatable, :registerable,
       :recoverable, :rememberable, :trackable, :validatable,
@@ -16,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :images, dependent: :destroy
   has_many :recommendations, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :links, dependent: :destroy  
+  has_many :links, dependent: :destroy
 
   dragonfly_accessor :avatar do
     default ENV['DEFAULT_AVATAR']
