@@ -34,16 +34,19 @@ else
   # Sass gem is needed to build web client.
   sudo gem install sass
   cd $MANSHAR_HOME/web-client/ && grunt && cd $MANSHAR_HOME
-  git add --all && git commit -a -m 'Dummy message.'
+  git add --all && git commit -a -m 'Deploying Web Client Dist...'
   yes | git push web-client-heroku `git subtree split --prefix web-client/dist tmp-deploy`:master --force
 
   # Deploy Manshar Backend.
   git checkout master
+  # Un-ignoring database.yml and using database.yml.sample to upload to heroku.
+  # This is mainly for database pool configuration.
+  sed '/config\/database.yml/d' backend/.gitignore > backend/.gitignore.new && mv backend/.gitignore.new backend/.gitignore
+  mv backend/config/database.yml.sample backend/config/database.yml
+  git add --all && git commit -am 'Deploying Manshar Backend...'
   yes | git push backend-heroku `git subtree split --prefix backend master`:master --force
   heroku run rake db:migrate --app manshar-backend
 
-  # Deploy Manshar Workers.
-  git checkout master
   yes | git push workers-heroku `git subtree split --prefix backend master`:master --force
   heroku run rake db:migrate --app manshar-workers
 fi

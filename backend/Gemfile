@@ -41,6 +41,9 @@ gem 'sidekiq'
 # Used to manage notifications, emails and messaging.
 gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-foreigner'
 
+# Helps with denormalizing attributes and store them along with the object.
+gem "persistize"
+
 group :production do
   gem 'rails_12factor'
   gem 'puma'

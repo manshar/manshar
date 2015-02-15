@@ -187,10 +187,8 @@ describe('Controller: EditArticleCtrl', function () {
       expect(mock.confirm).not.toHaveBeenCalled();
       expect(location.path()).toBe('/');
 
-      httpBackend.expectGET(apiBase + 'articles/1').respond({title: 'Hello World.'});
       routeParams.articleId = 1;
       createController();
-      httpBackend.flush();
       scope.article.title = 'Bye World.';
       scope.cancel();
       expect(mock.confirm).toHaveBeenCalled();

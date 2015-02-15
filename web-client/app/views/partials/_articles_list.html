@@ -16,7 +16,6 @@
             <div class="date">
               {{article.published_at | date:'EEEE, d MMMM'}}
             </div>
-            <span ng-hide="article.loading">بقلم: </span>
             <a ng-hide="article.loading" ng-href="/profiles/{{article.user.id}}"
               analytics-on="click"
               analytics-event="click"
@@ -26,7 +25,6 @@
                 {{article.user.name}}
             </a>
             <div class="category-topic" ng-show="article.topic.title">
-              <span>في</span>
               <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}"
                 style="background-color: {{article.topic.category.color}};">
                 {{article.topic.title}}
@@ -42,7 +40,6 @@
               <i class="fa fa-comment-o"></i> {{article.comments_count}}
             </span>
           </div>
-          <div ng-include="'views/partials/_sharing_buttons.html'"></div>
         </div>
       </div>
     </div>

@@ -9,6 +9,9 @@ angular.module('webClientApp')
         baseUrl + 'categories/:categoryId/topics/:topicId', {
           categoryId: '@categoryId',
           topicId: '@topicId'
+        }, {
+          get: {cache: true},
+          query: {cache: true, isArray: true}
         });
 
       return TopicResource;

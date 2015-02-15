@@ -224,6 +224,8 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    persistize (0.2.0)
+      activerecord
     pg (0.18.1)
     puma (2.11.0)
       rack (>= 1.1, < 2.0)
@@ -332,6 +334,7 @@ DEPENDENCIES
   oj
   omniauth-facebook
   omniauth-gplus (~> 2.0)
+  persistize
   pg
   puma
   pundit

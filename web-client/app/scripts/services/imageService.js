@@ -5,7 +5,10 @@ angular.module('webClientApp')
       function ($resource, $http, $q, $upload, API_HOST) {
 
       var baseUrl = '//' + API_HOST + '/api/v1/';
-      var ImageResource = $resource(baseUrl + 'images/:imageId');
+      var ImageResource = $resource(baseUrl + 'images/:imageId', {}, {
+        get: {cache: true},
+        query: {cache: true, isArray: true}
+      });
 
       /**
        * These configs are needed. AngularJS identity tranformer
