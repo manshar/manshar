@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :images, dependent: :destroy
   has_many :recommendations, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :links, dependent: :destroy  
 
   dragonfly_accessor :avatar do
     default ENV['DEFAULT_AVATAR']
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
   abs_url_for :avatar
 
   def published_articles
-  	articles.publishings.recents
+    articles.publishings.recents
   end
 
   def drafts

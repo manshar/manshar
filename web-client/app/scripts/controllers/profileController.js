@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'UserArticle', 'UserDraft', 'User','$analytics', '$window', 'Article', 'UserRecommendation', 'UserComment',
-    function ($scope, $rootScope, $location, $routeParams, UserArticle, UserDraft, User, $analytics, $window, Article, UserRecommendation, UserComment) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'UserArticle', 'UserDraft', 'User','$analytics', '$window', 'Article', 'UserRecommendation', 'UserComment', 'UserLink',
+    function ($scope, $rootScope, $location, $routeParams, UserArticle, UserDraft, User, $analytics, $window, Article, UserRecommendation, UserComment, UserLink) {
 
     User.get({'userId': $routeParams.userId}, function(resource) {
       /* jshint camelcase: false */
@@ -104,6 +104,14 @@ angular.module('webClientApp')
       });
     };
 
+
+    $scope.loadLinks = function() {
+      UserLink.query({'userId': $routeParams.userId}, function (links) {
+        $scope.links = links;
+      });
+    };
+    
+    $scope.loadLinks();
     $scope.loadArticles();
 
   }]);

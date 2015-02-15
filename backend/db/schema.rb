@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 20150206105517) do
     t.datetime "updated_at"
   end
 
+  create_table "links", force: :cascade do |t|
+    t.string   "title",      default: "", null: false
+    t.string   "url",        default: "", null: false
+    t.integer  "user_id",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
     t.string  "unsubscriber_type"

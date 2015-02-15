@@ -129,7 +129,7 @@ describe Api::V1::ArticlesController, :type => :controller do
       response.code.should eq('401')
     end
 
-    it 'should update successfully for owners' do
+    it 'should delete successfully for owners' do
       auth_headers = @article.user.create_new_auth_token
       request.headers.merge!(auth_headers)
       delete :destroy, { :id => @article.id }
