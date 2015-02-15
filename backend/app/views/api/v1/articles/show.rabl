@@ -49,6 +49,7 @@ else
       id: article.topic_id,
       title: article.topic_title,
       category: {
+        id: article.category_id,
         color: article.category_color
       }
     } if article.topic_title
