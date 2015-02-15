@@ -192,8 +192,12 @@ angular.module('webClientApp')
 
 
     var topicSelectedUnbind = $rootScope.$on('topicSelected', function(event, data) {
-      $scope.article.topic_id = data.topic.id;
-      $scope.article.topic = data.topic;
+      if (data.topic && data.topic.id) {
+        $scope.article.topic = data.topic;
+        $scope.article.topic_id = data.topic.id;
+        $scope.article.category = data.topic.category;
+        $scope.article.category_id = data.topic.category.id;
+      }
       $scope.article.published_at = publishingAfterTopicPicked;
       $scope.saveArticle($scope.article, publishingAfterTopicPicked);
     });

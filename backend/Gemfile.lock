@@ -187,6 +187,9 @@ GEM
     ipaddress (0.8.0)
     json (1.8.2)
     jwt (1.2.1)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     loofah (2.0.1)
@@ -330,6 +333,7 @@ DEPENDENCIES
   email_spec
   factory_girl_rails (= 4.3.0)
   foreman
+  kaminari
   mailboxer!
   oj
   omniauth-facebook

@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
   # GET /api/v1/users
   # GET /api/v1/users.json
   def index
-    @users = User.top.publishers
+    @users = User.top.publishers.page(params[:page])
     render 'api/v1/users/index'
   end
 

@@ -4,7 +4,7 @@ require 'dragonfly'
 Dragonfly.app.configure do
   plugin :imagemagick
 
-  protect_from_dos_attacks true
+  verify_urls true
   secret ENV['DRAGONFLY_SECRET']
 
   url_format "/media/:job/:sha/:name"

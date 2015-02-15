@@ -795,9 +795,18 @@ input[type="password"] {
   }
 }
 
+.load-more-button {
+  padding: 1em;
+  background: #eee;
+  margin: 0 auto;
+  width: 100%;
+  display: block;
+  border: none;
+}
+
 ul.cards-list-container {
   width: 100%;
-  padding-top: 20px;
+  padding: 20px 0;
   list-style: none;
   word-wrap: break-word;
   background-color: #f9f9f9;
