@@ -203,7 +203,7 @@ angular.module('webClientApp')
     });
 
     /**
-     * When the user logout while in edit mdoe redirect the user,
+     * When the user logout while in edit mode redirect the user,
      */
     var loggedOutUnbined = $rootScope.$on('auth:logout-success', function () {
       if ($scope.article.published) {

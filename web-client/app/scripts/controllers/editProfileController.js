@@ -130,4 +130,19 @@ angular.module('webClientApp')
       $scope.inProgress = null;
     };
 
+
+    /**
+     * When the user logout while in edit mode, redirect the user to his
+     * own profile
+     */
+    var loggedOutUnbined = $rootScope.$on('auth:logout-success', function () {
+      $location.path('/profiles/' + $routeParams.userId);
+    });
+
+    var onDestroy = function () {
+      loggedOutUnbined();
+    };
+
+    $scope.$on('$destroy', onDestroy);
+
   }]);

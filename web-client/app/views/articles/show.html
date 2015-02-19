@@ -43,7 +43,7 @@
         <h1 class="header-label">
           <span>بقلم</span>
         </h1>
-        <div class="meta-details card">
+        <div class="meta-details card" ng-hide="article.loading">
           <a class="meta-thumb" ng-href="/profiles/{{article.user.id}}">
             <img ng-src="{{article.user.thumb_url}}" />
           </a>
