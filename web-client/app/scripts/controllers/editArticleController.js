@@ -123,6 +123,10 @@ angular.module('webClientApp')
      * @param {boolean} silent Whether to flash the controls or not.
      */
     $scope.saveArticle = function(article, published, silent) {
+      // Clear autosave interval before sitting published
+      if(autoSavePromise) {
+        $interval.cancel(autoSavePromise);
+      }
       article.published = published;
       var formError = $scope.articleForm.$error;
       if(published && formError && formError.required) {

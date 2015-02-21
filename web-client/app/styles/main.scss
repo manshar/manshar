@@ -139,9 +139,11 @@ input[type="password"] {
 
 .profile-list {
   background: #fafafa;
+  padding-top: 2em;
+  
   .write-new-button {
-    margin-top: 2em;
     display: inline-block;
+    margin-top: 0;
   }
 
   .no-articles-container {
@@ -359,6 +361,9 @@ input[type="password"] {
 
     ul {
       list-style: none;
+      max-height: 500px;
+      overflow-y: scroll;
+      background-color: #fbfbfb;
 
       li {
         position: relative;
@@ -1468,4 +1473,19 @@ form.manshar-article article.manshar-editor {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+
+/* Overwrite the default to keep the scrollbar always visible
+   For the comments div to look scrollable
+ */
+
+.main-comment-box ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+.main-comment-box ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
