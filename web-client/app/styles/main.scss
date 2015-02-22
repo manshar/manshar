@@ -1025,8 +1025,52 @@ ul.cards-list-container {
       }
 
       ul, ol {
-        margin-right: 1.8em;
+        margin-right: 1.5em;
         padding-top: 1em;
+        list-style-type: none;
+
+        li {
+          margin-top: 1em;
+          position: relative;
+
+          &:before {
+            position: absolute;
+            top: 0;
+            width: 0.8em;
+            font-size: 1.8em;
+            color: rgba(0, 0, 0, 0.3);
+          }
+        }
+      }
+
+      ul {
+        li {
+          &:before{
+            content: '\2022';
+            right: -0.9em;
+            line-height: 1.2em;
+          }
+        }
+      }
+
+      ol {
+        counter-reset: li-counter;
+
+        li {
+          margin-top: 1.5em;
+
+          &:before {
+            right: -1em;
+            width: 0.8em;
+
+            line-height: 1;
+            font-weight: bold;
+            text-align: right;
+
+            content: counter(li-counter);
+            counter-increment: li-counter;
+          }
+        }
       }
 
       h3 {
