@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html ng-app="webClientApp" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <base href="/" target="_blank">>
+    <base href="/" target="_blank">
     <meta name="fragment" content="!">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
@@ -38,7 +38,7 @@
         <!-- Load the hosted stylesheets for highlight.js -->
         <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
+  </head>
   <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -51,7 +51,7 @@
 
     <div data-category-topic-picker></div>
     <!-- site nav -->
-    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="left"
+    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="left" width="35px"
         analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon"/>
     <nav class="site-nav" snap-drawer="left">
       <div class="profile-badge" ng-if="user.thumb_url">
@@ -92,19 +92,15 @@
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     </script>
 
-    <!-- Load the hosted compiled javasript for highlight.js -->
-    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
     <!-- Need to load shims before angular.js to allow progress events to work. -->
-    <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.js"></script>
-
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-
         <!-- build:js scripts/modules.js -->
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-i18n/angular-locale_ar.js"></script>
         <script src="bower_components/snapjs/snap.js"></script>
         <script src="bower_components/grande.js/js/grande.js"></script>
@@ -114,11 +110,9 @@
         <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
         <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
         <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-        <script src="bower_components/angular-cookie/angular-cookie.js"></script>
+        <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
         <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
-        <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/appConfig.js"></script>
         <script src="scripts/cachedTemplates.js"></script>
@@ -166,5 +160,8 @@
         <script src="scripts/filters/mansharSanitizer.js"></script>
 
         <!-- endbuild -->
+
+    <!-- Load the hosted compiled javasript for highlight.js -->
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js" async></script>
 </body>
 </html>
