@@ -21,6 +21,22 @@ module.exports = function (grunt) {
   // Load Google CDN tasks.
   grunt.loadNpmTasks('grunt-google-cdn');
 
+  // Replace assets with cdn url.
+  grunt.loadNpmTasks('grunt-string-replace');
+  var replacementFunc = function (match, src) {
+    if (src.indexOf('//') !== -1 || src.indexOf('http://') !== -1 || src.indexOf('https://') !== -1) {
+      return match;
+    } else {
+      var cdnBase = '//d32rdl4awdotlf.cloudfront.net';
+      if (src.indexOf('/') !== 0) {
+        cdnBase += '/';
+      }
+      var replacement = match.replace(src, cdnBase + src);
+      console.log('Replacing: ', match, ' with: ', replacement);
+      return replacement;
+    }
+  };
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -336,6 +352,30 @@ module.exports = function (grunt) {
       }
     },
 
+    'string-replace': {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'dist/',
+          src: 'index.html',
+          dest: 'dist/'
+        }],
+        options: {
+          // TODO(mkhatib): Move this into its own Grunt task.
+          replacements: [{
+            pattern: /<script.*? src="(.+?)".*?><\/script>/ig,
+            replacement: replacementFunc
+          }, {
+            pattern: /<link.*? href="(.+?)".*?>/ig,
+            replacement: replacementFunc
+          }, {
+            pattern: /<img.*? src="(.+?)".*?>/ig,
+            replacement: replacementFunc
+          }]
+        }
+      }
+    },
+
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -505,7 +545,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'string-replace'
   ]);
 
   grunt.registerTask('default', [

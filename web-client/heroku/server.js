@@ -9,13 +9,17 @@ app.configure(function(){
   // We set the token only if we're using the Prerender.io service
   app.use(require('prerender-node').set('prerenderToken', 'zJohnQZtTAHTRGaDACW5'));
   app.use(express.compress());
-  app.use(express.static(__dirname));
+
+  var options = {
+    maxAge: '60d'
+  };
+  app.use(express.static(__dirname, options));
   app.use(app.router);
 });
 
 // This will ensure that all routing is handed over to AngularJS
 app.get('*', function(req, res){
-        res.sendfile('index.html');
+  res.sendfile('index.html');
 });
 
 var port = process.env.PORT || 9000;
