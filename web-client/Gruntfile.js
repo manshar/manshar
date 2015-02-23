@@ -8,6 +8,7 @@
 // 'test/spec/**/*.js'
 
 var modRewrite = require('connect-modrewrite');
+var compression = require('compression');
 
 module.exports = function (grunt) {
 
@@ -107,7 +108,7 @@ module.exports = function (grunt) {
         livereload: 35729,
         middleware: function (connect, options) {
           var optBase = (typeof options.base === 'string') ? [options.base] : options.base,
-              middleware = [modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg\\.gif|\\swf$ / [L]'])]
+              middleware = [modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg\\.gif|\\swf$ / [L]']), compression()]
                 .concat(optBase.map(function (path) {
                   if (path.indexOf('rewrite|') === -1) {
                     return connect.static(path);

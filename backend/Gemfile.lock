@@ -180,6 +180,8 @@ GEM
     globalid (0.3.2)
       activesupport (>= 4.1.0)
     hashie (3.4.0)
+    heroku-deflater (0.5.3)
+      rack (>= 1.4.5)
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
@@ -333,6 +335,7 @@ DEPENDENCIES
   email_spec
   factory_girl_rails (= 4.3.0)
   foreman
+  heroku-deflater
   kaminari
   mailboxer!
   oj

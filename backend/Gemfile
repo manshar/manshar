@@ -51,6 +51,9 @@ group :production do
   gem 'rails_12factor'
   gem 'puma'
 	gem 'rack-cache', require: 'rack/cache'
+
+  # To enable API responses compression.
+  gem 'heroku-deflater'
 end
 
 group :test, :development do
