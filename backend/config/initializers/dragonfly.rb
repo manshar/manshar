@@ -5,7 +5,7 @@ Dragonfly.app.configure do
   plugin :imagemagick
 
   # TODO: Dragonfly changed their SHA algorithm and broke old images
-  # make sure to revert this back to true once we figure out how to support 
+  # make sure to revert this back to true once we figure out how to support
   # old images urls.
   verify_urls false
   secret ENV['DRAGONFLY_SECRET']

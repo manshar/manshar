@@ -8,7 +8,7 @@ class ArticleRankingWorker
   @@RANKING_LOG_BASE = (ENV['RANKING_LOG_BASE'] || 2).to_i
   @@RANKING_TIME_SCALE_CONSTANT = (ENV['RANKING_TIME_SCALE_CONSTANT']|| 45000).to_i
   @@RANKING_RECOMMENDATION_WEIGHT = (ENV['RANKING_RECOMMENDATION_WEIGHT'] || 2).to_i
-  @@RANKING_COMMENTS_WEIGHT = (ENV['RANKING_COMMENTS_WEIGHT'].to_i || 1).to_i
+  @@RANKING_COMMENTS_WEIGHT = (ENV['RANKING_COMMENTS_WEIGHT'] || 1).to_i
 
   def self.score(recommendations_count, comments_count)
     (recommendations_count * @@RANKING_RECOMMENDATION_WEIGHT +
