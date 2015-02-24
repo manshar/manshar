@@ -27,7 +27,7 @@ angular.module('webClientApp')
           }
         };
 
-        var uploadCallback = function (filesList, successFn, progressFn) {
+        var uploadCallback = function (filesList, successFn, progressFn, errorFn) {
           if (scope.mode !== 'rich') {
             return;
           }
@@ -44,8 +44,9 @@ angular.module('webClientApp')
               read(); // Update the ngModel.
             },
             // Fail.
-            function() {
-              window.alert('Erorr uploading the image');
+            function(error) {
+              window.alert(error);
+              errorFn();
             },
             // Progress.
             function(event) {
@@ -56,7 +57,7 @@ angular.module('webClientApp')
         };
 
         new Grande(element, {
-          containerEl: document.getElementsByClassName('container')[0],
+          containerSelector: '.container',
           placeholder: scope.placeholder || '',
           mode: scope.mode || 'rich',
           rtl: scope.rtl || false,

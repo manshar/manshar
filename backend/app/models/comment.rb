@@ -9,6 +9,8 @@ class Comment < ActiveRecord::Base
   has_many :notifications, -> { where notified_object_type: 'Comment'},
       foreign_key: :notified_object_id
 
+  default_scope { order('created_at') }
+
   # Comments for published articles.
   def self.published
     joins(:article).where(:articles => {:published => true})

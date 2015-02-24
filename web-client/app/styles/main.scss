@@ -140,7 +140,7 @@ input[type="password"] {
 .profile-list {
   background: #fafafa;
   padding-top: 2em;
-  
+
   .write-new-button {
     display: inline-block;
     margin-top: 0;
@@ -953,6 +953,11 @@ ul.cards-list-container {
       font-weight: 100;
       word-wrap: break-word;
       text-align: justify;
+
+      b {
+        /* Firefox doesn't seem to bold b elements. */
+        font-weight: bold;
+      }
 
       pre {
         direction: ltr;

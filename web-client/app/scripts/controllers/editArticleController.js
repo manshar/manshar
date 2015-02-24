@@ -19,8 +19,12 @@ angular.module('webClientApp')
       var maybeUpdatedArticle = angular.copy($scope.article);
       // To avoid updating the $scope.article model just remove updated_at
       // to make sure the updated_at is not compared when checking for changes.
+      delete maybeUpdatedArticle.$promise;
+      delete maybeUpdatedArticle.$resolved;
       delete maybeUpdatedArticle.updated_at;
       delete lastSavedArticle.updated_at;
+      delete lastSavedArticle.$promise;
+      delete lastSavedArticle.$resolved;
       return !angular.equals(maybeUpdatedArticle, lastSavedArticle);
     };
 

@@ -33,7 +33,6 @@ class Api::V1::ArticlesController < ApplicationController
     @article = current_user.articles.new(article_params)
     authorize @article
     if @article.save
-      ArticleRankingWorker.perform_async(@article.id) if @article.published
       render 'api/v1/articles/show', status: :created
     else
       render json: @article.errors, status: :unprocessable_entity
@@ -45,6 +44,7 @@ class Api::V1::ArticlesController < ApplicationController
   def update
     authorize @article
     if @article.update(article_params)
+      ArticleRankingWorker.perform_async(@article.id) if @article.published
       render 'api/v1/articles/show'
     else
       render json: @article.errors, status: :unprocessable_entity
