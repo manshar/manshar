@@ -15,17 +15,15 @@ angular.module('webClientApp')
      * @return {boolean} True if the article has been changed.
      */
     var isDirty = function () {
-      // Check if the article has been updated since last edited.
       var maybeUpdatedArticle = angular.copy($scope.article);
-      // To avoid updating the $scope.article model just remove updated_at
-      // to make sure the updated_at is not compared when checking for changes.
-      delete maybeUpdatedArticle.$promise;
-      delete maybeUpdatedArticle.$resolved;
-      delete maybeUpdatedArticle.updated_at;
-      delete lastSavedArticle.updated_at;
-      delete lastSavedArticle.$promise;
-      delete lastSavedArticle.$resolved;
-      return !angular.equals(maybeUpdatedArticle, lastSavedArticle);
+      var attrs = ['body', 'cover_url', 'tagline', 'title', 'topic'];
+      for (var i = 0; i < attrs.length; i++) {
+        if (!angular.equals(
+            maybeUpdatedArticle[attrs[i]], lastSavedArticle[attrs[i]])) {
+          return true;
+        }
+      }
+      return false;
     };
 
     /**
