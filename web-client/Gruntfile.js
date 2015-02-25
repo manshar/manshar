@@ -23,19 +23,6 @@ module.exports = function (grunt) {
 
   // Replace assets with cdn url.
   grunt.loadNpmTasks('grunt-string-replace');
-  var replacementFunc = function (match, src) {
-    if (src.indexOf('//') !== -1 || src.indexOf('http://') !== -1 || src.indexOf('https://') !== -1) {
-      return match;
-    } else {
-      var cdnBase = '//d32rdl4awdotlf.cloudfront.net';
-      if (src.indexOf('/') !== 0) {
-        cdnBase += '/';
-      }
-      var replacement = match.replace(src, cdnBase + src);
-      console.log('Replacing: ', match, ' with: ', replacement);
-      return replacement;
-    }
-  };
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -124,7 +111,7 @@ module.exports = function (grunt) {
         livereload: 35729,
         middleware: function (connect, options) {
           var optBase = (typeof options.base === 'string') ? [options.base] : options.base,
-              middleware = [modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg\\.gif|\\swf$ / [L]']), compression()]
+              middleware = [modRewrite(['!\\.html|\\.js|\\.svg|\\.ttf|\\.woff|\\.woff2|\\.css|\\.png|\\.jpg\\.gif|\\swf$ / [L]']), compression()]
                 .concat(optBase.map(function (path) {
                   if (path.indexOf('rewrite|') === -1) {
                     return connect.static(path);
@@ -357,20 +344,28 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'dist/',
-          src: 'index.html',
+          src: ['index.html', 'styles/*.main.css'],
           dest: 'dist/'
         }],
         options: {
           // TODO(mkhatib): Move this into its own Grunt task.
           replacements: [{
-            pattern: /<script.*? src="(.+?)".*?><\/script>/ig,
-            replacement: replacementFunc
-          }, {
-            pattern: /<link.*? href="(.+?)".*?>/ig,
-            replacement: replacementFunc
-          }, {
-            pattern: /<img.*? src="(.+?)".*?>/ig,
-            replacement: replacementFunc
+            pattern: /['"(]((\/?[\w\d.\-]+\/)+([\w\d.-]+).*?)['")]/ig,
+            replacement: function (match, path) {
+              // If path is an absolute URL (starts with http:// or https:// or //)
+              // just return the url itself to keep it as is.
+              if (path.search(/(https?:)?\/\//) === 0) {
+                return match;
+              } else {
+                var cdnBase = '//d32rdl4awdotlf.cloudfront.net';
+                if (path.indexOf('/') !== 0) {
+                  cdnBase += '/';
+                }
+                var replacement = match.replace(path, cdnBase + path);
+                console.log('Replacing: ', match, ' with: ', replacement);
+                return replacement;
+              }
+            }
           }]
         }
       }
