@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   scope do
     mount_devise_token_auth_for 'User', at: '/auth', controllers: {
+      sessions:  'api/v1/sessions',
       confirmations:  'api/v1/confirmations',
+      passwords:  'api/v1/passwords',
       omniauth_callbacks:  'api/v1/omniauth_callbacks'
     }
 
