@@ -24,14 +24,30 @@ class Api::V1::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksC
   end
 
   # RecordNotUnique is thrown when the email has already been used with another
-  # provider.
+  # provider, sign that user in since we know the user own the email through
+  # their provider.
   def user_exists_with_other_providers
-    @error = 'الإيميل مستعمل من قبل. حاول تسجيل الدخول بطريقة أخرى (فيسبوك أو جوجل أو بإيميل وكلمة سر)'
-    respond_to do |format|
-      format.html {
-        render :layout => "omniauth_response",
-            :template => "devise_token_auth/omniauth_failure"
-      }
+    @resource = User.find_by_email(@resource.email)
+
+    @resource.tokens[@client_id] = {
+      token: BCrypt::Password.create(@token),
+      expiry: @expiry
+    }
+
+    if resource_class.devise_modules.include?(:confirmable)
+      @resource.skip_confirmation!
     end
+
+    if @resource.avatar_uid.nil?
+      @resource.avatar_url = get_large_image(auth_hash['info']['image'])
+    end
+    if @resource.nickname.nil?
+      @resource.nickname = auth_hash['info']['nickname']
+    end
+
+    sign_in(:user, @resource, store: false, bypass: false)
+    @resource.save!
+
+    render :layout => "layouts/omniauth_response", :template => "devise_token_auth/omniauth_success"
   end
 end
