@@ -11,7 +11,13 @@ app.configure(function(){
   app.use(express.compress());
 
   var options = {
-    maxAge: '60d'
+    maxAge: '60d',
+    setHeaders: function (res, path, stat) {
+      // Webfonts need to have CORS * set in order to work.
+      if (path.match(/ttf|woff|woff2|eot|svg/ig)) {
+        res.set('Access-Control-Allow-Origin', '*');
+      }
+    }
   };
   app.use(express.static(__dirname, options));
   app.use(app.router);
