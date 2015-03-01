@@ -29,5 +29,3 @@ web:
     - web-client/:/manshar-web-client
   ports:
     - "9000:9000"
-  links:
-    - backend
