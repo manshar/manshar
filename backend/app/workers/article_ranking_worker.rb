@@ -1,6 +1,5 @@
 class ArticleRankingWorker
   include Sidekiq::Worker
-
   sidekiq_options retry: false
 
   app_start_time = Time.local(2014, 1, 1)
@@ -34,14 +33,7 @@ class ArticleRankingWorker
       puts "Updating ranking for #{article.id} = #{hotness}..."
       article.update_attributes(hotness: hotness)
     else
-      Article.find_each do |article|
-        hotness = ArticleRankingWorker.hot(
-            article.recommendations_count,
-            article.comments_count,
-            article.published_at)
-        puts "Updating ranking for #{article.id} = #{hotness}..."
-        article.update_attributes(hotness: hotness)
-      end
+      puts 'article_id was not passed. Nothing to do.'
     end
 
     puts 'Ranking articles worker finished!'

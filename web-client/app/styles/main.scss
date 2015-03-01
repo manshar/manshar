@@ -586,10 +586,6 @@ input[type="password"] {
   }
 }
 
-.manshar-logo {
-  width: 35px;
-}
-
 .manshar-snippet {
   color: #666;
 }
@@ -598,7 +594,6 @@ input[type="password"] {
   position: fixed;
   top: 1em;
   left: 1em;
-  width: 2em;
   z-index: 5;
   cursor: pointer;
 }
@@ -1074,9 +1069,11 @@ ul.cards-list-container {
     -moz-backface-visibility:hidden; /* Firefox */
     -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 
+    margin-bottom: 10px;
     transition: transform .3s;
     &.anchored-comments-active {
       transform: translateX(335px);
+      z-index: 99;
     }
 
     article {
