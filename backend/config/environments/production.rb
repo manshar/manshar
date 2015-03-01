@@ -89,10 +89,11 @@ Rails.application.configure do
     :authentication => :plain,
     :address => ENV['SMTP_HOSTNAME'],
     :port => 587,
-    :domain => ENV['SMTP_DOMAIN'},
+    :domain => ENV['SMTP_DOMAIN'],
     :user_name => ENV['SMTP_USERNAME'],
     :password => ENV['SMTP_PASSWORD'],
   }
+
 
   # Allow Cross-Origin Resource Sharing header to allow cross
   # domain xhr requests.
