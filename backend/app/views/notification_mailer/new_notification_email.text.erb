@@ -1,0 +1,13 @@
+لديك تنبيهات جديد على منشر
+===============================================
+
+<% @notification.each do |notification| %>
+
+-----------------------------------------------
+<%= notification.body.html_safe? ? notification.body : strip_tags(notification.body) %>
+-----------------------------------------------
+
+<% end %>
+
+قم بزيارة منشر
+http://<%=ENV['WEB_CLIENT_HOST']%>

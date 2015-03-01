@@ -81,16 +81,17 @@ Rails.application.configure do
 
   OmniAuth.config.full_host = "http://#{ENV['API_HOST']}"
 
-  config.action_mailer.default_url_options = { :host => ENV['API_HOST'] }
+  # Notification emails configurations.
+  config.roadie.url_options = { host: ENV['WEB_CLIENT_HOST'], scheme: "http" }
+  config.action_mailer.default_url_options = { :host => ENV['SMTP_HOSTNAME'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :enable_starttls_auto => true,
-    :address => "smtp.gmail.com",
+    :authentication => :plain,
+    :address => ENV['SMTP_HOSTNAME'],
     :port => 587,
-    :domain => "manshar.com",
-    :authentication => 'login',
-    :user_name => ENV['GMAIL_USERNAME'],
-    :password => ENV['GMAIL_PWD']
+    :domain => ENV['SMTP_DOMAIN'},
+    :user_name => ENV['SMTP_USERNAME'],
+    :password => ENV['SMTP_PASSWORD'],
   }
 
   # Allow Cross-Origin Resource Sharing header to allow cross
