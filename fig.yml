@@ -4,7 +4,7 @@ db:
     - "5432"
 backend:
   build: backend/
-  command: rails s
+  command: rails s -b '0.0.0.0'
   environment:
     RACK_ENV: development
     PORT: 80
