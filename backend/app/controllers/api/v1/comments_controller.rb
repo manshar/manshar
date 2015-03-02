@@ -21,6 +21,7 @@ class Api::V1::CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(comment_params)
     @comment.article_id = params[:article_id]
+    @load_content = preload_content
     authorize @comment
     if @comment.save
       ArticleRankingWorker.perform_async(params[:article_id])

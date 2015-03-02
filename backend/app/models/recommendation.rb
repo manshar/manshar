@@ -8,7 +8,8 @@ class Recommendation < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :article_id
 
   has_many :notifications, -> { where notified_object_type: 'Recommendation'},
-      foreign_key: :notified_object_id
+      foreign_key: :notified_object_id, dependent: :destroy,
+      class_name: 'Mailboxer::Notification'
 
   after_commit :maybe_create_notification, on: :create
 
@@ -21,8 +22,10 @@ class Recommendation < ActiveRecord::Base
 
   # Only notify the user when they get 5, 10, 15, 20... recommendations.
   def should_notify?
+    # The + 1 is because recommendations_count is not updated until the
+    # recommendation is saved.
     (article.recommendations_count > 0 and
-     article.recommendations_count.modulo(5) == 0)
+     (article.recommendations_count + 1).modulo(5) == 0)
   end
 
   def maybe_create_notification
@@ -30,12 +33,14 @@ class Recommendation < ActiveRecord::Base
     # we'll send many emails. We need to catch this and make sure not to spam
     # the user.
     if should_notify?
-      host = ENV['WEB_CLIENT_HOST']
-      url = "http://#{host}/articles/#{article.id}"
-      subject = "#{article.recommendations_count} توصيات على مقالك '#{article.title}'"
-      body = "وصل مقالك <a href='#{url}' target='blank'>'#{article.title}'</a> ل #{article.recommendations_count} توصيات."
-      SendEmailsWorker.perform_async(
-          subject, body, article.user_id, self.class.name, self.id)
+      subject = I18n.t('notifications.recommendations.subject',
+          recommendations_count: article.recommendations_count,
+          article_title: article.title)
+      body = I18n.t('notifications.recommendations.body_html',
+          recommendations_count: article.recommendations_count,
+          article_title: article.title,
+          article_id: article.id)
+      article.user.notify(subject, body, self)
     end
   end
 

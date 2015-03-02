@@ -8,6 +8,7 @@
 // 'test/spec/**/*.js'
 
 var modRewrite = require('connect-modrewrite');
+var compression = require('compression');
 
 module.exports = function (grunt) {
 
@@ -19,6 +20,9 @@ module.exports = function (grunt) {
 
   // Load Google CDN tasks.
   grunt.loadNpmTasks('grunt-google-cdn');
+
+  // Replace assets with cdn url.
+  grunt.loadNpmTasks('grunt-string-replace');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -107,7 +111,7 @@ module.exports = function (grunt) {
         livereload: 35729,
         middleware: function (connect, options) {
           var optBase = (typeof options.base === 'string') ? [options.base] : options.base,
-              middleware = [modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg\\.gif|\\swf$ / [L]'])]
+              middleware = [modRewrite(['!\\.html|\\.js|\\.svg|\\.ttf|\\.woff|\\.woff2|\\.css|\\.png|\\.jpg\\.gif|\\swf$ / [L]']), compression()]
                 .concat(optBase.map(function (path) {
                   if (path.indexOf('rewrite|') === -1) {
                     return connect.static(path);
@@ -236,7 +240,7 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= yeoman.dist %>/fonts/*'
           ]
         }
       }
@@ -264,7 +268,8 @@ module.exports = function (grunt) {
         assetsDirs: ['<%= yeoman.dist %>'],
         patterns: {
           js: [
-            [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp))/gm, 'Update the JS to reference our revved images']
+            [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp))/gm, 'Update the JS to reference our revved images'],
+            [/(fonts\/.*?\.(?:eot|svg|ttf|woff|woff2))/gm, 'Update the CSS to reference our revved fonts']
           ]
         }
       }
@@ -332,6 +337,38 @@ module.exports = function (grunt) {
       },
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
+      }
+    },
+
+    'string-replace': {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'dist/',
+          src: ['index.html', 'styles/*.main.css'],
+          dest: 'dist/'
+        }],
+        options: {
+          // TODO(mkhatib): Move this into its own Grunt task.
+          replacements: [{
+            pattern: /['"(]((\/?[\w\d.\-]+\/)+([\w\d.-]+).*?)['")]/ig,
+            replacement: function (match, path) {
+              // If path is an absolute URL (starts with http:// or https:// or //)
+              // just return the url itself to keep it as is.
+              if (path.search(/(https?:)?\/\//) === 0) {
+                return match;
+              } else {
+                var cdnBase = '//d32rdl4awdotlf.cloudfront.net';
+                if (path.indexOf('/') !== 0) {
+                  cdnBase += '/';
+                }
+                var replacement = match.replace(path, cdnBase + path);
+                console.log('Replacing: ', match, ' with: ', replacement);
+                return replacement;
+              }
+            }
+          }]
+        }
       }
     },
 
@@ -504,7 +541,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'string-replace'
   ]);
 
   grunt.registerTask('default', [

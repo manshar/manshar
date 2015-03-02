@@ -36,42 +36,50 @@
         <!-- endbuild -->
         <!-- Load the hosted stylesheets for highlight.js -->
         <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
+  </head>
   <body ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
+      <script src="bower_components/es5-shim/es5-shim.min.js"></script>
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
     <div data-category-topic-picker></div>
     <!-- Site Nav -->
-    <nav class="site-nav" ng-class="{'force-bar': forceBar, 'move-up': forceBar&&moveUp}">
+    <nav class="site-nav" ng-class="{'force-bar': yscroll > 320, 'move-up': forceBar&&moveUp}">
       <a href="/" class="site-nav-logo" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon">
-          <img src="/images/manshar@200x200.png"/>
+          <img src="/images/manshar@64x64.png" width="32px" height="32px"/>
       </a>
       <!-- User Menu -->
       <div class="profile-badge">
-        <a class="login" href="/login" ng-show="!user.signedIn" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
-          تسجيل الدخول
+        <a class="new-button" href="/login" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
+          مقال جديد
         </a>
-        <div class="drop" ng-click="menuActive = !menuActive" ng-class="{'active': menuActive && !moveUp}">
+        <div class="drop" ng-class="{'active': menuActive && !moveUp}">
           <div class="profile-badge-menu">
-            <a ng-show="!user.thumb_url" href="/profiles/{{user.id}}">
+            <a ng-if="user.id && !user.thumb_url" href="/profiles/{{user.id}}">
                 {{user.name || user.email }}
             </a>
-            <span ng-if="!user.thumb_url"><i class="fa fa-bars"></i></span>
+            <a ng-click="menuActive = !menuActive">
+              <span ng-if="!user.thumb_url"><i class="fa fa-bars"></i></span>
+            </a>
           </div>
-          <img ng-if="user.thumb_url" ng-src="{{user.thumb_url}}" ng-show="user"/>
+          <a ng-click="menuActive = !menuActive">
+            <img ng-if="user.thumb_url" ng-src="{{user.thumb_url}}" ng-show="user"/>
+          </a>
           <div class="dropdownContain">
             <div class="dropOut">
               <ul>
-                <li><a href="/articles/new">مقال جديد</a></li>
-                <li><a href="/profiles/{{user.id}}">ملفي الشخصي</a></li>
+                <li ng-show="!user.signedIn"><a href="/articles/new">تسجيل الدخول</a></li>
+                <li ng-if="user.id"><a href="/profiles/{{user.id}}">ملفي الشخصي</a></li>
+                <li>
+                  <a href="/login" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
+                    مقال جديد
+                  </a>
+                </li>
                 <li><a href="http://www.manshar.org/" target="_blank">قصة منشر</a></li>
                 <li><a ng-click="showDisclaimer=true">شروط الاستخدام</a></li>
                 <li><a href="http://goo.gl/IuOXaA" target="_blank">تابعنا</a></li>
@@ -100,19 +108,15 @@
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     </script>
 
-    <!-- Load the hosted compiled javasript for highlight.js -->
-    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
     <!-- Need to load shims before angular.js to allow progress events to work. -->
-    <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.js"></script>
-
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-
         <!-- build:js scripts/modules.js -->
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-i18n/angular-locale_ar.js"></script>
         <script src="bower_components/grande.js/js/grande.js"></script>
         <script src="bower_components/angular-truncate/src/truncate.js"></script>
@@ -120,11 +124,9 @@
         <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
         <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
         <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-        <script src="bower_components/angular-cookie/angular-cookie.js"></script>
+        <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
         <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
-        <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/appConfig.js"></script>
         <script src="scripts/cachedTemplates.js"></script>
@@ -173,5 +175,8 @@
         <script src="scripts/filters/mansharSanitizer.js"></script>
 
         <!-- endbuild -->
+
+    <!-- Load the hosted compiled javasript for highlight.js -->
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js" async></script>
 </body>
 </html>

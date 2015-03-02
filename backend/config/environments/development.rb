@@ -40,6 +40,24 @@ Rails.application.configure do
 
   OmniAuth.config.full_host = "http://#{ENV['API_HOST']}"
 
+  # To allow and test sending emails in development uncomment the following
+  # lines and set the required environment variables.
+  # config.roadie.url_options = {
+  #     host: ENV['WEB_CLIENT_HOST'].split(':')[0],
+  #     port: ENV['WEB_CLIENT_HOST'].split(':')[1],
+  #     scheme: "http"
+  # }
+  # config.action_mailer.default_url_options = { :host => ENV['SMTP_HOSTNAME'] }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   :authentication => :plain,
+  #   :address => ENV['SMTP_HOSTNAME'],
+  #   :port => 587,
+  #   :domain => ENV['SMTP_DOMAIN'],
+  #   :user_name => ENV['SMTP_USERNAME'],
+  #   :password => ENV['SMTP_PASSWORD'],
+  # }
+
   # Allow Cross-Origin Resource Sharing header to allow cross
   # domain xhr requests.
   config.middleware.insert_before Warden::Manager, Rack::Cors do

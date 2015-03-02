@@ -6,9 +6,23 @@ body {
   padding: 0;
 }
 
+.site-nav {
+  .profile-badge {
+    .new-button {
+      display: none;
+    }
+  }
+}
+
+.main-header {
+  .hero-unit {
+    z-index: 10;
+  }
+}
+
 .card-list {
   .card {
-    width: 80%;
+    width: 70%;
   }
 }
 
@@ -282,6 +296,14 @@ body {
 
 .listing-types-tabs {
   height: 50px;
+  bottom: 2.7em;
+  width: auto;
+
+  &.fixed {
+    width: auto;
+    margin-top: 0;
+  }
+
   a {
     span {
       display: inline-block;
@@ -303,6 +325,26 @@ body {
 
 // Media Queries.
 @media (min-width: 1280px) {
+  .site-nav {
+    .profile-badge {
+      .new-button {
+        display: block;
+      }
+    }
+  }
+
+  .terms-container {
+    .manshar-article {
+      width: 60%;
+      margin: 0 auto;
+    }
+  } 
+
+  .main-header {
+    .hero-unit {
+      z-index: 20;
+    }
+  }
 
   .tray {
     padding: 0 10px;

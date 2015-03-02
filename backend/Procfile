@@ -1,2 +1,2 @@
 web: bundle exec puma -e $RACK_ENV -p $PORT -C ./config/puma.rb
-worker: bundle exec sidekiq
+worker: bundle exec sidekiq -c $WORKER_THREADS_COUNT

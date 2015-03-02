@@ -70,6 +70,8 @@ GEM
     celluloid (0.16.0)
       timers (~> 4.0.0)
     connection_pool (2.1.1)
+    css_parser (1.3.6)
+      addressable
     devise_token_auth (0.1.30)
       devise (~> 3.3)
       rails (~> 4.1)
@@ -180,9 +182,14 @@ GEM
     globalid (0.3.2)
       activesupport (>= 4.1.0)
     hashie (3.4.0)
+    heroku-deflater (0.5.3)
+      rack (>= 1.4.5)
     hike (1.2.3)
     hitimes (1.2.2)
+    hpricot (0.8.6)
+    htmlentities (4.3.1)
     i18n (0.7.0)
+    ice_cube (0.11.1)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     json (1.8.2)
@@ -230,6 +237,12 @@ GEM
     persistize (0.2.0)
       activerecord
     pg (0.18.1)
+    premailer (1.8.3)
+      css_parser (>= 1.3.6)
+      htmlentities (>= 4.0.0, <= 4.3.1)
+    premailer-rails (1.8.0)
+      actionmailer (>= 3, < 5)
+      premailer (~> 1.7, >= 1.7.9)
     puma (2.11.0)
       rack (>= 1.1, < 2.0)
     pundit (0.3.0)
@@ -277,6 +290,12 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    roadie (3.0.3)
+      css_parser (~> 1.3.4)
+      nokogiri (~> 1.6.0)
+    roadie-rails (1.0.4)
+      rails (>= 3.0, < 4.3)
+      roadie (~> 3.0)
     rspec-core (3.2.0)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -301,6 +320,10 @@ GEM
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
+    sidetiq (0.6.3)
+      celluloid (>= 0.14.1)
+      ice_cube (= 0.11.1)
+      sidekiq (>= 3.0.0)
     spring (1.3.0)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -333,6 +356,8 @@ DEPENDENCIES
   email_spec
   factory_girl_rails (= 4.3.0)
   foreman
+  heroku-deflater
+  hpricot
   kaminari
   mailboxer!
   oj
@@ -340,6 +365,7 @@ DEPENDENCIES
   omniauth-gplus (~> 2.0)
   persistize
   pg
+  premailer-rails
   puma
   pundit
   rabl
@@ -347,7 +373,10 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2)
   rails_12factor
+  roadie
+  roadie-rails
   rspec-rails (~> 3.1)
   sass
   sidekiq
+  sidetiq
   spring

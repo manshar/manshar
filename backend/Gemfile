@@ -37,9 +37,16 @@ gem 'sass'
 
 # Background and scheduled jobs.
 gem 'sidekiq'
+gem 'sidetiq'
 
 # Used to manage notifications, emails and messaging.
 gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-foreigner'
+
+# Allows styling emails HTML with non-inline styles.
+gem 'hpricot'
+gem 'premailer-rails'
+gem 'roadie'
+gem 'roadie-rails'
 
 # Helps with denormalizing attributes and store them along with the object.
 gem "persistize"
@@ -51,6 +58,9 @@ group :production do
   gem 'rails_12factor'
   gem 'puma'
 	gem 'rack-cache', require: 'rack/cache'
+
+  # To enable API responses compression.
+  gem 'heroku-deflater'
 end
 
 group :test, :development do

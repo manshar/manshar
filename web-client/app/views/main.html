@@ -33,7 +33,7 @@
         <span>الأحدث</span>
       </a>
       <a ng-click="selectTab('publishers')" ng-class="{'active': activeTab == 'publishers'}">
-        <i class="fa fa-users"></i>
+        <i class="fa fa-group"></i>
         <span>الناشرون</span>
       </a>
       <a ng-click="showCategoriesPicker()">
@@ -57,7 +57,7 @@
           </a>
           <div class="stats-box">
             <span ng-show="user.published_articles_count">
-              <i class="fa fa-pencil-square-o"></i> {{user.published_articles_count}}
+              <i class="fa fa-edit"></i> {{user.published_articles_count}}
             </span>
             <span ng-show="user.comments_count">
               <i class="fa fa-comment-o"></i> {{user.comments_count}}

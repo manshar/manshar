@@ -1,46 +1,45 @@
+<header class="article-header" ng-class="{'nocover': !article.cover_url}">
+  <div class="cover-image" manshar-cover url="{{article.cover_url}}"></div>
+  <div class="dimmer" ng-show="article.cover_url"></div>
+
+  <div class="title tray">
+    <input
+      type="file"
+      manshar-file
+        file-model="article.cover"
+        preview-url="article.cover_url"
+      analytics-on="click"
+        analytics-event="Pick Article Cover"
+    />
+
+    <h1
+      name="myWidget"
+      class="manshar-editor"
+      grande-editor
+        rtl="true"
+        placeholder="عنوان المقال"
+        mode="inline"
+        max-length="100"
+        ng-model="article.title"
+        required
+      >
+    </h1>
+
+    <h2
+      class="manshar-editor"
+      grande-editor
+        rtl="true"
+        placeholder="عنوان المقال الفرعي"
+        mode="inline"
+        max-length="200"
+        ng-model="article.tagline"
+      >
+    </h2>
+
+  </div>
+</header>
+
 <form name="articleForm" class="manshar-article">
-    <header ng-class="{'nocover': !article.cover_url}">
-      <div class="cover-image" manshar-cover url="{{article.cover_url}}"></div>
-      <div class="dimmer" ng-show="article.cover_url"></div>
-
-      <div class="title tray">
-        <input
-          type="file"
-          manshar-file
-            file-model="article.cover"
-            preview-url="article.cover_url"
-          analytics-on="click"
-            analytics-event="Pick Article Cover"
-        />
-
-        <h1
-          name="myWidget"
-          class="manshar-editor"
-          grande-editor
-            rtl="true"
-            placeholder="عنوان المقال"
-            mode="inline"
-            max-length="100"
-            ng-model="article.title"
-            required
-          >
-        </h1>
-
-        <h2
-          class="manshar-editor"
-          grande-editor
-            rtl="true"
-            placeholder="عنوان المقال الفرعي"
-            mode="inline"
-            max-length="200"
-            ng-model="article.tagline"
-          >
-        </h2>
-
-      </div>
-
-    </header>
-
   <div class="article-container tray">
     <article
       class="manshar-editor"

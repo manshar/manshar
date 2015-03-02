@@ -3,6 +3,144 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
 
+@font-face {
+    font-family: 'fontawesome-manshar';
+    src: url('/fonts/fa-manshar-webfont.eot?-kybycc');
+    src: url('/fonts/fa-manshar-webfont.eot?#iefix-kybycc') format('embedded-opentype'),
+         url('/fonts/fa-manshar-webfont.woff2?-kybycc') format('woff2'),
+         url('/fonts/fa-manshar-webfont.woff?-kybycc') format('woff'),
+         url('/fonts/fa-manshar-webfont.ttf?-kybycc') format('truetype'),
+        url('/fonts/fa-manshar-webfont.svg?-kybycc##fa-manshar-webfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="fa-"], [class*=" fa-"], [class="fa"] {
+  font-family: 'fontawesome-manshar';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-bars:before {
+   content: "\f0c9";
+}
+
+.fa-heart:before {
+  content: "\f004";
+}
+
+.fa-th-large:before {
+  content: "\f009";
+}
+
+.fa-close:before {
+  content: "\f00d";
+}
+
+.fa-trash-o:before {
+  content: "\f014";
+}
+
+.fa-clock-o:before {
+  content: "\f017";
+}
+
+.fa-refresh:before {
+  content: "\f021";
+}
+
+.fa-tag:before {
+  content: "\f02b";
+}
+
+.fa-video-camera:before {
+  content: "\f03d";
+}
+
+.fa-image:before {
+  content: "\f03e";
+}
+
+.fa-pencil:before {
+  content: "\f040";
+}
+
+.fa-edit:before {
+  content: "\f044";
+}
+
+.fa-arrow-left:before {
+  content: "\f060";
+}
+
+.fa-arrow-right:before {
+  content: "\f061";
+}
+
+.fa-comment:before {
+  content: "\f075";
+}
+
+.fa-thumbs-o-up:before {
+  content: "\f087";
+}
+
+.fa-twitter:before {
+  content: "\f099";
+}
+
+.fa-facebook:before {
+  content: "\f09a";
+}
+
+.fa-github:before {
+  content: "\f09b";
+}
+
+.fa-group:before {
+  content: "\f0c0";
+}
+
+.fa-google-plus:before {
+  content: "\f0d5";
+}
+
+.fa-money:before {
+  content: "\f0d6";
+}
+
+.fa-comment-o:before {
+  content: "\f0e5";
+}
+
+.fa-desktop:before {
+  content: "\f108";
+}
+
+.fa-thumbs-up:before {
+  content: "\f164";
+}
+
+.fa-google:before {
+  content: "\f1a0";
+}
+
+.fa-paint-brush:before {
+  content: "\f1fc";
+}
+
+.fa-line-chart:before {
+  content: "\e600";
+}
+
 *{
   padding:0;
   margin:0;
@@ -127,9 +265,11 @@ input[type="password"] {
 
 .profile-list {
   background: #fafafa;
+  padding-top: 2em;
+
   .write-new-button {
-    margin-top: 2em;
     display: inline-block;
+    margin-top: 0;
   }
 
   .no-articles-container {
@@ -167,8 +307,8 @@ input[type="password"] {
 .category-nav-actions {
   position: fixed;
   font-size: 1.3em;
-  top: 0.2em;
-  right: 3em;
+  top: 0.3em;
+  right: 2.3em;
   z-index: 30;
 
   -webkit-transition: all .2s ease-out;
@@ -187,7 +327,7 @@ input[type="password"] {
 
   a {
     padding-right: 0.4em;
-    color: #CA1504;
+    color: #B3B3B3;
   }
 }
 
@@ -224,6 +364,8 @@ input[type="password"] {
     border-bottom: none;
     text-align: center;
     color: #fff;
+    padding-top: 1em;
+    box-shadow: none;
 
     .topics {
       a {
@@ -247,9 +389,11 @@ input[type="password"] {
   position: relative;
   height: 370px;
   color: #B3B3B3;
+  box-shadow: 0px 3px 5px -3px rgba(0,0,0,0.2);
 
   .hero-unit {
     height: 100%;
+
     h1 {
       display: inline-block;
       vertical-align: middle;
@@ -318,20 +462,21 @@ input[type="password"] {
 }
 
 .listing-types-tabs {
-  width: 100%;
   text-align: center;
-  position: absolute;
-  bottom: 0;
-  height: 44px;
-  background-color: #fff;
-  z-index: 5;
-  box-shadow: 0px 3px 5px -3px rgba(0,0,0,0.2);
+  position: relative;
+  bottom: 2.7em;
+  z-index: 20;
+  max-width: 900px;
+  margin: 0 auto;
 
   &.fixed {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    height: 50px;
+    margin-top: 0.4em;
+    width: 315px;
   }
 
   &.profile-tabs {
@@ -378,7 +523,7 @@ input[type="password"] {
 
     ul {
       list-style: none;
-      max-height: 340px;
+      max-height: 500px;
       overflow-y: scroll;
       background-color: #fbfbfb;
 
@@ -469,10 +614,6 @@ input[type="password"] {
   }
 }
 
-.manshar-logo {
-  width: 35px;
-}
-
 .manshar-snippet {
   color: #666;
 }
@@ -482,7 +623,7 @@ input[type="password"] {
   width: 100%;
   height: 50px;
   z-index: 15;
-  background-color: none;
+  background-color: #fff;
 
   -webkit-transition: all .2s ease-out;
   -moz-transition: all .2s ease-out;
@@ -506,37 +647,43 @@ input[type="password"] {
 
   .site-nav-logo, .profile-badge {
     position: absolute;
-    top: 0.3em;
+    top: 0.45em;
   }
 
   .site-nav-logo {
     right: 1em;
-
-    img {
-      width: 2em;
-    }
   }
 
   .profile-badge {
     left: 1em;
+    color: #B3B3B3;
 
-    img {
-      height: 36px;
+    .profile-badge-menu {
+      left: 1em;
+      position: fixed;
+      top: 0.7em;
     }
 
-    a {
-      font-size: 0.8em;
-      color: rgb(126, 126, 126);
-
-      &.login {
-        position: fixed;
-        left: 3.2em;
-        top: 0.5em;
-      }
+    .new-button {
+      display: none;
+      position: fixed;
+      left: 4em;
+      top: 0.8em;
+      padding: 0;
 
       &:hover {
         color: rgb(202, 21, 4);
       }
+    }
+
+    a {
+      display: block;
+      font-size: 0.8em;
+      color: #B3B3B3;
+    }
+
+    img {
+      height: 32px;
     }
 
     .drop {
@@ -588,7 +735,6 @@ input[type="password"] {
               text-align: right;
               float: left;
               width: 110px;
-              padding: 10px;
               margin: 0px 10px;
               color: #777;
               -webkit-border-radius: 4px;
@@ -602,6 +748,17 @@ input[type="password"] {
 
               &:hover {
                 background: #f6f6f6;
+              }
+
+              a {
+                display: block;
+                font-size: 0.8em;
+                color: rgb(126, 126, 126);
+                padding: 7px;
+
+                &:hover {
+                  color: rgb(202, 21, 4);
+                }
               }
             }
           }
@@ -923,7 +1080,7 @@ ul.cards-list-container {
   &.nocover {
     height: auto;
     margin-bottom: 0;
-    padding-top: 15em;
+    padding-top: 4em;
     padding-bottom: 1em;
     bottom: 0;
 
@@ -931,6 +1088,7 @@ ul.cards-list-container {
       color: #000;
       text-shadow: none;
       top: 3em;
+      position: static;
 
       .reading-time, h2 {
         color: #969696;
@@ -993,9 +1151,11 @@ ul.cards-list-container {
     background: #fff;
     padding-bottom: 2em;
 
+    margin-bottom: 10px;
     transition: transform .3s;
     &.anchored-comments-active {
       transform: translateX(335px);
+      z-index: 99;
     }
 
     article {
@@ -1006,6 +1166,11 @@ ul.cards-list-container {
       font-weight: 100;
       word-wrap: break-word;
       text-align: justify;
+
+      b {
+        /* Firefox doesn't seem to bold b elements. */
+        font-weight: bold;
+      }
 
       pre {
         direction: ltr;
@@ -1204,14 +1369,14 @@ ul.cards-list-container {
 .metabar {
   z-index: 15;
   position: fixed;
-  bottom: 50px;
+  bottom: 15px;
   left: 0;
 }
 
 .manshar-controls {
   height: 18px;
   text-align: left;
-  margin-top: -1.3em;
+  margin-top: -3em;
 
   .status {
     font-size: .6em;
@@ -1276,12 +1441,14 @@ button {
   }
 }
 
-form.manshar-article article.manshar-editor {
-  /**
-   * Adding lots of padding to the bottom of the main article editor to allow
-   * the user to scroll down rather being stuck at the end of the page.
-   */
-  padding-bottom: 50%;
+form.manshar-article {
+  article.manshar-editor {
+    /**
+     * Adding lots of padding to the bottom of the main article editor to allow
+     * the user to scroll down rather being stuck at the end of the page.
+     */
+    padding-bottom: 50%;
+  }
 }
 
 .terms-container {
@@ -1297,7 +1464,7 @@ form.manshar-article article.manshar-editor {
   }
 
   .manshar-article  {
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
 
     .article-container {
@@ -1596,4 +1763,19 @@ form.manshar-article article.manshar-editor {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+
+/* Overwrite the default to keep the scrollbar always visible
+   For the comments div to look scrollable
+ */
+
+.main-comment-box ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+.main-comment-box ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }

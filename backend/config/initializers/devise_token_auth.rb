@@ -13,7 +13,7 @@ DeviseTokenAuth.setup do |config|
   # time. In this case, each request in the batch will need to share the same
   # auth token. This setting determines how far apart the requests can be while
   # still using the same auth token.
-  #config.batch_request_buffer_throttle = 5.seconds
+  config.batch_request_buffer_throttle = 30.seconds
 
   # This route will be the prefix for all oauth2 redirect callbacks. For
   # example, using the default '/omniauth', the github oauth2 provider will

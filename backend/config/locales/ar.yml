@@ -1,0 +1,15 @@
+ar:
+  mailboxer:
+    notification_mailer:
+      subject: "%{subject}"
+      multi_notification_subject: "لديك %{count} تنبيهات جديدة على منشر"
+  notifications:
+    comments:
+      subject: "%{user_name} علق على مقالك '%{article_title}'"
+      body_html: "<p class='meta'><a href='/profiles/%{user_id}'>%{user_name}</a> ترك تعليق على مقالك <a href='/articles/%{article_id}'>'%{article_title}'</a></p><p class='comment'><blockquote>%{comment_body}</blockquote></p>"
+      reply:
+        subject: "%{user_name} علق على مقالك '%{article_title}' بعد تعليقك"
+        body_html: "<p class='meta'><a href='/profiles/%{user_id}'>%{user_name}</a> ترك تعليق على مقال <a href='/articles/%{article_id}'>'%{article_title}'</a> بعد تعليقك</p><p class='comment'><blockquote>%{comment_body}</blockquote></p>"
+    recommendations:
+      subject: "#{recommendations_count} توصيات على مقالك '#{article_title}'"
+      body_html: "<p class='comment'>وصل مقالك <a href='/articles/#{article_id}'>'#{article_title}'</a> ل #{recommendations_count} توصيات.</p>"
