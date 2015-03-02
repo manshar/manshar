@@ -8,7 +8,7 @@ class ScheduleArticleRankingWorker
   def perform
     puts 'Ranking all articles schedule starting...'
 
-    Article.find_each do |article|
+    Article.publishings.find_each do |article|
       ArticleRankingWorker.perform_async(article.id)
     end
 

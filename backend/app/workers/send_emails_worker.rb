@@ -8,7 +8,7 @@ class SendEmailsWorker
     user = User.find(user_id)
 
     if !user.confirmed?
-      Rails.logger.info 'Not sending notifications to unconfirmed email #{user.email}'
+      Rails.logger.info "Not sending notifications to unconfirmed email #{user.email}"
       return
     end
 
@@ -20,13 +20,13 @@ class SendEmailsWorker
       if most_recent && (most_recent < (Time.now - COOLDOWN_PERIOD))
         # Find all undelivered notifications and send email to the user.
         notifications = Mailboxer::Notification.find(receipts.map(&:notification_id))
-        Rails.logger.info 'Sending #{notifications.size} notification(s) to #{user.email}'
+        Rails.logger.info "Sending #{notifications.size} notification(s) to #{user.email}"
         NotificationMailer.new_notification_email(notifications, user).deliver
 
         # Mark all receipts as read.
         receipts.update_all(is_read: true)
       else
-        Rails.logger.info 'Waiting before sending notifications to #{user.email}'
+        Rails.logger.info "Waiting before sending notifications to #{user.email}"
       end
     end
   end
