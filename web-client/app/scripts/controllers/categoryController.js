@@ -15,6 +15,8 @@ angular.module('webClientApp')
       $scope.category = resource;
     });
 
+    $rootScope.forceBar = true;
+
     // Get all topics in this category.
     $scope.topics = Topic.query({'categoryId': $routeParams.categoryId});
 
@@ -34,6 +36,10 @@ angular.module('webClientApp')
         function(event, data) {
       $location.path('/categories/' + data.category.id);
     });
+
+    $scope.getCardColor = function(color) {
+      return $filter('darker')(color, -0.4);
+    };
 
     /**
      * Make sure to cleanup the binded events and intervals when the user

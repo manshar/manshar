@@ -7,6 +7,7 @@
         analytics-category="UI"
         analytics-label="Manshar Hero Title">{{title}}</h1>
     <span class="beta">نسخة تجريبية</span>
+    <a href=""><i class="fa fa-github"></i></a>
     <p class="manshar-tagline">{{tagline}}...</p>
     <p class="links">
       <a href="http://www.manshar.org" target="blank"
@@ -17,13 +18,8 @@
         عن منشر
       </a>
     </p>
-    <button ng-click="newArticle()" class="action-button"
-        analytics-on="click"
-        analytics-event="click"
-        analytics-category="UI"
-        analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
-
-    <div class="listing-types-tabs">
+  </div>
+  <div class="listing-types-tabs" ng-class="{fixed: yscroll > 320}">
       <a ng-click="orderArticles('popular')" ng-class="{'active': activeTab == 'popular'}">
         <i class="fa fa-line-chart"></i>
         <span>الأكثر شعبية</span>
@@ -45,7 +41,6 @@
         <span>استعرض الفئات</span>
       </a>
     </div>
-  </div>
 </header>
 
 <div ng-hide="activeTab == 'publishers'" ng-include="'views/partials/_articles_list.html'"></div>
@@ -73,3 +68,11 @@
     </div>
   </li>
 </ul>
+
+<div class="metabar tray">
+  <button ng-click="newArticle()" class="action-button"
+      analytics-on="click"
+      analytics-event="click"
+      analytics-category="UI"
+      analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
+</div>

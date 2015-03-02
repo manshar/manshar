@@ -12,7 +12,6 @@
 
     .category-page .card {
       color: {{topic.category.color}} !important;
-      padding: 0 .8em;
     }
 
     .category-page .card.topic:hover {
@@ -35,6 +34,14 @@
     .category-page .write-new-button:hover {
       background-color: {{topic.category.color|darker:-0.4}};
     }
+
+    .category-page .card-list .article-card {
+      border-left: 4em solid {{topic.category.color|darker:-0.4}};
+    }
+
+    .category-page .card-list .article-card .category-topic {
+      background-color: {{topic.category.color|darker:-0.4}};
+    }
   </style>
   <header class="main-header">
     <div class="hero-unit tray">
@@ -47,10 +54,7 @@
         </a>
       </p>
     </div>
-    <div class="category-nav-actions">
-      <a href="/categories/{{topic.category.id}}">
-        <i class="fa fa-arrow-right"></i>
-      </a>
+    <div class="category-nav-actions" ng-class="{'move-up': forceBar&&moveUp}">
       <a ng-click="showCategoriesPicker()">
         <i class="fa fa-th-large"></i>
       </a>

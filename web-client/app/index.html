@@ -5,13 +5,14 @@
 <!--[if gt IE 8]><!--> <html ng-app="webClientApp" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <base href="/" target="_blank">>
+    <base href="/" target="_blank">
     <meta name="fragment" content="!">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
     <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
     <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
-    <meta name="description" content="">
+    <meta name="keywords" content="تدوين, كتابة, عربي, مقالات, مدونات,مفتوح المصدر, محتوى عربي, مواضيع">
+    <meta name="description" content="منصة نشر وتدوين باللغى العربية.">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Open Graph Metadata -->
@@ -24,10 +25,8 @@
     <meta property="article:published_time" content="{{page.publishedTime}}">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css">
         <link rel="stylesheet" href="bower_components/grande.js/css/editor.css">
         <link rel="stylesheet" href="bower_components/grande.js/css/menu.css">
         <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
@@ -39,7 +38,7 @@
         <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-  <body>
+  <body ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -50,40 +49,49 @@
     <![endif]-->
 
     <div data-category-topic-picker></div>
-    <!-- site nav -->
-    <img src="/images/manshar@200x200.png" class="site-nav-logo" snap-toggle="left"
-        analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon"/>
-    <nav class="site-nav" snap-drawer="left">
-      <div class="profile-badge" ng-if="user.thumb_url">
-        <a href="/profiles/{{user.id}}" snap-close ng-show="user.signedIn"
-            analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Profile Picture">
-          <img ng-src="{{user.thumb_url}}" ng-show="user"/>
-          <span>{{user.name}}</span>
+    <!-- Site Nav -->
+    <nav class="site-nav" ng-class="{'force-bar': forceBar, 'move-up': forceBar&&moveUp}">
+      <a href="/" class="site-nav-logo" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon">
+          <img src="/images/manshar@200x200.png"/>
+      </a>
+      <!-- User Menu -->
+      <div class="profile-badge">
+        <a class="login" href="/login" ng-show="!user.signedIn" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
+          تسجيل الدخول
         </a>
+        <div class="drop" ng-click="menuActive = !menuActive" ng-class="{'active': menuActive && !moveUp}">
+          <div class="profile-badge-menu">
+            <a ng-show="!user.thumb_url" href="/profiles/{{user.id}}">
+                {{user.name || user.email }}
+            </a>
+            <span ng-if="!user.thumb_url"><i class="fa fa-bars"></i></span>
+          </div>
+          <img ng-if="user.thumb_url" ng-src="{{user.thumb_url}}" ng-show="user"/>
+          <div class="dropdownContain">
+            <div class="dropOut">
+              <ul>
+                <li><a href="/articles/new">مقال جديد</a></li>
+                <li><a href="/profiles/{{user.id}}">ملفي الشخصي</a></li>
+                <li><a href="http://www.manshar.org/" target="_blank">قصة منشر</a></li>
+                <li><a ng-click="showDisclaimer=true">شروط الاستخدام</a></li>
+                <li><a href="http://goo.gl/IuOXaA" target="_blank">تابعنا</a></li>
+                <li>
+                  <a ng-show="user.signedIn" ng-click="logout()"
+                  analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link">تسجيل الخروج</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      <ul>
-        <li ng-if="!user.thumb_url"><a href="/profiles/{{user.id}}" snap-close>{{user.name || user.email }}</a></li>
-        <!-- TDOD: Convert to ng-repeat -->
-        <li><a href="/" snap-close
-            analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Main Page Link">الصفحة الرئيسية</a></li>
-        <li><a href="/login" snap-close ng-show="!user.signedIn" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">تسجيل الدخول</a></li>
-        <li><a snap-close ng-show="user.signedIn" ng-click="logout()"
-            analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link">تسجيل الخروج</a></li>
-      </ul>
-      <ul class="base-links">
-        <li class="terms">منشر غير مسؤول عن محتوى المقالات ويتحمل الكاتب كامل المسؤولية عن كون المعلومات في المقال صحيحة ويجب عليه عدم استخدام أي محتوى لا يمتلكه ويتحمل الكاتب كامل المسؤولية اذا حصل ذلك</li>
-        <li ng-show="user.admin"><a snap-close href="admin" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Admin Link">إدارة الموقع</a></li>
-        <li><a href="http://www.manshar.org" target="blank" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav About Manshar Link">عن منشر</a></li>
-        <li><a href="http://www.github.com/manshar/manshar" target="blank"
-          analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Open Source Link"><i class="fa fa-github"></i> مشروع منشر مفتوح المصدر</a></li>
-      </ul>
     </nav>
 
     <div data-login-modal ng-if="!isLoginPage && !isSignupPage"></div>
-    <!-- Add your site or application content here -->
-    <div class="page-wrapper" snap-content snap-options="{disable: left, touchToDrag:false}">
-      <div class="container scrollable page" ng-view></div>
+    <div class="terms-container" data-modal-dialog visible="showDisclaimer">
+      <div data-ng-include="'views/partials/_tos.html'"></div>
     </div>
+    <!-- Add your site or application content here -->
+    <div class="container page" ng-view></div>
     <!-- Google Analytics: Configured in app.js run block. -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -106,9 +114,7 @@
 
         <!-- build:js scripts/modules.js -->
         <script src="bower_components/angular-i18n/angular-locale_ar.js"></script>
-        <script src="bower_components/snapjs/snap.js"></script>
         <script src="bower_components/grande.js/js/grande.js"></script>
-        <script src="bower_components/angular-snap/angular-snap.js"></script>
         <script src="bower_components/angular-truncate/src/truncate.js"></script>
         <script src="bower_components/angulartics/src/angulartics.js"></script>
         <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
@@ -159,6 +165,7 @@
         <script src="scripts/directives/mansharFile.js"></script>
         <script src="scripts/directives/modalDialog.js"></script>
         <script src="scripts/directives/recommendButton.js"></script>
+         <script src="scripts/directives/scrollSpy.js"></script>
 
         <script src="scripts/filters/darker.js"></script>
         <script src="scripts/filters/nohtml.js"></script>
