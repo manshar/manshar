@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
+
+      body {
+        font-family: 'Droid Arabic Naskh', 'Traditional Arabic', 'Arabic Typesetting' serif !important;
+        font-size: 18px;
+      }
+
+      body table {
+        width: 100%;
+      }
+
+      tr.spacer {
+        height: 30px;
+      }
+
+      .notification td {
+        color: #fff;
+        margin: 20px 0;
+        padding: 30px 50px;
+        box-shadow: 0 1px 5px -3px rgba(0,0,0,.2);
+      }
+
+      .notification .meta {
+        font-size: 16px;
+      }
+
+      .notification a {
+        background-color: #fff;
+        padding: 5px 10px;
+        text-decoration: none;
+      }
+
+      .notification blockquote {
+        font-size: 18px;
+        margin: 0;
+        border: 0;
+      }
+
+    </style>
+  </head>
+  <body dir="rtl">
+    <table class="header">
+      <tr>
+        <td width="32px">
+          <img src="http://<%=ENV['API_HOST']%>/images/manshar@64x64.png" width="32" height="32">
+        </td>
+        <td>
+          <h1>منشر</h1>
+        </td>
+      </tr>
+    </table>
+
+    <table class="notifications">
+      <%= yield %>
+    </table>
+
+    <p>
+      قم بزيارة <a href="http://<%=ENV['WEB_CLIENT_HOST']%>/">منشر</a>
+    </p>
+  </body>
+</html>
