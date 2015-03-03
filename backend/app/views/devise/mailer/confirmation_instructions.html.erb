@@ -1,5 +1,29 @@
-<p>مرحباً <%= @email %>!</p>
-
-<p>يمكنك تفعيل حسابك على منشر من خلال الرابط بالأسفل:</p>
-
-<p><%= link_to 'فعل حسابي', confirmation_url(@resource, {confirmation_token: @token, config: message['client-config'].to_s, redirect_url: message['redirect-url']}).html_safe %></p>
+<style type="text/css">
+  .notifications tr.notification td {
+    background-color: #F44336;
+  }
+  .notifications tr.notification td a {
+    color: #F44336;
+  }
+  .notifications tr.notification .comment {
+    text-align: center;
+  }
+  .notifications tr.notification .comment a {
+    font-size: 30px;
+    padding: 20px;
+    display: block;
+    margin: 20px;
+  }
+</style>
+<tr class="notification">
+  <td>
+    <p class="meta">مرحباً <a><%= @email %></a></p>
+    <p>
+      يمكنك تفعيل حسابك على منشر من خلال الرابط بالأسفل:
+    </p>
+    <p class="comment">
+      <%= link_to 'فعل حسابي', confirmation_url(@resource, {confirmation_token: @token, config: message['client-config'].to_s, redirect_url: message['redirect-url']}).html_safe %>
+    </p>
+  </td>
+</tr>
+<tr class="spacer"></tr>
