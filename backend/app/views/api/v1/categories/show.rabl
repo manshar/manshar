@@ -10,7 +10,7 @@ unless locals[:listing]
   attribute :image_abs_url => :original_image_url
 
   node :image_thumb_url do |category|
-    category.image_abs_url '300x300#'
+    category.image_abs_url '80x80#'
   end
 
   node :icon_url do |category|

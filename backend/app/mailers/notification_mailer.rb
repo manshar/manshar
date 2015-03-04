@@ -1,7 +1,6 @@
 class NotificationMailer < Mailboxer::NotificationMailer
   include Roadie::Rails::Automatic
-
-  default from: "منشر <manshar-noreply@manshar.com>"
+  layout 'notification'
 
   def new_notification_email(notification, receiver)
     @notification = notification

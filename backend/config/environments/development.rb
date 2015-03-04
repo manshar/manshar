@@ -47,7 +47,7 @@ Rails.application.configure do
   #     port: ENV['WEB_CLIENT_HOST'].split(':')[1],
   #     scheme: "http"
   # }
-  # config.action_mailer.default_url_options = { :host => ENV['SMTP_HOSTNAME'] }
+  # config.action_mailer.default_url_options = { :host => ENV['API_HOST'] }
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {
   #   :authentication => :plain,
