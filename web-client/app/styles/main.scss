@@ -311,17 +311,9 @@ input[type="password"] {
   right: 2.3em;
   z-index: 30;
 
-  -webkit-transition: all .2s ease-out;
-  -moz-transition: all .2s ease-out;
-  -ms-transition: all .2s ease-out;
-  -o-transition: all .2s ease-out;
   transition: all .2s ease-out;
 
   &.move-up{
-    -webkit-transform: translateY(-50px);
-    -moz-transform: translateY(-50px);
-    -ms-transform: translateY(-50px);
-    -o-transform: translateY(-50px);
     transform: translateY(-50px);
   }
 
@@ -450,10 +442,6 @@ input[type="password"] {
       width: 8px;
       overflow: hidden;
       &.blinking {
-        -webkit-animation: 1s blink step-end infinite;
-        -moz-animation: 1s blink step-end infinite;
-        -ms-animation: 1s blink step-end infinite;
-        -o-animation: 1s blink step-end infinite;
         animation: 1s blink step-end infinite;
       }
 
@@ -625,17 +613,9 @@ input[type="password"] {
   z-index: 15;
   background-color: #fff;
 
-  -webkit-transition: all .2s ease-out;
-  -moz-transition: all .2s ease-out;
-  -ms-transition: all .2s ease-out;
-  -o-transition: all .2s ease-out;
   transition: all .2s ease-out;
 
   &.move-up{
-    -webkit-transform: translateY(-50px);
-    -moz-transform: translateY(-50px);
-    -ms-transform: translateY(-50px);
-    -o-transform: translateY(-50px);
     transform: translateY(-50px);
   }
 
@@ -690,7 +670,7 @@ input[type="password"] {
       position: relative;
 
       &:hover, &.active {
-        .dropdownContain{
+        .dropdown-contain{
           top: 28px;
 
           .dropOut { 
@@ -701,7 +681,7 @@ input[type="password"] {
         }
       }
 
-      .dropdownContain {
+      .dropdown-contain {
         position: absolute;
         z-index: 2;
         left: 50%;
@@ -713,16 +693,8 @@ input[type="password"] {
           position: relative;
           margin-top: 0px;
           opacity: 0;
-          -webkit-border-radius: 4px;
-          -moz-border-radius: 4px;
           border-radius: 4px;
-          -webkit-box-shadow: 0 1px 6px rgba(0,0,0,.15);
-          -moz-box-shadow: 0 1px 6px rgba(0,0,0,.15);
           box-shadow: 0 1px 6px rgba(0,0,0,.15);
-          -webkit-transition: all .1s ease-out;
-          -moz-transition: all .1s ease-out;
-          -ms-transition: all .1s ease-out;
-          -o-transition: all .1s ease-out;
           transition: all .1s ease-out;
 
           ul {
@@ -737,13 +709,7 @@ input[type="password"] {
               width: 110px;
               margin: 0px 10px;
               color: #777;
-              -webkit-border-radius: 4px;
-              -moz-border-radius: 4px;
               border-radius: 4px;
-              -webkit-transition: background .1s ease-out;
-              -moz-transition: background .1s ease-out;
-              -ms-transition: background .1s ease-out;
-              -o-transition: background .1s ease-out;
               transition: background .1s ease-out;
 
               &:hover {
@@ -752,7 +718,7 @@ input[type="password"] {
 
               a {
                 display: block;
-                font-size: 0.8em;
+                font-size: 0.9em;
                 color: rgb(126, 126, 126);
                 padding: 7px;
 
@@ -837,10 +803,8 @@ input[type="password"] {
           margin-right: 0;
           background-color: #f6f6f6;
 
-          -webkit-animation: bouncedelay 1.5s infinite ease-in-out;
           animation: bouncedelay 1.5s infinite ease-in-out;
           /* Prevent first frame from flickering when animation starts */
-          -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
 
         }
@@ -1245,6 +1209,7 @@ ul.cards-list-container {
       ul, ol {
         margin-right: 1.5em;
         list-style-type: none;
+        padding-top: 0;
 
         li {
           margin-top: 1em;
@@ -1395,7 +1360,7 @@ button {
     color: #fff;
     width: 50px;
     height: 50px;
-    line-height: 1;
+    line-height: 1.1;
     border-radius: 40px;
 
     &.long-form {
@@ -1412,10 +1377,8 @@ button {
 
     &.in-progress {
       i {
-        -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
         animation: bouncedelay 1.4s infinite ease-in-out;
         /* Prevent first frame from flickering when animation starts */
-        -webkit-animation-fill-mode: both;
         animation-fill-mode: both;
       }
     }

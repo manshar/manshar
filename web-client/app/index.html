@@ -12,7 +12,7 @@
     <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
     <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
     <meta name="keywords" content="تدوين, كتابة, عربي, مقالات, مدونات,مفتوح المصدر, محتوى عربي, مواضيع">
-    <meta name="description" content="منصة نشر وتدوين باللغى العربية.">
+    <meta name="description" content="منصة نشر وتدوين باللغة العربية.">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Open Graph Metadata -->
@@ -49,13 +49,13 @@
 
     <div data-category-topic-picker></div>
     <!-- Site Nav -->
-    <nav class="site-nav" ng-class="{'force-bar': yscroll > 320, 'move-up': forceBar&&moveUp}">
+    <nav class="site-nav" ng-class="{'force-bar': yscroll > 320, 'move-up': forceBar && moveUp}">
       <a href="/" class="site-nav-logo" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon">
           <img src="/images/manshar@64x64.png" width="32px" height="32px"/>
       </a>
       <!-- User Menu -->
       <div class="profile-badge">
-        <a class="new-button" href="/login" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
+        <a class="new-button" href="/articles/new" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
           مقال جديد
         </a>
         <div class="drop" ng-class="{'active': menuActive && !moveUp}">
@@ -70,10 +70,10 @@
           <a ng-click="menuActive = !menuActive">
             <img ng-if="user.thumb_url" ng-src="{{user.thumb_url}}" ng-show="user"/>
           </a>
-          <div class="dropdownContain">
+          <div class="dropdown-contain">
             <div class="dropOut">
               <ul>
-                <li ng-show="!user.signedIn"><a href="/articles/new">تسجيل الدخول</a></li>
+                <li ng-show="!user.signedIn"><a href="/login">تسجيل الدخول</a></li>
                 <li ng-if="user.id"><a href="/profiles/{{user.id}}">ملفي الشخصي</a></li>
                 <li>
                   <a href="/login" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
@@ -81,7 +81,7 @@
                   </a>
                 </li>
                 <li><a href="http://www.manshar.org/" target="_blank">قصة منشر</a></li>
-                <li><a ng-click="showDisclaimer=true">شروط الاستخدام</a></li>
+                <li><a href="/articles/652">شروط الاستخدام</a></li>
                 <li><a href="http://goo.gl/IuOXaA" target="_blank">تابعنا</a></li>
                 <li>
                   <a ng-show="user.signedIn" ng-click="logout()"
