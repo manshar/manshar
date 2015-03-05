@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('CategoryCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$filter', 'Category', 'Topic', 'CategoryArticle',
-      function ($scope, $rootScope, $routeParams, $location, $filter, Category, Topic, CategoryArticle) {
+  .controller('CategoryCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$filter', '$anchorScroll', 'Category', 'Topic', 'CategoryArticle',
+      function ($scope, $rootScope, $routeParams, $location, $filter, $anchorScroll, Category, Topic, CategoryArticle) {
+    $anchorScroll();
 
     Category.get({'categoryId': $routeParams.categoryId},
         function(resource) {

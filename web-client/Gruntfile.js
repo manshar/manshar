@@ -251,6 +251,7 @@ module.exports = function (grunt) {
     // additional tasks can operate on them
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
+      css: '<%= yeoman.app %>/styles/{,*/}*.scss',
       options: {
         dest: '<%= yeoman.dist %>'
       }
@@ -351,7 +352,7 @@ module.exports = function (grunt) {
         options: {
           // TODO(mkhatib): Move this into its own Grunt task.
           replacements: [{
-            pattern: /['"(]((\/?[\w\d.\-]+\/)+([\w\d.-]+).*?)['")]/ig,
+            pattern: /['"(]((\/?[\w\d.\-]+\/)+([\w\d@.-]+)\.(?:js|css|gif|webp|png|jpg|jpeg|svg|woff|woff2|eot|ttf).*?)['")]/ig,
             replacement: function (match, path) {
               // If path is an absolute URL (starts with http:// or https:// or //)
               // just return the url itself to keep it as is.

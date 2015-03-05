@@ -23,7 +23,7 @@
     "grunt-google-cdn": "^0.4.3",
     "grunt-karma": "^0.6.2",
     "grunt-newer": "^0.5.4",
-    "grunt-ng-constant": "^1.0.0",
+    "grunt-ng-constant": "^1.1.0",
     "grunt-svgmin": "^0.2.1",
     "grunt-usemin": "^2.6.2",
     "jshint-stylish": "^0.1.5",
