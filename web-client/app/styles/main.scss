@@ -5,12 +5,12 @@
 
 @font-face {
     font-family: 'fontawesome-manshar';
-    src: url('/fonts/fa-manshar-webfont.eot?-kybycc');
-    src: url('/fonts/fa-manshar-webfont.eot?#iefix-kybycc') format('embedded-opentype'),
-         url('/fonts/fa-manshar-webfont.woff2?-kybycc') format('woff2'),
-         url('/fonts/fa-manshar-webfont.woff?-kybycc') format('woff'),
-         url('/fonts/fa-manshar-webfont.ttf?-kybycc') format('truetype'),
-        url('/fonts/fa-manshar-webfont.svg?-kybycc##fa-manshar-webfont') format('svg');
+    src: url('/styles/fonts/fa-manshar-webfont.eot?-kybycc');
+    src: url('/styles/fonts/fa-manshar-webfont.eot?#iefix-kybycc') format('embedded-opentype'),
+         url('/styles/fonts/fa-manshar-webfont.woff2?-kybycc') format('woff2'),
+         url('/styles/fonts/fa-manshar-webfont.woff?-kybycc') format('woff'),
+         url('/styles/fonts/fa-manshar-webfont.ttf?-kybycc') format('truetype'),
+        url('/styles/fonts/fa-manshar-webfont.svg?-kybycc##fa-manshar-webfont') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -673,9 +673,9 @@ input[type="password"] {
         .dropdown-contain{
           top: 28px;
 
-          .dropOut { 
-            opacity: 1; 
-            margin-top: 8px; 
+          .dropOut {
+            opacity: 1;
+            margin-top: 8px;
             margin-left: -18px;
           }
         }
@@ -1415,8 +1415,8 @@ form.manshar-article {
 }
 
 .terms-container {
-  position: fixed; 
-  overflow: auto; 
+  position: fixed;
+  overflow: auto;
   background-color: #fff;
   z-index: 200;
 

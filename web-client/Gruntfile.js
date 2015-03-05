@@ -240,7 +240,7 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/fonts/*'
+            '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
       }
@@ -269,7 +269,7 @@ module.exports = function (grunt) {
         patterns: {
           js: [
             [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp))/gm, 'Update the JS to reference our revved images'],
-            [/(fonts\/.*?\.(?:eot|svg|ttf|woff|woff2))/gm, 'Update the CSS to reference our revved fonts']
+            [/(styles\/fonts\/.*?\.(?:eot|svg|ttf|woff|woff2))/gm, 'Update the CSS to reference our revved fonts']
           ]
         }
       }
@@ -385,7 +385,7 @@ module.exports = function (grunt) {
             '.htaccess',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'styles/fonts/*'
           ]
         }, {
           expand: true,
