@@ -870,7 +870,6 @@ input[type="password"] {
 
           a {
             color: #fff;
-            padding: 0 .5em;
           }
         }
       }
@@ -940,6 +939,7 @@ input[type="password"] {
 
       .header {
         height: 10em;
+        padding-right: 0;
 
         .stats-box {
           font-size: .9em;
@@ -1106,6 +1106,14 @@ ul.cards-list-container {
         .manshar-article-header {
           padding-top: 2em;
         }
+      }
+    }
+
+    a {
+      color: #000;
+
+      &:hover, &:active {
+        color: #9A9A9A;
       }
     }
   }
