@@ -1,5 +1,6 @@
 <div class="manshar-profile">
   <div class="avatar" manshar-cover url="{{profile.cover_url}}">
+    <div class="dimmer" ng-show="profile.cover_url"></div>
     <div class="avatar blured" manshar-cover url="{{profile.cover_url}}"></div>
   </div>
   <div class="title">
@@ -50,14 +51,6 @@
             <h1>{{article.title || "بدون عنوان"}}</h1>
             <h2>{{article.tagline}}</h2>
           </a>
-          <h3>
-            <div class="date">
-              <span>
-                بتاريخ:
-              </span>
-              {{article.created_at | date:'dd-MM-yyyy'}}
-            </div>
-          </h3>
         </div>
       </div>
       <div class="profile-article-action" ng-show="isOwner(user, article)">

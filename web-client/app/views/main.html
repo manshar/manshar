@@ -7,6 +7,7 @@
         analytics-category="UI"
         analytics-label="Manshar Hero Title">{{title}}</h1>
     <span class="beta">نسخة تجريبية</span>
+    <a href="https://github.com/manshar/manshar"><i class="fa fa-github"></i></a>
     <p class="manshar-tagline">{{tagline}}...</p>
     <p class="links">
       <a href="http://www.manshar.org" target="blank"
@@ -17,34 +18,28 @@
         عن منشر
       </a>
     </p>
-    <button ng-click="newArticle()" class="action-button"
-        analytics-on="click"
-        analytics-event="click"
-        analytics-category="UI"
-        analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
-
-    <div class="listing-types-tabs">
-      <a ng-click="orderArticles('popular')" ng-class="{'active': activeTab == 'popular'}">
-        <i class="fa fa-line-chart"></i>
-        <span>الأكثر شعبية</span>
-      </a>
-      <a ng-click="orderArticles('best')" ng-class="{'active': activeTab == 'best'}">
-        <i class="fa fa-thumbs-o-up"></i>
-        <span>الأفضل</span>
-      </a>
-      <a ng-click="orderArticles('recents')" ng-class="{'active': activeTab == 'recents'}">
-        <i class="fa fa-clock-o"></i>
-        <span>الأحدث</span>
-      </a>
-      <a ng-click="selectTab('publishers')" ng-class="{'active': activeTab == 'publishers'}">
-        <i class="fa fa-group"></i>
-        <span>الناشرون</span>
-      </a>
-      <a ng-click="showCategoriesPicker()">
-        <i class="fa fa-th-large"></i>
-        <span>استعرض الفئات</span>
-      </a>
-    </div>
+  </div>
+  <div class="listing-types-tabs" ng-class="{fixed: yscroll > 320}">
+    <a ng-click="orderArticles('popular')" ng-class="{'active': activeTab == 'popular'}">
+      <i class="fa fa-line-chart"></i>
+      <span>الأكثر شعبية</span>
+    </a>
+    <a ng-click="orderArticles('best')" ng-class="{'active': activeTab == 'best'}">
+      <i class="fa fa-thumbs-o-up"></i>
+      <span>الأفضل</span>
+    </a>
+    <a ng-click="orderArticles('recents')" ng-class="{'active': activeTab == 'recents'}">
+      <i class="fa fa-clock-o"></i>
+      <span>الأحدث</span>
+    </a>
+    <a ng-click="selectTab('publishers')" ng-class="{'active': activeTab == 'publishers'}">
+      <i class="fa fa-group"></i>
+      <span>الناشرون</span>
+    </a>
+    <a ng-click="showCategoriesPicker()">
+      <i class="fa fa-th-large"></i>
+      <span>استعرض الفئات</span>
+    </a>
   </div>
 </header>
 
@@ -73,3 +68,11 @@
     </div>
   </li>
 </ul>
+
+<div class="metabar tray">
+  <button ng-click="newArticle()" class="action-button"
+      analytics-on="click"
+      analytics-event="click"
+      analytics-category="UI"
+      analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
+</div>

@@ -1,0 +1,88 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'postgresql-9.3' ]
+2 info using npm@2.1.5
+3 info using node@v0.10.33
+4 verbose node symlink /usr/local/bin/node
+5 verbose config Skipping project config: /Users/RashaKhatib/.npmrc. (matches userconfig)
+6 warn package.json jquery-xdomainajax@1.0.0 No repository field.
+7 silly cache add args [ 'postgresql-9.3', null ]
+8 verbose cache add spec postgresql-9.3
+9 silly cache add parsed spec { raw: 'postgresql-9.3',
+9 silly cache add   scope: null,
+9 silly cache add   name: 'postgresql-9.3',
+9 silly cache add   rawSpec: '',
+9 silly cache add   spec: '*',
+9 silly cache add   type: 'range' }
+10 verbose addNamed postgresql-9.3@*
+11 silly addNamed semver.valid null
+12 silly addNamed semver.validRange *
+13 silly addNameRange { name: 'postgresql-9.3', range: '*', hasData: false }
+14 verbose mapToRegistry name postgresql-9.3
+15 verbose mapToRegistry uri https://registry.npmjs.org/postgresql-9.3
+16 verbose addNameRange registry:https://registry.npmjs.org/postgresql-9.3 not in flight; fetching
+17 verbose request on initialization, where is /postgresql-9.3
+18 verbose request after pass 1, where is /postgresql-9.3
+19 verbose request url raw /postgresql-9.3
+20 verbose request resolving registry [ 'https://registry.npmjs.org/', './postgresql-9.3' ]
+21 verbose request after pass 2, where is https://registry.npmjs.org/postgresql-9.3
+22 verbose request no auth needed
+23 info attempt registry request try #1 at 14:47:10
+24 verbose request id 63519f5c44119f7a
+25 http request GET https://registry.npmjs.org/postgresql-9.3
+26 http 404 https://registry.npmjs.org/postgresql-9.3
+27 verbose headers { date: 'Wed, 04 Mar 2015 22:47:10 GMT',
+27 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+27 verbose headers   'content-type': 'application/json',
+27 verbose headers   'cache-control': 'max-age=0',
+27 verbose headers   'content-length': '52',
+27 verbose headers   'accept-ranges': 'bytes',
+27 verbose headers   via: '1.1 varnish',
+27 verbose headers   age: '0',
+27 verbose headers   'x-served-by': 'cache-sjc3120-SJC',
+27 verbose headers   'x-cache': 'MISS',
+27 verbose headers   'x-cache-hits': '0',
+27 verbose headers   'x-timer': 'S1425509230.209512,VS0,VE350',
+27 verbose headers   'keep-alive': 'timeout=10, max=50',
+27 verbose headers   connection: 'Keep-Alive' }
+28 silly registry.get cb [ 404,
+28 silly registry.get   { date: 'Wed, 04 Mar 2015 22:47:10 GMT',
+28 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+28 silly registry.get     'content-type': 'application/json',
+28 silly registry.get     'cache-control': 'max-age=0',
+28 silly registry.get     'content-length': '52',
+28 silly registry.get     'accept-ranges': 'bytes',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     age: '0',
+28 silly registry.get     'x-served-by': 'cache-sjc3120-SJC',
+28 silly registry.get     'x-cache': 'MISS',
+28 silly registry.get     'x-cache-hits': '0',
+28 silly registry.get     'x-timer': 'S1425509230.209512,VS0,VE350',
+28 silly registry.get     'keep-alive': 'timeout=10, max=50',
+28 silly registry.get     connection: 'Keep-Alive' } ]
+29 verbose stack Error: 404 Not Found: postgresql-9.3
+29 verbose stack     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:258:14)
+29 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:197:65)
+29 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+29 verbose stack     at Request.emit (events.js:98:17)
+29 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1160:14)
+29 verbose stack     at Request.emit (events.js:117:20)
+29 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1111:12)
+29 verbose stack     at IncomingMessage.emit (events.js:117:20)
+29 verbose stack     at _stream_readable.js:943:16
+29 verbose stack     at process._tickCallback (node.js:419:13)
+30 verbose statusCode 404
+31 verbose pkgid postgresql-9.3
+32 verbose cwd /Users/RashaKhatib/manshar/backend
+33 error Darwin 14.1.0
+34 error argv "node" "/usr/local/bin/npm" "install" "postgresql-9.3"
+35 error node v0.10.33
+36 error npm  v2.1.5
+37 error code E404
+38 error 404 Not Found: postgresql-9.3
+38 error 404
+38 error 404 'postgresql-9.3' is not in the npm registry.
+38 error 404 You should bug the author to publish it (or use the name yourself!)
+38 error 404
+38 error 404 Note that you can also install from a
+38 error 404 tarball, folder, http url, or git url.
+39 verbose exit [ 1, true ]

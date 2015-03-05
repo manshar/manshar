@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ArticleCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$filter', 'Article',
-      function ($scope, $rootScope, $routeParams, $location, $filter, Article) {
+  .controller('ArticleCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$filter', '$anchorScroll', 'Article',
+      function ($scope, $rootScope, $routeParams, $location, $filter, $anchorScroll, Article) {
+
+    $anchorScroll();
+    $rootScope.forceBar = true;
 
     Article.get({'articleId': $routeParams.articleId},
         function(resource) {

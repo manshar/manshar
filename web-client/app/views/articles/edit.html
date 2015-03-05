@@ -1,50 +1,48 @@
-<form name="articleForm" class="manshar-article">
+<header class="article-header" ng-class="{'nocover': !article.cover_url}">
+  <div class="cover-image" manshar-cover url="{{article.cover_url}}"></div>
+  <div class="dimmer" ng-show="article.cover_url"></div>
 
-    <div class="manshar-article-image-container card" ng-class="{'manshar-article-nocover': !article.cover_url}" manshar-cover url="{{article.cover_url}}">
-      <div class="dimmer" ng-show="article.cover_url"></div>
+  <div class="title tray">
+    <form>
+      <input
+        type="file"
+        manshar-file
+          file-model="article.cover"
+          preview-url="article.cover_url"
+        analytics-on="click"
+          analytics-event="Pick Article Cover"
+      />
 
-      <div class="manshar-article-header tray header">
+      <h1
+        name="myWidget"
+        class="manshar-editor"
+        grande-editor
+          rtl="true"
+          placeholder="عنوان المقال"
+          mode="inline"
+          max-length="100"
+          ng-model="article.title"
+          required
+        >
+      </h1>
 
-        <div class="title">
-          <input
-            type="file"
-            manshar-file
-              file-model="article.cover"
-              preview-url="article.cover_url"
-            analytics-on="click"
-              analytics-event="Pick Article Cover"
-          />
-
-          <h1
-            name="myWidget"
-            class="manshar-editor"
-            grande-editor
-              rtl="true"
-              placeholder="عنوان المقال"
-              mode="inline"
-              max-length="100"
-              ng-model="article.title"
-              required
-            >
-          </h1>
-
-          <h2
-            class="manshar-editor"
-            grande-editor
-              rtl="true"
-              placeholder="عنوان المقال الفرعي"
-              mode="inline"
-              max-length="200"
-              ng-model="article.tagline"
-            >
-          </h2>
-
-        </div>
-      </div>
+      <h2
+        class="manshar-editor"
+        grande-editor
+          rtl="true"
+          placeholder="عنوان المقال الفرعي"
+          mode="inline"
+          max-length="200"
+          ng-model="article.tagline"
+        >
+      </h2>
 
     </div>
+  </form>
+</header>
 
-  <div class="article-content-container tray">
+<form name="articleForm" class="manshar-article">
+  <div class="article-container tray">
     <article
       class="manshar-editor"
       grande-editor
@@ -55,7 +53,6 @@
         required
       >
     </article>
-
 
     <div class="article-meta card-list" ng-show="article.topic.title || article.published_at">
       <div class="meta-box">

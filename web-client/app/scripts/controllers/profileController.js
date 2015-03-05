@@ -13,6 +13,8 @@ angular.module('webClientApp')
       $scope.profile = resource;
     });
 
+    $rootScope.forceBar = true;
+
     $scope.editArticle = function (articleId) {
       $location.path('/articles/' + articleId + '/edit');
     };
@@ -109,6 +111,10 @@ angular.module('webClientApp')
       UserLink.query({'userId': $routeParams.userId}, function (links) {
         $scope.links = links;
       });
+    };
+
+    $scope.getCardColor = function(color) {
+      return color || '#C0C0C0';
     };
     
     $scope.loadLinks();

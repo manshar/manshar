@@ -16,6 +16,8 @@ angular.module('webClientApp')
       $scope.publishers = User.query();
     });
 
+    $rootScope.forceBar = false;
+
     // TODO(mkhatib): Refactor this to move it to its own directive for listing
     // articles with specific
     var page = 1;
@@ -66,6 +68,10 @@ angular.module('webClientApp')
         function(event, data) {
       $location.path('/categories/' + data.category.id);
     });
+
+    $scope.getCardColor = function(color) {
+      return color || '#C0C0C0';
+    };
 
     /**
      * Make sure to cleanup the binded events and intervals when the user

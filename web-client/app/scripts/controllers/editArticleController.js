@@ -9,7 +9,7 @@ angular.module('webClientApp')
         ' نشرها مجدداً بالضغط على نشر. هل تود نقل المقال للمسودات؟');
 
     var lastSavedArticle = {};
-
+    $rootScope.forceBar = true;
     /**
      * Checks if the article has been changed since the last time it was saved.
      * @return {boolean} True if the article has been changed.

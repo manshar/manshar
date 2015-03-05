@@ -50,7 +50,7 @@ angular.module('webClientApp')
      * Creates a new comment anchor and adding them to container.
      * @param  {HTMLElement} srcElement Element to get the GUID from.
      */
-    var createNewComment = function(srcElement, scope, container) {
+    var createNewComment = function(srcElement, scope, container, offsetTop) {
       // TODO(mkhatib): Maybe use another attribute rather than title
       // The reason I used title is Angular seems to be stripping any
       // data- attributes or id.
@@ -62,7 +62,7 @@ angular.module('webClientApp')
       commentEl.setAttribute('anchored-comment', '');
       commentEl.setAttribute('guid', guid);
       commentEl.className = 'anchored-comment-box';
-      commentEl.style.top = srcElement.offsetTop + 'px';
+      commentEl.style.top = (srcElement.offsetTop + offsetTop) + 'px';
       $compile(commentEl)(scope);
       container.appendChild(commentEl);
 
@@ -161,7 +161,7 @@ angular.module('webClientApp')
             var elements = document.getElementsByClassName(
                 scope.guidElementsClass);
             for (var i = 0; i < elements.length; i++) {
-              createNewComment(elements[i], scope, element[0]);
+              createNewComment(elements[i], scope, element[0], guidContainer.offsetTop);
             }
 
           }, 200);
