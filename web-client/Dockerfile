@@ -1,5 +1,5 @@
 FROM dockerfile/nodejs-bower-grunt
-RUN apt-get update -qq && apt-get install -y build-essential nodejs npm git curl ruby-full rubygems-integration
+RUN apt-get update && apt-get install -y ruby
 RUN gem install sass
 WORKDIR /manshar-web-client
 RUN npm cache clean
