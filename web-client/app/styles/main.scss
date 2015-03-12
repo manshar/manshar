@@ -306,7 +306,7 @@ input[type="password"] {
 
 .category-nav-actions {
   position: fixed;
-  font-size: 1.3em;
+  font-size: 1.4em;
   top: 0.3em;
   right: 2.3em;
   z-index: 30;
@@ -357,7 +357,6 @@ input[type="password"] {
     text-align: center;
     color: #fff;
     padding-top: 1em;
-    box-shadow: none;
 
     .topics {
       a {
@@ -381,7 +380,6 @@ input[type="password"] {
   position: relative;
   height: 370px;
   color: #B3B3B3;
-  box-shadow: 0px 3px 5px -3px rgba(0,0,0,0.2);
 
   .hero-unit {
     height: 100%;
@@ -452,10 +450,12 @@ input[type="password"] {
 .listing-types-tabs {
   text-align: center;
   position: relative;
-  bottom: 2.7em;
+  bottom: 50px;
   z-index: 20;
-  max-width: 900px;
+  width: 100%;
   margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0px 3px 5px -3px rgba(0, 0, 0, 0.2);
 
   &.fixed {
     position: fixed;
@@ -463,8 +463,6 @@ input[type="password"] {
     left: 0;
     right: 0;
     height: 50px;
-    margin-top: 0.4em;
-    width: 315px;
   }
 
   &.profile-tabs {
@@ -474,12 +472,13 @@ input[type="password"] {
   }
 
   a {
+    height: 50px;
     span {
       display: none;
     }
 
     display: inline-block;
-    padding: .3em 0.5em;
+    padding: .75em 0.5em;
     color: #B3B3B3;
 
     &.active {
@@ -607,12 +606,6 @@ input[type="password"] {
 }
 
 .site-nav{
-  position: fixed;
-  width: 100%;
-  height: 50px;
-  z-index: 15;
-  background-color: #fff;
-
   transition: all .2s ease-out;
 
   &.move-up{
@@ -621,13 +614,16 @@ input[type="password"] {
 
   &.force-bar {
     background-color: #fff;
-    box-shadow: 0px 3px 5px -3px rgba(0, 0, 0, 0.2);
     z-index: 20;
+    width: 100%;
+    height: 50px;
+    position: fixed;
   }
 
   .site-nav-logo, .profile-badge {
-    position: absolute;
-    top: 0.45em;
+    position: fixed;
+    top: 0.5em;
+    z-index: 25;
   }
 
   .site-nav-logo {
@@ -640,26 +636,30 @@ input[type="password"] {
 
     .profile-badge-menu {
       left: 1em;
-      position: fixed;
-      top: 0.7em;
     }
 
     .new-button {
       display: none;
-      position: fixed;
-      left: 4em;
-      top: 0.8em;
-      padding: 0;
+      position: absolute;
+      width: 5em;
+      left: 3em;
+      color: #C81916;
+      text-align: center;
+      font-weight: bold;
+      z-index: 25;
 
       &:hover {
-        color: rgb(202, 21, 4);
+        color: #952826;
       }
     }
 
     a {
       display: block;
-      font-size: 0.8em;
       color: #B3B3B3;
+    }
+
+    .fa-bars {
+      line-height: 1.9em;
     }
 
     img {
@@ -669,7 +669,7 @@ input[type="password"] {
     .drop {
       position: relative;
 
-      &:hover, &.active {
+      &.active {
         .dropdown-contain{
           top: 28px;
 
@@ -862,8 +862,8 @@ input[type="password"] {
 
         .category-topic {
           position: absolute;
-          left: -5em;
-          width: 5em;
+          left: -4.9em;
+          width: 4.9em;
           bottom: 1em;
           font-size: 1.2em;
           text-align: center;
@@ -1113,7 +1113,7 @@ ul.cards-list-container {
       color: #000;
 
       &:hover, &:active {
-        color: #9A9A9A;
+        color: #666666;
       }
     }
   }
@@ -1128,6 +1128,10 @@ ul.cards-list-container {
     &.anchored-comments-active {
       transform: translateX(335px);
       z-index: 99;
+    }
+
+    &.anchored-comments-active {
+      z-index: 10;
     }
 
     article {
@@ -1412,7 +1416,9 @@ button {
   }
 }
 
-form.manshar-article {
+form.article-edit-form {
+  height: 100%;
+
   article.manshar-editor {
     /**
      * Adding lots of padding to the bottom of the main article editor to allow
@@ -1648,7 +1654,6 @@ form.manshar-article {
 
 .g-body .image-tooltip {
   z-index: 9999;
-  position: fixed !important;
   color: #B3B3B3;
 }
 
