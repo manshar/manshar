@@ -57,7 +57,7 @@ angular.module('webClientApp')
         };
 
         new Grande(element, {
-          containerSelector: '.container',
+          containerSelector: 'body',
           placeholder: scope.placeholder || '',
           mode: scope.mode || 'rich',
           rtl: scope.rtl || false,

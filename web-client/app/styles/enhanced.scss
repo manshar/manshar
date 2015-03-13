@@ -11,6 +11,20 @@ body {
     .new-button {
       display: none;
     }
+
+    .drop {
+      &:hover {
+        .dropdown-contain{
+          top: 28px;
+
+          .dropOut {
+            opacity: 1;
+            margin-top: 8px;
+            margin-left: -18px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -343,7 +357,7 @@ body {
 
   .main-header {
     .hero-unit {
-      z-index: 20;
+      z-index: 10;
     }
   }
 

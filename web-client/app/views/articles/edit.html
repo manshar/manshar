@@ -1,9 +1,9 @@
-<header class="article-header" ng-class="{'nocover': !article.cover_url}">
-  <div class="cover-image" manshar-cover url="{{article.cover_url}}"></div>
-  <div class="dimmer" ng-show="article.cover_url"></div>
+<form class="article-edit-form" name="articleForm">
+  <header class="article-header" ng-class="{'nocover': !article.cover_url}">
+    <div class="cover-image" manshar-cover url="{{article.cover_url}}"></div>
+    <div class="dimmer" ng-show="article.cover_url"></div>
 
-  <div class="title tray">
-    <form>
+    <div class="title tray">
       <input
         type="file"
         manshar-file
@@ -36,47 +36,45 @@
           ng-model="article.tagline"
         >
       </h2>
-
     </div>
-  </form>
-</header>
+  </header>
 
-<form name="articleForm" class="manshar-article">
-  <div class="article-container tray">
-    <article
-      class="manshar-editor"
-      grande-editor
-        rtl="true"
-        placeholder="اكتب مقالك هنا"
-        mode="rich"
-        ng-model="article.body"
-        required
-      >
-    </article>
+  <div class="manshar-article">
+    <div class="article-container tray">
+      <article
+        class="manshar-editor"
+        grande-editor
+          rtl="true"
+          placeholder="اكتب مقالك هنا"
+          mode="rich"
+          ng-model="article.body"
+          required
+        >
+      </article>
 
-    <div class="article-meta card-list" ng-show="article.topic.title || article.published_at">
-      <div class="meta-box">
-        <h1 class="header-label">
-          <span>نشرت في</span>
-        </h1>
-        <a ng-click="changeTopic()">
-          <div class="meta-details card">
-            <p class="meta-thumb">
-              <img ng-src="{{article.topic.category.image_thumb_url}}" ng-show="article.topic.category.image_thumb_url"/>
-            </p>
-            <div class="meta-text">
-              <div class="meta-name">
-                <h3>{{article.topic.title || 'اختر موضوع لنشر تحته'}}</h3>
-              </div>
-              <div class="meta-more">
-                {{article.topic.category.title}}
+      <div class="article-meta card-list" ng-show="article.topic.title || article.published_at">
+        <div class="meta-box">
+          <h1 class="header-label">
+            <span>نشرت في</span>
+          </h1>
+          <a ng-click="changeTopic()">
+            <div class="meta-details card">
+              <p class="meta-thumb">
+                <img ng-src="{{article.topic.category.image_thumb_url}}" ng-show="article.topic.category.image_thumb_url"/>
+              </p>
+              <div class="meta-text">
+                <div class="meta-name">
+                  <h3>{{article.topic.title || 'اختر موضوع لنشر تحته'}}</h3>
+                </div>
+                <div class="meta-more">
+                  {{article.topic.category.title}}
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
-
   </div>
 </form>
 
