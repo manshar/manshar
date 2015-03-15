@@ -22,7 +22,7 @@
         class="comments-container">
     </div>
 
-    <div class="article-meta card-list">
+    <div class="article-meta card-list" ng-hide="article.loading">
       <div class="meta-box" ng-show="article.topic">
         <h1 class="header-label">
           <span>نشرت في</span>
@@ -50,7 +50,7 @@
         <h1 class="header-label">
           <span>بقلم</span>
         </h1>
-        <div class="meta-details card" ng-hide="article.loading">
+        <div class="meta-details card">
           <a class="meta-thumb" ng-href="/profiles/{{article.user.id}}">
             <img ng-src="{{article.user.thumb_url}}" />
           </a>
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="article-actions">
+    <div class="article-actions" ng-hide="article.loading">
       <button class="action-button recommend-button long-form" recommend-button article="article"
           analytics-on="click"
           analytics-event="click"
@@ -78,7 +78,7 @@
       </button>
     </div>
 
-    <div ng-include="'views/partials/_sharing_buttons.html'">
+    <div ng-include="'views/partials/_sharing_buttons.html'" ng-hide="article.loading">
     </div>
 </div>
 
