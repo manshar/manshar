@@ -1,6 +1,7 @@
 class Api::V1::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   respond_to :json, :html
   rescue_from ActiveRecord::RecordNotUnique, with: :user_exists_with_other_providers
+  rescue_from PG::UniqueViolation, with: :user_exists_with_other_providers
 
   # TODO(mkhatib): This wouldn't be necessary if Facebook omniauth config worked.
   def get_large_image image_url
