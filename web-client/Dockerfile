@@ -1,6 +1,8 @@
 FROM dockerfile/nodejs-bower-grunt
 RUN apt-get update && apt-get install -y ruby
 RUN gem install sass
+sudo locale-gen en_US.UTF-8
+sudo update-locale en_US.UTF-8
 WORKDIR /manshar-web-client
 RUN npm cache clean
 RUN npm install -g phantomjs
