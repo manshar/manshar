@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "compression": "^1.4.1",
-    "connect-modrewrite": "^0.7.9",
     "google-cdn": "^1.0.0",
     "google-cdn-data": "^0.1.16",
     "grunt-angular-templates": "~0.5.1",
