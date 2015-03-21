@@ -5,7 +5,10 @@ WORKDIR /manshar-web-client
 RUN npm cache clean
 RUN npm install -g phantomjs
 RUN npm install -g grunt grunt-cli --save-dev
-ADD package.json /manshar-web-client/package.json
+WORKDIR /node
+ADD package.json /node/package.json
 RUN npm install
-ADD bower.json /manshar-web-client/bower.json
+WORKDIR /bower
+ADD bower.json /bower/bower.json
 RUN bower install --allow-root
+WORKDIR /manshar-web-client
