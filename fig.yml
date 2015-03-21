@@ -20,7 +20,7 @@ backend:
     - db
 web:
   build: web-client/
-  command: fig_web_serve.sh
+  command: ./fig_web_serve.sh
   environment:
     NODE_ENV: development
     PORT: 9000
