@@ -81,7 +81,7 @@ This depends on which container you want to install extra packages to.
 For example, if you need to install packages to the 'web' container, you can run
 
 ```bash
-$ fig run backend/web npm install <whatever-package>
+$ fig run web npm install <whatever-package>
 ```
 
 ## Other Stuff
