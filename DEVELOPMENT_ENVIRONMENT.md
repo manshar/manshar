@@ -52,10 +52,9 @@ Note that these two commands should always be run when restarting the boot2docke
 ```bash
 $ boot2docker ip
 ```
-* Initialize the database container by running the following commands:
+* Initialize the database container by running the following command:
 ```bash
-$ fig run backend rake db:create
-$ fig run backend rake db:migrate
+$ fig run backend init_db.sh
 ```
 Note that running these commands might take a significant amount of time, depending on your Internet connection.
 The reason being that these commands will pull the Manshar's development environment docker containers from docker hub.
