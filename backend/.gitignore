@@ -14,8 +14,6 @@ vendor/bundle/*
 public/uploads/
 public/assets/
 
-config/database.yml
-
 .env
 .env.production
 
@@ -27,4 +25,4 @@ dist
 vendor/assets/bower_components
 
 dragonfly.log
-
+config/database.yml
