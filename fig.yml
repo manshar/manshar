@@ -3,7 +3,7 @@ db:
   ports:
     - "5432"
 backend:
-  image: mohammadshamma/manshar-backend
+  image: manshar/backend
   command: ./rails_serve.sh
   environment:
     RACK_ENV: development
@@ -20,7 +20,7 @@ backend:
   links:
     - db
 web:
-  image: mohammadshamma/manshar-web
+  image: manshar/web
   command: ./fig_web_serve.sh
   environment:
     NODE_ENV: development
