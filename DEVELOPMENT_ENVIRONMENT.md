@@ -54,7 +54,7 @@ $ boot2docker ip
 ```
 * Initialize the database container by running the following command:
 ```bash
-$ fig run backend init_db.sh
+$ fig run backend ./init_db.sh
 ```
 Note that running these commands might take a significant amount of time, depending on your Internet connection.
 The reason being that these commands will pull the Manshar's development environment docker containers from docker hub.
@@ -86,3 +86,13 @@ $ fig run web npm install <whatever-package>
 
 ## Other Stuff
 For More Information on How to Deal with Docker Containers and Fig, checkout the [docker](https://docs.docker.com/) and [fig](http://www.fig.sh/) documentation.
+
+
+## Troubleshooting
+### x509: certificate has expired or is not yet valid
+If you get this message when running any docker or fig commands, restart the boot2docker VM by running:
+```bash
+$ boot2docker down
+$ boot2docker up
+```
+And then run your command again.
