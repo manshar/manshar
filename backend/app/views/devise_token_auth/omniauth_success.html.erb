@@ -1,0 +1,10 @@
+<%# This is a fix for https://github.com/manshar/manshar/issues/195 %>
+<% @resource.as_json.each do |attr, val| %>
+  "<%= attr %>": "<%= val.respond_to?(:to_str) ? val.to_str.gsub(/(?:\n\r?|\r\n?)/, ' ') : val %>",
+<% end %>
+
+"auth_token": "<%= @token %>",
+"message":    "deliverCredentials",
+"client_id":  "<%= @client_id %>",
+"expiry":     "<%= @expiry %>",
+"config":     "<%= @config %>"
