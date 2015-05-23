@@ -1201,6 +1201,12 @@ ul.cards-list-container {
           height: 200px;
         }
 
+        &.vine {
+          iframe {
+            width: 450px;
+          }
+        }
+
       }
 
       img {

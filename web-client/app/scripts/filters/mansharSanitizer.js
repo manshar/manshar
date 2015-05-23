@@ -25,11 +25,14 @@ angular.module('webClientApp')
      * @return {string} Sanitized HTML string for the iframe.
      */
     var sanitizeIframe = function(iframeHtml) {
-      var iFrameParts = /src="((https?:)?\/\/.+youtube.com\/.+?)"/.exec(iframeHtml);
+      var embedRegex = /src="(((https?:)?\/\/(?:www\.)?youtube.com\/.+?)|(http(?:s?):\/\/(?:www\.)?vine\.co\/v\/([a-zA-Z0-9]{1,13})\/embed\/simple))"/;
+      var iFrameParts = embedRegex.exec(iframeHtml);
       var figureParts = /title="(.+)"/.exec(iframeHtml);
       if (iFrameParts && iFrameParts.length) {
-        return '<figure title="' + figureParts[1] + '">' +
-                 '<iframe src="' + iFrameParts[1] + '" frameborder="0" allowfullscreen></iframe>' +
+        var src = iFrameParts[1];
+        var classNames = /(youtube|vine)/.exec(src);
+        return '<figure class="' + classNames[0] + '" title="' + figureParts[1] + '">' +
+                 '<iframe src="' + src + '" frameborder="0" allowfullscreen></iframe>' +
                '</figure>';
       }
       return '';
