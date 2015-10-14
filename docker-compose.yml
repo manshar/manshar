@@ -14,7 +14,7 @@ backend:
     DRAGONFLY_SECRET: c2jq0a9cj039jc01mamc09qjc930ur10fjafj0a9fj09fj23qnweocn0qwf0qfjq
     MANSHAR_DB_1_PORT_5432_TCP_ADDR: db
   volumes:
-    - backend/:/manshar-backend
+    - ./backend/:/manshar-backend
   ports:
     - "3000:3000"
   links:
@@ -27,6 +27,6 @@ web:
     PORT: 9000
     API_HOST: dockerhost:3000
   volumes:
-    - web-client/:/manshar-web-client
+    - ./web-client/:/manshar-web-client
   ports:
     - "9000:9000"
