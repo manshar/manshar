@@ -18,7 +18,8 @@ angular.module('webClientApp', [
   'angularFileUpload',
   'angular-loading-bar',
   'ipCookie',
-  'ng-token-auth'
+  'ng-token-auth',
+  '720kb.tooltips'
 ])
   /**
    * Routing.

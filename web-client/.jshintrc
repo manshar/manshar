@@ -22,6 +22,8 @@
     "angular": false,
     "Grande": false,
     "ga": false,
-    "hljs": false
+    "hljs": false,
+    "carbon": false,
+    "Imagezoom": false
   }
 }

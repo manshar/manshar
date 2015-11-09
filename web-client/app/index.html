@@ -27,9 +27,10 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/grande.js/css/editor.css">
-        <link rel="stylesheet" href="bower_components/grande.js/css/menu.css">
+        <link rel="stylesheet" href="bower_components/carbon/dist/carbon.min.css">
         <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+        <link rel="stylesheet" href="bower_components/angular-tooltips/dist/angular-tooltips.min.css">
+        <link rel="stylesheet" href="bower_components/image-zoom/dist/imagezoom.css">
         <!-- endbuild -->
         <!-- build:css({.tmp,app}) styles/enhanced.css -->
         <link rel="stylesheet" type="text/css" href="styles/enhanced.css" media="screen  and (min-width: 45em)" />
@@ -37,7 +38,7 @@
         <!-- Load the hosted stylesheets for highlight.js -->
         <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
   </head>
-  <body ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
+  <body class="manshar" ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -113,7 +114,7 @@
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-touch/angular-touch.js"></script>
         <script src="bower_components/angular-i18n/angular-locale_ar.js"></script>
-        <script src="bower_components/grande.js/js/grande.js"></script>
+        <script src="bower_components/carbon/dist/carbon.js"></script>
         <script src="bower_components/angular-truncate/src/truncate.js"></script>
         <script src="bower_components/angulartics/src/angulartics.js"></script>
         <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
@@ -121,6 +122,8 @@
         <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
         <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
         <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
+        <script src="bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
+        <script src="bower_components/image-zoom/dist/imagezoom.js"></script>
 
         <script src="scripts/app.js"></script>
         <script src="scripts/appConfig.js"></script>
@@ -155,7 +158,8 @@
         <script src="scripts/directives/anchoredComments.js"></script>
         <script src="scripts/directives/categoryTopicPicker.js"></script>
         <script src="scripts/directives/clickOutside.js"></script>
-        <script src="scripts/directives/grandeEditor.js"></script>
+        <script src="scripts/directives/carbonEditor.js"></script>
+        <script src="scripts/directives/articleRenderer.js"></script>
         <script src="scripts/directives/highlightCode.js"></script>
         <script src="scripts/directives/loginModal.js"></script>
         <script src="scripts/directives/mansharCover.js"></script>
@@ -163,6 +167,7 @@
         <script src="scripts/directives/modalDialog.js"></script>
         <script src="scripts/directives/recommendButton.js"></script>
          <script src="scripts/directives/scrollSpy.js"></script>
+         <script src="scripts/directives/imageZoom.js"></script>
 
         <script src="scripts/filters/darker.js"></script>
         <script src="scripts/filters/nohtml.js"></script>
