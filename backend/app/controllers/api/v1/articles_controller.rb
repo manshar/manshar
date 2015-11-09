@@ -79,7 +79,8 @@ class Api::V1::ArticlesController < ApplicationController
     def article_params
       params.require(
         :article).permit(
-          :title, :tagline, :body, :published, :cover, :topic_id, :category_id)
+          :title, :tagline, :body, :json_model, :published, :cover, :topic_id,
+          :category_id)
     end
 
     def order_param

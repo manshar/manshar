@@ -2,8 +2,8 @@
 /* jshint camelcase: false */
 
 angular.module('webClientApp')
-  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$analytics', '$window', '$interval', '$timeout', 'Article',
-      function ($rootScope, $scope, $routeParams, $location, $analytics, $window, $interval, $timeout, Article) {
+  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$analytics', '$window', '$interval', '$timeout', '$anchorScroll', 'Article',
+      function ($rootScope, $scope, $routeParams, $location, $analytics, $window, $interval, $timeout, $anchorScroll, Article) {
 
     var confirmEditMessage = ('هذه العملية ستنقل المقال إلى مسوداتك. يمكنك' +
         ' نشرها مجدداً بالضغط على نشر. هل تود نقل المقال للمسودات؟');
@@ -16,7 +16,7 @@ angular.module('webClientApp')
      */
     var isDirty = function () {
       var maybeUpdatedArticle = angular.copy($scope.article);
-      var attrs = ['body', 'cover_url', 'tagline', 'title', 'topic'];
+      var attrs = ['body', 'json_model', 'cover_url', 'tagline', 'title', 'topic'];
       for (var i = 0; i < attrs.length; i++) {
         if (!angular.equals(
             maybeUpdatedArticle[attrs[i]], lastSavedArticle[attrs[i]])) {
@@ -45,6 +45,12 @@ angular.module('webClientApp')
     if($routeParams.articleId) {
       Article.get({'articleId': $routeParams.articleId}, function (resource) {
         authorizeUser(resource);
+
+        // Don't allow editing legacy articles.
+        if (resource.body) {
+          $location.path('/articles/' + resource.id);
+          return;
+        }
         lastSavedArticle = angular.copy(resource);
         $scope.article = resource;
         // Warn the user that editing an article will move it to draft until
@@ -57,6 +63,7 @@ angular.module('webClientApp')
               $scope.article.published = false;
             }
           }
+          $anchorScroll();
         });
       });
     }
@@ -175,6 +182,21 @@ angular.module('webClientApp')
         $location.path('/');
       } else {
         $scope.inProgress = null;
+      }
+    };
+
+    /**
+     * Extracts title, snippet and HTML body from the editor when changed.
+     * @param  {carbonEditor} editor A carbon editor instance.
+     */
+    $scope.onChange = function(editor) {
+      $scope.article.title = editor.getTitle();
+      $scope.article.body = editor.getHTML();
+      var snippet = editor.getSnippet();
+      if (snippet) {
+        var words = snippet.split(' ');
+        words = words.slice(0, 35);
+        $scope.article.tagline = words.join(' ') + '...';
       }
     };
 
