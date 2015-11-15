@@ -19,17 +19,22 @@ Dragonfly.app.configure do
   fetch_file_whitelist [
     /public/
   ]
-
-  fetch_url_whitelist [
+  whitelist = [
     /www\.manshar\.com/,
     /api\.manshar\.com/,
-    /dsi4xlu0p7t9b\.cloudfront\.net/
   ]
+  if not ENV["CDN_DOMAIN"].nil? and not ENV["CDN_DOMAIN"].empty?
+    whitelist.push(/#{Regexp.escape(ENV["CDN_DOMAIN"])}/)
+  end
+
+  fetch_url_whitelist whitelist
 
   if Rails.env == 'test'
     datastore :memory
   elsif Rails.env == 'production'
-    url_host 'http://dsi4xlu0p7t9b.cloudfront.net'
+    if not ENV["CDN_DOMAIN"].nil? and ENV["CDN_DOMAIN"].empty?
+     url_host 'http://#{ENV["CDN_DOMAIN"]}' if ENV["CDN_DOMAIN"]
+    end
     datastore :s3,
       bucket_name: ENV['S3_BUCKET_NAME'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID'],

@@ -11,6 +11,7 @@ tmp
 bundler_stubs/*
 vendor/bundle/*
 .pryrc
+public/system/
 public/uploads/
 public/assets/
 
@@ -25,4 +26,3 @@ dist
 vendor/assets/bower_components
 
 dragonfly.log
-config/database.yml
