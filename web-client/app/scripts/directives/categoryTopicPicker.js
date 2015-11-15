@@ -42,10 +42,15 @@ angular.module('webClientApp')
         };
 
         scope.saveTopic = function(topic) {
-          Topic.save({
-            'categoryId': scope.selectedCategory.id,
-            'topic': topic
-          }, createTopicSuccess, createTopicError);
+          if(topic && topic.title && topic.title.split(' ').length <= 3) {
+            Topic.save({
+              'categoryId': scope.selectedCategory.id,
+              'topic': topic
+            }, createTopicSuccess, createTopicError);
+          }
+          else {
+            $window.alert('موضوع المقال لا يجب ان يتعدى ثلاث كلمات');
+          }
         };
 
         var getCategoryById = function(id) {

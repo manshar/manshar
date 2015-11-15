@@ -218,6 +218,10 @@ input[type="password"] {
     color: #606060;
     background-color: #eee;
     padding: 0 10px;
+
+    &.no-bg {
+      background-color: #fff;
+    }
   }
 }
 
@@ -1479,7 +1483,6 @@ form.article-edit-form {
 }
 
 .form-div {
-  padding-top: 3em;
 
   &.center {
     margin-top: 3em;
