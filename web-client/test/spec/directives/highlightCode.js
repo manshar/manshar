@@ -25,7 +25,7 @@ describe('Directive: highlightCode', function () {
 
   it('should call', function () {
     expect(window.hljs.highlightBlock).toHaveBeenCalled();
-    expect(window.hljs.highlightBlock.callCount).toBe(2);
+    expect(window.hljs.highlightBlock.calls.count()).toBe(2);
   });
 
 });

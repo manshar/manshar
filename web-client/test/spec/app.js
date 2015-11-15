@@ -37,7 +37,7 @@ describe('App', function () {
       });
 
       it('should redirect users to login', function () {
-        spyOn(LoginSrv, 'isLoggedIn').andReturn(false);
+        spyOn(LoginSrv, 'isLoggedIn').and.returnValue(false);
         location.path('/articles/1/edit');
         rootScope.$digest();
 
@@ -46,7 +46,7 @@ describe('App', function () {
       });
 
       it('should allow logged in user to access protected routes', function () {
-        spyOn(LoginSrv, 'isLoggedIn').andReturn(true);
+        spyOn(LoginSrv, 'isLoggedIn').and.returnValue(true);
         location.path('/articles/1/edit');
         rootScope.$digest();
 
