@@ -56,7 +56,7 @@ module.exports = function (grunt) {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         constants: {
           ENV: 'production',
-          API_HOST: '<%= process.env.API_HOST || "api.manshar.com" %>',
+          API_HOST: '<%= grunt.option("api-host") || process.env.API_HOST || "api.manshar.com" %>',
           GA_TRACKING_ID: 'UA-47379030-1'
         }
       }
@@ -358,13 +358,17 @@ module.exports = function (grunt) {
               if (path.search(/(https?:)?\/\//) === 0) {
                 return match;
               } else {
-                var cdnBase = '//d32rdl4awdotlf.cloudfront.net';
-                if (path.indexOf('/') !== 0) {
-                  cdnBase += '/';
+                var cdnBase = grunt.option('cdn-base');
+                if (cdnBase) {
+                  if (path.indexOf('/') !== 0) {
+                    cdnBase += '/';
+                  }
+                  var replacement = match.replace(path, cdnBase + path);
+                  console.log('Replacing: ', match, ' with: ', replacement);
+                  return replacement;
+                } else {
+                  return match;
                 }
-                var replacement = match.replace(path, cdnBase + path);
-                console.log('Replacing: ', match, ' with: ', replacement);
-                return replacement;
               }
             }
           }]
