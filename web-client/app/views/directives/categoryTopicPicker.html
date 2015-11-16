@@ -57,7 +57,7 @@
                 ng-model="newTopic.title"
                 required
                 autofocus
-                placeholder="عنوان الموضوع"
+                placeholder="موضوع المقال"
               />
             </label>
             <div class="actions">
@@ -67,7 +67,20 @@
               </button>
             </div>
           </form>
-        </div>
+          <h1 class="header-label">
+            <span class="no-bg">المواضيع توضح تخصص المقال في الفئة المختارة. </span>
+          </h1>
+          <h1 class="header-label">
+            <span class="no-bg">مثال: اذا تم اختيار فئة الصحة، يمكن ان يكون الموضوع الذي يوضح تخصص المقال: </span>
+          </h1>
+          <h1 class="header-label">
+            <span>صحة القلب</span>
+            <span class="no-bg">أو </span>
+            <span>التغذية الصحية</span>
+            <span class="no-bg">أو </span>
+            <span>رياضة الجري</span>
+          </h1>
+        </li>
       </li>
       <li class="card topic" ng-click="selectTopic(topic)" ng-repeat="topic in topics">
         <div class="title">
