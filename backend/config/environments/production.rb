@@ -100,7 +100,7 @@ Rails.application.configure do
   # domain xhr requests.
   config.middleware.insert_before Warden::Manager, Rack::Cors do
     allow do
-      origins ENV['WEB_CLIENT_HOST']
+      origins ENV['CORS_ORIGINS'] || ENV['WEB_CLIENT_HOST']
       resource '*',
       :headers => :any,
       :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],

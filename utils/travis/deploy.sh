@@ -33,7 +33,7 @@ else
   sed '/web-client\/dist/d' .gitignore > .gitignore.new && mv .gitignore.new .gitignore
   # Sass gem is needed to build web client.
   sudo gem install sass
-  cd $MANSHAR_HOME/web-client/ && grunt && cd $MANSHAR_HOME
+  cd $MANSHAR_HOME/web-client/ && grunt --cdn-base=//d32rdl4awdotlf.cloudfront.net && cd $MANSHAR_HOME
   git add --all && git commit -a -m 'Deploying Web Client Dist...'
   yes | git push web-client-heroku `git subtree split --prefix web-client/dist tmp-deploy`:master --force
 

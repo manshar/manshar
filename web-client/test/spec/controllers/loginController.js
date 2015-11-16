@@ -42,7 +42,7 @@ describe('Controller: LoginCtrl', function () {
   describe('LoginCtrl.login', function () {
 
     it('should set error message when login fails', function () {
-      spyOn(LoginSrv, 'login').andCallFake(function(user, success, error) {
+      spyOn(LoginSrv, 'login').and.callFake(function(user, success, error) {
         error(errorMessages);
       });
 
