@@ -49,7 +49,7 @@ describe('Service: LoginService', function () {
       expect(LoginSrv.isAuthorized(isPublic)).toBe(true);
       expect(LoginSrv.isAuthorized(!isPublic)).toBe(false);
 
-      spyOn(LoginSrv, 'isLoggedIn').andReturn(true);
+      spyOn(LoginSrv, 'isLoggedIn').and.returnValue(true);
       expect(LoginSrv.isAuthorized(!isPublic)).toBe(true);
     });
   });

@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         constants: {
           ENV: 'development',
-          API_HOST: '<%= process.env.API_HOST || "localhost:3000" %>',
+          API_HOST: '<%= grunt.option("api-host") || process.env.API_HOST || "localhost:3000" %>',
           GA_TRACKING_ID: 'UA-XXXXXXXX-X'
         }
       },
