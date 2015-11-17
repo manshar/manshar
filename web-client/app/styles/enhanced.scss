@@ -206,9 +206,10 @@ body {
   .form-div {
     display: block;
     width: auto;
+    text-align: right;
+    padding-bottom: 1em;
 
     form {
-      padding: 5px 0;
       display: block;
 
       label {
@@ -303,7 +304,7 @@ body {
     }
 
     &.new-topic {
-      width: 400px;
+      width: 500px;
       padding: 0.3em 0.8em;
     }
   }
@@ -353,7 +354,7 @@ body {
       width: 60%;
       margin: 0 auto;
     }
-  } 
+  }
 
   .main-header {
     .hero-unit {
