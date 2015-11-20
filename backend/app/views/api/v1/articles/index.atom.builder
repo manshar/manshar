@@ -3,7 +3,7 @@ atom_feed({:language => 'ar', 'xml:base' => "http://#{ENV['WEB_CLIENT_HOST']}" }
   feed.title("منشر - منصة النشر العربية")
   #TODO (mjalajel) Add representative title/subtitle for the feed (POPULAR/LATEST/CATEGORY_NAME/TOPIC_NAME/USER_NAME)
   #feed.subtitle("")
-  feed.updated(@articles[0].created_at) if @articles.length > 0
+  feed.updated(@articles.first.created_at) if @articles.length > 0
   feed.icon('/images/manshar@64x64.png')
 
   feed.author do |author|
