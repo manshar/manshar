@@ -48,6 +48,13 @@ Rails.application.routes.draw do
     end
 
     root 'api/v1/articles#index'
+
+    #feeds are avaiable in RSS and Atom formats (defaults to Atom) (example: /feed/popular.atom /feed/popular.rss)
+    get 'feed/popular', to: 'api/v1/articles#index', defaults: {order: 'popular', format:'atom'}, as: :popular_feed
+    get 'feed/latest', to: 'api/v1/articles#index', defaults: {order: 'recents', format:'atom'}, as: :recents_feed
+    get 'feed/category/:category_id', to: 'api/v1/articles#index', defaults: {order: 'recents', format:'atom'}, as: :category_feed
+    get 'feed/topic/:topic_id', to: 'api/v1/articles#index', defaults: {order: 'recents', format:'atom'}, as: :topic_feed
+    get 'feed/user/:user_id', to: 'api/v1/users_articles#index', defaults: {format:'atom'}, as: :user_feed
   end
 
 end
