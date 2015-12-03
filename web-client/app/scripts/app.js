@@ -211,8 +211,6 @@ angular.module('webClientApp', [
    */
   .config(['$httpProvider', '$locationProvider', function ($httpProvider, $locationProvider) {
     $httpProvider.interceptors.push('unAuthenticatedInterceptor');
-    $httpProvider.defaults.headers.common['Accept-Encoding'] = 'gzip';
-
     $locationProvider.html5Mode(true).hashPrefix('!');
   }])
   /**

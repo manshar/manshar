@@ -33,7 +33,7 @@ Dragonfly.app.configure do
     datastore :memory
   elsif Rails.env == 'production'
     if not ENV["CDN_DOMAIN"].nil? and ENV["CDN_DOMAIN"].empty?
-     url_host 'http://#{ENV["CDN_DOMAIN"]}' if ENV["CDN_DOMAIN"]
+     url_host 'https://#{ENV["CDN_DOMAIN"]}' if ENV["CDN_DOMAIN"]
     end
     datastore :s3,
       bucket_name: ENV['S3_BUCKET_NAME'],
