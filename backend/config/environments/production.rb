@@ -98,13 +98,13 @@ Rails.application.configure do
 
   # Allow Cross-Origin Resource Sharing header to allow cross
   # domain xhr requests.
-  config.middleware.insert_before Warden::Manager, Rack::Cors do
+  config.middleware.insert_before 0, "Rack::Cors" do
     allow do
-      origins ENV['CORS_ORIGINS'] || ENV['WEB_CLIENT_HOST']
+      origins ENV['CORS_ORIGINS'] || ENV['WEB_CLIENT_HOST'] || ''
       resource '*',
-      :headers => :any,
-      :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-      :methods => [:get, :delete, :post, :put, :options]
+        :headers => :any,
+        :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+        :methods => [:get, :delete, :post, :put, :options, :head, :patch]
     end
   end
 end
