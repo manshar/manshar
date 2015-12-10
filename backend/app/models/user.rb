@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   acts_as_messageable
 
   has_many :articles, dependent: :destroy
+  has_many :total_stats, dependent: :destroy
   has_many :images, dependent: :destroy
   has_many :recommendations, dependent: :destroy
   has_many :comments, dependent: :destroy

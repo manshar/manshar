@@ -1689,6 +1689,43 @@ form.article-edit-form {
   color: #b3b3b3;
 }
 
+.stats-container {
+  padding: 0 2em 4em;
+
+  .stats-dashboard {
+    border: 1px solid #F9F9F9;
+    cursor: default;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0 auto;
+    li {
+      display: inline-block;
+      vertical-align: top;
+      width: 18.5%;
+      padding: 1em;
+      box-sizing: border-box;
+
+      a {
+        display: block;
+        font-size: 11px;
+        color: #9a9a9a;
+      }
+    }
+  }
+
+  .stats-header {
+    background-color: #F9F9F9;
+    font-weight: 700;
+  }
+
+  .row {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
 
 // Blinking cursor.
 @keyframes blink {

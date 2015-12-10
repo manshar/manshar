@@ -127,6 +127,13 @@ angular.module('webClientApp', [
         resolve: checkAccess
       })
 
+      .when('/profiles/:userId/dashboard', {
+        templateUrl: 'views/dashboard/show.html',
+        controller: 'UserDashboardCtrl',
+        isPublic: false,
+        resolve: checkAccess
+      })
+
       .when('/categories/:categoryId', {
         templateUrl: 'views/categories/show.html',
         controller: 'CategoryCtrl',

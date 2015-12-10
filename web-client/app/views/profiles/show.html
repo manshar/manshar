@@ -16,11 +16,12 @@
     <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>
     <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>
     <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>
+    <a ng-click="loadArticlesStats()" ng-class="{'active': activeTab == 'stats'}" ng-show="user.id == profile.id" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
   </div>
 </div>
 
 
-<div class="profile-list">
+<div class="profile-list" ng-hide="activeTab == 'stats'">
   <a href="/articles/new" class="write-new-button" ng-show="user.id == profile.id">
     <i class="fa fa-pencil"></i>
     اكتب مقال جديد
@@ -37,6 +38,27 @@
 
   <div ng-include="'views/partials/_articles_list.html'"></div>
 
+</div>
+
+<div class="stats-container one-column" ng-show="stats && user.id == profile.id && activeTab == 'stats'">
+  <div class="stats-dashboard">
+    <ul class="stats-header row">
+      <li> العنوان </li>
+      <li> المشاهدات </li>
+      <li> القراءات </li>
+      <li> التعليقات </li>
+      <li> التوصيات </li>
+    </ul>
+    <ul ng-repeat="stat in stats" class="row">
+      <li> {{stat.article_title}}
+        <a ng-href="{{$location.host() + 'articles/' + stat.article_id}}">رابط للمقال</a>
+      </li>
+      <li> {{stat.page_views_count}} </li>
+      <li> {{stat.reads_count}} </li>
+      <li> {{stat.comments_count}} </li>
+      <li> {{stat.recommendations_count}} </li>
+    </ul>
+  </div>
 </div>
 
 <ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
