@@ -44,7 +44,7 @@ angular.module('webClientApp')
       $location.path('/articles/' + articleId);
     };
 
-    $scope.orderArticles = function (order) {
+    $scope.orderArticles = function (order, klass) {
       page = 1;
       $scope.activeTab = order;
       $scope.articles = [{ loading: true }, { loading: true },
@@ -54,6 +54,7 @@ angular.module('webClientApp')
         $scope.articles = articles;
         $scope.hasNext = true;
       });
+      $(".listing-types-tabs i").removeClass().addClass("circle-icon fa fa-"+klass);
     };
 
     $scope.selectTab = function(tab) {

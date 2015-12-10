@@ -1077,3 +1077,24 @@ h1, h2, h3 {
   border-top: 12px solid #fff;
   border-radius: 4px;
 }
+
+#typed-cursor {
+  position: absolute;
+  top: 20px;
+  font-weight: 100;
+  font-size: 5.5em;
+  width: 8px;
+  overflow: hidden;
+  &.blinking {
+    animation: 1s blink step-end infinite;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: black;
+  }
+}

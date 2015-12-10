@@ -1,9 +1,9 @@
 <div class="listing-types-tabs">
   <div class="section-title">
     <i class="circle-icon fa fa-line-chart"></i>
-    <a href="#" class="active"> الأكثر شعبية </a> .
-    <a href="#"> الأفضل </a> .
-    <a href="#"> الأحدث </a>
+    <a ng-click="orderArticles('popular','line-chart')" ng-class="{'active': activeTab == 'popular'}"> الأكثر شعبية </a> .
+    <a ng-click="orderArticles('best','thumbs-o-up')" ng-class="{'active': activeTab == 'best'}"> الأفضل </a> .
+    <a ng-click="orderArticles('recents','clock-o')" ng-class="{'active': activeTab == 'recents'}"> الأحدث </a>
   </div>
 </div>
 
