@@ -1,4 +1,4 @@
-<header class="main-header">
+<!-- <header class="main-header">
   <div class="hero-unit tray">
     <span id="typed-cursor" class="blinking">|</span>
     <h1 ng-click="newArticle()"
@@ -67,12 +67,71 @@
       </div>
     </div>
   </li>
-</ul>
+</ul> -->
 
-<div class="metabar tray">
+
+  <div class="menu-icon icon fa fa-bars"></div>
+
+  <header>
+    <div class="header-content">
+      <div class="container">
+        <div class="row clearfix">
+          <div class="pull-right">
+            <i class="logo-square"></i><i class="to-top"></i>
+          </div>
+          <div class="listing-types-tabs">
+            <div class="section-title"> <i></i>
+              <a href="#" class="active"> الأكثر شعبية </a> .
+              <a href="#"> الأفضل </a> .
+              <a href="#"> الأحدث </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-icons">
+        <i>m</i>
+        <i>w</i>
+      </div>
+    </div>
+  </header>
+
+  <div class="container content-container"> <!-- 700px centered -->
+
+    <div class="row clearfix">
+      <div class="logo">
+        <div>منشر</div>
+        <p>منصة النشر العربية</p>
+      </div>
+
+      <div class="content-wrapper">
+
+        <div class="write-box">
+          <p> أكتب هنا... </p>
+        </div>
+
+        
+        <div ng-include="'views/partials/_articles_list.html'"></div>
+
+        <div class="categories-section section" ng-include="'views/partials/_categories_grid.html'"></div>
+
+        <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
+
+
+        <div class="more-articles section">
+          <h3 class="section-title"> <i class="circle-icon fa fa-refresh"></i> </h3>
+
+        </div> <!-- more-articles -->
+
+      </div> <!-- .content-wrapper -->
+
+    </div> <!-- row -->
+  </div> <!-- content-container -->
+
+
+<!-- <div class="metabar tray">
   <button ng-click="newArticle()" class="action-button"
       analytics-on="click"
       analytics-event="click"
       analytics-category="UI"
       analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
-</div>
+</div> -->

@@ -27,7 +27,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/grande.js/css/editor.css">
+        <!-- <link rel="stylesheet" href="bower_components/grande.js/css/editor.css"> -->
         <link rel="stylesheet" href="bower_components/grande.js/css/menu.css">
         <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
         <!-- endbuild -->
@@ -47,14 +47,14 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <div data-category-topic-picker></div>
+    <!-- <div data-category-topic-picker></div> -->
     <!-- Site Nav -->
-    <nav class="site-nav" ng-class="{'force-bar': forceBar, 'move-up': forceBar && moveUp}">
+    <!-- <nav class="site-nav" ng-class="{'force-bar': forceBar, 'move-up': forceBar && moveUp}">
       <a href="/" class="site-nav-logo" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon">
           <img src="/images/manshar@64x64.png" width="32px" height="32px"/>
-      </a>
+      </a> -->
       <!-- User Menu -->
-      <div class="profile-badge">
+      <!-- <div class="profile-badge">
         <a class="new-button" href="/articles/new" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
           مقال جديد
         </a>
@@ -90,10 +90,40 @@
         </div>
       </div>
     </nav>
+    
+    <div data-login-modal ng-if="!isLoginPage && !isSignupPage"></div> -->
 
-    <div data-login-modal ng-if="!isLoginPage && !isSignupPage"></div>
+    <!-- side menu -->
+    <div class="menu-wrapper">
+      <ul class="user-menu with-border">
+        <li> <a href="#"><i class="profile-photo"></i>مراد طليب </a></li>
+        <li> <a href="#"><i></i>كتابة مقال</a> </li>
+        <li> <a href="#"><i></i>المسودات </a></li>
+        <li> <a href="#"><i></i>المحفوظات </a></li>
+        <li> <a href="#"><i></i>التوصيات </a></li>
+      </ul>
+
+      <ul class="categories-menu with-border">
+        <li class="cat1"> <a href="#"><i></i>صحة ورياضة</a> </li>
+        <li class="cat2"> <a href="#"><i></i>علوم وتكنولوجيا</a> </li>
+        <li class="cat3"> <a href="#"><i></i>إعلام وتسويق</a> </li>
+        <li class="cat4"> <a href="#"><i></i>سياسة ومجتمع</a> </li>
+        <li class="cat5"> <a href="#"><i></i>فن وأدب</a> </li>
+        <li class="cat6"> <a href="#"><i></i>مال وأعمال</a> </li>
+        <li class="cat7"> <a href="#"><i></i>الناشرون</a> </li>
+      </ul>
+
+      <ul>
+        <li> <a href="#"><i></i>قصة منشر</a> </li>
+        <li> <a href="#"><i></i>شروط الاستخدام</a> </li>
+        <li> <a href="#"><i></i>المسودات</a> </li>
+        <li> <a href="#"><i></i>تابعنا</a> </li>
+        <li> <a href="#"><i></i>ساهم بتطوير المنصة</a> </li>
+      </ul>
+    </div>
+
     <!-- Add your site or application content here -->
-    <div class="container page" ng-view></div>
+    <div class="body-wrapper" ng-view></div>
     <!-- Google Analytics: Configured in app.js run block. -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -123,6 +153,7 @@
         <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
 
         <script src="scripts/app.js"></script>
+        <script src="scripts/main.js"></script>
         <script src="scripts/appConfig.js"></script>
         <script src="scripts/cachedTemplates.js"></script>
 

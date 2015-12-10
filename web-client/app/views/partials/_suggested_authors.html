@@ -1,0 +1,20 @@
+<h3 class="section-title"> <i class="circle-icon fa fa-group"></i>الناشرون</h3>
+
+<div class="clearfix">
+  <div class="author-block block" ng-repeat="user in publishers">
+    <a ng-href=\"/profiles/{{user.id}}\">
+      <div class="dimmer"></div>
+      <div class="cover" data-manshar-cover url="{{user.thumb_url}}"></div>
+      <span ng-show="user.published_articles_count">
+        <i class="fa fa-edit"></i> {{user.published_articles_count}}
+      </span>
+      <p> {{user.name}} </p>
+    </a>
+  </div>
+  
+  <div class="author-block block">
+    <div class="dimmer"></div>
+    <span> 50 <i class="fa fa-group"></i> </span>
+    <p> الكل </p>
+  </div>
+</div>
