@@ -109,6 +109,14 @@
           <p> أكتب هنا... </p>
         </div>
 
+        <div class="listing-types-tabs">
+          <div class="section-title">
+            <i class="circle-icon fa fa-line-chart"></i>
+            <a ng-click="orderArticles('popular','line-chart')" ng-class="{'active': activeTab == 'popular'}"> الأكثر شعبية </a> .
+            <a ng-click="orderArticles('best','thumbs-o-up')" ng-class="{'active': activeTab == 'best'}"> الأفضل </a> .
+            <a ng-click="orderArticles('recents','clock-o')" ng-class="{'active': activeTab == 'recents'}"> الأحدث </a>
+          </div>
+        </div>
         
         <div ng-include="'views/partials/_articles_list.html'"></div>
 

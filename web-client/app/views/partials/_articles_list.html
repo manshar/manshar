@@ -1,15 +1,6 @@
-<div class="listing-types-tabs">
-  <div class="section-title">
-    <i class="circle-icon fa fa-line-chart"></i>
-    <a ng-click="orderArticles('popular','line-chart')" ng-class="{'active': activeTab == 'popular'}"> الأكثر شعبية </a> .
-    <a ng-click="orderArticles('best','thumbs-o-up')" ng-class="{'active': activeTab == 'best'}"> الأفضل </a> .
-    <a ng-click="orderArticles('recents','clock-o')" ng-class="{'active': activeTab == 'recents'}"> الأحدث </a>
-  </div>
-</div>
-
 <div class="articles">
 
-  <div ng-repeat="article in articles" class="article" ng-class="{'loading': article.loading, 'blinking': article.loading}" style="border-right: 1px solid {getCardColor(article.topic.category.color)}}">
+  <div ng-repeat="article in articles" class="article" ng-class="{'loading': article.loading, 'blinking': article.loading}" style="border-right: 1px solid {getCardColor(article.topic.category.color)}">
     
     <span class="reading-time" ng-hide="article.loading">{{article.reading_time | timeToRead }}</span>
     <div class="title">

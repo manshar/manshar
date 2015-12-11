@@ -830,6 +830,9 @@ h1, h2, h3 {
     position: relative;
     top: 2px;
   }
+  div {
+    display: inline-block;
+  }
 }
 
 .listing-types-tabs i {
@@ -865,14 +868,21 @@ h1, h2, h3 {
    margin: 15px 0;
   }
 }
+  .recommendation-count {
+    position: absolute;
+    right: -40px;
+    text-align: left;
+    width: 36px;
+    line-height: 26px;
+  }
   .full-width-photo {
     margin-left: -100%;
     margin-right: -100%;
     padding-left: 100%;
     padding-right: 100%;
-    background-image: url("../images/cover.jpg");
-    background-size: cover;
-    background-position: 50% 0;
+    // background-image: url("../images/cover.jpg");
+    // background-size: cover;
+    // background-position: 50% 0;
     height: 600px;
     position: relative;
   }
@@ -902,8 +912,9 @@ h1, h2, h3 {
     min-height: 99px;
     h3 {
       font-size: 14px;
+      display: inline;
     }
-    p {
+    p, div {
       font-size: 12px;
       margin-bottom: 20px;
     }

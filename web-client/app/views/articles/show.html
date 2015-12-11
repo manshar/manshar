@@ -1,113 +1,107 @@
-<header class="article-header" ng-class="{'nocover': !article.cover_url}">
-  <div class="cover-image" manshar-cover url="{{article.cover_url}}">
-  </div>
-  <div class="dimmer" ng-show="article.cover_url"></div>
+<div class="body-wrapper article-page">
 
-  <div class="title tray">
-    <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }}
-    </span>
-    <h1>{{article.title}}</h1>
-    <h2>{{article.tagline}}</h2>
-  </div>
-</header>
+  <div class="menu-icon"></div>
 
-<div class="manshar-article">
-  <div class="article-container tray">
-    <article id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code>
-    </article>
-
-    <div anchored-comments
-        article="article"
-        guid-elements-container-id="article-body"
-        class="comments-container">
-    </div>
-
-    <div class="article-meta card-list" ng-hide="article.loading">
-      <div class="meta-box" ng-show="article.topic">
-        <h1 class="header-label">
-          <span>نشرت في</span>
-        </h1>
-        <div class="meta-details card topic" style="background-color: {{article.topic.category.color}}">
-          <a class="meta-thumb" ng-href="/categories/{{article.topic.category.id}}">
-            <img ng-src="{{article.topic.category.image_thumb_url}}" />
-          </a>
-          <div class="meta-text">
-            <div class="meta-name">
-              <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
-                <h3>{{article.topic.title}}</h3>
-              </a>
-            </div>
-            <div class="meta-more">
-              <a ng-href="/categories/{{article.topic.category.id}}">
-                {{article.topic.category.title}}
-              </a>
-            </div>
+  <header>
+    <div class="header-content">
+      <div class="container">
+        <div class="row clearfix">
+          <div class="pull-right"> 
+            <i class="logo-square"></i><i class="to-top"></i>
           </div>
         </div>
       </div>
+      <div class="header-icons">
+        <i>m</i>
+        <i>w</i>
+      </div>
+    </div>
+  </header>
 
-      <div class="meta-box">
-        <h1 class="header-label">
-          <span>بقلم</span>
-        </h1>
-        <div class="meta-details card">
+  <div class="container content-container">
+
+    <div class="row clearfix">
+      <div class="logo">
+        <div>منشر</div>
+        <p>منصة النشر العربية</p>
+      </div>
+      
+      <div class="content-wrapper">
+
+        <div class="single-article">
+
+          <div class="cover-image full-width-photo cover" manshar-cover url="{{article.cover_url}}" ng-show="article.cover_url"></div>
+          <div class="dimmer" ng-show="article.cover_url"></div>
+
+          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }}</span>
+          <h1>{{article.title}}</h1>
+          <h2>{{article.tagline}}</h2>
+
+          <div class="manshar-article">
+            <div class="article-container tray">
+              
+              <article id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code>
+              </article>
+
+              <div anchored-comments
+                  article="article"
+                  guid-elements-container-id="article-body"
+                  class="comments-container">
+              </div>
+
+            </div>
+          </div>
+
+          
+
+        </div> <!-- single-article -->
+
+        <div class="article-author" style="border-right: 1px solid {{getCardColor(article.topic.category.color)}}">
           <a class="meta-thumb" ng-href="/profiles/{{article.user.id}}">
             <img ng-src="{{article.user.thumb_url}}" />
           </a>
-          <div class="meta-text">
-            <div class="meta-name">
-              <a ng-href="/profiles/{{article.user.id}}">
-                <h3>{{article.user.name || 'غير معروف'}}</h3>
-              </a>
-            </div>
-            <div class="meta-more">
-              {{article.published_at | date:'fullDate'}}
-            </div>
+          
+          <a ng-href="/profiles/{{article.user.id}}">
+            <h3>{{article.user.name || 'غير معروف'}}</h3>
+          </a>
+          
+          <p>{{article.user.bio || 'غير معروف'}}</p>
+          
+          <div>
+            <span>نشرت في</span>
+            <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
+              <h3>{{article.topic.title || 'غير محدد'}}</h3></a>,
+            <span>{{article.published_at | date:'fullDate'}}</span>
           </div>
+        
         </div>
+
+        <div class="article-share section" ng-hide="article.loading">
+          <p class="action-button recommend-button long-form" recommend-button article="article"
+              analytics-on="click"
+              analytics-event="click"
+              analytics-category="UI"
+              analytics-label="Recommend Button in Article Page - {{article.title}}"
+              analytics-value="recommend-{{article.id}}">
+          </p>
+
+          <h3 class="section-title"> <i></i>
+            <div ng-include="'views/partials/_sharing_buttons.html'" ng-hide="article.loading">
+            </div>
+          </h3>
+        </div>
+
+        <div class="articles">
+
+          <h3 class="section-title"> <i></i>اقرأ أيضاً</h3>
+
+          <div ng-include="'views/partials/_articles_list.html'"></div>
+
+        </div> <!-- .articles -->
+
       </div>
     </div>
 
-    <div class="article-actions" ng-hide="article.loading">
-      <button class="action-button recommend-button long-form" recommend-button article="article"
-          analytics-on="click"
-          analytics-event="click"
-          analytics-category="UI"
-          analytics-label="Recommend Button in Article Page - {{article.title}}"
-          analytics-value="recommend-{{article.id}}">
-      </button>
-    </div>
+  </div> <!-- content-container -->
 
-    <div ng-include="'views/partials/_sharing_buttons.html'" ng-hide="article.loading">
-    </div>
 </div>
-
-
-
-<div class="next-article-container" ng-show="article.next.id">
-  <a href="/articles/{{article.next.id}}">
-    <div class="manshar-article-image-container card" manshar-cover url="{{article.next.original_cover_url}}" ng-class="{'manshar-article-nocover': !article.next.original_cover_url}">
-      <div class="dimmer" ng-show="article.next.original_cover_url"></div>
-      <div class="manshar-article-header tray header">
-        <h5>اقرأ أيضاً</h5>
-        <span class="reading-time" ng-hide="article.loading"> {{article.next.reading_time | timeToRead }} </span>
-        <div class="title">
-          <h1>{{article.next.title}}</h1>
-          <h2>{{article.next.tagline}}</h2>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="metabar tray">
-  <div class="manshar-controls">
-    <button class="action-button" ng-click="editArticle(article.id)" ng-show="isOwner(user, article)">
-      <i class="fa fa-pencil"></i>
-    </button>
-  </div>
-</div>
-
-
-
-
