@@ -1,5 +1,5 @@
 <h3 class="section-title recommendation-button">
-  <span class="recommendation-count count" ng-hide="article.recommendations_count == 10">{{article.recommendations_count}}</span>
+  <span class="recommendation-count count" ng-hide="article.recommendations_count == 0">{{article.recommendations_count}}</span>
   <i class="circle-icon fa" ng-class="{'fa-thumbs-o-up': !isRecommended, 'fa-thumbs-up': isRecommended}"></i>
   <span class="label" ng-hide="isRecommended">قدم توصية</span>
   <span class="label" ng-show="isRecommended">تمت التوصية</span>

@@ -868,13 +868,30 @@ h1, h2, h3 {
    margin: 15px 0;
   }
 }
+.recommendation-button {
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    color: #ca1504;
+    i {
+      transform: scale(1.4);
+    }
+  }
   .recommendation-count {
     position: absolute;
     right: -40px;
     text-align: left;
     width: 36px;
-    line-height: 26px;
+    line-height: 34px;
+    color: #ca1504;
+    font-size: 18px;
   }
+}
+.sharing-box {
+  i:hover {
+    transform: scale(1.4);
+  }
+}
   .full-width-photo {
     margin-left: -100%;
     margin-right: -100%;
@@ -904,7 +921,6 @@ h1, h2, h3 {
 
   .article-author {
     padding: 0 15px;
-    border-right: 1px solid red;
     position: relative;
     right: -1px;
     color: #aaa;
