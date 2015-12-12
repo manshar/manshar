@@ -36,6 +36,9 @@ $(document).ready(function(){
 
     if(offset > 66) {
     	$("header").css("top", "0");
+      if($(".content-wrapper .listing-types-tabs").length > 0) {
+        $("header .listing-types-tabs").html($(".content-wrapper .listing-types-tabs").html());
+      } 
     } else {
     	$("header").css("top", "-48px");
     }
