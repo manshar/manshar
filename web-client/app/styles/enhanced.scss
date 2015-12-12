@@ -421,6 +421,8 @@
 //
 // }
 
+$red: #ca1504;
+
 html {
   direction: rtl;
   /*height: 100%;*/
@@ -461,8 +463,17 @@ header {
     display: inline-block;
     width: 30px;
     height: 30px;
-    background: red;
     vertical-align: top;
+  }
+  .icon {
+    font-size: 18px;
+    cursor: pointer;
+    &:before {
+      line-height: 32px;
+    }
+    &:hover {
+      color: $red;
+    }
   }
   .listing-types-tabs, .section-title {
     margin: 4px 0;

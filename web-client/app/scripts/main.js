@@ -3,7 +3,7 @@ $(document).ready(function(){
 
   var menuStatus = "closed";
 
-  $(".menu-icon").click(function(){
+  $(".menu-icon, .menu").click(function(){
     if(menuStatus === "closed") {
       $(".body-wrapper, header").css("left","150px");
       menuStatus = "opened";
@@ -11,12 +11,6 @@ $(document).ready(function(){
       $(".body-wrapper, header").css("left","0px");
       menuStatus = "closed";
     }
-  });
-
-  // just for test
-  $(".container").click(function(){
-    
-    // $(".menu-wrapper").css("left",0);
   });
 
   // show comments
