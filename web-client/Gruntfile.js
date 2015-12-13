@@ -105,7 +105,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        protocol: 'https',
+        protocol: 'http',
         key: grunt.file.read('utils/dev/certs/server.key').toString(),
         cert: grunt.file.read('utils/dev/certs/server.crt').toString(),
         ca: grunt.file.read('utils/dev/certs/ca.crt').toString(),

@@ -2,6 +2,7 @@ class Article < ActiveRecord::Base
   include Concerns::Utils
   paginates_per 15
 
+  has_one :total_stat
   belongs_to :user
   belongs_to :topic
   belongs_to :category
