@@ -43,6 +43,7 @@ Rails.application.routes.draw do
         scope '/me' do
           match :drafts, to: 'users_articles#drafts', via: [:get, :options]
           match :articles, to: 'users_articles#index', via: [:get, :options]
+          match :total_stats, to: 'total_stats#index', via: [:get, :options]
         end
       end
     end

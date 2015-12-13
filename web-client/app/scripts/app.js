@@ -196,8 +196,8 @@ angular.module('webClientApp', [
     $authProvider.configure({
       apiUrl: '//' + API_HOST,
       omniauthWindowType: 'newWindow',
-      confirmationSuccessUrl:  'http://' + window.location.host + '/login',
-      passwordResetSuccessUrl: ('http://' + window.location.host +
+      confirmationSuccessUrl:  '//' + window.location.host + '/login',
+      passwordResetSuccessUrl: ('//' + window.location.host +
                                 '/accounts/update_password'),
       authProviderPaths: {
         facebook: '/auth/facebook',
@@ -243,7 +243,7 @@ angular.module('webClientApp', [
       ga('create', GA_TRACKING_ID);
     }
 
-    $rootScope.linkPrefix = 'http://' + document.location.host;
+    $rootScope.linkPrefix = '//' + document.location.host;
 
     /**
      * Holds data about page-wide attributes. Like pages title.
@@ -251,7 +251,7 @@ angular.module('webClientApp', [
     $rootScope.page = {
       title: 'منصة النشر العربية',
       description: 'منصة نشر متخصصة باللغة العربية مفتوحة المصدر',
-      image: 'http://' + document.location.host + '/images/manshar@200x200.png'
+      image: '//' + document.location.host + '/images/manshar@200x200.png'
     };
 
     /**
