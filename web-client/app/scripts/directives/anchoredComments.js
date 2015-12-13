@@ -41,7 +41,7 @@ angular.module('webClientApp')
     var showAnchor = function(e, guidAttribute) {
       // Some elements (like img inside figure) won't have guid. So rely on
       // their parent guids.
-      var guidElement = getAncestorWithGuid(e.target, guidAttribute);
+      var guidElement = getAncestorWithGuid(e.currentTarget, guidAttribute);
       var guid = guidElement.getAttribute(guidAttribute);
       $rootScope.$emit('show-anchor', guid);
     };
@@ -66,7 +66,7 @@ angular.module('webClientApp')
       commentEl.setAttribute('anchored-comment', '');
       commentEl.setAttribute('guid', guid);
       commentEl.className = 'anchored-comment-box';
-      commentEl.style.top = (srcElement.offsetTop) + 'px';
+      commentEl.style.top = (srcElement.offsetTop + offsetTop) + 'px';
       $compile(commentEl)(scope);
       container.appendChild(commentEl);
 
@@ -84,7 +84,7 @@ angular.module('webClientApp')
      * Recalculate the positions of the comments.
      * @param  {HTMLElement} container Element that contains the anchors.
      */
-    var repositionComments = function(container, guidAttribute) {
+    var repositionComments = function(container, offsetTop, guidAttribute) {
       var comments = container.getElementsByClassName('anchored-comment-box');
       for (var i = 0; i < comments.length; i++) {
         var guid = comments[i].getAttribute('guid');
@@ -92,7 +92,7 @@ angular.module('webClientApp')
           continue;
         }
         var srcElement = document.querySelector('['+guidAttribute+'="' + guid + '"]');
-        comments[i].style.top = srcElement.offsetTop + 'px';
+        comments[i].style.top = (srcElement.offsetTop + offsetTop) + 'px';
       }
     };
 
@@ -153,7 +153,8 @@ angular.module('webClientApp')
             var guidContainer = document.getElementById(
                 scope.guidElementsContainerId);
             angular.element(guidContainer).find('img').on('load', function() {
-              repositionComments(element[0], scope.guidAttribute);
+              repositionComments(
+                  element[0], guidContainer.offsetTop, scope.guidAttribute);
             });
 
 
@@ -168,10 +169,12 @@ angular.module('webClientApp')
             var elements = guidContainer.querySelectorAll(scope.selector);
 
             for (var i = 0; i < elements.length; i++) {
-              createNewComment(elements[i], scope, element[0], guidContainer.offsetTop, scope.guidAttribute);
+              createNewComment(
+                  elements[i], scope, element[0],
+                  guidContainer.offsetTop, scope.guidAttribute);
             }
 
-          }, 200);
+          }, 1000);
 
         });
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webClientApp')
-  .directive('grandeEditor', ['Image', function (Image) {
+  .directive('carbonEditor', ['Image', function (Image) {
     return {
       require: '?ngModel',
       restrict: 'A',
@@ -13,6 +13,7 @@ angular.module('webClientApp')
         ngModel.$render = function() {
           if (ngModel.$viewValue) {
             editor.loadJSON(JSON.parse(ngModel.$viewValue));
+            editor.render();
           }
         };
 
@@ -66,12 +67,25 @@ angular.module('webClientApp')
 
         var editor = new carbon.Editor(element[0], {
           modules: [
-            carbon.YouTubeComponent,
             carbon.GiphyComponent,
+            carbon.EmbeddedComponent,
           ],
           article: article,
           rtl: scope.rtl || true
         });
+
+        editor.install(carbon.EmbeddingExtension, {
+          embedProviders: carbon.Loader.load('embedProviders') || {
+            embedly: new carbon.EmbedlyProvider({
+              apiKey: '46c6ad376b1343359d774c5d8a940db7'
+            }),
+            carbon: new carbon.CarbonEmbedProvider({
+            })
+          },
+          ComponentClass: carbon.EmbeddedComponent
+        });
+        editor.install(carbon.SelfieExtension);
+        editor.render();
 
         editor.addEventListener('change', function() {
           scope.$evalAsync(read);
@@ -82,11 +96,36 @@ angular.module('webClientApp')
 
         editor.addEventListener('attachment-added', function(event) {
           var attachment = event.detail.attachment;
-          uploadFile(attachment.file, function(src) {
-            attachment.setAttributes({
-              src: src
+          if (attachment.file) {
+            uploadFile(attachment.file, function(src) {
+              attachment.setAttributes({
+                src: src
+              });
             });
-          });
+          } else if (attachment.dataUri) {
+            var dataUri = attachment.dataUri;
+            var timestamp = (new Date()).getTime();
+            var name = 'selfie-' + timestamp;
+            var imageFormat = '';
+            var match = dataUri.match(/^data\:image\/(\w+)/);
+            if (match) {
+              imageFormat = match[1];
+            } else {
+              throw 'Cannot locate image format in Data URI';
+            }
+            // extract raw base64 data from Data URI
+            var rawImageData = dataUri.replace(
+                /^data\:image\/\w+\;base64\,/, '');
+            var blob = new Blob(
+                [Webcam.base64DecToArr(rawImageData)],
+                {type: 'image/'+imageFormat, name: name});
+            blob.name = name;
+            uploadFile(blob, function(src) {
+              attachment.setAttributes({
+                src: src
+              });
+            });
+          }
         });
 
         read(); // initialize

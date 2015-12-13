@@ -8,8 +8,8 @@ backend:
   environment:
     RACK_ENV: development
     PORT: 80
-    API_HOST: dockerhost:3000
-    WEB_CLIENT_HOST: dockerhost:9000
+    API_HOST: manshar.host:3000
+    WEB_CLIENT_HOST: manshar.host:9000
     SECRET_TOKEN: a59d98c49d5a9b6ccf7e14cc35cb005e1ba9ab6656070e4c05e5df95d07afd44f98fd48552a68ac83e6dc3440691db011ef635c0c1a74102964686e7d51f3bf3
     DRAGONFLY_SECRET: c2jq0a9cj039jc01mamc09qjc930ur10fjafj0a9fj09fj23qnweocn0qwf0qfjq
     MANSHAR_DB_1_PORT_5432_TCP_ADDR: db
@@ -25,7 +25,7 @@ web:
   environment:
     NODE_ENV: development
     PORT: 9000
-    API_HOST: dockerhost:3000
+    API_HOST: manshar.host:3000
   volumes:
     - ./web-client/:/manshar-web-client
   ports:

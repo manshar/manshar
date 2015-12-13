@@ -24,6 +24,7 @@
     "ga": false,
     "hljs": false,
     "carbon": false,
-    "Imagezoom": false
+    "Imagezoom": false,
+    "Webcam": false
   }
 }
