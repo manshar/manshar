@@ -54,6 +54,9 @@ gem "persistize"
 # Helps with pagination for models.
 gem 'kaminari'
 
+# To communicate with Google APIs. Mainly for Analytics
+gem 'google-api-client'
+
 group :production do
   gem 'rails_12factor'
   gem 'puma'
@@ -64,6 +67,7 @@ group :production do
 end
 
 group :test, :development do
+  gem 'thin'
   gem 'spring'
   gem 'rspec-rails', '~> 3.1'
   # gem 'guard-rspec'

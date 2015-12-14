@@ -1,106 +1,131 @@
+<div class="menu-icon icon fa fa-bars closed"></div>
 
-
-  <div class="menu-icon icon fa fa-bars closed"></div>
-
-  <header>
-    <div class="header-content">
-      <div class="container">
-        <div class="row clearfix">
-          <div class="pull-right"> 
-            <i class="logo-square"></i><i class="to-top"></i>
-          </div>
+<header>
+  <div class="header-content">
+    <div class="container">
+      <div class="row clearfix">
+        <div class="pull-right">
+          <i class="logo-square"></i><i class="to-top"></i>
         </div>
       </div>
-      <div class="header-icons">
-        <i>m</i>
-        <i>w</i>
-      </div>
     </div>
-  </header>
+    <div class="header-icons">
+      <i>m</i>
+      <i>w</i>
+    </div>
+  </div>
+</header>
 
-  <div class="container content-container">
+<div class="container content-container">
+  <div class="row clearfix">
+    <div class="logo">
+      <div>منشر</div>
+      <p>منصة النشر العربية</p>
+    </div>
 
-    <div class="row clearfix">
-      <div class="logo">
-        <div>منشر</div>
-        <p>منصة النشر العربية</p>
-      </div>
-      
-      <div class="content-wrapper">
+    <div class="content-wrapper">
 
-        <div class="single-article">
-
-          <div class="cover-image full-width-photo cover" manshar-cover url="{{article.cover_url}}" ng-show="article.cover_url"></div>
-          <div class="dimmer" ng-show="article.cover_url"></div>
+      <div class="single-article">
+        <div ng-if="article.body" ng-class="{'nocover': !article.cover_url}">
+          <!-- Note: Legacy Article Rendering. -->
+          <!-- <div class="cover-image full-width-photo cover" manshar-cover url="{{article.cover_url}}" ng-show="article.cover_url"></div> -->
+          <!-- <div class="dimmer" ng-show="article.cover_url"></div> -->
 
           <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }}</span>
           <h1>{{article.title}}</h1>
           <h2>{{article.tagline}}</h2>
+        </div>
+        <!-- New article model read time -->
+        <div class="title tray" ng-if="article.json_model">
+          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }}
+          </span>
+        </div>
 
-          <div class="manshar-article">
-            <div class="article-container tray">
-              
-              <article id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code>
-              </article>
+        <div class="manshar-article">
+          <div class="article-container tray" ng-class="{'new-version': !!article.json_model}">
+            <article ng-if="article.body" id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code image-zoom>
+            </article>
 
-              <div anchored-comments
-                  article="article"
-                  guid-elements-container-id="article-body"
-                  class="comments-container">
-              </div>
+            <article
+              ng-if="article.json_model"
+              id="article-body"
+              article-renderer
+                ng-model="article.json_model"
+              image-zoom
+              highlight-code>
+            </article>
 
+            <div anchored-comments
+              article="article"
+              guid-elements-container-id="article-body"
+              guid-attribute="{{article.body ? 'data-guid' : 'name'}}"
+              selector="{{article.body ? '.guid-tagged' : 'section [name]'}}"
+              class="comments-container">
             </div>
           </div>
+        </div>
 
-          
+      </div> <!-- single-article -->
 
-        </div> <!-- single-article -->
+      <!-- TODO(mkhatib): Disable edits for legacy articles and display a note for
+       the owner of the article about the changes. -->
+      <div class="section-title">
+        <button class="action-button"
+          ng-click="editArticle(article.id)"
+          ng-show="isOwner(user, article)"
+          tooltips
+            tooltip-class="fixed-tooltip"
+            tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}">
+          <i class="fa fa-pencil"></i>
+        </button>
+      </div>
 
-        <div class="article-author" style="border-right: 1px solid {{getCardColor(article.topic.category.color)}}">
-          <a class="meta-thumb" ng-href="/profiles/{{article.user.id}}">
-            <img ng-src="{{article.user.thumb_url}}" />
-          </a>
-          
-          <a ng-href="/profiles/{{article.user.id}}">
-            <h3>{{article.user.name || 'غير معروف'}}</h3>
-          </a>
-          
-          <p>{{article.user.bio || 'غير معروف'}}</p>
-          
-          <div>
+      <div class="article-author" style="border-right: 1px solid {{getCardColor(article.topic.category.color)}}">
+        <a class="meta-thumb" ng-href="/profiles/{{article.user.id}}">
+          <img ng-src="{{article.user.thumb_url}}" />
+        </a>
+
+        <a ng-href="/profiles/{{article.user.id}}">
+          <h3>{{article.user.name || 'غير معروف'}}</h3>
+        </a>
+
+        <p>{{article.user.bio || 'غير معروف'}}</p>
+
+        <div>
+          <span ng-if="article.topic">
             <span>نشرت في</span>
-            <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
-              <h3>{{article.topic.title || 'غير محدد'}}</h3></a>,
-            <span>{{article.published_at | date:'fullDate'}}</span>
-          </div>
-        
+            <a ng-show="article.topic" ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
+              <h3>{{article.topic.title || 'غير محدد'}}</h3>
+            </a>،
+          </span>
+          <span>{{article.published_at | date:'fullDate'}}</span>
         </div>
-
-        <div class="article-share section" ng-hide="article.loading">
-          <p class="action-button recommend-button long-form" recommend-button article="article"
-              analytics-on="click"
-              analytics-event="click"
-              analytics-category="UI"
-              analytics-label="Recommend Button in Article Page - {{article.title}}"
-              analytics-value="recommend-{{article.id}}">
-          </p>
-
-          <h3 class="section-title"> <i></i>
-            <div ng-include="'views/partials/_sharing_buttons.html'" ng-hide="article.loading">
-            </div>
-          </h3>
-        </div>
-
-        <div class="articles">
-
-          <h3 class="section-title"> <i></i>اقرأ أيضاً</h3>
-
-          <div ng-include="'views/partials/_articles_list.html'"></div>
-
-        </div> <!-- .articles -->
 
       </div>
+
+      <div class="article-share section" ng-hide="article.loading">
+        <p class="action-button recommend-button long-form" recommend-button article="article"
+            analytics-on="click"
+            analytics-event="click"
+            analytics-category="UI"
+            analytics-label="Recommend Button in Article Page - {{article.title}}"
+            analytics-value="recommend-{{article.id}}">
+        </p>
+
+        <h3 class="section-title"> <i></i>
+          <div ng-include="'views/partials/_sharing_buttons.html'" ng-hide="article.loading">
+          </div>
+        </h3>
+      </div>
+
+      <div class="articles">
+
+        <h3 class="section-title"> <i></i>اقرأ أيضاً</h3>
+
+        <div ng-include="'views/partials/_articles_list.html'"></div>
+
+      </div> <!-- .articles -->
+
     </div>
-
-  </div> <!-- content-container -->
-
+  </div>
+</div> <!-- content-container -->

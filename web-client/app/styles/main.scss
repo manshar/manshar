@@ -1769,3 +1769,66 @@ a {
 //     background-color: rgba(0,0,0,.5);
 //     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 // }
+
+/**
+ * Override Carbon Toolbar Styling.
+ */
+body.manshar {
+  .editor-inline-toolbar {
+
+    .editor-toolbar-buttons {
+
+      &:after {
+        border-color: #CA1504 transparent transparent transparent;
+      }
+
+      .button-container {
+        button {
+          background-color: #CA1504;
+          color: #fff;
+          padding: 0.7em .8em;
+          font-size: 0.8em;
+          line-height: 1;
+
+          &:hover {
+            background-color: #8E0E02;
+          }
+        }
+
+        &.active  {
+          button {
+            background-color: #8E0E02;
+          }
+        }
+      }
+    }
+  }
+
+
+  .editor-block-toolbar {
+    .editor-toolbar-buttons {
+      button {
+        background-color: transparent;
+        padding: 0.3em 0.7em;
+        width: auto;
+
+        &:hover {
+          background-color: transparent;
+          color: #8E0E02;
+        };
+      }
+    }
+  }
+
+  .extra-fields-container {
+    top: -39px;
+  }
+
+  .editor-toolbar {
+    z-index: 99;
+
+    .extra-fields.active {
+      background-color: #8E0E02;
+    }
+  }
+}

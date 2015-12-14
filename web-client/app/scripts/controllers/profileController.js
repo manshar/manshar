@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'UserArticle', 'UserDraft', 'User','$analytics', '$window', 'Article', 'UserRecommendation', 'UserComment', 'UserLink',
-    function ($scope, $rootScope, $location, $routeParams, UserArticle, UserDraft, User, $analytics, $window, Article, UserRecommendation, UserComment, UserLink) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'UserArticle', 'UserDraft', 'User','$analytics', '$window', 'Article', 'UserRecommendation', 'UserComment', 'UserLink', 'ArticleStats',
+    function ($scope, $rootScope, $location, $routeParams, UserArticle, UserDraft, User, $analytics, $window, Article, UserRecommendation, UserComment, UserLink, ArticleStats) {
 
     User.get({'userId': $routeParams.userId}, function(resource) {
       /* jshint camelcase: false */
@@ -69,6 +69,15 @@ angular.module('webClientApp')
       });
     };
 
+    $scope.loadArticlesStats = function () {
+      $scope.activeTab = 'stats';
+
+      ArticleStats.query({}, function (stats) {
+        $scope.stats = stats;
+      });
+    };
+
+
     $scope.loadDiscussions = function() {
       $scope.activeTab = 'discussions';
       $scope.articles = [{ loading: true }, { loading: true },
@@ -89,6 +98,7 @@ angular.module('webClientApp')
         $scope.articles = articles;
       });
     };
+
 
     $scope.loadArticles = function() {
       $scope.articles = [{ loading: true }, { loading: true },
@@ -116,7 +126,7 @@ angular.module('webClientApp')
     $scope.getCardColor = function(color) {
       return color || '#C0C0C0';
     };
-    
+
     $scope.loadLinks();
     $scope.loadArticles();
 

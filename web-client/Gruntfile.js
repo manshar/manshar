@@ -105,8 +105,12 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
+        protocol: 'http',
+        key: grunt.file.read('utils/dev/certs/server.key').toString(),
+        cert: grunt.file.read('utils/dev/certs/server.crt').toString(),
+        ca: grunt.file.read('utils/dev/certs/ca.crt').toString(),
         port: grunt.option('port') || 9000,
-        hostname: '0.0.0.0',
+        hostname: grunt.option('host') || '0.0.0.0',
         livereload: 35729,
         middleware: function (connect, options) {
           var optBase = (typeof options.base === 'string') ? [options.base] : options.base,

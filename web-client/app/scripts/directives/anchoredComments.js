@@ -26,10 +26,10 @@ angular.module('webClientApp')
      * @param  {HTMLElement} element Element to start looking from.
      * @return {HTMLElement} The element or one of its ancestor that has a guid.
      */
-    var getAncestorWithGuid = function(element) {
-      var guid = element.getAttribute('data-guid');
+    var getAncestorWithGuid = function(element, guidAttribute) {
+      var guid = element.getAttribute(guidAttribute);
       if (!guid && element.parentNode) {
-        return getAncestorWithGuid(element.parentNode);
+        return getAncestorWithGuid(element.parentNode, guidAttribute);
       }
       return element;
     };
@@ -38,11 +38,11 @@ angular.module('webClientApp')
      * Broadcasts a 'show-anchor' event to show a specific anchor.
      * @param  {Event} e Mouse event.
      */
-    var showAnchor = function(e) {
+    var showAnchor = function(e, guidAttribute) {
       // Some elements (like img inside figure) won't have guid. So rely on
       // their parent guids.
-      var guidElement = getAncestorWithGuid(e.target);
-      var guid = guidElement.getAttribute('data-guid');
+      var guidElement = getAncestorWithGuid(e.currentTarget, guidAttribute);
+      var guid = guidElement.getAttribute(guidAttribute);
       $rootScope.$emit('show-anchor', guid);
     };
 
@@ -50,13 +50,17 @@ angular.module('webClientApp')
      * Creates a new comment anchor and adding them to container.
      * @param  {HTMLElement} srcElement Element to get the GUID from.
      */
-    var createNewComment = function(srcElement, scope, container, offsetTop) {
+    var createNewComment = function(srcElement, scope, container, offsetTop, guidAttribute) {
       // TODO(mkhatib): Maybe use another attribute rather than title
       // The reason I used title is Angular seems to be stripping any
       // data- attributes or id.
       var guid = srcElement.getAttribute('title');
-      srcElement.removeAttribute('title');
-      srcElement.setAttribute('data-guid', guid);
+      if (guid) {
+        srcElement.removeAttribute('title');
+        srcElement.setAttribute(guidAttribute, guid);
+      } else {
+        guid = srcElement.getAttribute(guidAttribute);
+      }
       // Enable comments anchors by adding anchored-comment directive to each.
       var commentEl = document.createElement('div');
       commentEl.setAttribute('anchored-comment', '');
@@ -67,7 +71,9 @@ angular.module('webClientApp')
       container.appendChild(commentEl);
 
       // Adding click and mouseover listeners to show anchor bubbles.
-      angular.element(srcElement).on('click mouseover', showAnchor);
+      angular.element(srcElement).on('click mouseover', function(event) {
+        showAnchor(event, guidAttribute);
+      });
       // Make sure to unbind events we binded to elements.
       angular.element(srcElement).on('$destroy', function() {
         angular.element(srcElement).off('click mouseover');
@@ -78,15 +84,15 @@ angular.module('webClientApp')
      * Recalculate the positions of the comments.
      * @param  {HTMLElement} container Element that contains the anchors.
      */
-    var repositionComments = function(container) {
+    var repositionComments = function(container, offsetTop, guidAttribute) {
       var comments = container.getElementsByClassName('anchored-comment-box');
       for (var i = 0; i < comments.length; i++) {
         var guid = comments[i].getAttribute('guid');
         if (!guid) {
           continue;
         }
-        var srcElement = document.querySelector('[data-guid="' + guid + '"]');
-        comments[i].style.top = srcElement.offsetTop + 'px';
+        var srcElement = document.querySelector('['+guidAttribute+'="' + guid + '"]');
+        comments[i].style.top = (srcElement.offsetTop + offsetTop) + 'px';
       }
     };
 
@@ -117,8 +123,9 @@ angular.module('webClientApp')
       restrict: 'A',
       scope: {
         article: '=',
-        guidElementsClass: '@',
-        guidElementsContainerId: '@'
+        selector: '@',
+        guidElementsContainerId: '@',
+        guidAttribute: '@'
       },
       link: function (scope, element) {
         var mainCommentBox = element.find('div')[0];
@@ -128,8 +135,8 @@ angular.module('webClientApp')
           scope.user = $rootScope.user;
         });
 
-        if (!scope.guidElementsClass) {
-          scope.guidElementsClass = 'guid-tagged';
+        if (!scope.selector) {
+          scope.selector = '.guid-tagged';
         }
 
         scope.$watch('article', function (newValue) {
@@ -146,7 +153,8 @@ angular.module('webClientApp')
             var guidContainer = document.getElementById(
                 scope.guidElementsContainerId);
             angular.element(guidContainer).find('img').on('load', function() {
-              repositionComments(element[0]);
+              repositionComments(
+                  element[0], guidContainer.offsetTop, scope.guidAttribute);
             });
 
 
@@ -158,13 +166,15 @@ angular.module('webClientApp')
             });
 
             // Loop over all elements with the GUID class.
-            var elements = document.getElementsByClassName(
-                scope.guidElementsClass);
+            var elements = guidContainer.querySelectorAll(scope.selector);
+
             for (var i = 0; i < elements.length; i++) {
-              createNewComment(elements[i], scope, element[0], guidContainer.offsetTop);
+              createNewComment(
+                  elements[i], scope, element[0],
+                  guidContainer.offsetTop, scope.guidAttribute);
             }
 
-          }, 200);
+          }, 1000);
 
         });
 
@@ -174,7 +184,7 @@ angular.module('webClientApp')
             clearHighlightedComment();
 
             // Highlight the element that is showing its comments.
-            var el = document.querySelector('[data-guid="' + data.guid + '"]');
+            var el = document.querySelector('['+scope.guidAttribute+'="' + data.guid + '"]');
             angular.element(el).addClass(COMMENT_HIGHLIGHT_CLASS);
             mainCommentBox.style.top = data.target.parentNode.offsetTop + 'px';
 

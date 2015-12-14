@@ -8,7 +8,12 @@ attributes :id, :title, :tagline, :published_at,
 # a lot of queries to be executed when listing articles.
 if not locals[:listing]
 
-  attributes :body, :created_at, :updated_at, :published, :hotness
+  attributes :json_model, :created_at, :updated_at, :published, :hotness
+
+  # Only serve body when json_model is empty
+  if not root_object.json_model
+    attributes :body
+  end
 
   attribute cover_abs_url: :original_cover_url
 

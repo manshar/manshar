@@ -18,7 +18,8 @@ angular.module('webClientApp', [
   'angularFileUpload',
   'angular-loading-bar',
   'ipCookie',
-  'ng-token-auth'
+  'ng-token-auth',
+  '720kb.tooltips'
 ])
   /**
    * Routing.
@@ -61,7 +62,7 @@ angular.module('webClientApp', [
         resolve: checkAccess
       })
 
-      .when('/login', {
+      .when('/login/?', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         title: 'تسجيل الدخول',
@@ -69,7 +70,7 @@ angular.module('webClientApp', [
         resolve: checkAccess
       })
 
-      .when('/signup', {
+      .when('/signup/?', {
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl',
         title: 'مستخدم جديد',
@@ -77,7 +78,7 @@ angular.module('webClientApp', [
         resolve: checkAccess
       })
 
-      .when('/articles/new', {
+      .when('/articles/new/?', {
         templateUrl: 'views/articles/edit.html',
         controller: 'NewArticleCtrl',
         title: 'مقال جديد',
@@ -85,70 +86,70 @@ angular.module('webClientApp', [
         resolve: checkAccess
       })
 
-      .when('/articles/:articleId/edit', {
+      .when('/articles/:articleId/edit/?', {
         templateUrl: 'views/articles/edit.html',
         controller: 'EditArticleCtrl',
         isPublic: false,
         resolve: checkAccess
       })
 
-      .when('/articles/:articleId', {
+      .when('/articles/:articleId/?', {
         templateUrl: 'views/articles/show.html',
         controller: 'ArticleCtrl',
         isPublic: true,
         resolve: checkAccess
       })
 
-      .when('/accounts/reset_password', {
+      .when('/accounts/reset_password/?', {
         templateUrl: 'views/accounts/reset_password.html',
         controller: 'ResetPasswordController',
         isPublic: true,
         resolve: checkAccess
       })
 
-      .when('/accounts/update_password', {
+      .when('/accounts/update_password/?', {
         templateUrl: 'views/accounts/update_password.html',
         controller: 'UpdatePasswordController',
         isPublic: true,
         resolve: checkAccess
       })
 
-      .when('/profiles/:userId', {
+      .when('/profiles/:userId/?', {
         templateUrl: 'views/profiles/show.html',
         controller: 'ProfileCtrl',
         isPublic: true,
         resolve: checkAccess
       })
 
-      .when('/profiles/:userId/edit', {
+      .when('/profiles/:userId/edit/?', {
         templateUrl: 'views/profiles/edit.html',
         controller: 'EditProfileCtrl',
         isPublic: false,
         resolve: checkAccess
       })
 
-      .when('/categories/:categoryId', {
+      .when('/categories/:categoryId/?', {
         templateUrl: 'views/categories/show.html',
         controller: 'CategoryCtrl',
         isPublic: true,
         resolve: checkAccess
       })
 
-      .when('/categories/:categoryId/topics/:topicId', {
+      .when('/categories/:categoryId/topics/:topicId/?', {
         templateUrl: 'views/topics/show.html',
         controller: 'TopicCtrl',
         isPublic: true,
         resolve: checkAccess
       })
 
-      .when('/admin', {
+      .when('/admin/?', {
         templateUrl: 'views/admin/dashboard.html',
         isPublic: false,
         isAdmin: true,
         resolve: checkAccess
       })
 
-      .when('/admin/manage/categories', {
+      .when('/admin/manage/categories/?', {
         templateUrl: 'views/admin/manage/categories.html',
         controller: 'ManageCategoriesCtrl',
         isPublic: false,
@@ -195,8 +196,8 @@ angular.module('webClientApp', [
     $authProvider.configure({
       apiUrl: '//' + API_HOST,
       omniauthWindowType: 'newWindow',
-      confirmationSuccessUrl:  'http://' + window.location.host + '/login',
-      passwordResetSuccessUrl: ('http://' + window.location.host +
+      confirmationSuccessUrl:  '//' + window.location.host + '/login',
+      passwordResetSuccessUrl: ('//' + window.location.host +
                                 '/accounts/update_password'),
       authProviderPaths: {
         facebook: '/auth/facebook',
@@ -242,7 +243,7 @@ angular.module('webClientApp', [
       ga('create', GA_TRACKING_ID);
     }
 
-    $rootScope.linkPrefix = 'http://' + document.location.host;
+    $rootScope.linkPrefix = '//' + document.location.host;
 
     /**
      * Holds data about page-wide attributes. Like pages title.
@@ -250,7 +251,7 @@ angular.module('webClientApp', [
     $rootScope.page = {
       title: 'منصة النشر العربية',
       description: 'منصة نشر متخصصة باللغة العربية مفتوحة المصدر',
-      image: 'http://' + document.location.host + '/images/manshar@200x200.png'
+      image: '//' + document.location.host + '/images/manshar@200x200.png'
     };
 
     /**
