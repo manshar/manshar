@@ -1,88 +1,137 @@
-<div class="manshar-profile">
-  <div class="avatar" manshar-cover url="{{profile.cover_url}}">
-    <div class="dimmer" ng-show="profile.cover_url"></div>
-    <div class="avatar blured" manshar-cover url="{{profile.cover_url}}"></div>
-  </div>
-  <div class="title">
-    <img ng-src="{{profile.cover_url}}"/>
-    <h1>{{profile.name}}</h1>
-    <h4>{{profile.bio}}</h4>
-    <button class="action-button" ng-click="editProfile()" ng-show="user.id == profile.id">
-      <i class="fa fa-pencil"></i>
-      تعديل معلومات صفحتك
-    </button>
-  </div>
-  <div class="listing-types-tabs profile-tabs">
-    <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>
-    <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>
-    <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>
-    <a ng-click="loadArticlesStats()" ng-class="{'active': activeTab == 'stats'}" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
-  </div>
-</div>
+<div class="body-wrapper authors-page">
+  <div class="container content-container">
+    <div class="row clearfix">
+      <div class="content-wrapper profile-page">
 
+        <div class="other-profiles">
+          <div class="clearfix slider">
+            <div class="author-block block">
+              <a href="#">
+                <div class="dimmer"></div>
+                <img src="images/face.png">
+                <span><i></i> 21 </span>
+                <p> عمرو التميمي </p>
+              </a>
+            </div>
+            <div class="author-block block hovered current">
+              <a href="#">
+                <div class="dimmer"></div>
+                <img ng-src="{{profile.cover_url}}">
+                <span><i></i> 21 </span>
+                <p> مراد طليب </p>
+                <p class="social-icons"> <i>f</i><i>t</i><i>in</i> </p>
+              </a>
+              <div class="arrow"></div>
+            </div>
+            <div class="author-block block">
+              <div class="dimmer"></div>
+              <img src="images/face.png">
+              <span><i></i> 21 </span>
+              <p> مراد طليب </p>
+            </div>
+            <div class="author-block block">
+              <div class="dimmer"></div>
+              <img src="images/face.png">
+              <span><i></i> 21 </span>
+              <p> مراد طليب </p>
+            </div>
+            <div class="author-block block">
+              <div class="dimmer"></div>
+              <img src="images/face.png">
+              <span><i></i> 21 </span>
+              <p> مراد طليب </p>
+            </div>
+            <div class="author-block block">
+              <div class="dimmer"></div>
+              <img src="images/face.png">
+              <span><i></i> 21 </span>
+              <p> مراد طليب </p>
+            </div>
+          </div>
+        </div>
 
-<div class="profile-list" ng-hide="activeTab == 'stats'">
-  <a href="/articles/new" class="write-new-button" ng-show="user.id == profile.id">
-    <i class="fa fa-pencil"></i>
-    اكتب مقال جديد
-  </a>
+        <div class="articles">
+          <div class="profile-info">
+            <h3> {{profile.name}} </h3>
+            <p> {{profile.bio}} </p>
+          </div>
 
-  <div ng-show="!articles[0]" class="no-articles-container">
-    <h3 ng-show="activeTab == 'published'">لا يوجد أي منشورات</h3>
-    <h3 ng-show="activeTab == 'recommendations'">لا يوجد أي توصيات</h3>
-    <h3 ng-show="activeTab == 'discussions'">لا يوجد أي مناقشات</h3>
-    <h4>
-      <a href="/">تصفح أشهر المقالات</a>
-    </h4>
-  </div>
+          <div class="listing-types-tabs">
+            <div class="section-title">
+              <i></i>
+              <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>
+              <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>
+              <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>
+              <a ng-click="loadArticlesStats()" ng-class="{'active': activeTab == 'stats'}" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
+            </div>
+          </div>
 
-  <div ng-include="'views/partials/_articles_list.html'"></div>
+          <div class="profile-list" ng-hide="activeTab == 'stats'">
+            <a href="/articles/new" class="write-new-button" ng-show="user.id == profile.id">
+              <i class="fa fa-pencil"></i>
+              اكتب مقال جديد
+            </a>
 
-</div>
+            <div ng-show="!articles[0]" class="no-articles-container">
+              <h3 ng-show="activeTab == 'published'">لا يوجد أي منشورات</h3>
+              <h3 ng-show="activeTab == 'recommendations'">لا يوجد أي توصيات</h3>
+              <h3 ng-show="activeTab == 'discussions'">لا يوجد أي مناقشات</h3>
+              <h4>
+                <a href="/">تصفح أشهر المقالات</a>
+              </h4>
+            </div>
 
-<div class="stats-container one-column" ng-show="stats && user.id == profile.id && activeTab == 'stats'">
-  <div class="stats-dashboard">
-    <ul class="stats-header row">
-      <li> العنوان </li>
-      <li> المشاهدات </li>
-      <li> القراءات </li>
-      <li> التعليقات </li>
-      <li> التوصيات </li>
-    </ul>
-    <ul ng-repeat="stat in stats" class="row">
-      <li> {{stat.article_title}}
-        <a ng-href="{{$location.host() + 'articles/' + stat.article_id}}">رابط للمقال</a>
-      </li>
-      <li> {{stat.page_views_count}} </li>
-      <li> {{stat.reads_count}} </li>
-      <li> {{stat.comments_count}} </li>
-      <li> {{stat.recommendations_count}} </li>
-    </ul>
-  </div>
-</div>
+            <div ng-include="'views/partials/_articles_list.html'"></div>
+          </div>
 
-<ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
-  <h1 class="header-label">
-    <span>المسودات</span>
-  </h1>
-  <li ng-repeat="article in drafts" class="card draft">
-    <div class="article-details article-card">
-      <div class="header tray">
-        <div class="title">
-          <a ng-href="/articles/{{article.id}}">
-            <h1>{{article.title || "بدون عنوان"}}</h1>
-            <h2>{{article.tagline}}</h2>
-          </a>
+          <div class="stats-container one-column" ng-show="stats && user.id == profile.id && activeTab == 'stats'">
+            <div class="stats-dashboard">
+              <ul class="stats-header row">
+                <li> العنوان </li>
+                <li> المشاهدات </li>
+                <li> القراءات </li>
+                <li> التعليقات </li>
+                <li> التوصيات </li>
+              </ul>
+              <ul ng-repeat="stat in stats" class="row">
+                <li> {{stat.article_title}}
+                  <a ng-href="{{$location.host() + 'articles/' + stat.article_id}}">رابط للمقال</a>
+                </li>
+                <li> {{stat.page_views_count}} </li>
+                <li> {{stat.reads_count}} </li>
+                <li> {{stat.comments_count}} </li>
+                <li> {{stat.recommendations_count}} </li>
+              </ul>
+            </div>
+          </div>
+
+          <ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
+            <h1 class="header-label">
+              <span>المسودات</span>
+            </h1>
+            <li ng-repeat="article in drafts" class="card draft">
+              <div class="article-details article-card">
+                <div class="header tray">
+                  <div class="title">
+                    <a ng-href="/articles/{{article.id}}">
+                      <h1>{{article.title || "بدون عنوان"}}</h1>
+                      <h2>{{article.tagline}}</h2>
+                    </a>
+                  </div>
+                </div>
+                <div class="profile-article-action" ng-show="isOwner(user, article)">
+                  <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                  <button class="action-button" ng-click="editArticle(article.id)">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="profile-article-action" ng-show="isOwner(user, article)">
-        <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-          <i class="fa fa-trash-o"></i>
-        </button>
-        <button class="action-button" ng-click="editArticle(article.id)">
-          <i class="fa fa-pencil"></i>
-        </button>
-      </div>
     </div>
-  </li>
-</ul>
+  </div>
+</div>
