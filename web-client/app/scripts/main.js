@@ -1,19 +1,7 @@
 'use strict';
 
 $(document).ready(function(){
-  $winWidth = $(window).width();
-
-  var menuStatus = 'closed';
-
-  $('.menu-icon, .menu').click(function(){
-    if(menuStatus === 'closed') {
-      $('.body-wrapper, header').css('left','150px');
-      menuStatus = 'opened';
-    } else {
-      $('.body-wrapper, header').css('left','0px');
-      menuStatus = 'closed';
-    }
-  });
+  var $winWidth = $(window).width();
 
   // show comments
   $('.comments').click(function(){
@@ -34,7 +22,7 @@ $(document).ready(function(){
   });
 
   $(window).scroll(function(){
-    offset = $(window).scrollTop();
+    var offset = $(window).scrollTop();
 
     if(offset > 66) {
     	$('header').css('top', '0');

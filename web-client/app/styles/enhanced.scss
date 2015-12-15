@@ -512,6 +512,11 @@ header {
   z-index: 1;
   color: #fff;
   overflow-y: auto;
+  img {
+    display: block;
+    width: 100%;
+    opacity: 0.5;
+  }
   ul {
     list-style: none;
     padding: 0;
@@ -579,6 +584,7 @@ header {
   z-index: 8;
   width: 26px;
   height: 26px;
+  transition: left 0.4s;
 }
 
 .write-box {
@@ -595,6 +601,7 @@ header {
 }
 .content-container {
   min-height: 100vh;
+  position: relative;
 }
 
 /* Clearfix */
@@ -627,9 +634,8 @@ html[xmlns] .clearfix {
   height: 1%;
 }
 
-.logo {
+/*.logo {
   margin: 28px 0;
-  text-align: left;
   padding-left: 15px;
   z-index: 9;
   position: relative;
@@ -637,10 +643,33 @@ html[xmlns] .clearfix {
     font-size: 10px;
     color: #777;
   }
+}*/
+
+.logo {
+  position: absolute;
+  right: 50%;
+  margin-right: -400px;
+  text-align: left;
+  z-index: 999;
+  top: 40px;
+  transition: all 0.4s;
+
+  img {
+    display: inline;
+    width: 20px;
+  }
+  span {
+    display: inline-table;
+    vertical-align: top;
+    margin-right: -4px;
+    font-size: 0.8em;
+  }
+  &.push-right {
+    margin-right: -550px;
+  }
 }
 
-.logo, .pull-right {
-  width: 99px;
+.pull-right {
   float: right;
 }
 
@@ -725,6 +754,10 @@ h1, h2, h3 {
       color: #ca1504;
     }
   }
+}
+
+.text-white {
+  color: #fff;
 }
 
 .author-block img {
@@ -1076,11 +1109,11 @@ h1, h2, h3 {
 
 }
 
+.profile-wrapper {
+  padding-top: 150px;
+}
 .profile-page {
   position: relative;
-}
-.profile-page .articles {
-  padding-top: 150px;
 }
 .profile-info {
   margin: 6px 0 40px;
@@ -1139,4 +1172,8 @@ h1, h2, h3 {
   50% {
     color: black;
   }
+}
+
+.body-wrapper.push-right, header.push-right {
+  left: 150px;
 }

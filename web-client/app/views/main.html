@@ -1,140 +1,57 @@
-<!-- <header class="main-header">
-  <div class="hero-unit tray">
-    <span id="typed-cursor" class="blinking">|</span>
-    <h1 ng-click="newArticle()"
-        analytics-on="click"
-        analytics-event="click"
-        analytics-category="UI"
-        analytics-label="Manshar Hero Title">{{title}}</h1>
-    <span class="beta">نسخة تجريبية</span>
-    <a href="https://github.com/manshar/manshar"><i class="fa fa-github"></i></a>
-    <p class="manshar-tagline">{{tagline}}...</p>
-    <p class="links">
-      <a href="http://www.manshar.org" target="blank"
-        analytics-on="click"
-        analytics-event="click"
-        analytics-category="UI"
-        analytics-label="Hero About Manshar Link">
-        عن منشر
-      </a>
-    </p>
-  </div>
-  <div class="listing-types-tabs" ng-class="{fixed: yscroll > 320}">
-    <a ng-click="orderArticles('popular')" ng-class="{'active': activeTab == 'popular'}">
-      <i class="fa fa-line-chart"></i>
-      <span>الأكثر شعبية</span>
-    </a>
-    <a ng-click="orderArticles('best')" ng-class="{'active': activeTab == 'best'}">
-      <i class="fa fa-thumbs-o-up"></i>
-      <span>الأفضل</span>
-    </a>
-    <a ng-click="orderArticles('recents')" ng-class="{'active': activeTab == 'recents'}">
-      <i class="fa fa-clock-o"></i>
-      <span>الأحدث</span>
-    </a>
-    <a ng-click="selectTab('publishers')" ng-class="{'active': activeTab == 'publishers'}">
-      <i class="fa fa-group"></i>
-      <span>الناشرون</span>
-    </a>
-    <a ng-click="showCategoriesPicker()">
-      <i class="fa fa-th-large"></i>
-      <span>استعرض الفئات</span>
-    </a>
+<header>
+  <div class="header-content">
+    <div class="container">
+      <div class="row clearfix">
+        <div class="pull-right">
+          <i class="logo-square"></i><i class="fa fa-angle-up to-top"></i>
+        </div>
+        <div class="listing-types-tabs">
+        </div>
+      </div>
+    </div>
+    <div class="header-icons">
+      <i class="icon fa fa-edit"></i>
+      <i class="menu icon fa fa-bars closed"></i>
+    </div>
   </div>
 </header>
 
-<div ng-hide="activeTab == 'publishers'" ng-include="'views/partials/_articles_list.html'"></div>
+<div class="container content-container"> <!-- 700px centered -->
 
-<ul ng-hide="activeTab != 'publishers'" class="users-card-list cards-list-container one-column card-list">
-  <li ng-repeat="user in publishers" class="card with-cover">
-    <div class="user-details user-card">
-      <div class="header">
-        <div class="cover" data-manshar-cover url="{{user.thumb_url}}"></div>
-        <div class="dimmer"></div>
-        <div class="title">
-          <a ng-href="/profiles/{{user.id}}">
-            <h1>{{user.name}}</h1>
-          </a>
-          <div class="stats-box">
-            <span ng-show="user.published_articles_count">
-              <i class="fa fa-edit"></i> {{user.published_articles_count}}
-            </span>
-            <span ng-show="user.comments_count">
-              <i class="fa fa-comment-o"></i> {{user.comments_count}}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
-</ul> -->
+  <div class="row clearfix">
+    <!-- <div class="logo">
+      <div>منشر</div>
+      <p>منصة النشر العربية</p>
+    </div> -->
 
+    <div class="content-wrapper">
 
-  <div class="menu-icon icon fa fa-bars closed"></div>
-
-  <header>
-    <div class="header-content">
-      <div class="container">
-        <div class="row clearfix">
-          <div class="pull-right">
-            <i class="logo-square"></i><i class="fa fa-angle-up to-top"></i>
-          </div>
-          <div class="listing-types-tabs">
-          </div>
-        </div>
-      </div>
-      <div class="header-icons">
-        <i class="icon fa fa-edit"></i>
-        <i class="menu icon fa fa-bars closed"></i>
-      </div>
-    </div>
-  </header>
-
-  <div class="container content-container"> <!-- 700px centered -->
-
-    <div class="row clearfix">
-      <div class="logo">
-        <div>منشر</div>
-        <p>منصة النشر العربية</p>
+      <div class="write-box">
+        <p> أكتب هنا... </p>
       </div>
 
-      <div class="content-wrapper">
-
-        <div class="write-box">
-          <p> أكتب هنا... </p>
+      <div class="listing-types-tabs">
+        <div class="section-title">
+          <i class="circle-icon fa fa-line-chart"></i>
+          <a ng-click="orderArticles('popular','line-chart')" ng-class="{'active': activeTab == 'popular'}"> الأكثر شعبية </a> .
+          <a ng-click="orderArticles('best','thumbs-o-up')" ng-class="{'active': activeTab == 'best'}"> الأفضل </a> .
+          <a ng-click="orderArticles('recents','clock-o')" ng-class="{'active': activeTab == 'recents'}"> الأحدث </a>
         </div>
+      </div>
 
-        <div class="listing-types-tabs">
-          <div class="section-title">
-            <i class="circle-icon fa fa-line-chart"></i>
-            <a ng-click="orderArticles('popular','line-chart')" ng-class="{'active': activeTab == 'popular'}"> الأكثر شعبية </a> .
-            <a ng-click="orderArticles('best','thumbs-o-up')" ng-class="{'active': activeTab == 'best'}"> الأفضل </a> .
-            <a ng-click="orderArticles('recents','clock-o')" ng-class="{'active': activeTab == 'recents'}"> الأحدث </a>
-          </div>
-        </div>
-        
-        <div ng-include="'views/partials/_articles_list.html'"></div>
+      <div ng-include="'views/partials/_articles_list.html'"></div>
 
-        <div class="categories-section section" ng-include="'views/partials/_categories_grid.html'"></div>
+      <div class="categories-section section" ng-include="'views/partials/_categories_grid.html'"></div>
 
-        <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
+      <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
 
 
-        <div class="more-articles section">
-          <h3 class="section-title"> <i class="circle-icon fa fa-refresh"></i> </h3>
+      <div class="more-articles section">
+        <h3 class="section-title"> <i class="circle-icon fa fa-refresh"></i> </h3>
 
-        </div> <!-- more-articles -->
+      </div> <!-- more-articles -->
 
-      </div> <!-- .content-wrapper -->
+    </div> <!-- .content-wrapper -->
 
-    </div> <!-- row -->
-  </div> <!-- content-container -->
-
-
-<!-- <div class="metabar tray">
-  <button ng-click="newArticle()" class="action-button"
-      analytics-on="click"
-      analytics-event="click"
-      analytics-category="UI"
-      analytics-label="Hero New Article Pencil"><i class="fa fa-pencil"></i></button>
-</div> -->
+  </div> <!-- row -->
+</div> <!-- content-container -->

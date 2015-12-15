@@ -116,6 +116,11 @@ angular.module('webClientApp')
       });
     };
 
+    $scope.loadDrafts = function() {
+      $scope.articles = $scope.drafts;
+      console.log($scope.drafts);
+    }
+
 
     $scope.loadLinks = function() {
       UserLink.query({'userId': $routeParams.userId}, function (links) {

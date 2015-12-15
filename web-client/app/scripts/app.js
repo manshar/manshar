@@ -235,8 +235,8 @@ angular.module('webClientApp', [
   /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'User', 'GA_TRACKING_ID',
-      function ($location, $rootScope, $analytics, $auth, LoginService, User, GA_TRACKING_ID) {
+  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'User', 'Category', 'GA_TRACKING_ID',
+      function ($location, $rootScope, $analytics, $auth, LoginService, User, Category, GA_TRACKING_ID) {
 
     // ga is the Google analytics global variable.
     if (window.ga) {
@@ -253,6 +253,11 @@ angular.module('webClientApp', [
       description: 'منصة نشر متخصصة باللغة العربية مفتوحة المصدر',
       image: '//' + document.location.host + '/images/manshar@200x200.png'
     };
+
+    /**
+     * Load categories once for all application
+     */
+     $rootScope.categories = Category.query();
 
     /**
      * Logs the user out.

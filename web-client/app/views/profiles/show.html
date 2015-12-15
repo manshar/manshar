@@ -16,7 +16,7 @@
             <div class="author-block block hovered current">
               <a href="#">
                 <div class="dimmer"></div>
-                <img ng-src="{{profile.cover_url}}">
+                <img ng-src="{{profile.thumb_url}}">
                 <span><i></i> 21 </span>
                 <p> مراد طليب </p>
                 <p class="social-icons"> <i>f</i><i>t</i><i>in</i> </p>
@@ -41,16 +41,10 @@
               <span><i></i> 21 </span>
               <p> مراد طليب </p>
             </div>
-            <div class="author-block block">
-              <div class="dimmer"></div>
-              <img src="images/face.png">
-              <span><i></i> 21 </span>
-              <p> مراد طليب </p>
-            </div>
           </div>
         </div>
 
-        <div class="articles">
+        <div class="profile-wrapper">
           <div class="profile-info">
             <h3> {{profile.name}} </h3>
             <p> {{profile.bio}} </p>
@@ -59,9 +53,10 @@
           <div class="listing-types-tabs">
             <div class="section-title">
               <i></i>
-              <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>
-              <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>
-              <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>
+              <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>.
+              <a ng-click="loadDrafts()" ng-class="{'active': activeTab == 'drafts'}" ng-show="user.id == profile.id">المسودات</a>.
+              <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>.
+              <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>.
               <a ng-click="loadArticlesStats()" ng-class="{'active': activeTab == 'stats'}" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
             </div>
           </div>
@@ -74,6 +69,7 @@
 
             <div ng-show="!articles[0]" class="no-articles-container">
               <h3 ng-show="activeTab == 'published'">لا يوجد أي منشورات</h3>
+              <h3 ng-show="activeTab == 'drafts'">لا يوجد أي مسودات</h3>
               <h3 ng-show="activeTab == 'recommendations'">لا يوجد أي توصيات</h3>
               <h3 ng-show="activeTab == 'discussions'">لا يوجد أي مناقشات</h3>
               <h4>
@@ -105,7 +101,7 @@
             </div>
           </div>
 
-          <ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
+          <!-- <ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
             <h1 class="header-label">
               <span>المسودات</span>
             </h1>
@@ -129,7 +125,7 @@
                 </div>
               </div>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>

@@ -1486,170 +1486,170 @@ a {
 //   opacity: 1 !important;
 // }
 
-// .form-div {
+ .form-div {
 
-//   &.center {
-//     margin-top: 3em;
-//   }
+   &.center {
+     margin-top: 3em;
+   }
 
-//   margin: auto;
-//   width: 300px;
+   margin: auto;
+   width: 300px;
 
-//   header {
-//     @include row(table);
+   header {
+     @include row(table);
 
-//     img {
-//       display: inline-block;
-//       vertical-align: middle;
-//     }
+     img {
+       display: inline-block;
+       vertical-align: middle;
+     }
 
-//     h1 {
-//       color: #3A3A3A;
-//       padding-right: 70px;
-//       display: inline-block;
-//       vertical-align: middle;
-//     }
-//   }
+     h1 {
+       color: #3A3A3A;
+       padding-right: 70px;
+       display: inline-block;
+       vertical-align: middle;
+     }
+   }
 
-//   .form-errors {
-//     background: #CA1504;
-//     color: #FFFFFF;
-//     line-height: 40px;
-//     padding: 4px;
-//     text-align: center;
-//   }
+   .form-errors {
+     background: #CA1504;
+     color: #FFFFFF;
+     line-height: 40px;
+     padding: 4px;
+     text-align: center;
+   }
 
-//   .form-flash {
-//     background: #4CAF50;
-//     color: #FFFFFF;
-//     line-height: 40px;
-//     padding: 4px;
-//     text-align: center;
+   .form-flash {
+     background: #4CAF50;
+     color: #FFFFFF;
+     line-height: 40px;
+     padding: 4px;
+     text-align: center;
 
-//     .note {
-//       font-size: .7em;
-//     }
-//   }
+     .note {
+       font-size: .7em;
+     }
+   }
 
-//   .oauth-providers {
-//     a {
-//       display: inline-block;
-//       width: 49%;
-//       padding: 0.5em;
-//       text-align: center;
-//       color: #fff;
-//       font-size: 0.8em;
+   .oauth-providers {
+     a {
+       display: inline-block;
+       width: 49%;
+       padding: 0.5em;
+       text-align: center;
+       color: #fff;
+       font-size: 0.8em;
 
-//       &.google-login-button {
-//         background-color: #D50000;
+       &.google-login-button {
+         background-color: #D50000;
 
-//         &:hover {
-//           background-color: #B71C1C;
-//         }
-//       }
+         &:hover {
+           background-color: #B71C1C;
+         }
+       }
 
-//       &.facebook-login-button {
-//         background-color: #3F51B5;
+       &.facebook-login-button {
+         background-color: #3F51B5;
 
-//         &:hover {
-//           background-color: #1A237E;
-//         }
-//       }
-//     }
-//   }
+         &:hover {
+           background-color: #1A237E;
+         }
+       }
+     }
+   }
 
-//   form {
-//     @include row(table);
-//     margin: 1em 0;
+   form {
+     @include row(table);
+     margin: 1em 0;
 
-//     label {
-//       display: inline-block;
-//       vertical-align: top;
-//       margin: 5px 0;
-//     }
+     label {
+       display: inline-block;
+       vertical-align: top;
+       margin: 5px 0;
+     }
 
-//     input, .input {
-//       display: block;
-//       border: 1px solid #ECEBEC;
-//       font-size: 0.8em;
-//       padding: 10px;
-//       border-radius: 5px;
-//       width: 300px;
-//       transition: 300ms ease;
+     input, .input {
+       display: block;
+       border: 1px solid #ECEBEC;
+       font-size: 0.8em;
+       padding: 10px;
+       border-radius: 5px;
+       width: 300px;
+       transition: 300ms ease;
 
-//       &[type="file"] {
-//         font-size: 0.7em;
-//       }
+       &[type="file"] {
+         font-size: 0.7em;
+       }
 
-//       &:invalid {
-//         border-left: 4px solid #ECEBEC;
-//         box-shadow: 0 0 0px;
-//       }
+       &:invalid {
+         border-left: 4px solid #ECEBEC;
+         box-shadow: 0 0 0px;
+       }
 
-//       &:focus:invalid {
-//         border-left: 4px solid #E66565;
-//         box-shadow: 0 0 0px;
-//       }
+       &:focus:invalid {
+         border-left: 4px solid #E66565;
+         box-shadow: 0 0 0px;
+       }
 
-//       &:focus:valid, &:valid {
-//         border-left: 4px solid #44B387;
-//         box-shadow: 0 0 0px;
-//       }
-//     }
+       &:focus:valid, &:valid {
+         border-left: 4px solid #44B387;
+         box-shadow: 0 0 0px;
+       }
+     }
 
-//     button, a.button {
-//       @include button(simple, #CA1504);
-//       background-image: none;
-//       font-size: 0.8em;
-//       padding : 10px;
-//       text-align: center;
-//       width: 100%;
-//     }
+     button, a.button {
+       @include button(simple, #CA1504);
+       background-image: none;
+       font-size: 0.8em;
+       padding : 10px;
+       text-align: center;
+       width: 100%;
+     }
 
-//     .actions {
-//       text-align: center;
+     .actions {
+       text-align: center;
 
-//       button {
-//         width: 88%;
-//       }
-//       a {
-//         padding: .5em;
-//         display: inline-block;
-//       }
-//     }
-//   }
+       button {
+         width: 88%;
+       }
+       a {
+         padding: .5em;
+         display: inline-block;
+       }
+     }
+   }
 
-//   &.category {
-//     img {
-//       width: 100%;
-//     }
-//   }
-// }
+   &.category {
+     img {
+       width: 100%;
+     }
+   }
+ }
 
-// .form-info {
-//   margin: 20px 0;
-//   font-size: 0.7em;
-//   color: #bbbaba;
-//   text-align: center;
+ .form-info {
+   margin: 20px 0;
+   font-size: 0.7em;
+   color: #bbbaba;
+   text-align: center;
 
-//   .signup-link {
-//     background-color: #F3EFEE;
-//     border-radius: 8px;
-//     color: #272F36;
-//     font-size: 1.1em;
-//     padding: 2px 10px;
-//   }
-// }
+   .signup-link {
+     background-color: #F3EFEE;
+     border-radius: 8px;
+     color: #272F36;
+     font-size: 1.1em;
+     padding: 2px 10px;
+   }
+ }
 
-// .admin-dashboard {
-//   margin-top: 2em;
+ .admin-dashboard {
+   margin-top: 2em;
 
-//   .header-label {
-//     margin: 1em 0;
-//   }
-// }
+   .header-label {
+     margin: 1em 0;
+   }
+ }
 
-// // Load simple code style for the editor.
+ // Load simple code style for the editor.
 // // For rendering the code we use highlight.js
 // .manshar-editor pre {
 //   padding: 25px;

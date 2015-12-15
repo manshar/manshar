@@ -11,6 +11,7 @@ angular.module('webClientApp')
         label: resource.title
       });
       $location.path('/articles/' + resource.id + '/edit');
+      $location.replace();
     };
 
     var createError = function (response) {

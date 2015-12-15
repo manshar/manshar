@@ -1,0 +1,52 @@
+<!-- side menu -->
+<div class="menu-icon icon fa fa-bars" ng-class="{'text-white': pushAside }"></div>
+
+<div class="menu-wrapper">
+  <img class="profile-photo" ng-src="{{user.thumb_url}}">
+  <ul class="user-menu with-border">
+    <li ng-if="!user.name">
+      <a href="/login"><i></i>تسجيل الدخول</a>
+    </li>
+    <li ng-if="user.name">
+      <a href="/profiles/{{user.id}}"><i></i>{{ user.name }}</a>
+    </li>
+    <li> <a href="/articles/new"><i></i>كتابة مقال</a> </li>
+    <li> <a href="/profiles/{{user.id}}"><i></i>المسودات </a></li>
+    <li> <a href="/profiles/{{user.id}}"><i></i>المنشورات </a></li>
+    <li> <a href="/profiles/{{user.id}}"><i></i>التوصيات </a></li>
+    <li>
+      <!--logout function is not accessible by this directive-->
+      <a ng-show="id" ng-click="logout()"
+      analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link"><i></i>تسجيل الخروج</a>
+    </li>
+  </ul>
+
+  <ul class="categories-menu with-border">
+    <li ng-repeat="category in categories" class="category-{{category.id}}">
+      <style type="text/css">
+        .categories-menu .category-{{category.id}} {
+          border-right-color: {{category.color}};
+        }
+      </style>
+      <a href="/category/{{category.id}}">
+        <i class="fa {{category.icon_cssclass}}"></i>
+        {{category.title}}
+      </a>
+    </li>
+  </ul>
+
+  <ul class="with-border">
+    <li>
+      <a href="/">
+        <i></i>الناشرون
+      </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li> <a href="https://www.manshar.org/" target="_blank"><i></i>قصة منشر</a> </li>
+    <li> <a href="/articles/652"><i></i>شروط الاستخدام</a> </li>
+    <li> <a href="https://goo.gl/IuOXaA" target="_blank"><i></i>تابعنا</a> </li>
+    <li> <a href="https://github.com/manshar/manshar"><i></i>ساهم بتطوير المنصة</a> </li>
+  </ul>
+</div>

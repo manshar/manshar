@@ -3,214 +3,155 @@
 <!--[if IE 7]>         <html ng-app="webClientApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html ng-app="webClientApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html ng-app="webClientApp" class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <base href="/" target="_blank">
-    <meta name="fragment" content="!">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
-    <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
-    <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
-    <meta name="keywords" content="تدوين, كتابة, عربي, مقالات, مدونات,مفتوح المصدر, محتوى عربي, مواضيع">
-    <meta name="description" content="منصة نشر وتدوين باللغة العربية.">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8">
+  <base href="/" target="_blank">
+  <meta name="fragment" content="!">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
+  <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
+  <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
+  <meta name="keywords" content="تدوين, كتابة, عربي, مقالات, مدونات,مفتوح المصدر, محتوى عربي, مواضيع">
+  <meta name="description" content="منصة نشر وتدوين باللغة العربية.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Open Graph Metadata -->
-    <meta property="og:type" content="{{page.publishedTime ? 'article' : 'website'}}" />
-    <meta property="og:site_name" content="منشر">
-    <meta property="og:url" content="{{page.url}}" />
-    <meta property="og:title" content="{{page.title}} - منشر" />
-    <meta property="og:description" content="{{page.description}}">
-    <meta property="og:image" content="{{page.image}}" />
-    <meta property="article:published_time" content="{{page.publishedTime}}">
+  <!-- Open Graph Metadata -->
+  <meta property="og:type" content="{{page.publishedTime ? 'article' : 'website'}}" />
+  <meta property="og:site_name" content="منشر">
+  <meta property="og:url" content="{{page.url}}" />
+  <meta property="og:title" content="{{page.title}} - منشر" />
+  <meta property="og:description" content="{{page.description}}">
+  <meta property="og:image" content="{{page.image}}" />
+  <meta property="article:published_time" content="{{page.publishedTime}}">
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/carbon/dist/carbon.min.css">
-        <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
-        <link rel="stylesheet" href="bower_components/angular-tooltips/dist/angular-tooltips.min.css">
-        <link rel="stylesheet" href="bower_components/image-zoom/dist/imagezoom.css">
-        <!-- endbuild -->
-        <!-- build:css({.tmp,app}) styles/enhanced.css -->
-        <link rel="stylesheet" type="text/css" href="styles/enhanced.css" media="screen  and (min-width: 45em)" />
-        <!-- endbuild -->
-        <!-- Load the hosted stylesheets for highlight.js -->
-        <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
-  </head>
-  <body class="manshar" ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css({.tmp,app}) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="bower_components/carbon/dist/carbon.min.css">
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+  <link rel="stylesheet" href="bower_components/angular-tooltips/dist/angular-tooltips.min.css">
+  <link rel="stylesheet" href="bower_components/image-zoom/dist/imagezoom.css">
+  <!-- endbuild -->
+  <!-- build:css({.tmp,app}) styles/enhanced.css -->
+  <link rel="stylesheet" type="text/css" href="styles/enhanced.css" media="screen  and (min-width: 45em)" />
+  <!-- endbuild -->
+  <!-- Load the hosted stylesheets for highlight.js -->
+  <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+</head>
+<body class="manshar" ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
+  <!--[if lt IE 7]>
+    <p class="browsehappy">
+    You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    </p>
+  <![endif]-->
+  <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.min.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+  <![endif]-->
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.min.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-
-    <!-- <div data-category-topic-picker></div> -->
-    <!-- Site Nav -->
-    <!-- <nav class="site-nav" ng-class="{'force-bar': forceBar, 'move-up': forceBar && moveUp}">
-      <a href="/" class="site-nav-logo" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Icon">
-          <img src="/images/manshar@64x64.png" width="32px" height="32px"/>
-      </a> -->
-      <!-- User Menu -->
-      <!-- <div class="profile-badge">
-        <a class="new-button" href="/articles/new" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
-          مقال جديد
-        </a>
-        <div class="drop" ng-class="{'active': menuActive && !moveUp}">
-          <div class="profile-badge-menu">
-            <a ng-click="menuActive = !menuActive">
-              <i ng-if="!user.thumb_url" class="fa fa-bars"></i>
-            </a>
-          </div>
-          <a ng-click="menuActive = !menuActive">
-            <img ng-if="user.thumb_url" ng-src="{{user.thumb_url}}" ng-show="user"/>
-          </a>
-          <div class="dropdown-contain">
-            <div class="dropOut">
-              <ul>
-                <li ng-show="!user.signedIn"><a href="/login">تسجيل الدخول</a></li>
-                <li ng-if="user.id"><a href="/profiles/{{user.id}}">ملفي الشخصي</a></li>
-                <li>
-                  <a href="/articles/new" analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Login Link">
-                    مقال جديد
-                  </a>
-                </li>
-                <li><a href="https://www.manshar.org/" target="_blank">قصة منشر</a></li>
-                <li><a href="/articles/652">شروط الاستخدام</a></li>
-                <li><a href="https://goo.gl/IuOXaA" target="_blank">تابعنا</a></li>
-                <li>
-                  <a ng-show="user.signedIn" ng-click="logout()"
-                  analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link">تسجيل الخروج</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+  <div class="logo" ng-class="{'push-right': pushAside }">
+    <a href="/">
+      <div>
+        <img src="/images/manshar@64x64.png"/>
+        <span>ـنشر</span>
       </div>
-    </nav>
+      <p>منصة النشر العربية</p>
+    </a>
+  </div>
+  <!-- side menu -->
+  <side-menu></side-menu>
 
-    <div data-login-modal ng-if="!isLoginPage && !isSignupPage"></div> -->
+  <!-- Add your site or application content here -->
+  <div class="body-wrapper" ng-class="{'push-right': pushAside }">
+    <div ng-view></div>
+  </div>
+  <!-- Google Analytics: Configured in app.js run block. -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ </script>
 
-    <!-- side menu -->
-    <div class="menu-wrapper">
-      <ul class="user-menu with-border">
-        <li> <a href="#"><i class="profile-photo"></i>مراد طليب </a></li>
-        <li> <a href="#"><i></i>كتابة مقال</a> </li>
-        <li> <a href="#"><i></i>المسودات </a></li>
-        <li> <a href="#"><i></i>المحفوظات </a></li>
-        <li> <a href="#"><i></i>التوصيات </a></li>
-      </ul>
+ <!-- Need to load shims before angular.js to allow progress events to work. -->
+ <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.min.js"></script>
+ <script src="bower_components/angular/angular.js"></script>
+ <!-- build:js scripts/modules.js -->
+ <script src="bower_components/angular-animate/angular-animate.js"></script>
+ <script src="bower_components/angular-resource/angular-resource.js"></script>
+ <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+ <script src="bower_components/angular-route/angular-route.js"></script>
+ <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+ <script src="bower_components/angular-touch/angular-touch.js"></script>
+ <script src="bower_components/angular-i18n/angular-locale_ar.js"></script>
+ <script src="bower_components/webcamjs/webcam.min.js"></script>
+ <script src="bower_components/carbon/dist/carbon.js"></script>
+ <script src="bower_components/angular-truncate/src/truncate.js"></script>
+ <script src="bower_components/angulartics/src/angulartics.js"></script>
+ <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
+ <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
+ <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+ <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
+ <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
+ <script src="bower_components/jquery/dist/jquery.min.js"></script>
+ <script src="bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
+ <script src="bower_components/image-zoom/dist/imagezoom.js"></script>
 
-      <ul class="categories-menu with-border">
-        <li class="cat1"> <a href="#"><i class="fa fa-heart"></i>صحة ورياضة</a> </li>
-        <li class="cat2"> <a href="#"><i class="fa fa-desktop"></i>علوم وتكنولوجيا</a> </li>
-        <li class="cat3"> <a href="#"><i class="fa fa-video-camera"></i>إعلام وتسويق</a> </li>
-        <li class="cat4"> <a href="#"><i class="fa fa-group"></i>سياسة ومجتمع</a> </li>
-        <li class="cat5"> <a href="#"><i class="fa fa-paint-brush"></i>فن وأدب</a> </li>
-        <li class="cat6"> <a href="#"><i class="fa fa-money"></i>مال وأعمال</a> </li>
-        <li class="cat7"> <a href="#"><i class="fa fa-group"></i>الناشرون</a> </li>
-      </ul>
+ <script src="scripts/app.js"></script>
+ <script src="scripts/main.js"></script>
+ <script src="scripts/appConfig.js"></script>
+ <script src="scripts/cachedTemplates.js"></script>
 
-      <ul>
-        <li> <a href="#"><i></i>قصة منشر</a> </li>
-        <li> <a href="#"><i></i>شروط الاستخدام</a> </li>
-        <li> <a href="#"><i></i>المسودات</a> </li>
-        <li> <a href="#"><i></i>تابعنا</a> </li>
-        <li> <a href="#"><i></i>ساهم بتطوير المنصة</a> </li>
-      </ul>
-    </div>
+ <script src="scripts/controllers/admin/manageCategoriesCtrl.js"></script>
+ <script src="scripts/controllers/mainController.js"></script>
+ <script src="scripts/controllers/articleController.js"></script>
+ <script src="scripts/controllers/categoryController.js"></script>
+ <script src="scripts/controllers/newArticleController.js"></script>
+ <script src="scripts/controllers/editArticleController.js"></script>
+ <script src="scripts/controllers/profileController.js"></script>
+ <script src="scripts/controllers/resetPasswordController.js"></script>
+ <script src="scripts/controllers/updatePasswordController.js"></script>
+ <script src="scripts/controllers/editProfileController.js"></script>
+ <script src="scripts/controllers/loginController.js"></script>
+ <script src="scripts/controllers/signupController.js"></script>
+ <script src="scripts/controllers/topicController.js"></script>
 
-    <!-- Add your site or application content here -->
-    <div class="body-wrapper" ng-view></div>
-    <!-- Google Analytics: Configured in app.js run block. -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    </script>
+ <script src="scripts/services/articleService.js"></script>
+ <script src="scripts/services/linkService.js"></script>
+ <script src="scripts/services/categoryService.js"></script>
+ <script src="scripts/services/topicService.js"></script>
+ <script src="scripts/services/commentService.js"></script>
+ <script src="scripts/services/recommendationService.js"></script>
+ <script src="scripts/services/imageService.js"></script>
+ <script src="scripts/services/userService.js"></script>
+ <script src="scripts/services/loginService.js"></script>
+ <script src="scripts/services/signupService.js"></script>
+ <script src="scripts/services/articleStatsService.js"></script>
 
-    <!-- Need to load shims before angular.js to allow progress events to work. -->
-    <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.min.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-        <!-- build:js scripts/modules.js -->
-        <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-touch/angular-touch.js"></script>
-        <script src="bower_components/angular-i18n/angular-locale_ar.js"></script>
-        <script src="bower_components/webcamjs/webcam.min.js"></script>
-        <script src="bower_components/carbon/dist/carbon.js"></script>
-        <script src="bower_components/angular-truncate/src/truncate.js"></script>
-        <script src="bower_components/angulartics/src/angulartics.js"></script>
-        <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
-        <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
-        <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-        <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
-        <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
-        <script src="bower_components/image-zoom/dist/imagezoom.js"></script>
+ <script src="scripts/directives/anchoredComment.js"></script>
+ <script src="scripts/directives/anchoredComments.js"></script>
+ <script src="scripts/directives/categoryTopicPicker.js"></script>
+ <script src="scripts/directives/clickOutside.js"></script>
+ <script src="scripts/directives/carbonEditor.js"></script>
+ <script src="scripts/directives/articleRenderer.js"></script>
+ <script src="scripts/directives/highlightCode.js"></script>
+ <script src="scripts/directives/loginModal.js"></script>
+ <script src="scripts/directives/mansharCover.js"></script>
+ <script src="scripts/directives/mansharFile.js"></script>
+ <script src="scripts/directives/modalDialog.js"></script>
+ <script src="scripts/directives/recommendButton.js"></script>
+ <script src="scripts/directives/scrollSpy.js"></script>
+ <script src="scripts/directives/imageZoom.js"></script>
+ <script src="scripts/directives/sideMenu.js"></script>
 
-        <script src="scripts/app.js"></script>
-        <script src="scripts/main.js"></script>
-        <script src="scripts/appConfig.js"></script>
-        <script src="scripts/cachedTemplates.js"></script>
+ <script src="scripts/filters/darker.js"></script>
+ <script src="scripts/filters/nohtml.js"></script>
+ <script src="scripts/filters/timeToRead.js"></script>
+ <script src="scripts/filters/mansharSanitizer.js"></script>
 
-        <script src="scripts/controllers/admin/manageCategoriesCtrl.js"></script>
-        <script src="scripts/controllers/mainController.js"></script>
-        <script src="scripts/controllers/articleController.js"></script>
-        <script src="scripts/controllers/categoryController.js"></script>
-        <script src="scripts/controllers/newArticleController.js"></script>
-        <script src="scripts/controllers/editArticleController.js"></script>
-        <script src="scripts/controllers/profileController.js"></script>
-        <script src="scripts/controllers/resetPasswordController.js"></script>
-        <script src="scripts/controllers/updatePasswordController.js"></script>
-        <script src="scripts/controllers/editProfileController.js"></script>
-        <script src="scripts/controllers/loginController.js"></script>
-        <script src="scripts/controllers/signupController.js"></script>
-        <script src="scripts/controllers/topicController.js"></script>
+ <!-- endbuild -->
 
-        <script src="scripts/services/articleService.js"></script>
-        <script src="scripts/services/linkService.js"></script>
-        <script src="scripts/services/categoryService.js"></script>
-        <script src="scripts/services/topicService.js"></script>
-        <script src="scripts/services/commentService.js"></script>
-        <script src="scripts/services/recommendationService.js"></script>
-        <script src="scripts/services/imageService.js"></script>
-        <script src="scripts/services/userService.js"></script>
-        <script src="scripts/services/loginService.js"></script>
-        <script src="scripts/services/signupService.js"></script>
-        <script src="scripts/services/articleStatsService.js"></script>
-
-        <script src="scripts/directives/anchoredComment.js"></script>
-        <script src="scripts/directives/anchoredComments.js"></script>
-        <script src="scripts/directives/categoryTopicPicker.js"></script>
-        <script src="scripts/directives/clickOutside.js"></script>
-        <script src="scripts/directives/carbonEditor.js"></script>
-        <script src="scripts/directives/articleRenderer.js"></script>
-        <script src="scripts/directives/highlightCode.js"></script>
-        <script src="scripts/directives/loginModal.js"></script>
-        <script src="scripts/directives/mansharCover.js"></script>
-        <script src="scripts/directives/mansharFile.js"></script>
-        <script src="scripts/directives/modalDialog.js"></script>
-        <script src="scripts/directives/recommendButton.js"></script>
-        <script src="scripts/directives/scrollSpy.js"></script>
-        <script src="scripts/directives/imageZoom.js"></script>
-
-        <script src="scripts/filters/darker.js"></script>
-        <script src="scripts/filters/nohtml.js"></script>
-        <script src="scripts/filters/timeToRead.js"></script>
-        <script src="scripts/filters/mansharSanitizer.js"></script>
-
-        <!-- endbuild -->
-
-    <!-- Load the hosted compiled javasript for highlight.js -->
-    <script src="https://yandex.st/highlightjs/8.0/highlight.min.js" async></script>
+ <!-- Load the hosted compiled javasript for highlight.js -->
+ <script src="https://yandex.st/highlightjs/8.0/highlight.min.js" async></script>
 </body>
 </html>
