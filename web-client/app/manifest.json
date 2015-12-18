@@ -1,0 +1,23 @@
+{
+  "lang": "ar",
+  "name": "منشر - منصة النشر العربية",
+  "short_name": "منشر",
+  "icons": [
+    {
+      "src": "images/manshar@48x48.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "images/manshar@96x96.png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "images/manshar@192x192.png",
+      "sizes": "192x192"
+    }
+  ],
+  "theme_color": "#CA1B03",
+  "background_color": "#CA1B03",
+  "display": "standalone", // fullscreen, browser
+  "start_url": "/?homescreen=1"
+}

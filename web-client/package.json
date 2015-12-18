@@ -58,7 +58,8 @@
     "karma-requirejs": "^0.2.2",
     "karma-script-launcher": "^0.1.0",
     "phantomjs": "^1.9.18",
-    "requirejs": "^2.1.20"
+    "requirejs": "^2.1.20",
+    "sw-precache": "git://github.com/mkhatib/sw-precache"
   },
   "engines": {
     "node": ">=0.8.0"

@@ -5,7 +5,10 @@ class Image < ActiveRecord::Base
 
   dragonfly_accessor :asset do
     storage_options do |attachment|
-      { headers: {"x-amz-acl" => "public-read-write"} }
+      {
+        root_path: 'images/',
+        headers: {'x-amz-acl' => 'public-read-write'}
+      }
     end
   end
   abs_url_for :asset
