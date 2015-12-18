@@ -1,19 +1,12 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'UserArticle', 'UserDraft', 'User','$analytics', '$window', 'Article', 'UserRecommendation', 'UserComment', 'UserLink', 'ArticleStats',
-    function ($scope, $rootScope, $location, $routeParams, UserArticle, UserDraft, User, $analytics, $window, Article, UserRecommendation, UserComment, UserLink, ArticleStats) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', 'profile', 'articles', 'publishers', '$location', '$stateParams', 'User','$analytics', '$window', 'Article', 'UserLink',
+    function ($scope, $rootScope, profile, articles, publishers, $location, $stateParams, User, $analytics, $window, Article, UserLink) {
 
-    User.get({'userId': $routeParams.userId}, function(resource) {
-      /* jshint camelcase: false */
-      $rootScope.page.title = resource.name;
-      $rootScope.page.image = resource.cover_url;
-      $rootScope.page.publishedTime = resource.created_at;
-      $rootScope.page.description = resource.bio;
-      $scope.profile = resource;
-    });
-
-    $rootScope.forceBar = true;
+    $scope.profile = profile;
+    $scope.articles = articles;
+    $scope.publishers = publishers;
 
     $scope.editArticle = function (articleId) {
       $location.path('/articles/' + articleId + '/edit');
@@ -56,74 +49,9 @@ angular.module('webClientApp')
       }
     };
 
-    $scope.loadRecommendations = function() {
-      $scope.activeTab = 'recommendations';
-      $scope.articles = [{ loading: true }, { loading: true },
-          { loading: true }];
-      var articles = [];
-      UserRecommendation.query({'userId': $routeParams.userId}, function(recommendations) {
-        angular.forEach(recommendations, function (recommendation) {
-          articles.push(recommendation.article);
-        });
-        $scope.articles = articles;
-      });
-    };
-
-    $scope.loadArticlesStats = function () {
-      $scope.activeTab = 'stats';
-
-      ArticleStats.query({}, function (stats) {
-        $scope.stats = stats;
-      });
-    };
-
-
-    $scope.loadDiscussions = function() {
-      $scope.activeTab = 'discussions';
-      $scope.articles = [{ loading: true }, { loading: true },
-            { loading: true }];
-      var articles = [];
-      UserComment.query({'userId': $routeParams.userId}, function(comments) {
-        angular.forEach(comments, function (comment) {
-          var alreadyExist = false;
-          for (var i = 0; i < articles.length; i++) {
-            if (angular.equals(articles[i], comment.article)) {
-              alreadyExist = true;
-            }
-          }
-          if (!alreadyExist) {
-            articles.push(comment.article);
-          }
-        });
-        $scope.articles = articles;
-      });
-    };
-
-
-    $scope.loadArticles = function() {
-      $scope.articles = [{ loading: true }, { loading: true },
-            { loading: true }];
-      $scope.activeTab = 'published';
-      // Only get drafts if the current profile being viewed and the logged in user
-      // are the same person.
-      if (($rootScope.user &&
-           $rootScope.user.id === parseInt($routeParams.userId))) {
-        $scope.drafts = UserDraft.query({});
-      }
-
-      UserArticle.query({'userId': $routeParams.userId}, function (articles) {
-        $scope.articles = articles;
-      });
-    };
-
-    $scope.loadDrafts = function() {
-      $scope.articles = $scope.drafts;
-      console.log($scope.drafts);
-    }
-
 
     $scope.loadLinks = function() {
-      UserLink.query({'userId': $routeParams.userId}, function (links) {
+      UserLink.query({'userId': $stateParams.userId}, function (links) {
         $scope.links = links;
       });
     };
@@ -133,6 +61,6 @@ angular.module('webClientApp')
     };
 
     $scope.loadLinks();
-    $scope.loadArticles();
+    // $scope.loadArticles();
 
   }]);

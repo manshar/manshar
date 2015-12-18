@@ -1,23 +1,20 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ArticleCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$filter', '$anchorScroll', 'Article',
-      function ($scope, $rootScope, $routeParams, $location, $filter, $anchorScroll, Article) {
+  .controller('ArticleCtrl', ['$scope', '$rootScope', '$location', '$filter', '$anchorScroll', 'article',
+      function ($scope, $rootScope, $location, $filter, $anchorScroll, article) {
 
     $anchorScroll();
-    $rootScope.forceBar = true;
 
-    Article.get({'articleId': $routeParams.articleId},
-        function(resource) {
-      /* jshint camelcase: false */
-      $rootScope.page.title = resource.title;
-      $rootScope.page.image = resource.cover_url;
-      $rootScope.page.publishedTime = resource.created_at;
-      var cleanBody = $filter('nohtml')(resource.body);
-      $rootScope.page.description = $filter('words')(cleanBody, 50);
+    // TODO: set proper values for page properties
+    $rootScope.page.title = article.title;
+    $rootScope.page.image = article.cover_url;
+    $rootScope.page.publishedTime = article.created_at;
 
-      $scope.article = resource;
-    });
+    var cleanBody = $filter('nohtml')(article.body);
+    $rootScope.page.description = $filter('words')(cleanBody, 50);
+
+    $scope.article = article;
 
     $scope.editArticle = function (articleId) {
       $location.path('/articles/' + articleId + '/edit');

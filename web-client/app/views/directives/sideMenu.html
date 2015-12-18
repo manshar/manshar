@@ -3,21 +3,40 @@
 
 <div class="menu-wrapper">
   <img class="profile-photo" ng-src="{{user.thumb_url}}">
-  <ul class="user-menu with-border">
-    <li ng-if="!user.name">
-      <a href="/login"><i></i>تسجيل الدخول</a>
-    </li>
-    <li ng-if="user.name">
-      <a href="/profiles/{{user.id}}"><i></i>{{ user.name }}</a>
-    </li>
-    <li> <a href="/articles/new"><i></i>كتابة مقال</a> </li>
-    <li> <a href="/profiles/{{user.id}}"><i></i>المسودات </a></li>
-    <li> <a href="/profiles/{{user.id}}"><i></i>المنشورات </a></li>
-    <li> <a href="/profiles/{{user.id}}"><i></i>التوصيات </a></li>
+  <ul class="user-menu with-border" ng-switch on="!!user.id">
     <li>
-      <!--logout function is not accessible by this directive-->
-      <a ng-show="id" ng-click="logout()"
-      analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link"><i></i>تسجيل الخروج</a>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.published({ userId: user.id })">
+        <i></i>{{ user.name }}
+      </a>
+      <a ng-switch-when="false" ui-sref="app.login">
+        <i></i>تسجيل الدخول
+      </a>
+    </li>
+    <li>
+      <a ui-sref="app.articles.new">
+        <i></i>كتابة مقال
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.published({ userId: user.id })">
+        <i></i>المنشورات
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.drafts({ userId: user.id })">
+        <i></i>المسودات
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.stats({ userId: user.id })">
+        <i></i>احصائيات المقالات
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ng-click="logout()"
+        analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link">
+        <i></i>تسجيل الخروج
+      </a>
     </li>
   </ul>
 
@@ -37,7 +56,7 @@
 
   <ul class="with-border">
     <li>
-      <a href="/">
+      <a ui-sref="app.publishers">
         <i></i>الناشرون
       </a>
     </li>

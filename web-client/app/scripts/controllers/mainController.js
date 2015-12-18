@@ -1,27 +1,22 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', '$location', 'Article', 'User',
-      function ($scope, $rootScope, $location, Article, User) {
-    $scope.order = 'popular';
+  .controller('MainCtrl', ['$scope', '$state','$rootScope', 'Article', 'User', 'articles', 'publishers',
+      function ($scope, $state, $rootScope, Article, User, articles, publishers) {
+    var currentState = $state.current.url;
+    console.log('hello there', currentState);
+
+    $scope.order = currentState.substring(0, currentState.length - 1);
     $scope.title = 'مَنْشَر';
     $scope.tagline = 'منصة النشر العربية';
-    $scope.articles = [{ loading: true }, { loading: true },
-        { loading: true }];
+    $scope.articles = articles;
+    $scope.publishers = publishers;
 
-    $scope.activeTab = $scope.order;
-    Article.query({'order': $scope.order}, function(articles) {
-      $scope.articles = articles;
-      $scope.hasNext = true;
-      $scope.publishers = User.query();
-    });
-
-    $rootScope.forceBar = false;
+    $scope.hasNext = articles ? true: false;
 
     // TODO(mkhatib): Refactor this to move it to its own directive for listing
     // articles with specific
     var page = 1;
-    $scope.hasNext = false;
     $scope.loadMoreArticles = function() {
       $scope.inProgress = 'load-more';
       Article.query({
@@ -37,28 +32,11 @@ angular.module('webClientApp')
     };
 
     $scope.newArticle = function () {
-      $location.path('/articles/new');
+      $state.go('app.articles.new');
     };
 
     $scope.showArticle = function (articleId) {
-      $location.path('/articles/' + articleId);
-    };
-
-    $scope.orderArticles = function (order, klass) {
-      page = 1;
-      $scope.activeTab = order;
-      $scope.articles = [{ loading: true }, { loading: true },
-          { loading: true }];
-      $scope.order = order;
-      Article.query({'order': order}, function(articles) {
-        $scope.articles = articles;
-        $scope.hasNext = true;
-      });
-      $(".listing-types-tabs i").removeClass().addClass("circle-icon fa fa-"+klass);
-    };
-
-    $scope.selectTab = function(tab) {
-      $scope.activeTab = tab;
+      $state.go('app.articles', {articleId: articleId});
     };
 
     $scope.showCategoriesPicker = function() {
@@ -66,8 +44,8 @@ angular.module('webClientApp')
     };
 
     var categorySelectedUnbind = $rootScope.$on('categorySelected',
-        function(event, data) {
-      $location.path('/categories/' + data.category.id);
+         function(event, data) {
+    //   $location.path('/categories/' + data.category.id);
     });
 
     $scope.getCardColor = function(color) {

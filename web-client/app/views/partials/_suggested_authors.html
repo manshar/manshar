@@ -2,7 +2,7 @@
 
 <div class="clearfix">
   <div class="author-block block" ng-repeat="user in publishers">
-    <a ng-href=\"/profiles/{{user.id}}\">
+    <a ui-sref="app.publishers.profile.published({ userId: user.id })">
       <div class="dimmer"></div>
       <div class="cover" data-manshar-cover url="{{user.thumb_url}}"></div>
       <span ng-show="user.published_articles_count">
@@ -11,10 +11,12 @@
       <p> {{user.name}} </p>
     </a>
   </div>
-  
+
   <div class="author-block block">
-    <div class="dimmer"></div>
-    <span> 50 <i class="fa fa-group"></i> </span>
-    <p> الكل </p>
+    <a ui-sref="app.publishers">
+      <div class="dimmer"></div>
+      <span> {{publishers.length}} <i class="fa fa-group"></i> </span>
+      <p> الكل </p>
+    </a>
   </div>
 </div>

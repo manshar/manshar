@@ -132,7 +132,7 @@ angular.module('webClientApp')
         var textarea = element.find('textarea')[0];
 
         $rootScope.$watch('user', function() {
-          scope.user = $rootScope.user;
+          // scope.user = $rootScope.user;
         });
 
         if (!scope.selector) {

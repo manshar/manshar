@@ -1,31 +1,6 @@
-<header>
-  <div class="header-content">
-    <div class="container">
-      <div class="row clearfix">
-        <div class="pull-right">
-          <i class="logo-square"></i><i class="fa fa-angle-up to-top"></i>
-        </div>
-        <div class="listing-types-tabs">
-        </div>
-      </div>
-    </div>
-    <div class="header-icons">
-      <i class="icon fa fa-edit"></i>
-      <i class="menu icon fa fa-bars closed"></i>
-    </div>
-  </div>
-</header>
-
 <div class="container content-container"> <!-- 700px centered -->
-
   <div class="row clearfix">
-    <!-- <div class="logo">
-      <div>منشر</div>
-      <p>منصة النشر العربية</p>
-    </div> -->
-
     <div class="content-wrapper">
-
       <div class="write-box">
         <p> أكتب هنا... </p>
       </div>
@@ -33,25 +8,21 @@
       <div class="listing-types-tabs">
         <div class="section-title">
           <i class="circle-icon fa fa-line-chart"></i>
-          <a ng-click="orderArticles('popular','line-chart')" ng-class="{'active': activeTab == 'popular'}"> الأكثر شعبية </a> .
-          <a ng-click="orderArticles('best','thumbs-o-up')" ng-class="{'active': activeTab == 'best'}"> الأفضل </a> .
-          <a ng-click="orderArticles('recents','clock-o')" ng-class="{'active': activeTab == 'recents'}"> الأحدث </a>
+          <a ui-sref="app.articles.hot" ui-sref-active="active"> الأكثر شعبية </a> .
+          <a ui-sref="app.articles.best" ui-sref-active="active"> الأفضل </a> .
+          <a ui-sref="app.articles.recent" ui-sref-active="active"> الأحدث </a>
         </div>
       </div>
 
-      <div ng-include="'views/partials/_articles_list.html'"></div>
+      <div ui-view></div>
 
       <div class="categories-section section" ng-include="'views/partials/_categories_grid.html'"></div>
 
       <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
 
-
       <div class="more-articles section">
-        <h3 class="section-title"> <i class="circle-icon fa fa-refresh"></i> </h3>
-
+        <h3 class="section-title" ng-click="loadMoreArticles()" ng-disabled="inProgress == 'load-more'" ng-show="hasNext"> <i class="circle-icon fa fa-refresh"></i> </h3>
       </div> <!-- more-articles -->
-
     </div> <!-- .content-wrapper -->
-
   </div> <!-- row -->
 </div> <!-- content-container -->

@@ -1,0 +1,20 @@
+ <div class="stats-container one-column" ng-show="stats && user.id == profile.id">
+  <table class="stats-dashboard">
+    <tr class="stats-header row">
+      <th> العنوان </th>
+      <th> المشاهدات </th>
+      <th> القراءات </th>
+      <th> التعليقات </th>
+      <th> التوصيات </th>
+    </tr>
+    <tr ng-repeat="stat in stats" class="row">
+      <td> {{stat.article_title}}
+        <a ng-href="{{$location.host() + 'articles/' + stat.article_id}}">رابط للمقال</a>
+      </td>
+      <td> {{stat.page_views_count}} </td>
+      <td> {{stat.reads_count}} </td>
+      <td> {{stat.comments_count}} </td>
+      <td> {{stat.recommendations_count}} </td>
+    </tr>
+  </table>
+</div>

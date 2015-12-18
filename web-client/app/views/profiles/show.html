@@ -5,45 +5,9 @@
 
         <div class="other-profiles">
           <div class="clearfix slider">
-            <div class="author-block block">
-              <a href="#">
-                <div class="dimmer"></div>
-                <img src="images/face.png">
-                <span><i></i> 21 </span>
-                <p> عمرو التميمي </p>
-              </a>
-            </div>
-            <div class="author-block block hovered current">
-              <a href="#">
-                <div class="dimmer"></div>
-                <img ng-src="{{profile.thumb_url}}">
-                <span><i></i> 21 </span>
-                <p> مراد طليب </p>
-                <p class="social-icons"> <i>f</i><i>t</i><i>in</i> </p>
-              </a>
-              <div class="arrow"></div>
-            </div>
-            <div class="author-block block">
-              <div class="dimmer"></div>
-              <img src="images/face.png">
-              <span><i></i> 21 </span>
-              <p> مراد طليب </p>
-            </div>
-            <div class="author-block block">
-              <div class="dimmer"></div>
-              <img src="images/face.png">
-              <span><i></i> 21 </span>
-              <p> مراد طليب </p>
-            </div>
-            <div class="author-block block">
-              <div class="dimmer"></div>
-              <img src="images/face.png">
-              <span><i></i> 21 </span>
-              <p> مراد طليب </p>
-            </div>
+            <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
           </div>
         </div>
-
         <div class="profile-wrapper">
           <div class="profile-info">
             <h3> {{profile.name}} </h3>
@@ -53,53 +17,23 @@
           <div class="listing-types-tabs">
             <div class="section-title">
               <i></i>
-              <a ng-click="loadArticles()" ng-class="{'active': activeTab == 'published'}">المنشورات</a>.
-              <a ng-click="loadDrafts()" ng-class="{'active': activeTab == 'drafts'}" ng-show="user.id == profile.id">المسودات</a>.
-              <a ng-click="loadRecommendations()" ng-class="{'active': activeTab == 'recommendations'}">التوصيات</a>.
-              <a ng-click="loadDiscussions()" ng-class="{'active': activeTab == 'discussions'}">المناقشات</a>.
-              <a ng-click="loadArticlesStats()" ng-class="{'active': activeTab == 'stats'}" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
+              <a ui-sref-active="active" ui-sref=".published">المنشورات</a>.
+              <a ui-sref-active="active" ui-sref=".recommended">التوصيات</a>.
+              <a ng-show="user.id == profile.id" ui-sref-active="active" ui-sref=".drafts">المسودات</a><span ng-show="user.id == profile.id">.</span>
+              <a ui-sref-active="active" ui-sref=".discussions">المناقشات</a>.
+              <a ui-sref-active="active" ui-sref=".stats" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
             </div>
           </div>
 
-          <div class="profile-list" ng-hide="activeTab == 'stats'">
-            <a href="/articles/new" class="write-new-button" ng-show="user.id == profile.id">
+          <div class="profile-list">
+            <a href="/articles/new" class="write-new-button"
+              ng-show="user.id == profile.id">
               <i class="fa fa-pencil"></i>
               اكتب مقال جديد
             </a>
-
-            <div ng-show="!articles[0]" class="no-articles-container">
-              <h3 ng-show="activeTab == 'published'">لا يوجد أي منشورات</h3>
-              <h3 ng-show="activeTab == 'drafts'">لا يوجد أي مسودات</h3>
-              <h3 ng-show="activeTab == 'recommendations'">لا يوجد أي توصيات</h3>
-              <h3 ng-show="activeTab == 'discussions'">لا يوجد أي مناقشات</h3>
-              <h4>
-                <a href="/">تصفح أشهر المقالات</a>
-              </h4>
-            </div>
-
-            <div ng-include="'views/partials/_articles_list.html'"></div>
           </div>
 
-          <div class="stats-container one-column" ng-show="stats && user.id == profile.id && activeTab == 'stats'">
-            <div class="stats-dashboard">
-              <ul class="stats-header row">
-                <li> العنوان </li>
-                <li> المشاهدات </li>
-                <li> القراءات </li>
-                <li> التعليقات </li>
-                <li> التوصيات </li>
-              </ul>
-              <ul ng-repeat="stat in stats" class="row">
-                <li> {{stat.article_title}}
-                  <a ng-href="{{$location.host() + 'articles/' + stat.article_id}}">رابط للمقال</a>
-                </li>
-                <li> {{stat.page_views_count}} </li>
-                <li> {{stat.reads_count}} </li>
-                <li> {{stat.comments_count}} </li>
-                <li> {{stat.recommendations_count}} </li>
-              </ul>
-            </div>
-          </div>
+          <div ui-view></div>
 
           <!-- <ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
             <h1 class="header-label">

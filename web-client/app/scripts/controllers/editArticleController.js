@@ -2,14 +2,18 @@
 /* jshint camelcase: false */
 
 angular.module('webClientApp')
-  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$analytics', '$window', '$interval', '$timeout', '$anchorScroll', 'Article',
-      function ($rootScope, $scope, $routeParams, $location, $analytics, $window, $interval, $timeout, $anchorScroll, Article) {
+  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$stateParams', '$state', '$location', '$analytics', '$window', '$interval', '$timeout', '$anchorScroll', 'Article', 'article',
+      function ($rootScope, $scope, $stateParams, $state, $location, $analytics, $window, $interval, $timeout, $anchorScroll, Article, article) {
 
+    console.log('i am a controller');
     var confirmEditMessage = ('هذه العملية ستنقل المقال إلى مسوداتك. يمكنك' +
         ' نشرها مجدداً بالضغط على نشر. هل تود نقل المقال للمسودات؟');
 
     var lastSavedArticle = {};
-    $rootScope.forceBar = true;
+    // Load the article if we are editing.
+    lastSavedArticle = angular.copy(article);
+    $scope.article = article;
+    console.log('article', article);
     /**
      * Checks if the article has been changed since the last time it was saved.
      * @return {boolean} True if the article has been changed.
@@ -29,46 +33,57 @@ angular.module('webClientApp')
     /**
      * If the current user is not the owner redirect the user to view.
      */
-    var authorizeUser = function (article) {
-      if (!$rootScope.isOwner($rootScope.user, article)) {
-        $location.path('/articles/' + article.id);
-      }
-    };
+    // var authorizeUser = function (article) {
+    //   if (!$rootScope.isOwner($rootScope.user, article)) {
+    //     $location.path('/articles/' + article.id);
+    //   }
+    // };
 
     // Update the page title when the title of the article changes.
     $scope.$watch('article.title', function(){
       $rootScope.page.title = $scope.article.title || 'مقال جديد';
     });
 
-    // Load the article if we are editing.
-    $scope.article = {};
-    if($routeParams.articleId) {
-      Article.get({'articleId': $routeParams.articleId}, function (resource) {
-        authorizeUser(resource);
-
-        // Don't allow editing legacy articles.
-        if (resource.body) {
-          $location.path('/articles/' + resource.id);
-          return;
+    // Warn the user that editing an article will move it to draft until
+    // they publish it again.
+    $timeout(function () {
+      if (article.published) {
+        if (!$window.confirm(confirmEditMessage)) {
+          $state.go('app.articles.show', {articleId: article.id});
+        } else {
+          $scope.article.published = false;
         }
-        lastSavedArticle = angular.copy(resource);
-        $scope.article = resource;
-        // Warn the user that editing an article will move it to draft until
-        // they publish it again.
-        $timeout(function () {
-          if (resource.published) {
-            if (!$window.confirm(confirmEditMessage)) {
-              $location.path('/articles/' + resource.id);
-            } else {
-              $scope.article.published = false;
-            }
-          }
-          $anchorScroll();
-        });
-      });
-    }
+      }
+      $anchorScroll();
+    });
+    // if($stateParams.articleId) {
+    //   Article.get({'articleId': $stateParams.articleId}, function (resource) {
+    //     authorizeUser(resource);
+
+    //     // Don't allow editing legacy articles.
+    //     // if (resource.body) {
+    //     //   $location.path('/articles/' + resource.id);
+    //     //   return;
+    //     // }
+    //     lastSavedArticle = angular.copy(resource);
+    //     $scope.article = resource;
+    //     // Warn the user that editing an article will move it to draft until
+    //     // they publish it again.
+    //     $timeout(function () {
+    //       if (resource.published) {
+    //         if (!$window.confirm(confirmEditMessage)) {
+    //           $location.path('/articles/' + resource.id);
+    //         } else {
+    //           $scope.article.published = false;
+    //         }
+    //       }
+    //       $anchorScroll();
+    //     });
+    //   });
+    // }
 
     var updateSuccess = function (resource) {
+      console.log('resouce', resource);
       lastSavedArticle = angular.copy(resource);
       $timeout(function () {
         $scope.isSaving = false;
@@ -93,9 +108,8 @@ angular.module('webClientApp')
           });
         }
       }
-
       if (resource.published) {
-        $location.path('/articles/' + resource.id);
+        $state.go('app.articles.show' + {articleId: resource.id});
       }
     };
 
@@ -132,6 +146,7 @@ angular.module('webClientApp')
      * @param {boolean} silent Whether to flash the controls or not.
      */
     $scope.saveArticle = function(article, published, silent) {
+      console.log('saving...');
       // Clear autosave interval before sitting published.
       if(autoSavePromise && published) {
         $interval.cancel(autoSavePromise);
@@ -235,7 +250,7 @@ angular.module('webClientApp')
      */
     var loggedOutUnbined = $rootScope.$on('auth:logout-success', function () {
       if ($scope.article.published) {
-        var location = '/articles/' + $routeParams.articleId;
+        var location = '/articles/' + $stateParams.articleId;
         $location.path(location);
       } else {
         $location.path('/');

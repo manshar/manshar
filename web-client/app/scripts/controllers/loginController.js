@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('LoginCtrl', ['$scope', '$http', '$location', '$routeParams', '$analytics', 'LoginService', 'SignupService',
-      function ($scope, $http, $location, $routeParams, $analytics, LoginService, SignupService) {
+  .controller('LoginCtrl', ['$scope', '$http', '$location', '$stateParams', '$analytics', 'LoginService', 'SignupService',
+      function ($scope, $http, $location, $stateParams, $analytics, LoginService, SignupService) {
 
-    $scope.isLoginPage = $location.path() === '/login';
+    $scope.isLoginPage = $location.path() === '/login/';
     $scope.error = null;
 
     $scope.login = function(user) {
@@ -23,8 +23,9 @@ angular.module('webClientApp')
       $analytics.eventTrack('Login Success', {
         category: 'User'
       });
+      console.log('$location.path()', $location.path());
       if ($scope.isLoginPage) {
-        $location.path($routeParams.prev || '/profiles/' + user.id)
+        $location.path($stateParams.prev || '/profiles/' + user.id)
           // Remove the prev param when redirecting.
           .search('prev', null);
       }
