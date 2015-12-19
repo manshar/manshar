@@ -6,7 +6,7 @@
     </h4>
   </div>
 
-  <div ng-repeat="article in articles" class="article" ng-class="{'loading': article.loading, 'blinking': article.loading}" style="border-right: 1px solid {getCardColor(article.topic.category.color)}">
+  <div ng-repeat="article in articles" class="article category-{{article.topic.category.id}}" ng-class="{'loading': article.loading, 'blinking': article.loading}" style="border-right: 1px solid {getCardColor(article.topic.category.color)}">
 
     <span class="reading-time" ng-hide="article.loading">{{article.reading_time | timeToRead }}</span>
     <div class="title">

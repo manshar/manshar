@@ -105,7 +105,7 @@ header {
       height: 26px;
       margin-left: 10px;
       vertical-align: top;
-      text-align: center;
+      text-align: left;
       line-height: 26px;
       &.profile-photo {
         background: red;
@@ -230,16 +230,20 @@ html[xmlns] .clearfix {
   z-index: 999;
   top: 40px;
   transition: all 0.4s;
-
+  a {
+    color: #000;
+    font-size: 14px;
+  }
   img {
     display: inline;
-    width: 20px;
+    width: 21px;
   }
   span {
     display: inline-table;
     vertical-align: top;
     margin-right: -4px;
     font-size: 0.8em;
+    font-size: 14px;
   }
   &.push-right {
     margin-right: -550px;
@@ -268,18 +272,15 @@ html[xmlns] .clearfix {
   transition: all 0.4s;
 }
 
-.article {
-  padding: 0 15px;
-  margin-bottom: 40px;
-  border-right: 1px solid #03a9f4;
-  right: -1px;
-  position: relative;
-}
-
 h1, h2, h3 {
   font-weight: normal;
 }
 .article {
+  padding: 0 15px;
+  margin-bottom: 40px;
+  border-right: 1px solid;
+  right: -1px;
+  position: relative;
   a {
    color: #000;
   }
@@ -293,11 +294,23 @@ h1, h2, h3 {
       font-size: 16px;
     }
   }
-  &.red {
+  &.category-1 {
+    border-color: #d40041;
+  }
+  &.category-2 {
     border-color: #f44336;
   }
-  &.green {
-    border-color: #4c9b27;
+  &.category-3 {
+    border-color: #8755ff;
+  }
+  &.category-4 {
+    border-color: #03a9f4;
+  }
+  &.category-5 {
+    border-color: #008e94;
+  }
+  &.category-6 {
+    border-color: #27ae60;
   }
 }
 
@@ -419,6 +432,12 @@ h1, h2, h3 {
     position: absolute;
     left: 10px;
     top: 10px;
+  }
+  &.small-block {
+    .author-name {
+      height: 22px;
+      overflow: hidden;
+    }
   }
 }
 
