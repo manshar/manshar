@@ -1,19 +1,20 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', 'profile', 'articles', 'publishers', '$location', '$stateParams', 'User','$analytics', '$window', 'Article', 'UserLink',
-    function ($scope, $rootScope, profile, articles, publishers, $location, $stateParams, User, $analytics, $window, Article, UserLink) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', 'profile', 'articles', 'publishers', 'Article', '$state', '$stateParams','$analytics', '$anchorScroll','$window',
+    function ($scope, $rootScope, profile, articles, publishers, Article, $state, $stateParams, $analytics, $anchorScroll, $window) {
+    $anchorScroll();
 
     $scope.profile = profile;
     $scope.articles = articles;
     $scope.publishers = publishers;
 
     $scope.editArticle = function (articleId) {
-      $location.path('/articles/' + articleId + '/edit');
+      $state.go('app.articles.edit', {articleId: $stateParams.articleId});
     };
 
     $scope.editProfile = function () {
-      $location.path('/profiles/' + $rootScope.user.id + '/edit');
+      $state.go('app.publishers.profile.edit', {userId: $rootScope.user.id});
     };
 
     var deleteSuccess = function () {
@@ -49,18 +50,8 @@ angular.module('webClientApp')
       }
     };
 
-
-    $scope.loadLinks = function() {
-      UserLink.query({'userId': $stateParams.userId}, function (links) {
-        $scope.links = links;
-      });
-    };
-
     $scope.getCardColor = function(color) {
       return color || '#C0C0C0';
     };
-
-    $scope.loadLinks();
-    // $scope.loadArticles();
 
   }]);

@@ -128,7 +128,7 @@ angular.module('webClientApp')
           }
         });
 
-        read(); // initialize
+        // read(); // initialize
 
         scope.$on('$destroy', function() {
           editor.destroy();

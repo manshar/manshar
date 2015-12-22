@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ArticleCtrl', ['$scope', '$rootScope', '$location', '$filter', '$anchorScroll', 'article',
-      function ($scope, $rootScope, $location, $filter, $anchorScroll, article) {
+  .controller('ArticleCtrl', ['$scope', '$rootScope', '$state', '$filter', '$anchorScroll', 'article',
+      function ($scope, $rootScope, $state, $filter, $anchorScroll, article) {
 
     $anchorScroll();
 
@@ -16,8 +16,11 @@ angular.module('webClientApp')
 
     $scope.article = article;
 
+    // TODO: retrieve more than one article and rename the variable to readmore
+    $scope.articles = [article.next];
+
     $scope.editArticle = function (articleId) {
-      $location.path('/articles/' + articleId + '/edit');
+      $state.go('app.articles.edit', {articleId: articleId});
     };
 
   }]);

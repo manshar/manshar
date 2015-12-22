@@ -41,13 +41,13 @@
   </ul>
 
   <ul class="categories-menu with-border">
-    <li ng-repeat="category in categories" class="category-{{category.id}}">
+    <li ui-sref-active="active" ng-repeat="category in categories" class="category-{{category.id}}">
       <style type="text/css">
         .categories-menu .category-{{category.id}} {
           border-right-color: {{category.color}};
         }
       </style>
-      <a href="/category/{{category.id}}">
+      <a ui-sref="app.categories({categoryId: category.id})">
         <i class="fa {{category.icon_cssclass}}"></i>
         {{category.title}}
       </a>
@@ -63,8 +63,8 @@
   </ul>
 
   <ul>
-    <li> <a href="https://www.manshar.org/" target="_blank"><i></i>قصة منشر</a> </li>
-    <li> <a href="/articles/652"><i></i>شروط الاستخدام</a> </li>
+    <li> <a href="http://www.manshar.org/" target="_blank"><i></i>قصة منشر</a> </li>
+    <li> <a ui-sref="app.articles.show({articleId: 652})" ><i></i>شروط الاستخدام</a> </li>
     <li> <a href="https://goo.gl/IuOXaA" target="_blank"><i></i>تابعنا</a> </li>
     <li> <a href="https://github.com/manshar/manshar"><i></i>ساهم بتطوير المنصة</a> </li>
   </ul>

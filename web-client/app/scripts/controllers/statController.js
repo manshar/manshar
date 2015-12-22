@@ -5,5 +5,5 @@ angular.module('webClientApp')
     function ($scope, stats) {
 
       $scope.stats = stats;
-      console.log(stats[0]);
+      console.log(stats);
   }]);

@@ -33,8 +33,7 @@ angular.module('webClientApp', [
         url: '/',
         views: {
           'content': {
-            templateUrl: 'views/main.html',
-            controller: 'MainCtrl'
+            templateUrl: 'views/main.html'
           }
         },
         resolve: {
@@ -101,8 +100,12 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          article: function(Article, $stateParams) {
-            return Article.get({'articleId': $stateParams.articleId}).$promise;
+          article: function(Article, $stateParams, $state) {
+            return Article.get({'articleId': $stateParams.articleId}, function(article) {
+              return article;
+            }, function() {
+              $state.go('app');
+            });
           }
         }
       })
@@ -123,7 +126,7 @@ angular.module('webClientApp', [
               }
             }, function() {
                 $state.go('app.login');
-            });
+            }).$promise;
           },
           article: function(Article, $stateParams, $state, $rootScope) {
             console.log('articleContent resolved');
@@ -135,29 +138,24 @@ angular.module('webClientApp', [
               } else {
                 $state.go('app.articles.show', {articleId: article.id});
               }
-            });
+            }).$promise;
           }
         }
       })
       .state('app.articles.new', {
         url: 'new/',
         views: {
-          // 'content@': {
-          //   templateUrl: 'views/articles/edit.html',
-          //   controller: 'EditArticleCtrl'
-          // }
+          'content@': {}
         },
         resolve: {
           article: function(Article, $state) {
-            console.log('articles/new/');
-
             return Article.save({ article: { published: false } }, function(resource) {
               console.log(resource);
               $state.go('app.articles.edit', { articleId: resource.id });
             }, function(error) {
               console.log(error);
-              return;
-            });
+              $state.go('app');
+            }).$promise;
           }
         }
       })
@@ -177,7 +175,7 @@ angular.module('webClientApp', [
               }
             }, function() {
               return;
-            });
+            }).$promise;
           }
         }
       })
@@ -210,6 +208,28 @@ angular.module('webClientApp', [
           },
           articles: function(UserArticle, $stateParams) {
             return UserArticle.query({'userId': $stateParams.userId}).$promise;
+          }
+        }
+      })
+      .state('app.publishers.profile.edit', {
+        url: 'edit/',
+        views: {
+          'content@': {
+            templateUrl: 'views/profiles/edit.html',
+            controller: 'EditProfileCtrl'
+          }
+        },
+        resolve: {
+          canEdit: function($auth, $state, $stateParams) {
+            return $auth.validateUser().then(function(user) {
+              if(user.id === $stateParams.userId) {
+                return;
+              } else {
+                $state.go('app.publishers.profile.published', {userId: $stateParams.userId});
+              }
+            }, function() {
+              $state.go('app.publishers.profile.published', {userId: $stateParams.userId});
+            });
           }
         }
       })
@@ -264,6 +284,63 @@ angular.module('webClientApp', [
         resolve: {
           comments: function(UserComment, $stateParams) {
             return UserComment.query({'userId': $stateParams.userId}).$promise;
+          }
+        }
+      })
+      .state('app.categories', {
+        url: 'category/:categoryId/',
+        views: {
+          'content@': {
+            templateUrl: 'views/categories/show.html',
+            controller: 'CategoryCtrl'
+          }
+        },
+        resolve: {
+          category: function(Category, $stateParams, $state) {
+            return Category.get({'categoryId': $stateParams.categoryId}, function(category) {
+              return category;
+            }, function() {
+              $state.go('app');
+            });
+          },
+          articles: function(CategoryArticle, $stateParams) {
+            return CategoryArticle.query({'categoryId': $stateParams.categoryId}).$promise;
+          },
+          topics: function(Topic, $stateParams) {
+            return Topic.query({'categoryId': $stateParams.categoryId}).$promise;
+          }
+        }
+      })
+      .state('app.categories.topic', {
+        url: 'topic/:topicId/',
+        views: {
+          'content@': {
+            templateUrl: 'views/topics/show.html',
+            controller: 'TopicCtrl'
+          }
+        },
+        resolve: {
+          topic: function(Topic, $state, $stateParams) {
+            return Topic.get({
+                  'categoryId': $stateParams.categoryId,
+                  'topicId': $stateParams.topicId
+                }, function(topic) {
+                  console.log(topic);
+                  return topic;
+                }, function() {
+                  $state.go('app');
+                }).$promise;
+          },
+          articles: function(TopicArticle, $state, $stateParams) {
+            return TopicArticle.query({
+                    'categoryId': $stateParams.categoryId,
+                    'topicId': $stateParams.topicId
+                  }, function(articles) {
+                    console.log(articles);
+                    return articles;
+                  }, function() {
+                    $state.go('app');
+                  }).$promise;
           }
         }
       });

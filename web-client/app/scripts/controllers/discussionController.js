@@ -5,8 +5,6 @@ angular.module('webClientApp')
     function ($scope, $rootScope, comments) {
       var articles = [];
 
-      console.log('comments', comments);
-
       angular.forEach(comments, function (comment) {
         var alreadyExist = false;
         for (var i = 0; i < articles.length; i++) {
