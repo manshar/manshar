@@ -23,7 +23,10 @@ class User < ActiveRecord::Base
   dragonfly_accessor :avatar do
     default ENV['DEFAULT_AVATAR']
     storage_options do |attachment|
-      { headers: {"x-amz-acl" => "public-read-write"} }
+      {
+        root_path: 'users/avatars/',
+        headers: {'x-amz-acl' => 'public-read-write'}
+      }
     end
   end
   abs_url_for :avatar
