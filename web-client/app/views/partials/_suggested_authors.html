@@ -1,7 +1,7 @@
 <h3 class="section-title"> <i class="circle-icon fa fa-group"></i>الناشرون</h3>
 
 <div class="clearfix">
-  <div class="author-block small-block block" ng-repeat="user in publishers">
+  <div class="author-block small-block block" ng-repeat="user in publishers|limitTo:5">
     <a ui-sref="app.publishers.profile.published({ userId: user.id })">
       <div class="dimmer"></div>
       <div class="cover" data-manshar-cover url="{{user.thumb_url}}"></div>
