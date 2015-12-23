@@ -32,18 +32,21 @@
     <meta name="twitter:image" content="{{page.image}}" /> 
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/carbon/dist/carbon.min.css">
-        <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
-        <link rel="stylesheet" href="bower_components/angular-tooltips/dist/angular-tooltips.min.css">
-        <link rel="stylesheet" href="bower_components/image-zoom/dist/imagezoom.css">
-        <!-- endbuild -->
-        <!-- build:css({.tmp,app}) styles/enhanced.css -->
-        <link rel="stylesheet" type="text/css" href="styles/enhanced.css" media="screen  and (min-width: 45em)" />
-        <!-- endbuild -->
-        <!-- Load the hosted stylesheets for highlight.js -->
-        <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/carbon/dist/carbon.min.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <link rel="stylesheet" href="bower_components/angular-tooltips/dist/angular-tooltips.min.css">
+    <link rel="stylesheet" href="bower_components/image-zoom/dist/imagezoom.css">
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/enhanced.css -->
+    <link rel="stylesheet" type="text/css" href="styles/enhanced.css" media="screen  and (min-width: 45em)" />
+    <!-- endbuild -->
+    <!-- Load the hosted stylesheets for highlight.js -->
+    <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+
+    <!-- TODO(mkhatib): Needs HTTPS support. -->
+    <link rel="manifest" href="/manifest.json">
   </head>
   <body class="manshar" ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
     <!--[if lt IE 7]>
@@ -136,6 +139,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/appConfig.js"></script>
         <script src="scripts/cachedTemplates.js"></script>
+        <script src="scripts/service-worker-registration.js"></script>
 
         <script src="scripts/controllers/admin/manageCategoriesCtrl.js"></script>
         <script src="scripts/controllers/mainController.js"></script>

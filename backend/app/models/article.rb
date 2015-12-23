@@ -21,7 +21,10 @@ class Article < ActiveRecord::Base
 
   dragonfly_accessor :cover do
     storage_options do |attachment|
-      { headers: {"x-amz-acl" => "public-read-write"} }
+      {
+        root_path: 'articles/covers/',
+        headers: {'x-amz-acl' => 'public-read-write'}
+      }
     end
   end
   abs_url_for :cover
