@@ -2,41 +2,13 @@
 
 <div class="clearfix">
   
-  <div class="category-block block category-1">
+  <div ui-sref-active="active" ng-repeat="category in categories" class="category-block block" style="background:{{category.color}}">
     <div class="category-content">
-      <i class="large-icon fa fa-paint-brush"></i>
-      <p> فن وأدب </p>
+      <a ui-sref="app.categories({categoryId: category.id})">
+        <i class="large-icon fa {{category.icon_cssclass}}"></i>
+        <p> {{category.title}} </p>
+      </a>
     </div>
   </div>
-  <div class="category-block block category-2">
-    <div class="category-content">
-      <i class="large-icon fa fa-heart"></i>
-      <p> صحة ورياضة </p>
-    </div>
-  </div>
-  <div class="category-block block category-3">
-    <div class="category-content">
-      <i class="large-icon fa fa-video-camera"></i>
-      <p> إعلام وتسويق </p>
-    </div>
-  </div>
-  <div class="category-block block category-4">
-    <div class="category-content">
-      <i class="large-icon fa fa-desktop"></i>
-      <p> علوم وتكنولوجيا </p>
-    </div>
-  </div>
-  <div class="category-block block category-5">
-    <div class="category-content">
-      <i class="large-icon fa fa-group"></i>
-      <p> سياسة ومجتمع </p>
-    </div>
-  </div>
-  
-  <div class="category-block block category-6">
-    <div class="category-content">
-      <i class="large-icon fa fa-money"></i>
-      <p> مال وأعمال </p>
-    </div>
-  </div>
+
 </div>
