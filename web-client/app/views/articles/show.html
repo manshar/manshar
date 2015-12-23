@@ -14,7 +14,7 @@
 </header>
 
 <div class="manshar-article">
-  <div class="article-container tray" ng-class="{'new-version': !!article.json_model}">
+  <div class="article-container" ng-class="{'new-version': !!article.json_model, 'tray': !article.json_model}">
     <article ng-if="article.body" id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code image-zoom>
       <!-- Note: Legacy Article rendering. -->
     </article>
@@ -32,7 +32,7 @@
         ng-model="article.json_model"
       image-zoom
       highlight-code></article>
-
+    <div style="clear: both;"></div>
     <div anchored-comments
         article="article"
         guid-elements-container-id="article-body"
