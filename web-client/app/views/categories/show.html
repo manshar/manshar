@@ -5,11 +5,13 @@
         <a ui-sref="app.articles.new"><p> أكتب هنا... </p></a>
       </div>
 
-      <h3 class="section-title">
-        <i class="circle-icon fa {{category.icon_cssclass}}" style="background-color:{{category.color}}"></i>
-        {{category.title}}
-      </h3>
-      <p class="category-tagline">{{category.description}}</p>
+      <div class="category-info">
+        <h3 class="section-title">
+          <i class="circle-icon fa {{category.icon_cssclass}}" style="background-color:{{category.color}}"></i>
+          {{category.title}}
+        </h3>
+        <p class="category-tagline">{{category.description}}</p>
+      </div>
 
       <div ng-include="'views/partials/_articles_list.html'"></div>
 
