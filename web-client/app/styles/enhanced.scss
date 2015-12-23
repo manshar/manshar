@@ -233,7 +233,7 @@ html[xmlns] .clearfix {
 .logo {
   position: absolute;
   right: 50%;
-  margin-right: -400px;
+  margin-right: -350px;
   text-align: left;
   z-index: 999;
   top: 40px;
@@ -241,6 +241,9 @@ html[xmlns] .clearfix {
   a {
     color: #000;
     font-size: 14px;
+  }
+  p {
+    font-size: 11px;
   }
   img {
     display: inline;
