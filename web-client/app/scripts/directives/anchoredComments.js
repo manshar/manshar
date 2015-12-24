@@ -50,7 +50,8 @@ angular.module('webClientApp')
      * Creates a new comment anchor and adding them to container.
      * @param  {HTMLElement} srcElement Element to get the GUID from.
      */
-    var createNewComment = function(srcElement, scope, container, offsetTop, guidAttribute) {
+    var createNewComment = function(srcElement, scope, container, offsetTop,
+        guidAttribute, positionLeft) {
       // TODO(mkhatib): Maybe use another attribute rather than title
       // The reason I used title is Angular seems to be stripping any
       // data- attributes or id.
@@ -67,6 +68,9 @@ angular.module('webClientApp')
       commentEl.setAttribute('guid', guid);
       commentEl.className = 'anchored-comment-box';
       commentEl.style.top = (srcElement.offsetTop + offsetTop) + 'px';
+      if (positionLeft) {
+        commentEl.style.left = srcElement.offsetLeft + 'px';
+      }
       $compile(commentEl)(scope);
       container.appendChild(commentEl);
 
@@ -84,7 +88,8 @@ angular.module('webClientApp')
      * Recalculate the positions of the comments.
      * @param  {HTMLElement} container Element that contains the anchors.
      */
-    var repositionComments = function(container, offsetTop, guidAttribute) {
+    var repositionComments = function(container, offsetTop, guidAttribute,
+        positionLeft) {
       var comments = container.getElementsByClassName('anchored-comment-box');
       for (var i = 0; i < comments.length; i++) {
         var guid = comments[i].getAttribute('guid');
@@ -93,6 +98,9 @@ angular.module('webClientApp')
         }
         var srcElement = document.querySelector('['+guidAttribute+'="' + guid + '"]');
         comments[i].style.top = (srcElement.offsetTop + offsetTop) + 'px';
+        if (positionLeft) {
+          comments[i].style.left = srcElement.offsetLeft + 'px';
+        }
       }
     };
 
@@ -125,7 +133,8 @@ angular.module('webClientApp')
         article: '=',
         selector: '@',
         guidElementsContainerId: '@',
-        guidAttribute: '@'
+        guidAttribute: '@',
+        positionLeft: '='
       },
       link: function (scope, element) {
         var mainCommentBox = element.find('div')[0];
@@ -154,7 +163,8 @@ angular.module('webClientApp')
                 scope.guidElementsContainerId);
             angular.element(guidContainer).find('img').on('load', function() {
               repositionComments(
-                  element[0], guidContainer.offsetTop, scope.guidAttribute);
+                  element[0], guidContainer.offsetTop, scope.guidAttribute,
+                  scope.positionLeft);
             });
 
 
@@ -171,7 +181,8 @@ angular.module('webClientApp')
             for (var i = 0; i < elements.length; i++) {
               createNewComment(
                   elements[i], scope, element[0],
-                  guidContainer.offsetTop, scope.guidAttribute);
+                  guidContainer.offsetTop, scope.guidAttribute,
+                  scope.positionLeft);
             }
 
           }, 1000);
@@ -187,6 +198,9 @@ angular.module('webClientApp')
             var el = document.querySelector('['+scope.guidAttribute+'="' + data.guid + '"]');
             angular.element(el).addClass(COMMENT_HIGHLIGHT_CLASS);
             mainCommentBox.style.top = data.target.parentNode.offsetTop + 'px';
+            if (scope.positionLeft) {
+              mainCommentBox.style.left = data.target.parentNode.offsetLeft + 'px';
+            }
 
             // Activate the anchor sidebar and focus the new comment textarea.
             scope.activeGuid = data.guid;

@@ -1,4 +1,4 @@
-<header ng-if="article.body" class="article-header" ng-class="{'nocover': !article.cover_url}">
+<header ng-if="!article.json_model" class="article-header" ng-class="{'nocover': !article.cover_url}">
   <!-- Note: Legacy Article Rendering. -->
 
   <div class="cover-image" manshar-cover url="{{article.cover_url}}">
@@ -15,7 +15,7 @@
 
 <div class="manshar-article">
   <div class="article-container" ng-class="{'new-version': !!article.json_model, 'tray': !article.json_model}">
-    <article ng-if="article.body" id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code image-zoom>
+    <article ng-if="!article.json_model" id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code image-zoom>
       <!-- Note: Legacy Article rendering. -->
     </article>
 
@@ -35,9 +35,10 @@
     <div style="clear: both;"></div>
     <div anchored-comments
         article="article"
+        position-left="!!article.json_model"
         guid-elements-container-id="article-body"
-        guid-attribute="{{article.body ? 'data-guid' : 'name'}}"
-        selector="{{article.body ? '.guid-tagged' : 'section [name]'}}"
+        guid-attribute="{{article.json_model ? 'name' : 'data-guid'}}"
+        selector="{{article.json_model ? 'section [name]:not(.carbon-layout)' : '.guid-tagged'}}"
         class="comments-container">
     </div>
 
@@ -123,7 +124,7 @@
       ng-show="isOwner(user, article)"
       tooltips
         tooltip-class="fixed-tooltip"
-        tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}">
+        tooltip-title="{{!article.json_model ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}">
       <i class="fa fa-pencil"></i>
     </button>
   </div>
