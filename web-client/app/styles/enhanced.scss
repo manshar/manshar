@@ -531,15 +531,22 @@ h1, h2, h3 {
 .recommendation-button {
   cursor: pointer;
   display: inline-block;
+  i {
+    transform: scale(1.4);
+    width: 30px;
+    height: 30px;
+    border: 3px solid transparent;
+  }
   &:hover {
     color: #ca1504;
     i {
-      transform: scale(1.4);
+      transform: scale(1.35);
+      border: 3px solid #eee;
     }
   }
   .recommendation-count {
     position: absolute;
-    right: -40px;
+    right: -45px;
     text-align: left;
     width: 36px;
     line-height: 34px;
@@ -604,6 +611,9 @@ h1, h2, h3 {
       right: -100px;
       top: 0;
       width: 99px;
+    }
+    a {
+      color: #222;
     }
   }
 
