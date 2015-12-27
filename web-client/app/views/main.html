@@ -16,10 +16,6 @@
 
       <div ui-view></div>
 
-      <div class="categories-section section" ng-include="'views/partials/_categories_grid.html'"></div>
-
-      <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
-
       <div class="more-articles section">
         <h3 class="section-title" ng-click="loadMoreArticles()" ng-disabled="inProgress == 'load-more'" ng-show="hasNext"> <i class="circle-icon fa fa-refresh"></i> </h3>
       </div> <!-- more-articles -->

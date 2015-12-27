@@ -35,13 +35,6 @@ angular.module('webClientApp', [
           'content': {
             templateUrl: 'views/main.html'
           }
-        },
-        resolve: {
-          articles: function(Article) {
-            var order = 'popular';
-            // Popular is the default sort for articles
-            return Article.query({'order': order}).$promise;
-          }
         }
       })
       .state('app.articles', {
@@ -49,31 +42,25 @@ angular.module('webClientApp', [
         url: 'articles/',
         views: {
           'content@': {
-            templateUrl: 'views/main.html',
-            controller: 'MainCtrl'
-          }
-        },
-        resolve: {
-          articles: function(Article) {
-            var order = 'popular';
-            // Popular is the default sort for articles
-            return Article.query({'order': order}).$promise;
-          },
-          publishers: function(User) {
-            return User.query({
-              per: 5
-            }).$promise;
+            templateUrl: 'views/main.html'
           }
         }
       })
       .state('app.articles.hot', {
         url: 'hot/',
-        templateUrl: 'views/partials/_articles_list.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/partials/_stream.html',
+        controller: 'MainCtrl',
+        resolve: {
+          articles: function(Article) {
+            var order = 'popular';
+            // Popular is the default sort for articles
+            return Article.query({'order': order}).$promise;
+          }
+        }
       })
       .state('app.articles.best', {
         url: 'best/',
-        templateUrl: 'views/partials/_articles_list.html',
+        templateUrl: 'views/partials/_stream.html',
         controller: 'MainCtrl',
         resolve: {
           articles: function(Article) {
@@ -85,7 +72,7 @@ angular.module('webClientApp', [
       .state('app.articles.recent', {
         url: 'recent/',
         controller: 'MainCtrl',
-        templateUrl: 'views/partials/_articles_list.html',
+        templateUrl: 'views/partials/_stream.html',
         resolve: {
           articles: function(Article) {
             var order = 'recents';
@@ -107,7 +94,7 @@ angular.module('webClientApp', [
               return article;
             }, function() {
               $state.go('app');
-            });
+            }).$promise;
           }
         }
       })
@@ -183,7 +170,7 @@ angular.module('webClientApp', [
         views: {
           'content@': {
             templateUrl: 'views/publishers/show.html',
-            controller: 'MainCtrl'
+            controller: 'PublishersCtrl'
           }
         },
         resolve: {
@@ -623,6 +610,7 @@ angular.module('webClientApp', [
 
     $rootScope.$on('$stateChangeStart', function(
           event, toState, toParams, fromState, fromParams){
+      /* jshint unused:false */
       $rootScope.previousState = fromState;
     });
 

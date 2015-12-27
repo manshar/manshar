@@ -7,6 +7,7 @@ angular.module('webClientApp')
 
     $scope.topic = topic;
     $scope.articles = articles;
+    $scope.publishers = [];
 
 
     $rootScope.page.title = topic.title;
@@ -14,8 +15,17 @@ angular.module('webClientApp')
     $rootScope.page.publishedTime = topic.created_at;
     $rootScope.page.description = topic.category.description;
 
-    console.log('topic', topic);
-    console.log('articles', articles);
+    // Used to make sure no duplicates occur in the publishers array
+    var publishersDict = {},
+      i;
+
+    for(i = 0; (i < articles.length) && ($scope.publishers.length<5); ++i) {
+      var user = articles[i].user;
+      if(!publishersDict[user.id]) {
+        publishersDict[user.id] = true;
+        $scope.publishers.push(user);
+      }
+    }
 
     // Topic.get({
     //   'categoryId': $routeParams.categoryId,

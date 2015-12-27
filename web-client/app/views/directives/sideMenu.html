@@ -44,7 +44,7 @@
     <li ui-sref-active="active" ng-repeat="category in categories" class="category-{{category.id}}">
       <style type="text/css">
         .categories-menu .category-{{category.id}} {
-          border-right-color: {{category.color}};
+          border-left-color: {{category.color}};
         }
       </style>
       <a ui-sref="app.categories({categoryId: category.id})">

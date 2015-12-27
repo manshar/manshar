@@ -17,14 +17,12 @@ angular.module('webClientApp')
         //   scope.user = user;
         // });
         scope.logout = function () {
-          console.log('$rootScope.user', $rootScope.user);
           // scope.user = {};
           // $analytics.eventTrack('Logout', {
           //   category: 'User'
           // });
           LoginService.logout();
         };
-        console.log('$rootScope.user', $rootScope.user);
         // Escape key listner to close menu
       	$document.bind('keyup', function(e) {
       		console.log('key', e.keyCode);

@@ -13,6 +13,16 @@
         <p class="category-tagline">{{category.description}}</p>
       </div>
 
+      <div class="category-topics">
+        <ul class="topics card-list unstyled">
+          <li ng-repeat="topic in topics" class="card topic">
+            <a ui-sref="app.categories.topic({topicId: topic.id})">
+              {{topic.title}}
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <div ng-include="'views/partials/_articles_list.html'"></div>
 
       <div class="categories-section section" ng-include="'views/partials/_categories_grid.html'"></div>
@@ -25,14 +35,3 @@
     </div> <!-- .content-wrapper -->
   </div> <!-- row -->
 </div> <!-- content-container -->
-
-<div class="category-topics">
-  <ul class="topics card-list unstyled">
-    <li ng-repeat="topic in topics" class="card topic">
-      <a ui-sref="app.categories.topic({topicId: topic.id})">
-        {{topic.title}}
-      </a>
-    </li>
-  </ul>
-</div>
-
