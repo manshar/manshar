@@ -43,17 +43,15 @@
 
       </div> <!-- single-article -->
 
-      <!-- TODO(mkhatib): Disable edits for legacy articles and display a note for
-       the owner of the article about the changes. -->
       <div class="section-title">
-        <button class="action-button"
+        <span class="action-button"
           ng-click="editArticle(article.id)"
           ng-show="isOwner(user, article)"
           tooltips
             tooltip-class="fixed-tooltip"
             tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}">
-          <i class="fa fa-pencil"></i>
-        </button>
+          <i class="fa fa-pencil circle-icon"></i>
+        </span>
       </div>
 
       <div class="article-author" style="border-right: 1px solid {{article.topic.category.color}}">
