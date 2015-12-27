@@ -682,12 +682,17 @@ html[xmlns] .clearfix {
   float: left;
   min-height: 100vh;
   transition: all 0.4s;
-  @media (min-width: 440px) and (max-width: 699px) {
-    padding-left: 150px;
+  &.category-page {
+    @media (min-width: 720px) and (max-width: 900px) {
+      padding-left: 100px;
+    }
   }
-  @media (max-width: 439px) {
-    padding-left: 36px;
-  }
+  // @media (min-width: 440px) and (max-width: 900px) {
+  //   padding-left: 150px;
+  // }
+  // @media (max-width: 439px) {
+  //   padding-left: 36px;
+  // }
 }
 
 h1, h2, h3 {
@@ -1194,7 +1199,7 @@ h1, h2, h3 {
 }
 
 .category-topics {
-  display: relative;
+  position: relative;
   padding: 0 15px;
   font-size: 12px;
   margin-bottom: 40px;
@@ -1209,25 +1214,25 @@ h1, h2, h3 {
       color: #222;
     }
   }
-  @media (min-width: 440px) and (max-width: 699px) {
-    position: absolute;
-    left: 0;
-    top: 116px;
-    text-align: left;
-    max-width: 100px;
-    padding: 0;
-    .card-list {
-      li {
-        padding-left: 10px;
-        border-left: 2px solid #aaa;
-        margin: 5px 0;
-        a {
-          display: block;
-          color: #ccc;
-        }
-      }
-    }
-  }
+  // @media (min-width: 440px) {
+  //   position: absolute;
+  //   left: 0;
+  //   top: 116px;
+  //   text-align: left;
+  //   max-width: 100px;
+  //   padding: 0;
+  //   .card-list {
+  //     li {
+  //       padding-left: 10px;
+  //       border-left: 2px solid #aaa;
+  //       margin: 5px 0;
+  //       a {
+  //         display: block;
+  //         color: #ccc;
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 @keyframes blink {
