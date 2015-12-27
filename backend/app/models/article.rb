@@ -78,6 +78,8 @@ class Article < ActiveRecord::Base
   end
 
   def update_published_articles_count
+    # TODO(mkhatib): Move this operation to a worker?
+    # TODO(mkhatib): Also update the cached number of articles in topics and categories.
     self.user.published_articles_count = self.user.published_articles.count
     self.user.save
   end

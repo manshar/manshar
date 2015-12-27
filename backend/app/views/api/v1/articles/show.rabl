@@ -45,7 +45,8 @@ else
   node :user do |article|
     {
       id: article.user_id,
-      name: article.user_name
+      name: article.user_name,
+      thumb_url: article.user_avatar_url
     }
   end
 

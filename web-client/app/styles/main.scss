@@ -1141,9 +1141,6 @@ h1, h2, h3 {
 
 }
 
-.profile-wrapper {
-  padding-top: 150px;
-}
 .profile-page {
   position: relative;
 }
@@ -1162,18 +1159,6 @@ h1, h2, h3 {
   color: #000;
 }
 
-.other-profiles {
-  width: 900px; /* to be calculated (150 * number of items) */
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 150px;
-  overflow: hidden;
-}
-.other-profiles .slider {
-  position: relative;
-  right: -100px;
-}
 .other-profiles .current .dimmer,
 .other-profiles .current p,
 .other-profiles .current span {
