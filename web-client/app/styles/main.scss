@@ -679,10 +679,15 @@ html[xmlns] .clearfix {
 }
 
 .content-wrapper {
-  /*margin-right: 100px;*/
   float: left;
   min-height: 100vh;
   transition: all 0.4s;
+  @media (min-width: 440px) and (max-width: 699px) {
+    padding-left: 150px;
+  }
+  @media (max-width: 439px) {
+    padding-left: 36px;
+  }
 }
 
 h1, h2, h3 {
@@ -782,8 +787,8 @@ h1, h2, h3 {
   }
 }
 .publishers-page .author-block {
-  width: 148px;
-  height: 148px;
+  width: 139px;
+  height: 139px;
 }
 .block {
   float: right;
@@ -1087,7 +1092,7 @@ h1, h2, h3 {
     border-right: 1px solid #f4f4f4;
     margin-right: 36px;
     width: 100%;
-    padding-left: 36px;
+    // padding-left: 36px;
     float: none;
   }
 
@@ -1189,6 +1194,7 @@ h1, h2, h3 {
 }
 
 .category-topics {
+  display: relative;
   padding: 0 15px;
   font-size: 12px;
   margin-bottom: 40px;
@@ -1201,6 +1207,25 @@ h1, h2, h3 {
     a {
       display: inline;
       color: #222;
+    }
+  }
+  @media (min-width: 440px) and (max-width: 699px) {
+    position: absolute;
+    left: 0;
+    top: 116px;
+    text-align: left;
+    max-width: 100px;
+    padding: 0;
+    .card-list {
+      li {
+        padding-left: 10px;
+        border-left: 2px solid #aaa;
+        margin: 5px 0;
+        a {
+          display: block;
+          color: #ccc;
+        }
+      }
     }
   }
 }
