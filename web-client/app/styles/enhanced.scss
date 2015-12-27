@@ -186,7 +186,7 @@ header {
 }
 .content-container {
   min-height: 100vh;
-  position: relative;
+  position: static;
 }
 
 /* Clearfix */
@@ -796,6 +796,7 @@ h1, h2, h3 {
   font-size: 12px;
   text-align: left;
   max-width: 100px;
+  padding: 0;
   .card-list {
     li {
       padding-left: 10px;
