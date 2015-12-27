@@ -5,7 +5,7 @@
   <img class="profile-photo" ng-src="{{user.thumb_url}}">
   <ul class="user-menu with-border" ng-switch on="!!user.id">
     <li>
-      <a ng-switch-when="true" ui-sref="app.publishers.profile.published({ userId: user.id })">
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.published({ userId: user.id })">
         <i></i>{{ user.name }}
       </a>
       <a ng-switch-when="false" ui-sref="app.login">
@@ -18,17 +18,17 @@
       </a>
     </li>
     <li>
-      <a ng-switch-when="true" ui-sref="app.publishers.profile.published({ userId: user.id })">
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.published({ userId: user.id })">
         <i></i>المنشورات
       </a>
     </li>
     <li>
-      <a ng-switch-when="true" ui-sref="app.publishers.profile.drafts({ userId: user.id })">
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.drafts({ userId: user.id })">
         <i></i>المسودات
       </a>
     </li>
     <li>
-      <a ng-switch-when="true" ui-sref="app.publishers.profile.stats({ userId: user.id })">
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.stats({ userId: user.id })">
         <i></i>احصائيات المقالات
       </a>
     </li>

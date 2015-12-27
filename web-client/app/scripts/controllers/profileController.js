@@ -7,14 +7,25 @@ angular.module('webClientApp')
 
     $scope.profile = profile;
     $scope.articles = articles;
-    $scope.publishers = publishers;
+
+    if (publishers) {
+      $rootScope.$emit('publishers:loaded', {
+        publishers: publishers
+      });
+    }
+
+    if (profile) {
+      $rootScope.$emit('profile:loaded', {
+        profile: profile
+      });
+    }
 
     $scope.editArticle = function (articleId) {
-      $state.go('app.articles.edit', {articleId: $stateParams.articleId});
+      $state.go('app.articles.edit', {articleId: articleId});
     };
 
     $scope.editProfile = function () {
-      $state.go('app.publishers.profile.edit', {userId: $rootScope.user.id});
+      $state.go('app.publishers.profile.user.edit', {userId: $rootScope.user.id});
     };
 
     var deleteSuccess = function () {

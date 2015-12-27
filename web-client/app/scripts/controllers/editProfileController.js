@@ -20,7 +20,7 @@ angular.module('webClientApp')
       $analytics.eventTrack('Update Success', {
         category: 'User'
       });
-      $state.go('app.publishers.profile.published', {userId: $stateParams.userId});
+      $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
     };
 
     var updateUserDataError = function(response) {
@@ -37,7 +37,7 @@ angular.module('webClientApp')
      * own profile
      */
     var loggedOutUnbined = $rootScope.$on('auth:logout-success', function () {
-      $state.go('app.publishers.profile.published', {userId: $stateParams.userId});
+      $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
     });
 
     var onDestroy = function () {

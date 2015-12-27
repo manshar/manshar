@@ -60,7 +60,9 @@ angular.module('webClientApp', [
             return Article.query({'order': order}).$promise;
           },
           publishers: function(User) {
-            return User.query().$promise;
+            return User.query({
+              per: 5
+            }).$promise;
           }
         }
       })
@@ -121,7 +123,6 @@ angular.module('webClientApp', [
           user: function($auth, $state) {
             return $auth.validateUser().then(function(user) {
               if(user) {
-                console.log('user resolved');
                 return user;
               }
             }, function() {
@@ -129,7 +130,6 @@ angular.module('webClientApp', [
             }).$promise;
           },
           article: function(Article, $stateParams, $state, $rootScope) {
-            console.log('articleContent resolved');
             return Article.get({'articleId': $stateParams.articleId}, function(article) {
               if (article.body) {
                 $state.go('app.articles.show', {articleId: article.id});
@@ -150,7 +150,6 @@ angular.module('webClientApp', [
         resolve: {
           article: function(Article, $state) {
             return Article.save({ article: { published: false } }, function(resource) {
-              console.log(resource);
               $state.go('app.articles.edit', { articleId: resource.id });
             }, function(error) {
               console.log(error);
@@ -195,23 +194,46 @@ angular.module('webClientApp', [
       })
       .state('app.publishers.profile', {
         abstract: true,
-        url: 'profile/:userId/',
+        url: 'profile/',
         views: {
           'content@': {
             templateUrl: 'views/profiles/show.html',
-            controller: 'ProfileCtrl'
+            controller: 'ProfileInitCtrl'
           }
         },
+      })
+      .state('app.publishers.profile.user', {
+        url: ':userId/',
+        templateUrl: 'views/profiles/body.html',
+        controller: 'ProfileCtrl',
         resolve: {
           profile: function(User, $stateParams) {
             return User.get({'userId': $stateParams.userId}).$promise;
+          },
+          publishers: function(User, $rootScope, $q, $stateParams) {
+            // Only load publishers when coming from a non-profile state.
+            if ($rootScope.previousState &&
+                $rootScope.previousState.name.indexOf('app.publishers.profile') !== -1) {
+              var deferred = $q.defer();
+              deferred.resolve();
+              return deferred.promise;
+            }
+
+            return User.query({
+              'pivot_id': $stateParams.userId,
+              'after_pivot_count': 10,
+              'before_pivot_count': 10,
+              'order_dir': 'ASC',
+              'order': 'published_articles_count',
+              'include_pivot': true
+            }).$promise;
           },
           articles: function(UserArticle, $stateParams) {
             return UserArticle.query({'userId': $stateParams.userId}).$promise;
           }
         }
       })
-      .state('app.publishers.profile.edit', {
+      .state('app.publishers.profile.user.edit', {
         url: 'edit/',
         views: {
           'content@': {
@@ -225,19 +247,19 @@ angular.module('webClientApp', [
               if(user.id === $stateParams.userId) {
                 return;
               } else {
-                $state.go('app.publishers.profile.published', {userId: $stateParams.userId});
+                $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
               }
             }, function() {
-              $state.go('app.publishers.profile.published', {userId: $stateParams.userId});
+              $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
             });
           }
         }
       })
-      .state('app.publishers.profile.published', {
+      .state('app.publishers.profile.user.published', {
         url: 'published/',
         templateUrl: 'views/partials/_articles_list.html'
       })
-      .state('app.publishers.profile.drafts', {
+      .state('app.publishers.profile.user.drafts', {
         url: 'drafts/',
         templateUrl: 'views/partials/_articles_list.html',
         controller: 'DraftCtrl',
@@ -251,7 +273,7 @@ angular.module('webClientApp', [
           }
         }
       })
-      .state('app.publishers.profile.stats', {
+      .state('app.publishers.profile.user.stats', {
         url: 'stats/',
         templateUrl: 'views/profiles/stats.html',
         controller: 'StatCtrl',
@@ -267,7 +289,7 @@ angular.module('webClientApp', [
           }
         }
       })
-      .state('app.publishers.profile.recommended', {
+      .state('app.publishers.profile.user.recommended', {
         url: 'recommended/',
         templateUrl: 'views/partials/_articles_list.html',
         controller: 'RecommendationCtrl',
@@ -277,7 +299,7 @@ angular.module('webClientApp', [
           }
         }
       })
-      .state('app.publishers.profile.discussions', {
+      .state('app.publishers.profile.user.discussions', {
         url: 'discussions/',
         templateUrl: 'views/partials/_articles_list.html',
         controller: 'DiscussionCtrl',
@@ -325,7 +347,6 @@ angular.module('webClientApp', [
                   'categoryId': $stateParams.categoryId,
                   'topicId': $stateParams.topicId
                 }, function(topic) {
-                  console.log(topic);
                   return topic;
                 }, function() {
                   $state.go('app');
@@ -336,7 +357,6 @@ angular.module('webClientApp', [
                     'categoryId': $stateParams.categoryId,
                     'topicId': $stateParams.topicId
                   }, function(articles) {
-                    console.log(articles);
                     return articles;
                   }, function() {
                     $state.go('app');
@@ -599,6 +619,12 @@ angular.module('webClientApp', [
         }
       }
     };
+
+
+    $rootScope.$on('$stateChangeStart', function(
+          event, toState, toParams, fromState, fromParams){
+      $rootScope.previousState = fromState;
+    });
 
     /**
      * If the route to be accessed is private make sure the user is authenticated

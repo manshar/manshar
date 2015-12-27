@@ -1,0 +1,28 @@
+<div class="profile-wrapper">
+  <div class="profile-info">
+    <h3> {{profile.name}} </h3>
+    <p> {{profile.bio}} </p>
+  </div>
+
+  <div class="listing-types-tabs">
+    <div class="section-title">
+      <i></i>
+      <a ui-sref-active="active" ui-sref=".published">المنشورات</a>.
+      <a ui-sref-active="active" ui-sref=".recommended">التوصيات</a>.
+      <a ui-sref-active="active" ui-sref=".discussions">المناقشات</a>.
+      <a ng-show="user.id == profile.id" ui-sref-active="active" ui-sref=".drafts">المسودات</a><span ng-show="user.id == profile.id">.</span>
+      <a ui-sref-active="active" ui-sref=".stats" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
+    </div>
+  </div>
+
+  <div class="profile-list">
+    <a href="/articles/new" class="write-new-button"
+      ng-show="user.id == profile.id">
+      <i class="fa fa-pencil"></i>
+      اكتب مقال جديد
+    </a>
+  </div>
+
+  <!-- Displays the different tabs pages (published, drafts...) for user profile. -->
+  <div ui-view></div>
+</div>

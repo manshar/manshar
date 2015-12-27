@@ -2,65 +2,21 @@
   <div class="container content-container">
     <div class="row clearfix">
       <div class="content-wrapper profile-page">
-
         <div class="other-profiles">
           <div class="clearfix slider">
-            <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
+            <div class="authors-section"
+              users-carousel
+                order="published_articles_count"
+                order-dir="ASC"
+                selected-user="profile"
+                users="publishers"
+                auto-load="true"
+                auto-load-buffer-count="3"></div>
           </div>
         </div>
-        <div class="profile-wrapper">
-          <div class="profile-info">
-            <h3> {{profile.name}} </h3>
-            <p> {{profile.bio}} </p>
-          </div>
 
-          <div class="listing-types-tabs">
-            <div class="section-title">
-              <i></i>
-              <a ui-sref-active="active" ui-sref=".published">المنشورات</a>.
-              <a ui-sref-active="active" ui-sref=".recommended">التوصيات</a>.
-              <a ui-sref-active="active" ui-sref=".discussions">المناقشات</a>.
-              <a ng-show="user.id == profile.id" ui-sref-active="active" ui-sref=".drafts">المسودات</a><span ng-show="user.id == profile.id">.</span>
-              <a ui-sref-active="active" ui-sref=".stats" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
-            </div>
-          </div>
+        <div ui-view></div>
 
-          <div class="profile-list">
-            <a href="/articles/new" class="write-new-button"
-              ng-show="user.id == profile.id">
-              <i class="fa fa-pencil"></i>
-              اكتب مقال جديد
-            </a>
-          </div>
-
-          <div ui-view></div>
-
-          <!-- <ul class="cards-list-container one-column card-list" ng-show="drafts[0] && user.id == profile.id && activeTab == 'published'">
-            <h1 class="header-label">
-              <span>المسودات</span>
-            </h1>
-            <li ng-repeat="article in drafts" class="card draft">
-              <div class="article-details article-card">
-                <div class="header tray">
-                  <div class="title">
-                    <a ng-href="/articles/{{article.id}}">
-                      <h1>{{article.title || "بدون عنوان"}}</h1>
-                      <h2>{{article.tagline}}</h2>
-                    </a>
-                  </div>
-                </div>
-                <div class="profile-article-action" ng-show="isOwner(user, article)">
-                  <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                  <button class="action-button" ng-click="editArticle(article.id)">
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                </div>
-              </div>
-            </li>
-          </ul> -->
-        </div>
       </div>
     </div>
   </div>

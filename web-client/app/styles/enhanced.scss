@@ -496,10 +496,33 @@ h1, h2, h3 {
   margin-left: 0;
 }
 
+.authors-page {
+  .carousel {
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+}
+
 .authors-page .author-block {
   width: 148px;
   height: 148px;
   overflow: hidden;
+  float: none;
+  display: inline-block;
+  position: relative;
+
+  &.selected:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+    bottom: 0px;
+    left: 45%;
+  }
+
   .social-icons {
     bottom: -24px;
   }
@@ -726,9 +749,6 @@ h1, h2, h3 {
 
 }
 
-.profile-wrapper {
-  padding-top: 150px;
-}
 .profile-page {
   position: relative;
 }
@@ -747,17 +767,8 @@ h1, h2, h3 {
   color: #000;
 }
 
-.other-profiles {
-  width: 900px; /* to be calculated (150 * number of items) */
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 150px;
-  overflow: hidden;
-}
 .other-profiles .slider {
   position: relative;
-  right: -100px;
 }
 .other-profiles .current .dimmer,
 .other-profiles .current p,

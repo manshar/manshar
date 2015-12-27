@@ -92,7 +92,7 @@ angular.module('webClientApp')
       $analytics.eventTrack('Article Deleted', {
         category: 'Article'
       });
-      $state.go('app.publishers.profile.published', {userId: $rootScope.user.id});
+      $state.go('app.publishers.profile.user.published', {userId: $rootScope.user.id});
     };
 
     var deleteError = function (response) {
