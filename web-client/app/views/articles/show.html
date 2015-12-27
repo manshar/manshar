@@ -57,11 +57,11 @@
       </div>
 
       <div class="article-author" style="border-right: 1px solid {{article.topic.category.color}}">
-        <a class="meta-thumb" ui-sref="app.publishers.profile.user.published({ userId: article.user.id })">
+        <a class="meta-thumb" ui-sref="app.publishers.profile.user.published({userId: article.user.id})">
           <img ng-src="{{article.user.thumb_url}}" />
         </a>
 
-        <a ui-sref="app.publishers.profile.user.published({ userId: article.user.id })">
+        <a ui-sref="app.publishers.profile.user.published({userId: article.user.id})">
           <h3>{{article.user.name || 'غير معروف'}}</h3>
         </a>
 
@@ -70,7 +70,7 @@
         <div>
           <span ng-if="article.topic">
             <span>نشرت في</span>
-            <a ng-show="article.topic" ui-sref="app.categories.topic({ topicId: article.topic.id, categoryId: article.topic.category.id })">
+            <a ng-show="article.topic" ui-sref="app.categories.topic({ categoryId: article.topic.category.id, topicId: article.topic.id})">
               <h3>{{article.topic.title || 'غير محدد'}}</h3>
             </a>،
           </span>

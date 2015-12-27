@@ -157,7 +157,7 @@ angular.module('webClientApp', [
           requireNoAuth: function($auth, $state) {
             return $auth.validateUser().then(function(user) {
               if(user) {
-                $state.go('app.publishers.profile.published', { userId: user.id});
+                $state.go('app.publishers.profile.user.published', { userId: user.id});
               }
             }, function() {
               return;
@@ -297,7 +297,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.categories', {
-        url: 'category/:categoryId/',
+        url: 'categories/:categoryId/',
         views: {
           'content@': {
             templateUrl: 'views/categories/show.html',
@@ -321,7 +321,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.categories.topic', {
-        url: 'topic/:topicId/',
+        url: 'topics/:topicId/',
         views: {
           'content@': {
             templateUrl: 'views/topics/show.html',

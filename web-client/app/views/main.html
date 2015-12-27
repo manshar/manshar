@@ -7,7 +7,9 @@
 
       <div class="listing-types-tabs">
         <div class="section-title">
-          <i class="circle-icon fa fa-line-chart"></i>
+          <i class="circle-icon fa fa-line-chart" ng-if="'app.articles.hot'|isState"></i>
+          <i class="circle-icon fa fa-thumbs-o-up" ng-if="'app.articles.best'|isState"></i>
+          <i class="circle-icon fa fa-clock-o" ng-if="'app.articles.recent'|isState"></i>
           <a ui-sref="app.articles.hot" ui-sref-active="active"> الأكثر شعبية </a> .
           <a ui-sref="app.articles.best" ui-sref-active="active"> الأفضل </a> .
           <a ui-sref="app.articles.recent" ui-sref-active="active"> الأحدث </a>

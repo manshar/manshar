@@ -21,7 +21,13 @@
       </a>
     </div>
     <div class="category-topic">
+<<<<<<< HEAD
       <a ui-sref="app.categories.topic({ topicId: article.topic.id, categoryId: article.topic.category.id })">
+||||||| merged common ancestors
+      <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
+=======
+      <a ui-sref="app.categories.topic({ categoryId: article.topic.category.id, topicId: article.topic.id})">
+>>>>>>> be59ffad632d613a325e34b0f49e309d0ff4ee6d
         {{article.topic.title || 'الموضوع غير محدد'}}
       </a>
     </div>
