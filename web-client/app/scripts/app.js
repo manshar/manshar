@@ -107,14 +107,8 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          user: function($auth, $state) {
-            return $auth.validateUser().then(function(user) {
-              if(user) {
-                return user;
-              }
-            }, function() {
-                $state.go('app.login');
-            }).$promise;
+          user: function($rootScope) {
+            return $rootScope.user;
           },
           article: function(Article, $stateParams, $state, $rootScope) {
             return Article.get({'articleId': $stateParams.articleId}, function(article) {
@@ -350,107 +344,78 @@ angular.module('webClientApp', [
                   }).$promise;
           }
         }
+      })
+      .state('app.signup', {
+        url: 'signup/',
+        views: {
+        'content@': {
+            templateUrl: 'views/signup.html',
+            controller: 'SignupCtrl'
+          }
+        },
+        resolve: {
+          requireNoAuth: function($auth, $state) {
+            return $auth.validateUser().then(function(user) {
+              if(user) {
+                $state.go('app.publishers.profile.user.published', { userId: user.id});
+              }
+            }, function() {
+              return;
+            }).$promise;
+          }
+        }
+      })
+      .state('app.reset', {
+        url: 'accounts/reset_password/',
+        views: {
+        'content@': {
+            templateUrl: 'views/accounts/reset_password.html',
+            controller: 'ResetPasswordController'
+          }
+        },
+        resolve: {
+          requireNoAuth: function($auth, $state) {
+            return $auth.validateUser().then(function(user) {
+              if(user) {
+                $state.go('app.publishers.profile.user.published', { userId: user.id});
+              }
+            }, function() {
+              return;
+            }).$promise;
+          }
+        }
+      })
+      .state('app.admin', {
+        url: 'admin/',
+        views: {
+        'content@': {
+            templateUrl: 'views/admin/dashboard.html'
+          }
+        },
+        resolve: {
+          user: function($auth, $state) {
+            return $auth.validateUser().then(function(user) {
+              if(user.role === 'admin') {
+                return user;
+              } else {
+                $state.go('app');
+              }
+            }, function() {
+                $state.go('app');
+            }).$promise;
+          }
+        }
+      })
+      .state('app.admin.categories', {
+        url: 'manage/categories/',
+        views: {
+        'content@': {
+            templateUrl: 'views/admin/manage/categories.html',
+            controller: 'ManageCategoriesCtrl'
+          }
+        }
       });
-
       $urlRouterProvider.otherwise('/');
-
-      // .when('/login/?', {
-      //   templateUrl: 'views/login.html',
-      //   controller: 'LoginCtrl',
-      //   title: 'تسجيل الدخول',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/signup/?', {
-      //   templateUrl: 'views/signup.html',
-      //   controller: 'SignupCtrl',
-      //   title: 'مستخدم جديد',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/articles/new/?', {
-      //   templateUrl: 'views/articles/edit.html',
-      //   controller: 'NewArticleCtrl',
-      //   title: 'مقال جديد',
-      //   isPublic: false,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/articles/:articleId/edit/?', {
-      //   templateUrl: 'views/articles/edit.html',
-      //   controller: 'EditArticleCtrl',
-      //   isPublic: false,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/articles/:articleId/?', {
-      //   templateUrl: 'views/articles/show.html',
-      //   controller: 'ArticleCtrl',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/accounts/reset_password/?', {
-      //   templateUrl: 'views/accounts/reset_password.html',
-      //   controller: 'ResetPasswordController',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/accounts/update_password/?', {
-      //   templateUrl: 'views/accounts/update_password.html',
-      //   controller: 'UpdatePasswordController',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/profiles/:userId/?', {
-      //   templateUrl: 'views/profiles/show.html',
-      //   controller: 'ProfileCtrl',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/profiles/:userId/edit/?', {
-      //   templateUrl: 'views/profiles/edit.html',
-      //   controller: 'EditProfileCtrl',
-      //   isPublic: false,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/categories/:categoryId/?', {
-      //   templateUrl: 'views/categories/show.html',
-      //   controller: 'CategoryCtrl',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/categories/:categoryId/topics/:topicId/?', {
-      //   templateUrl: 'views/topics/show.html',
-      //   controller: 'TopicCtrl',
-      //   isPublic: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/admin/?', {
-      //   templateUrl: 'views/admin/dashboard.html',
-      //   isPublic: false,
-      //   isAdmin: true,
-      //   resolve: checkAccess
-      // })
-
-      // .when('/admin/manage/categories/?', {
-      //   templateUrl: 'views/admin/manage/categories.html',
-      //   controller: 'ManageCategoriesCtrl',
-      //   isPublic: false,
-      //   isAdmin: true,
-      //   resolve: checkAccess
-      // })
-      // .otherwise({
-      //   redirectTo: '/'
-      // });
   }])
   .factory('unAuthenticatedInterceptor', ['$location', '$q', '$rootScope',
       function ($location, $q, $rootScope) {
@@ -626,13 +591,4 @@ angular.module('webClientApp', [
       $rootScope.page.title = current.$$route.title || $rootScope.page.title;
       $rootScope.page.url = document.location.href;
     });
-
-    // var getLoggedInUserProfile = function(event, data) {
-    //   User.get({'userId': data.id}, function(user) {
-    //     // angular.extend($rootScope.user, user);
-    //   });
-    // };
-    // $rootScope.$on('auth:validation-success', getLoggedInUserProfile);
-    // $rootScope.$on('auth:login-success', getLoggedInUserProfile);
-
   }]);

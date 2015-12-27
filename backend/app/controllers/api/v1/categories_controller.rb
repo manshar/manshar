@@ -8,6 +8,7 @@ class Api::V1::CategoriesController < ApplicationController
   # GET /api/v1/categories.json
   def index
     @categories = Category.all
+    @all = params[:all]
     render 'api/v1/categories/index'
   end
 
