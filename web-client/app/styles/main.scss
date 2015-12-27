@@ -562,9 +562,9 @@ header {
 }
 
 .menu-icon {
-  position: absolute;
+  position: fixed;
   top: 16px;
-  left: 16px;
+  left: 12px;
   font-size: 18px;
   cursor: pointer;
   z-index: 8;
@@ -633,12 +633,13 @@ html[xmlns] .clearfix {
 
 .logo {
   position: absolute;
-  right: 50%;
-  margin-right: -350px;
+  right: 0;
+  // margin-right: -350px;
   text-align: left;
   z-index: 999;
-  top: 40px;
+  top: 22px;
   transition: all 0.4s;
+  padding: 6px 0;
   a {
     color: #000;
     font-size: 14px;
@@ -651,7 +652,7 @@ html[xmlns] .clearfix {
     width: 21px;
   }
   span {
-    display: inline-table;
+    display: none;
     vertical-align: top;
     margin-right: -4px;
     font-size: 0.8em;

@@ -237,18 +237,6 @@ header {
   overflow: hidden;
 }
 
-.menu-icon {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 8;
-  width: 26px;
-  height: 26px;
-  transition: left 0.4s;
-}
-
 .write-box {
   padding: 40px 0;
   p {
@@ -916,4 +904,21 @@ ul.unstyled {
 
 .body-wrapper.push-right, header.push-right {
   left: 150px;
+}
+
+/* 
+*
+* New UI
+*
+*/
+.logo {
+  right: 50%;
+  margin-right: -350px;
+  text-align: left;
+  z-index: 999;
+  top: 40px;
+  padding: 0;
+  span {
+    display: inline-table;
+  }
 }
