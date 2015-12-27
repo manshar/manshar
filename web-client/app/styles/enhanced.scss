@@ -144,9 +144,9 @@ header {
 }
 
 .categories-menu li {
-  border-right: 2px solid;
+  border-left: 2px solid;
   &:hover {
-    border-right-width: 4px;
+    border-left-width: 4px;
   }
 }
 
@@ -161,7 +161,7 @@ header {
 }
 
 .menu-icon {
-  position: absolute;
+  position: fixed;
   top: 16px;
   left: 16px;
   font-size: 18px;
