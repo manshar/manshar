@@ -134,13 +134,90 @@ header {
   }
 }
 
+/* Category picker styles */
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 999;
+  background: rgba(255,255,255,0.9);
+
+  .content {
+    padding: 3em 0;
+  }
+
+  .close-button {
+    color: #999;
+    padding: 1em;
+    cursor: pointer;
+    position: absolute;
+  }
+}
+.header-label {
+  font-size: 0.7em;
+  text-align: right;
+
+  &.category-header-label{
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  span {
+    color: #606060;
+    background-color: #eee;
+    padding: 0 10px;
+
+    &.no-bg {
+      background-color: #fff;
+    }
+  }
+}
+.category-list {
+  text-align: center;
+
+  .card.category {
+    cursor: pointer;
+    width: 110px;
+    height: 100px;
+    padding: 1.6em 0;
+    text-align: center;
+    font-size: 0.8em;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0.3em;
+
+    i {
+      font-size: 2em;
+    }
+  }
+}
+.topic-list {
+  .card.topic {
+    box-shadow: none;
+    border: 1px solid;
+    margin: 0.5em;
+    cursor: pointer;
+    width: auto;
+    padding: 1em;
+    text-align: center;
+    display: inline-block;
+
+    &:hover {
+      background-color: #E1F5FE;
+    }
+
+    &.new-topic {
+      display: block;
+      padding: 1em 0.8em;
+      .form-div {
+        form {
+          display: block;
+        }
+      }
+    }
+  }
 }
 
 .categories-menu li {
@@ -281,6 +358,9 @@ html[xmlns] .clearfix {
   float: left;
   min-height: 100vh;
   transition: all 0.4s;
+  &.editor {
+    padding: 40px;
+  }
 }
 
 h1, h2, h3 {
@@ -463,7 +543,7 @@ h1, h2, h3 {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.7);
 }
 
 

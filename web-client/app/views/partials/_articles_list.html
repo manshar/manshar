@@ -21,7 +21,7 @@
       </a>
     </div>
     <div class="category-topic">
-      <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
+      <a ui-sref="app.categories.topic({ topicId: article.topic.id, categoryId: article.topic.category.id })">
         {{article.topic.title || 'الموضوع غير محدد'}}
       </a>
     </div>

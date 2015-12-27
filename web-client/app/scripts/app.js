@@ -119,7 +119,7 @@ angular.module('webClientApp', [
           article: function(Article, $stateParams, $state, $rootScope) {
             return Article.get({'articleId': $stateParams.articleId}, function(article) {
               if (article.body) {
-                $state.go('app.articles.show', {articleId: article.id});
+                $state.go('app.articles.show', { articleId: article.id });
               } else if($rootScope.user.id === article.user.id) {
                 return article;
               } else {

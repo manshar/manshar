@@ -1,24 +1,6 @@
-<!-- <header>
-  <div class="header-content">
-    <div class="container">
-      <div class="row clearfix">
-        <div class="pull-right">
-          <i class="logo-square"></i><i class="to-top"></i>
-        </div>
-      </div>
-    </div>
-    <div class="header-icons">
-      <i>m</i>
-      <i>w</i>
-    </div>
-  </div>
-</header> -->
-
 <div class="container content-container">
   <div class="row clearfix">
-
     <div class="content-wrapper">
-
       <div class="single-article">
         <div ng-if="article.body" ng-class="{'nocover': !article.cover_url}">
           <!-- Note: Legacy Article Rendering. -->
@@ -75,11 +57,11 @@
       </div>
 
       <div class="article-author" style="border-right: 1px solid {{article.topic.category.color}}">
-        <a class="meta-thumb" ng-href="/profiles/{{article.user.id}}">
+        <a class="meta-thumb" ui-sref="app.publishers.profile.user.published({ userId: article.user.id })">
           <img ng-src="{{article.user.thumb_url}}" />
         </a>
 
-        <a ng-href="/profiles/{{article.user.id}}">
+        <a ui-sref="app.publishers.profile.user.published({ userId: article.user.id })">
           <h3>{{article.user.name || 'غير معروف'}}</h3>
         </a>
 
@@ -88,7 +70,7 @@
         <div>
           <span ng-if="article.topic">
             <span>نشرت في</span>
-            <a ng-show="article.topic" ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
+            <a ng-show="article.topic" ui-sref="app.categories.topic({ topicId: article.topic.id, categoryId: article.topic.category.id })">
               <h3>{{article.topic.title || 'غير محدد'}}</h3>
             </a>،
           </span>
