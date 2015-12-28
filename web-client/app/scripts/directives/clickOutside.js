@@ -17,7 +17,12 @@ angular.module('webClientApp')
 
         element.bind('click', function(e) {
           // This part keeps it from firing the click on the document.
+          console.log("test");
+          if(document.body.clientWidth < 900){
+            console.log("mobile");
+          }
           e.stopPropagation();
+
         });
 
         $document.bind('click', function() {
