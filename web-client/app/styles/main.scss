@@ -1229,7 +1229,7 @@ h1, h2, h3 {
   position: relative;
 }
 .profile-info, .category-info {
-  margin: 6px 0 40px;
+  margin: 6px 0 20px 40px;
   p {
     color: #777;
     font-size: 14px;
@@ -1275,24 +1275,29 @@ h1, h2, h3 {
 
 .category-topics {
   position: relative;
-  padding: 0 15px;
   font-size: 12px;
   margin-bottom: 40px;
+
   .card-list {
-    height: 98px;
-    overflow: hidden;
+    overflow: scroll;
+    padding-left: 3em;
+    padding-bottom: 1em;
+    white-space: nowrap;
+
     &.expanded {
       height: auto;
     }
     li {
-      padding-left: 15px;
       margin: 5px 0;
       display: inline-block;
-      border-right: 2px solid;
-      padding-right: 10px;
+      border-right: 2px solid #ccc;
+      background: #eee;
+      margin-left: 0.4em;
+      font-size: 0.8em;
     }
     a {
-      display: inline;
+      padding: 4px 12px;
+      display: inline-block;
       color: #222;
     }
   }

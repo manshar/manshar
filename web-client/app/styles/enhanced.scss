@@ -718,19 +718,24 @@ h1, h2, h3 {
   padding: 0;
   .card-list {
     height: auto;
+    padding-left: 0;
     overflow: hidden;
     li {
       padding-left: 10px;
       border-left: 2px solid #aaa;
+      background: none;
+      margin-left: 0;
       border-right: none;
       padding-right: 0;
       display: block;
       &:hover {
         border-color: #222;
-        a { color: #222; }
+        a { color: #222; overflow: hidden; }
       }
     }
     a {
+      overflow: hidden;
+      padding: 0;
       display: block;
       color: #dedede;
     }
