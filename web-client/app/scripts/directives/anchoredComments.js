@@ -194,7 +194,7 @@ angular.module('webClientApp')
             // Activate the anchor sidebar and focus the new comment textarea.
             scope.activeGuid = data.guid;
             scope.activeComments = getActiveComments();
-            element.parent().addClass(ANCHORS_ACTIVE);
+            document.body.classList.add(ANCHORS_ACTIVE);
             $timeout(function() {
               textarea.focus();
             }, 50);
@@ -210,7 +210,7 @@ angular.module('webClientApp')
         scope.clickedOutside = function() {
           scope.activeGuid = null;
           clearHighlightedComment();
-          element.parent().removeClass(ANCHORS_ACTIVE);
+          document.body.classList.remove(ANCHORS_ACTIVE);
         };
 
         /**
