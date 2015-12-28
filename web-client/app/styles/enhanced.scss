@@ -734,6 +734,8 @@ h1, h2, h3 {
       padding-left: 10px;
       border-left: 2px solid #aaa;
       margin: 5px 0;
+      border-right: none;
+      padding-right: 0;
       &:hover {
         border-color: #222;
         a { color: #222; }
