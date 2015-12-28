@@ -1,5 +1,9 @@
 $red: #ca1504;
 
+body {
+  font-size: 14px;
+}
+
 /* Category picker styles */
 .modal {
   position: fixed;
@@ -421,32 +425,9 @@ h1, h2, h3 {
   margin-left: 0;
 }
 
-.authors-page {
-  .carousel {
-    white-space: nowrap;
-    overflow-x: scroll;
-  }
-}
-
 .authors-page .author-block {
   width: 148px;
   height: 148px;
-  overflow: hidden;
-  float: none;
-  display: inline-block;
-  position: relative;
-
-  &.selected:after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent #fff transparent;
-    bottom: 0px;
-    left: 45%;
-  }
 
   .social-icons {
     bottom: -24px;
@@ -772,3 +753,20 @@ h1, h2, h3 {
   height: 148px;
 }
 
+.anchored-comments-active {
+  .content-wrapper, .article-container.new-model {
+    transform: none;
+  }
+}
+
+.comments-container {
+  .main-comment-box {
+    width: 300px;
+    right: -308px;
+  }
+  .anchored-comment-box {
+    .comments-icons-container {
+      /*left: 2.9em;*/
+    }
+  }
+}

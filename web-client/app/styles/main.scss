@@ -19,6 +19,10 @@ html {
   direction: rtl;
 }
 
+body {
+  font-size: 14px;
+}
+
 body, input, textarea {
   font-family: "Droid Arabic Naskh";
 }
@@ -724,11 +728,11 @@ h1, h2, h3 {
   .title {
     margin: 24px 0;
     h2 {
-      font-size: 21px;
+      font-size: 1.2em;
     }
     h3 {
       color: #777;
-      font-size: 16px;
+      font-size: 1em;
     }
   }
   &.category-1 {
@@ -921,20 +925,43 @@ h1, h2, h3 {
   margin-left: 0;
 }
 
+.authors-page {
+  .carousel {
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+}
+
 .authors-page .author-block {
   width: 148px;
   height: 148px;
   overflow: hidden;
+  float: none;
+  display: inline-block;
+  position: relative;
+
+  &.selected:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+    bottom: 0px;
+    left: 45%;
+  }
   .social-icons {
     bottom: -24px;
   }
 }
-  .authors-page .author-block.hovered p { /* to be changed in SASS */
-    bottom: 34px;
-  }
-  .authors-page .author-block.hovered .social-icons { /* to be changed in SASS */
-    bottom: 10px;
-  }
+
+.authors-page .author-block.hovered p { /* to be changed in SASS */
+  bottom: 34px;
+}
+.authors-page .author-block.hovered .social-icons { /* to be changed in SASS */
+  bottom: 10px;
+}
 
 .article-page .logo p {
   color: #ddd;
@@ -1298,13 +1325,22 @@ h1, h2, h3 {
   }
 }
 
-.manshar-article {
+.single-article {
+  h1 {
+    font-size: 1.6em;
+  }
+
+  h2 {
+    font-size: 1.3em
+  }
+
   article {
     position: relative;
-    font-size: 15px;
+    font-size: 1em;
 
     h1 {
-      margin: 2em 0;
+
+      margin: 1.6em 0;
 
       > h2 {
         margin: 0;
@@ -1404,20 +1440,33 @@ h1, h2, h3 {
   }
 }
 
+.content-wrapper, .article-container.new-model {
+  transition: transform .3s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
 .anchored-comments-active {
-  article {
+  .content-wrapper, .article-container.new-model {
+    transform: translate3d(-60%, 0, 0);
+  }
 
-    p, h1, h2, h3, blockquote {
-      &.comment-highlighted {
-        padding: 1em;
+  .article-container {
+    article {
+
+      p, h1, h2, h3, blockquote {
+        &.comment-highlighted {
+          padding: 1em;
+        }
       }
-    }
 
-    .comment-highlighted {
-      background-color: rgba(0,142,148,0.1);
+      .comment-highlighted {
+        background-color: rgba(0,142,148,0.1);
+      }
     }
   }
 }
+
+
+
 
 .comments-container {
   font-size: 0.7em;
@@ -1426,8 +1475,8 @@ h1, h2, h3 {
   right: 20px;
 
   .main-comment-box {
-    width: 300px;
-    right: -308px;
+    width: 250px;
+    right: -258px;
     background-color: #fff;
     z-index: 2;
 
@@ -1550,7 +1599,7 @@ h1, h2, h3 {
 
     .comments-icons-container {
       position: relative;
-      left: 2.9em;
+      left: 3.3em;
       cursor: pointer;
 
       &:hover {
