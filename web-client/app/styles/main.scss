@@ -1230,6 +1230,11 @@ h1, h2, h3 {
   font-size: 12px;
   margin-bottom: 40px;
   .card-list {
+    height: 98px;
+    overflow: hidden;
+    &.expanded {
+      height: auto;
+    }
     li {
       padding-left: 15px;
       margin: 5px 0;
@@ -1241,6 +1246,19 @@ h1, h2, h3 {
       display: inline;
       color: #222;
     }
+  }
+  
+  i.more {
+    // &:before {
+      width: 20px;
+      height: 20px;
+      display: block;
+      background: red;
+      right: 50%;
+      position: absolute;
+      bottom: -20px;
+      margin-right: -28px;
+    // }
   }
   // @media (min-width: 440px) {
   //   position: absolute;
