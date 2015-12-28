@@ -2,35 +2,51 @@
     ng-show="activeGuid"
     click-outside="clickedOutside()">
 
-  <div>
-    <textarea ng-show="user.signedIn"
-      ng-model="newComment"
-      ng-keypress="handleKeypress($event)"
-      placeholder="اكتب تعليق"></textarea>
+  <div class="article-line"></div>
+
+  <div class="comments-list" ng-show="activeComments[0]">
+    <div class="scroll-shadow scroll-up-shadow"></div>
+    <div class="scroll-shadow scroll-down-shadow"></div>
+    <ul>
+      <li ng-repeat="comment in activeComments">
+        <div class="author">
+          <a ui-sref="app.publishers.profile.user.published({userId: comment.user.id})">
+            {{comment.user.name}}
+          </a>
+
+          <div class="comment-icon">
+            <div class="comment-icon-clipper">
+              <img ng-src="{{comment.user.thumb_url}}" width="24"/>
+            </div>
+          </div>
+        </div>
+        <p>
+          {{comment.body}}
+        </p>
+        <div class="date">
+          {{comment.created_at | date:'EEEE, d MMMM'}}
+        </div>
+        <div class="actions">
+          <a class="delete-button" ng-click="deleteComment(comment)"
+              ng-show="$root.isOwner(user, comment) || $root.isOwner(user, article)">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
+
   <div class="warning-note" ng-show="!user.id">
     يجب عليك
     <a ng-click="$root.showLoginDialog()"> تسجيل الدخول</a>
     لترك تعليق!
   </div>
 
-  <ul>
-    <li ng-repeat="comment in comments|filter:{guid: activeGuid}">
-      <p class="author">
-      <a ng-href="/profiles/{{comment.user.id}}">{{comment.user.name}}</a>
-      </p>
-      <p>
-        {{comment.body}}
-      </p>
-      <span class="date">
-        {{comment.created_at | date:'EEEE, d MMMM'}}
-      </span>
-      <div class="actions">
-        <a class="delete-button" ng-click="deleteComment(comment)"
-            ng-show="$root.isOwner(user, comment) || $root.isOwner(user, article)">
-          <i class="fa fa-trash-o"></i>
-        </a>
-      </div>
-    </li>
-  </ul>
+  <div class="new-comment-box">
+    <textarea ng-show="user.id"
+      msd-elastic
+      ng-model="newComment"
+      ng-keypress="handleKeypress($event)"
+      placeholder="اكتب تعليق..."></textarea>
+  </div>
 </div>

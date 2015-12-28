@@ -1,6 +1,23 @@
 <div class="anchored-comment-box" ng-show="isActive || commentsCount">
-  <span class="icon-count-container" ng-class="{'filled': commentsCount}">
-    <i class="fa" ng-class="{'fa-comment': commentsCount, 'fa-comment-o': !commentsCount}"></i>
-    <span>{{commentsCount > 0 ? commentsCount : '+'}}</span>
-  </span>
+  <div>
+    <span class="comments-icons-container">
+      <div class="new-button-container comment-icon" ng-if="isActive">
+        <div class="comment-icon-clipper">
+          <span>+</span>
+        </div>
+      </div>
+
+      <div class="comment-icon" ng-repeat="comment in latestComments">
+        <div class="comment-icon-clipper">
+          <img ng-src="{{comment.user.thumb_url}}" width="24"/>
+        </div>
+      </div>
+
+      <div class="count-container comment-icon" ng-if="commentsCount">
+        <div class="comment-icon-clipper">
+          <span>{{commentsCount}}</span>
+        </div>
+      </div>
+    </span>
+  </div>
 </div>

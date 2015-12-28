@@ -61,7 +61,7 @@ angular.module('webClientApp')
         listeners.push(listener);
 
         // On clicking the bubble icon send an event to show the comment.
-        var commentButton = element.find('div').find('span');
+        var commentButton = element.find('div').find('div');
         commentButton.on('click', function(e) {
           // Get the clicked anchor.
           var clickedEl = getParentWithClassName(
@@ -86,7 +86,25 @@ angular.module('webClientApp')
               scope.commentsCount++;
             }
           }
+
+          scope.latestComments = getLatestComments(4);
         });
+
+        var getLatestComments = function(count) {
+          var comments = [];
+          var allComments = scope.$parent.comments || [];
+          for (var i = 0; i < allComments.length; i++) {
+            if (allComments[i].guid === scope.guid) {
+              comments.push(allComments[i]);
+            }
+          }
+
+          var startIndex = Math.max(0, comments.length - count);
+          var endIndex = Math.min(
+              comments.length, Math.max(comments.length, count));
+          comments.reverse();
+          return comments.slice(startIndex, endIndex);
+        };
 
         scope.$on('$destroy', cleanup);
       }

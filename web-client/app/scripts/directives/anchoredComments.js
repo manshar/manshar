@@ -15,8 +15,8 @@ angular.module('webClientApp')
    * @param  {ArticleComment} ArticleComment Manshar's article comments service.
    * @return {!angular.Directive} Angular directive description.
    */
-  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', '$window', 'ArticleComment',
-      function ($rootScope, $compile, $timeout, $window, ArticleComment) {
+  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', '$window', '$filter', 'ArticleComment',
+      function ($rootScope, $compile, $timeout, $window, $filter, ArticleComment) {
 
     var COMMENT_HIGHLIGHT_CLASS = 'comment-highlighted';
     var ANCHORS_ACTIVE = 'anchored-comments-active';
@@ -132,7 +132,7 @@ angular.module('webClientApp')
         var textarea = element.find('textarea')[0];
 
         $rootScope.$watch('user', function() {
-          // scope.user = $rootScope.user;
+          scope.user = $rootScope.user;
         });
 
         if (!scope.selector) {
@@ -195,6 +195,7 @@ angular.module('webClientApp')
 
             // Activate the anchor sidebar and focus the new comment textarea.
             scope.activeGuid = data.guid;
+            scope.activeComments = getActiveComments();
             element.parent().addClass(ANCHORS_ACTIVE);
             $timeout(function() {
               textarea.focus();
@@ -229,12 +230,17 @@ angular.module('webClientApp')
             }, function(comment) {
               $timeout(function() {
                 scope.comments.push(comment);
+                scope.activeComments = getActiveComments();
                 scope.newComment = '';
               });
             });
 
             e.preventDefault();
           }
+        };
+
+        var getActiveComments = function() {
+          return $filter('filter')(scope.comments, {guid: scope.activeGuid});
         };
 
         /**

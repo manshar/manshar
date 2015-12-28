@@ -46,7 +46,7 @@
       <div class="section-title">
         <span class="action-button"
           ng-click="editArticle(article.id)"
-          ng-show="isOwner(user, article)"
+          ng-if="isOwner(user, article)"
           tooltips
             tooltip-class="fixed-tooltip"
             tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}">

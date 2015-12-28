@@ -32,6 +32,11 @@ class Article < ActiveRecord::Base
   end
   persistize :user_name
 
+  def user_avatar_url
+    user.avatar_abs_url('400x400#')
+  end
+  persistize :user_avatar_url
+
   def topic_title
     topic ? topic.title : nil
   end
@@ -41,6 +46,7 @@ class Article < ActiveRecord::Base
     category ? category.color : nil
   end
   persistize :category_color
+
 
 
   # Instance Methods.

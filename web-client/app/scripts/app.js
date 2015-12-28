@@ -19,7 +19,8 @@ angular.module('webClientApp', [
   'angular-loading-bar',
   'ipCookie',
   'ng-token-auth',
-  '720kb.tooltips'
+  '720kb.tooltips',
+  'monospaced.elastic'
 ])
   /**
    * Routing.

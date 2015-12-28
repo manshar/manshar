@@ -23,6 +23,10 @@ body {
   font-family: "Droid Arabic Naskh";
 }
 
+textarea {
+  font-family: "Droid Arabic Naskh";
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -1234,6 +1238,7 @@ h1, h2, h3 {
       padding: 2em;
       direction: ltr;
       word-wrap: break-word;
+      white-space: pre-wrap;
     }
 
     figure {
@@ -1261,64 +1266,130 @@ h1, h2, h3 {
   background-color: #FFFDE7;
 }
 
+.scroll-shadow {
+  position: absolute;
+  height: 20px;
+  left: 0;
+  right: 0;
+  z-index: 9;
+
+  &.scroll-up-shadow {
+    top: 0;
+    background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,.1));
+  }
+
+  &.scroll-down-shadow {
+    bottom: 0;
+    background: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,1));
+  }
+}
+
 .comments-container {
-  font-size: 0.8em;
+  font-size: 0.7em;
   position: absolute;
   top: 0;
   right: 20px;
 
   .main-comment-box {
+    width: 300px;
+    right: -308px;
     background-color: #fff;
-    width: 350px;
-    right: -370px;
-    box-shadow: 0 1px 5px -2px #333;
     z-index: 2;
 
-    ul {
-      list-style: none;
-      max-height: 500px;
-      overflow-y: scroll;
-      background-color: #fbfbfb;
+    .article-line {
+      position: absolute;
+      left: 12px;
+      border-left: 1px solid #fafafa;
+      height: 100%;
+    }
+    .comments-list {
+      position: relative;
 
-      li {
-        position: relative;
-        background-color: #fbfbfb;
-        padding: 1em 2em;
-        border-bottom: 1px solid #eee;
+      .scroll-shadow {
+        left: 1em;
+      }
 
-        .date, .author {
-          color: #aaa;
-          font-size: 0.6em;
-        }
+      ul {
+        list-style: none;
+        max-height: 500px;
+        overflow-y: scroll;
+        /* To keep the scrollbar to the right. */
+        direction: ltr;
+        padding: 2em 1em 2em 0;
 
-        .date {
-          position: absolute;
-          top: 1em;
-          left: 2em;
-        }
+        li {
+          position: relative;
+          margin: 2em 0;
 
-        .author {
-          a {
-            color: #000;
-            font-size: 0.6rem;
-            border-bottom: 1px solid #CBCBCB;
+          &:first-child {
+            margin-top: 0;
           }
-        }
 
-        .actions {
-          text-align: left;
-        }
+          &:last-child {
+            margin-bottom: 0;
+          }
 
+          p {
+            margin: 5px 0;
+            margin-left: 3em;
+            word-wrap: break-word;
+          }
+
+          .date, .author {
+            color: #aaa;
+            font-size: 0.6em;
+            text-align: left;
+          }
+
+          .author {
+            a {
+              padding: 0 0.5em;
+              margin-left: 1em;
+            }
+            .comment-icon, a {
+              display: inline-block;
+              vertical-align: middle;
+            }
+
+            .comment-icon {
+              position: relative;
+              /* Make sure the avatar doesn't get covered by the scroll shadow. */
+              z-index: 10;
+            }
+          }
+
+          .date {
+            margin-left: 4.5em;
+          }
+
+          .author {
+            a {
+              color: #000;
+              font-size: 0.6rem;
+              border-bottom: 1px solid #CBCBCB;
+            }
+          }
+
+          .actions {
+            text-align: right;
+          }
+
+        }
       }
     }
 
-    textarea {
-      width: 100%;
-      height: 5em;
-      border: 1px solid #ddd;
-      display: block;
-      padding: 1em;
-      font-size: 1.2em;
+    .new-comment-box {
+      margin-left: 1em;
+
+      textarea {
+        width: 100%;
+        height: 5em;
+        border: none;
+        display: block;
+        padding: 1em;
+        font-size: 1.2em;
+        resize: none;
+      }
     }
 
     .warning-note {
@@ -1329,6 +1400,64 @@ h1, h2, h3 {
 
   .anchored-comment-box {
     position: absolute;
+
+    opacity: 1;
+
+    &.ng-hide-add, &.ng-hide-remove {
+      transition: opacity .2s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+
+    &.ng-hide {
+      opacity: 0;
+    }
+
+
+    .comments-icons-container {
+      position: relative;
+      left: 2.9em;
+      cursor: pointer;
+
+      &:hover {
+        .comment-icon {
+          height: 26px;
+          opacity: 1;
+        }
+
+        &.count-container {
+          opacity: 1;
+        }
+      }
+
+      .comment-icon {
+        width: 24px;
+        height: 10px;
+        opacity: 0.3;
+        transition: height .1s cubic-bezier(0.65, 0.05, 0.36, 1),
+          opacity .1s cubic-bezier(0.65, 0.05, 0.36, 1);
+
+        &.count-container {
+          opacity: 0.5;
+          height: 24px;
+          position: relative;
+        }
+
+        &.new-button-container {
+          opacity: 1;
+          height: 0;
+          position: relative;
+          top: -24px;
+        }
+      }
+    }
+
+    .comment-icon-clipper {
+      img, span {
+        border-radius: 50%;
+        overflow: hidden;
+        display: block;
+        text-align: center;
+      }
+    }
 
     .icon-count-container {
 
