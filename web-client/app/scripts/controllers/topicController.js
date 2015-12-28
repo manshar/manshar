@@ -7,8 +7,9 @@ angular.module('webClientApp')
 
     $scope.topic = topic;
     $scope.articles = articles;
-    $scope.publishers = [];
+    $scope.firstArticles = $scope.articles.splice(0, 6);
 
+    $scope.publishers = [];
 
     $rootScope.page.title = topic.title;
     $rootScope.page.image = topic.category.original_image_url;
@@ -26,26 +27,6 @@ angular.module('webClientApp')
         $scope.publishers.push(user);
       }
     }
-
-    // Topic.get({
-    //   'categoryId': $routeParams.categoryId,
-    //   'topicId': $routeParams.topicId
-    // }, function(resource) {
-    //   /* jshint camelcase: false */
-    //   $rootScope.page.title = resource.title;
-    //   $rootScope.page.image = resource.category.original_image_url;
-    //   $rootScope.page.publishedTime = resource.created_at;
-    //   $rootScope.page.description = resource.category.description;
-
-    //   $scope.topic = resource;
-    // });
-
-    // TopicArticle.query({
-    //   'categoryId': $routeParams.categoryId,
-    //   'topicId': $routeParams.topicId
-    // }, function(articles) {
-    //   $scope.articles = articles;
-    // });
 
     $scope.showCategoriesPicker = function() {
       $rootScope.$emit('openTopicPicker', {pickOnlyCategory: true});
