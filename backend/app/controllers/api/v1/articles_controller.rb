@@ -23,7 +23,7 @@ class Api::V1::ArticlesController < ApplicationController
   # GET /api/v1/articles/1.json
   def show
     authorize @article
-    @next = @article.next
+    @next = @article.next((params[:next_count] or 1).to_i)
     render 'api/v1/articles/show'
   end
 
