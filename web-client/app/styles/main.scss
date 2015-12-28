@@ -566,9 +566,9 @@ header {
 }
 
 .menu-icon {
-  position: absolute;
+  position: fixed;
   top: 16px;
-  left: 16px;
+  left: 12px;
   font-size: 18px;
   cursor: pointer;
   z-index: 8;
@@ -637,12 +637,13 @@ html[xmlns] .clearfix {
 
 .logo {
   position: absolute;
-  right: 50%;
-  margin-right: -350px;
+  right: 0;
+  // margin-right: -350px;
   text-align: left;
   z-index: 999;
-  top: 40px;
+  top: 22px;
   transition: all 0.4s;
+  padding: 6px 0;
   a {
     color: #000;
     font-size: 14px;
@@ -655,7 +656,7 @@ html[xmlns] .clearfix {
     width: 21px;
   }
   span {
-    display: inline-table;
+    display: none;
     vertical-align: top;
     margin-right: -4px;
     font-size: 0.8em;
@@ -679,13 +680,24 @@ html[xmlns] .clearfix {
 .row .left-column {
   border-right: 1px solid #f4f4f4;
   width: 601px;
+  padding-left: 36px;
 }
 
 .content-wrapper {
-  /*margin-right: 100px;*/
   float: left;
   min-height: 100vh;
   transition: all 0.4s;
+  &.category-page {
+    @media (min-width: 720px) and (max-width: 900px) {
+      padding-left: 100px;
+    }
+  }
+  // @media (min-width: 440px) and (max-width: 900px) {
+  //   padding-left: 150px;
+  // }
+  // @media (max-width: 439px) {
+  //   padding-left: 36px;
+  // }
 }
 
 h1, h2, h3 {
@@ -785,8 +797,8 @@ h1, h2, h3 {
   }
 }
 .publishers-page .author-block {
-  width: 148px;
-  height: 148px;
+  width: 139px;
+  height: 139px;
 }
 .block {
   float: right;
@@ -1090,7 +1102,7 @@ h1, h2, h3 {
     border-right: 1px solid #f4f4f4;
     margin-right: 36px;
     width: 100%;
-    padding-left: 36px;
+    // padding-left: 36px;
     float: none;
   }
 
@@ -1192,6 +1204,7 @@ h1, h2, h3 {
 }
 
 .category-topics {
+  position: relative;
   padding: 0 15px;
   font-size: 12px;
   margin-bottom: 40px;
@@ -1206,6 +1219,25 @@ h1, h2, h3 {
       color: #222;
     }
   }
+  // @media (min-width: 440px) {
+  //   position: absolute;
+  //   left: 0;
+  //   top: 116px;
+  //   text-align: left;
+  //   max-width: 100px;
+  //   padding: 0;
+  //   .card-list {
+  //     li {
+  //       padding-left: 10px;
+  //       border-left: 2px solid #aaa;
+  //       margin: 5px 0;
+  //       a {
+  //         display: block;
+  //         color: #ccc;
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 @keyframes blink {
