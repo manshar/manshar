@@ -6,6 +6,7 @@ angular.module('webClientApp')
     $anchorScroll();
     $scope.category = category;
     $scope.articles = articles;
+    $scope.firstArticles = $scope.articles.splice(0, 6);
     $scope.topics = topics;
     $scope.publishers = [];
     console.log('topics', $scope.topics);

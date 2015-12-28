@@ -9,6 +9,7 @@ angular.module('webClientApp')
     $scope.title = 'مَنْشَر';
     $scope.tagline = 'منصة النشر العربية';
     $scope.articles = articles;
+    $scope.firstArticles = $scope.articles.splice(0, 6);
     $scope.hasNext = articles ? true: false;
     $scope.publishers = [];
 

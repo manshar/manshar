@@ -1,0 +1,30 @@
+<span class="reading-time" ng-hide="article.loading">{{article.reading_time | timeToRead }}</span>
+<div class="title">
+  <a ui-sref="app.articles.show({ articleId: article.id })"
+          analytics-on="click"
+          analytics-event="click"
+          analytics-category="UI"
+          analytics-label="Article in Main Page - {{article.title}}"
+          analytics-value="article-{{article.id}}">
+    <h2>{{article.title || 'بدون عنوان'}}</h2>
+    <h3>{{article.tagline}}</h3>
+  </a>
+</div>
+<div class="category-topic">
+  <a ui-sref="app.categories.topic({ categoryId: article.topic.category.id, topicId: article.topic.id})">
+    {{article.topic.title || 'الموضوع غير محدد'}}
+  </a>
+</div>
+
+<div class="meta-data">
+  <p><a ng-hide="article.loading"
+          ui-sref="app.publishers.profile.user.published({ userId: article.user.id })"
+          analytics-on="click"
+          analytics-event="click"
+          analytics-category="UI"
+          analytics-label="User in Main Page - {{article.user.name}}"
+          analytics-value="user-{{article.user.id}}">
+            {{article.user.name}}
+        </a></p>
+  <p>{{article.published_at | date:'EEEE, d MMMM'}}</p>
+</div>
