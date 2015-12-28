@@ -884,6 +884,11 @@ h1, h2, h3 {
       overflow: hidden;
     }
   }
+  &.selected {
+    .author-name {
+      display: none;
+    }
+  }
 }
 
 .dimmer {
