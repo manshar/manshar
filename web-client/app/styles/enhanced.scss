@@ -2,6 +2,12 @@ $red: #ca1504;
 
 body {
   font-size: 14px;
+
+  &.article-with-cover.bleed-cover {
+    .menu-icon {
+      color: #000;
+    }
+  }
 }
 
 /* Category picker styles */
@@ -731,6 +737,38 @@ h1, h2, h3 {
   }
 }
 
+.article-container {
+  > .article-meta {
+    margin-right: -352px;
+    right: 50%;
+  }
+
+  .carbon {
+    p,
+    h1,
+    h2,
+    h3,
+    blockquote {
+      margin-right: 2em;
+    }
+  }
+
+  > .article-line {
+    right: auto;
+    left: 50%;
+    margin-left: 250px;
+  }
+
+}
+
+.push-right {
+  .article-container {
+    > .article-meta {
+      margin-right: -405px;
+    }
+  }
+}
+
 /*
 *
 * New UI
@@ -756,6 +794,12 @@ h1, h2, h3 {
 .anchored-comments-active {
   .content-wrapper, .article-container.new-model {
     transform: none;
+  }
+}
+
+.new-model {
+  .comments-container {
+    right: calc(50% - 230px);
   }
 }
 

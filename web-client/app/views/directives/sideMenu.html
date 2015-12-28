@@ -1,5 +1,7 @@
 <!-- side menu -->
-<div class="menu-icon icon fa fa-bars" ng-class="{'text-white': pushAside }"></div>
+<div class="menu-icon icon fa fa-bars"
+  ng-class="{'text-white': pushAside }"
+  click-outside="clickedOutside()"></div>
 
 <div class="menu-wrapper">
   <img class="profile-photo" ng-src="{{user.thumb_url}}">

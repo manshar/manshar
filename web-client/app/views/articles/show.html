@@ -1,20 +1,13 @@
-<!-- <div class="container content-container" ng-if="article.json_model">
-  <div class="row clearfix">
-    <div class="content-wrapper">
-
-      <div class="title tray" ng-if="article.json_model">
-        <span class="reading-time" ng-hide="article.loading">
-          {{article.reading_time | timeToRead}}
-        </span>
-      </div>
-
-    </div>
-  </div>
-</div>
- -->
 <div class="article-container new-model" ng-if="article.json_model">
 
   <div class="article-line"></div>
+
+  <div class="article-meta meta-data">
+    <span class="reading-time">
+      {{article.reading_time | timeToRead}}
+    </span>
+  </div>
+
 
   <div class="single-article">
     <div class="manshar-article">

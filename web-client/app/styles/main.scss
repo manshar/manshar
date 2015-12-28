@@ -21,6 +21,15 @@ html {
 
 body {
   font-size: 14px;
+
+  &.article-with-cover {
+    .logo, .article-meta {
+      color: #fff;
+      a, span {
+        color: #fff;
+      }
+    }
+  }
 }
 
 body, input, textarea {
@@ -974,7 +983,7 @@ h1, h2, h3 {
 
 .single-article {
   &.legacy-article {
-    padding: 6em 30px;
+    padding: 2em 30px;
     text-align: justify;
     position: relative;
 
@@ -987,7 +996,7 @@ h1, h2, h3 {
 
 .manshar-article {
   .single-article {
-    padding: 6em 0;
+    padding: 2em 0;
     text-align: justify;
     position: relative;
 
@@ -1402,10 +1411,22 @@ h1, h2, h3 {
 }
 
 .article-container {
+
+  > .article-meta {
+    transition: margin-right 0.4s;
+    position: absolute;
+    right: -28px;
+    text-align: left;
+    z-index: 999;
+    top: 100px;
+    padding: 0;
+    width: 88px;
+  }
+
   > .article-line {
     position: absolute;
-    left: 50%;
-    margin-left: 250px;
+    right: 35px;
+    top: 0;
     border-left: 1px solid #f4f4f4;
     height: 100%;
     width: 1px;
@@ -1424,7 +1445,7 @@ h1, h2, h3 {
     h2,
     h3,
     blockquote {
-      margin-right: 2em;
+      margin-left: 1.8em;
     }
 
     p {
@@ -1441,7 +1462,7 @@ h1, h2, h3 {
 
 .new-model {
   .comments-container {
-    right: calc(50% - 230px);
+    right: 56px;
   }
 }
 
@@ -1488,8 +1509,9 @@ h1, h2, h3 {
     .article-line {
       position: absolute;
       left: 12px;
-      border-left: 1px solid #fafafa;
+      border-left: 1px solid #f4f4f4;
       height: 100%;
+      z-index: 10;
     }
     .comments-list {
       position: relative;
