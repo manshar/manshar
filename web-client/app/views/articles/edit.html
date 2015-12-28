@@ -1,7 +1,8 @@
-<div class="container content-container"> <!-- 700px centered -->
-  <div class="row clearfix">
-    <div class="content-wrapper editor">
-      <form class="article-edit-form" name="articleForm">
+<form class="article-edit-form" name="articleForm">
+  <div class="article-container" ng-if="article.json_model">
+    <div class="article-line"></div>
+
+    <div class="single-article">
         <div class="manshar-article">
           <div class="article-container tray">
             <div
@@ -13,53 +14,73 @@
                 required
               >
             </div>
-
-            <div class="article-meta card-list" ng-show="article.topic.title || article.published_at">
-              <div class="meta-box">
-                <h1 class="header-label">
-                  <span>نشرت في</span>
-                </h1>
-                <a ng-click="changeTopic()">
-                  <div class="meta-details card">
-                    <p class="meta-thumb">
-                      <img ng-src="{{article.topic.category.image_thumb_url}}" ng-show="article.topic.category.image_thumb_url"/>
-                    </p>
-                    <div class="meta-text">
-                      <div class="meta-name">
-                        <h3>{{article.topic.title || 'اختر موضوع لنشر تحته'}}</h3>
-                      </div>
-                      <div class="meta-more">
-                        {{article.topic.category.title}}
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
-      </form>
+    </div>
+  </div>
 
+  <div class="container content-container"> <!-- 700px centered -->
+    <div class="row clearfix">
+      <div class="content-wrapper editor">
 
-      <div class="metabar tray">
-        <div class="manshar-controls">
-          <span class="status" ng-show="!isSaving">
-            محفوظ كمسودة
-          </span>
-          <span class="status" ng-show="isSaving">
-            يتم حفظ المقال...
-          </span>
-          <button class="action-button" ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
-            <span>نشر</span>
-          </button>
-          <button class="action-button" ng-click="deleteArticle(article)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
-            <i class="fa fa-trash-o"></i>
-          </button>
-          <button class="action-button" ng-click="cancel()" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'cancel'}">
-            <i class="fa fa-arrow-left"></i>
-          </button>
+        <div class="article-meta card-list" ng-show="article.topic.title || article.published_at">
+          <div class="meta-box">
+            <h1 class="header-label">
+              <span>نشرت في</span>
+            </h1>
+            <a ng-click="changeTopic()">
+              <div class="meta-details card">
+                <p class="meta-thumb">
+                  <img ng-src="{{article.topic.category.image_thumb_url}}" ng-show="article.topic.category.image_thumb_url"/>
+                </p>
+                <div class="meta-text">
+                  <div class="meta-name">
+                    <h3>{{article.topic.title || 'اختر موضوع لنشر تحته'}}</h3>
+                  </div>
+                  <div class="meta-more">
+                    {{article.topic.category.title}}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="metabar tray">
+          <div class="manshar-controls">
+            <h3 class="section-title">
+              <i class="circle-icon fa" ng-class="{'fa-check': !isSaving, 'fa-floppy-o': isSaving}"></i>
+              <span class="label ng-hide" ng-hide="isSaving">
+                محفوظ كمسودة
+              </span>
+              <span class="label ng-hide" ng-show="isSaving">
+                يتم حفظ المقال...
+              </span>
+            </h3>
+
+            <h3 class="section-title action-button" ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
+              <i class="circle-icon fa"></i>
+              <span>
+                نشر
+              </span>
+            </h3>
+
+            <h3 class="section-title action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
+              <i class="circle-icon fa fa-trash-o"></i>
+              <span>
+                حذف
+              </span>
+            </h3>
+
+            <h3 class="section-title action-button" ng-click="cancel()" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'cancel'}">
+              <i class="circle-icon fa fa-arrow-left"></i>
+              <span>
+                عودة
+              </span>
+            </h3>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</form>

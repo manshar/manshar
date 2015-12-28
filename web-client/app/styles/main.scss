@@ -933,13 +933,34 @@ h1, h2, h3 {
 }
 
 .single-article {
-  padding: 6em 30px;
-  text-align: justify;
-  position: relative;
+  &.legacy-article {
+    padding: 6em 30px;
+    text-align: justify;
+    position: relative;
 
-  .content-wrapper {
-    min-height: 1px;
-    padding: 0 15px;
+    .content-wrapper {
+      min-height: 1px;
+      padding: 0 15px;
+    }
+  }
+}
+
+.manshar-article {
+  .single-article {
+    padding: 6em 0;
+    text-align: justify;
+    position: relative;
+
+    .content-wrapper {
+      min-height: 1px;
+      padding: 0 15px;
+    }
+  }
+}
+
+.manshar-controls {
+  .action-button {
+    cursor: pointer;
   }
 }
 
@@ -1251,6 +1272,7 @@ h1, h2, h3 {
 
 .manshar-article {
   article {
+    position: relative;
     font-size: 15px;
 
     h1 {
@@ -1287,15 +1309,9 @@ h1, h2, h3 {
     }
 
     ul, ol {
-      padding-right: 50px;
+      margin-right: 80px;
     }
-
   }
-}
-
-
-.comment-highlighted {
-  background-color: #FFFDE7;
 }
 
 .scroll-shadow {
@@ -1313,6 +1329,65 @@ h1, h2, h3 {
   &.scroll-down-shadow {
     bottom: 0;
     background: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,1));
+  }
+}
+
+.article-container {
+  > .article-line {
+    position: absolute;
+    left: 50%;
+    margin-left: 250px;
+    border-left: 1px solid #f4f4f4;
+    height: 100%;
+    width: 1px;
+  }
+
+  .carbon .layout-float-left,
+  .carbon .layout-float-right,
+  .carbon .layout-single-column {
+    margin: 0 auto 0 auto;
+    padding-right: 50px;
+  }
+
+  .carbon {
+    p,
+    h1,
+    h2,
+    h3,
+    blockquote {
+      margin-right: 2em;
+    }
+
+    p {
+      text-align: justify;
+    }
+
+    section > .layout-staged {
+      figure {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.new-model {
+  .comments-container {
+    right: calc(50% - 230px);
+  }
+}
+
+.anchored-comments-active {
+  article {
+
+    p, h1, h2, h3, blockquote {
+      &.comment-highlighted {
+        padding: 1em;
+      }
+    }
+
+    .comment-highlighted {
+      background-color: rgba(0,142,148,0.1);
+    }
   }
 }
 
@@ -1365,6 +1440,7 @@ h1, h2, h3 {
             margin: 5px 0;
             margin-left: 3em;
             word-wrap: break-word;
+            text-align: left;
           }
 
           .date, .author {

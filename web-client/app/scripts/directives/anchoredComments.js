@@ -155,8 +155,7 @@ angular.module('webClientApp')
             angular.element(guidContainer).find('img').on('load', function() {
               repositionComments(
                   element[0],
-                  // guidContainer.offsetTop,
-                  0,
+                  guidContainer.offsetTop,
                   scope.guidAttribute);
             });
 
@@ -174,8 +173,7 @@ angular.module('webClientApp')
             for (var i = 0; i < elements.length; i++) {
               createNewComment(
                   elements[i], scope, element[0],
-                  // guidContainer.offsetTop,
-                  0,
+                  guidContainer.offsetTop,
                   scope.guidAttribute);
             }
 

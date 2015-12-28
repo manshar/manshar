@@ -1,47 +1,53 @@
+<!-- <div class="container content-container" ng-if="article.json_model">
+  <div class="row clearfix">
+    <div class="content-wrapper">
+
+      <div class="title tray" ng-if="article.json_model">
+        <span class="reading-time" ng-hide="article.loading">
+          {{article.reading_time | timeToRead}}
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+ -->
+<div class="article-container new-model" ng-if="article.json_model">
+
+  <div class="article-line"></div>
+
+  <div class="single-article">
+    <div class="manshar-article">
+      <div class="new-version">
+        <article
+          ng-if="article.json_model"
+          id="article-body"
+          article-renderer
+            ng-model="article.json_model"
+          image-zoom
+          highlight-code>
+        </article>
+
+        <div anchored-comments
+          article="article"
+          guid-elements-container-id="article-body"
+          guid-attribute="name"
+          selector="section [name]:not(.carbon-layout)"
+          class="comments-container">
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- single-article -->
+</div>
+
 <div class="container content-container">
   <div class="row clearfix">
     <div class="content-wrapper">
-      <div class="single-article">
-        <div ng-if="article.body" ng-class="{'nocover': !article.cover_url}">
-          <!-- Note: Legacy Article Rendering. -->
-          <!-- <div class="cover-image full-width-photo cover" manshar-cover url="{{article.cover_url}}" ng-show="article.cover_url"></div> -->
-          <!-- <div class="dimmer" ng-show="article.cover_url"></div> -->
 
-          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }}</span>
-          <h1>{{article.title}}</h1>
-          <h2>{{article.tagline}}</h2>
-        </div>
-        <!-- New article model read time -->
-        <div class="title tray" ng-if="article.json_model">
-          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }}
-          </span>
-        </div>
-
-        <div class="manshar-article">
-          <div class="article-container tray" ng-class="{'new-version': !!article.json_model}">
-            <article ng-if="article.body" id="article-body" ng-bind-html="article.body | mansharSanitizer" highlight-code image-zoom>
-            </article>
-
-            <article
-              ng-if="article.json_model"
-              id="article-body"
-              article-renderer
-                ng-model="article.json_model"
-              image-zoom
-              highlight-code>
-            </article>
-
-            <div anchored-comments
-              article="article"
-              guid-elements-container-id="article-body"
-              guid-attribute="{{article.body ? 'data-guid' : 'name'}}"
-              selector="{{article.body ? '.guid-tagged' : 'section [name]'}}"
-              class="comments-container">
-            </div>
-          </div>
-        </div>
-
-      </div> <!-- single-article -->
+      <ng-include
+          ng-if="!article.json_model"
+          src="'views/partials/_article_legacy.html'"></ng-include>
 
       <div class="section-title">
         <span class="action-button"

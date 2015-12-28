@@ -207,13 +207,9 @@ html[xmlns] .clearfix {
 }
 
 .content-wrapper {
-  /*margin-right: 100px;*/
   float: left;
   min-height: 100vh;
   transition: all 0.4s;
-  &.editor {
-    padding: 40px;
-  }
 }
 
 h1, h2, h3 {
@@ -750,7 +746,7 @@ h1, h2, h3 {
   }
 }
 
-/* 
+/*
 *
 * New UI
 *
