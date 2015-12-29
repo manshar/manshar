@@ -227,7 +227,8 @@ angular.module('webClientApp', [
         resolve: {
           drafts: function($auth, $stateParams, UserDraft) {
             return $auth.validateUser().then(function(user) {
-              if(user && user.id === parseInt($stateParams.userId)) {
+              if(user &&
+                 parseInt(user.id) === parseInt($stateParams.userId)) {
                 return UserDraft.query({}).$promise;
               }
             });
@@ -240,10 +241,8 @@ angular.module('webClientApp', [
         controller: 'StatCtrl',
         resolve: {
           stats: function($auth, $stateParams, ArticleStats) {
-            // ToDo: Add a better way to check if user is logged in
-            // Here if rootscope is not set yet, it doesn't work on refresh
             return $auth.validateUser().then(function(user) {
-              if(user && user.id === parseInt($stateParams.userId)) {
+              if(user && parseInt(user.id) === parseInt($stateParams.userId)) {
                 return ArticleStats.query({}).$promise;
               }
             });
