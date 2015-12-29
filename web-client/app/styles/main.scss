@@ -450,7 +450,7 @@ body.manshar {
   color: #fff;
   overflow-y: auto;
   .user-menu {
-    padding-top: 5em;
+    padding-top: 4em;
   }
   img {
     display: block;
@@ -571,12 +571,36 @@ header {
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 999;
+  background: rgba(255,255,255,0.97);
+
+  .close-button {
+    color: #999;
+    padding: 1em;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  .content {
+    padding: 3em 0;
+  }
+
+  .form-div, .form-info {
+    margin: 44px auto 0;
+  }
+
+  .form-title {
+    display: none;
+  }
+
+  .content-wrapper {
+    margin: 0;
+  }
 }
 
 .body-wrapper {
@@ -1287,7 +1311,6 @@ h1, h2, h3 {
   .card-list {
     overflow: scroll;
     padding-left: 3em;
-    padding-bottom: 1em;
     white-space: nowrap;
 
     &.expanded {
