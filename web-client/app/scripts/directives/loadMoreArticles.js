@@ -15,7 +15,7 @@ angular.module('webClientApp')
         profile: '=',
         state: '='
       },
-      link: function(scope, element) {
+      link: function(scope) {
         var page = 1;
         scope.hasNext = true;
 
@@ -26,7 +26,7 @@ angular.module('webClientApp')
           }
           Array.prototype.push.apply(scope.articles, articles);
           scope.inProgress = null;
-        }
+        };
 
         var loadedArticles = {};
 
@@ -42,7 +42,7 @@ angular.module('webClientApp')
             }
           }
           scope.inProgress = null;
-        }
+        };
 
         scope.loadMoreArticles = function() {
           scope.inProgress = 'load-more';
@@ -58,22 +58,22 @@ angular.module('webClientApp')
               'page': ++page
             }, addArticles);
           } else if(scope.profile) {
-            if(scope.state == 'published') {
+            if(scope.state === 'published') {
               UserArticle.query({
                 'userId': scope.profile.id,
                 'page': ++page
               }, addArticles);
-            } else if(scope.state == 'recommended') {
+            } else if(scope.state === 'recommended') {
               UserRecommendation.query({
                 'userId': scope.profile.id,
                 'page': ++page
               }, loopAddArticles);
-            } else if(scope.state == 'discussions') {
+            } else if(scope.state === 'discussions') {
               UserComment.query({
                 'userId': scope.profile.id,
                 'page': ++page
               }, loopAddArticles);
-            } else if(scope.state == 'drafts') {
+            } else if(scope.state === 'drafts') {
               UserDraft.query({
                 'userId': scope.profile.id,
                 'page': ++page
@@ -86,6 +86,7 @@ angular.module('webClientApp')
             }, addArticles);
           }
         };
+
       },
       template: '<div class="more-articles section">'+
                   '<h3 class="section-title" ng-click="loadMoreArticles()"'+

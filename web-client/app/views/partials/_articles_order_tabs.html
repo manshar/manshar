@@ -1,0 +1,10 @@
+<div class="listing-types-tabs">
+  <div class="section-title">
+    <i class="circle-icon fa fa-line-chart" ng-if="order == 'popular'"></i>
+    <i class="circle-icon fa fa-thumbs-o-up" ng-if="order == 'best'"></i>
+    <i class="circle-icon fa fa-clock-o" ng-if="order == 'recents'"></i>
+    <a ui-sref="^.list({order: 'popular'})" ui-sref-active="active"> الأكثر شعبية </a> .
+    <a ui-sref="^.list({order: 'best'})" ui-sref-active="active"> الأفضل </a> .
+    <a ui-sref="^.list({order: 'recents'})" ui-sref-active="active"> الأحدث </a>
+  </div>
+</div>

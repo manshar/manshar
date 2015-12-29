@@ -4,6 +4,7 @@ angular.module('webClientApp')
   .controller('CategoryCtrl', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', '$anchorScroll', 'category', 'topics', 'articles',
       function ($scope, $rootScope, $stateParams, $state, $filter, $anchorScroll, category, topics, articles) {
     $anchorScroll();
+    $scope.order = $stateParams.order;
     $scope.category = category;
     $scope.articles = articles;
     $scope.firstArticles = $scope.articles.splice(0, 6);
@@ -36,7 +37,7 @@ angular.module('webClientApp')
 
     var categorySelectedUnbind = $rootScope.$on('categorySelected',
         function(event, data) {
-      $state.go('app.categories', {categoryId: data.category.id});
+      $state.go('app.categories.articles.list', {categoryId: data.category.id});
     });
 
     $scope.getCardColor = function(color) {

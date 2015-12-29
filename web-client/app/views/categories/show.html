@@ -16,12 +16,14 @@
       <div class="category-topics">
         <ul class="topics card-list unstyled">
           <li ng-repeat="topic in topics" class="card topic" style="border-right-color: {{category.color}}">
-            <a ui-sref="app.categories.topic({topicId: topic.id})">
+            <a ui-sref="app.categories.topic.articles.list({topicId: topic.id, order: order || 'popular'})">
               {{topic.title}}
             </a>
           </li>
         </ul>
       </div>
+
+      <div ng-include="'views/partials/_articles_order_tabs.html'"></div>
 
       <div ng-include="'views/partials/_stream.html'"></div>
 

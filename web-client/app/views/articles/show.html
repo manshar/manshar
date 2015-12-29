@@ -67,7 +67,7 @@
         <div>
           <span ng-if="article.topic">
             <span>نشرت في</span>
-            <a ng-show="article.topic" ui-sref="app.categories.topic({ categoryId: article.topic.category.id, topicId: article.topic.id})">
+            <a ng-show="article.topic" ui-sref="app.categories.topic.articles.list({ categoryId: article.topic.category.id, topicId: article.topic.id})">
               <h3>{{article.topic.title || 'غير محدد'}}</h3>
             </a>،
           </span>

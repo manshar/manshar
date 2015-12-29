@@ -15,6 +15,7 @@ class Article < ActiveRecord::Base
   scope :popular, -> { order('hotness DESC') }
   scope :best, -> { order('recommendations_count DESC') }
   scope :recents, -> { order('published_at DESC') }
+  scope :recently_updated, -> { order('updated_at DESC') }
 
   before_save :published_post, :time_to_read
   after_save :update_published_articles_count
