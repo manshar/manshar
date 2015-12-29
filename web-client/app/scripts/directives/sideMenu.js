@@ -47,7 +47,7 @@ angular.module('webClientApp')
 
         scope.clickedOutside = function() {
           $timeout(function() {
-            if(document.body.clientWidth < 900 &&
+            if(document.body.clientWidth < 1100 &&
                scope.menuStatus === 'opened') {
               $rootScope.pushAside = false;
               scope.menuStatus = 'closed';
