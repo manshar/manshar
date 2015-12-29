@@ -40,44 +40,19 @@ angular.module('webClientApp', [
       })
       .state('app.articles', {
         abstract: true,
-        url: 'articles/',
+        url: 'articles/'
+      })
+      .state('app.articles.list', {
+        url: ':order/',
         views: {
           'content@': {
-            templateUrl: 'views/main.html'
-          }
-        }
-      })
-      .state('app.articles.popular', {
-        url: 'popular/',
-        templateUrl: 'views/partials/_stream.html',
-        controller: 'MainCtrl',
-        resolve: {
-          articles: function(Article) {
-            var order = 'popular';
-            // Popular is the default sort for articles
-            return Article.query({'order': order}).$promise;
-          }
-        }
-      })
-      .state('app.articles.best', {
-        url: 'best/',
-        templateUrl: 'views/partials/_stream.html',
-        controller: 'MainCtrl',
-        resolve: {
-          articles: function(Article) {
-            var order = 'best';
-            return Article.query({'order': order}).$promise;
-          }
-        }
-      })
-      .state('app.articles.recents', {
-        url: 'recents/',
-        controller: 'MainCtrl',
-        templateUrl: 'views/partials/_stream.html',
-        resolve: {
-          articles: function(Article) {
-            var order = 'recents';
-            return Article.query({'order': order}).$promise;
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl',
+            resolve: {
+              articles: function(Article, $stateParams) {
+                return Article.query({'order': $stateParams.order}).$promise;
+              }
+            }
           }
         }
       })
@@ -296,7 +271,11 @@ angular.module('webClientApp', [
         }
       })
       .state('app.categories', {
-        url: 'categories/:categoryId/',
+        url: 'categories/:categoryId/'
+      })
+      .state('app.categories.articles', {})
+      .state('app.categories.articles.list', {
+        url: ':order/',
         views: {
           'content@': {
             templateUrl: 'views/categories/show.html',
@@ -312,15 +291,20 @@ angular.module('webClientApp', [
             });
           },
           articles: function(CategoryArticle, $stateParams) {
-            return CategoryArticle.query({'categoryId': $stateParams.categoryId}).$promise;
+            return CategoryArticle.query({
+              'categoryId': $stateParams.categoryId,
+              'order': $stateParams.order
+            }).$promise;
           },
           topics: function(Topic, $stateParams) {
             return Topic.query({'categoryId': $stateParams.categoryId}).$promise;
           }
         }
       })
-      .state('app.categories.topic', {
-        url: 'topics/:topicId/',
+      .state('app.categories.topic', {})
+      .state('app.categories.topic.articles', {})
+      .state('app.categories.topic.articles.list', {
+        url: 'topics/:topicId/:order/',
         views: {
           'content@': {
             templateUrl: 'views/topics/show.html',
@@ -341,7 +325,8 @@ angular.module('webClientApp', [
           articles: function(TopicArticle, $state, $stateParams) {
             return TopicArticle.query({
                     'categoryId': $stateParams.categoryId,
-                    'topicId': $stateParams.topicId
+                    'topicId': $stateParams.topicId,
+                    'order': $stateParams.order
                   }, function(articles) {
                     return articles;
                   }, function() {

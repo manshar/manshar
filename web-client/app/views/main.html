@@ -5,18 +5,9 @@
         <a ui-sref="app.articles.new"><p> أكتب هنا... </p></a>
       </div>
 
-      <div class="listing-types-tabs">
-        <div class="section-title">
-          <i class="circle-icon fa fa-line-chart" ng-if="'app.articles.popular'|isState"></i>
-          <i class="circle-icon fa fa-thumbs-o-up" ng-if="'app.articles.best'|isState"></i>
-          <i class="circle-icon fa fa-clock-o" ng-if="'app.articles.recents'|isState"></i>
-          <a ui-sref="app.articles.popular" ui-sref-active="active"> الأكثر شعبية </a> .
-          <a ui-sref="app.articles.best" ui-sref-active="active"> الأفضل </a> .
-          <a ui-sref="app.articles.recents" ui-sref-active="active"> الأحدث </a>
-        </div>
-      </div>
+      <div ng-include="'views/partials/_articles_order_tabs.html'"></div>
 
-      <div ui-view></div>
+      <div ng-include="'views/partials/_stream.html'"></div>
 
     </div> <!-- .content-wrapper -->
   </div> <!-- row -->

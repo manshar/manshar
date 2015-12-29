@@ -1,14 +1,15 @@
 object @article
 
 attributes :id, :title, :tagline, :published_at,
-   :recommendations_count, :comments_count, :reading_time
+   :recommendations_count, :comments_count, :reading_time, :published,
+   :updated_at
 
 # Don't return cover for listings. We only need these when we are getting the
 # full article. This might change in the future but for now this is causing
 # a lot of queries to be executed when listing articles.
 if not locals[:listing]
 
-  attributes :json_model, :created_at, :updated_at, :published, :hotness
+  attributes :json_model, :created_at, :hotness
 
   # Only serve body when json_model is empty
   if not root_object.json_model

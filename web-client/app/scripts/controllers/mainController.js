@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('MainCtrl', ['$scope', '$state','$rootScope', 'Article', 'User', 'articles',
-      function ($scope, $state, $rootScope, Article, User, articles) {
-    var currentState = $state.current.url;
+  .controller('MainCtrl', ['$scope', '$stateParams','$rootScope', 'Article', 'User', 'articles',
+      function ($scope, $stateParams, $rootScope, Article, User, articles) {
 
-    $scope.order = currentState.substring(0, currentState.length - 1);
+    $scope.order = $stateParams.order;
     $scope.title = 'مَنْشَر';
     $scope.tagline = 'منصة النشر العربية';
     $scope.articles = articles;

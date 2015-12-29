@@ -8,7 +8,8 @@ class Api::V1::UsersArticlesController < ApplicationController
   # GET /api/v1/users/1/articles.json
   def index
     if profile
-      @articles = profile.published_articles.page(params[:page])
+      @articles = profile.published_articles.page(params[:page]).per(
+          params[:per] || 10)
       render 'api/v1/articles/index'
     else
       raise ActiveRecord::RecordNotFound
@@ -18,7 +19,8 @@ class Api::V1::UsersArticlesController < ApplicationController
   # GET /api/v1/me/drafts
   # GET /api/v1/me/drafts.json
   def drafts
-    @articles = policy_scope(current_user.drafts.page(params[:page]))
+    @articles = policy_scope(current_user.drafts.page(params[:page]).per(
+        params[:per] || 10))
     render 'api/v1/articles/index'
   end
 
