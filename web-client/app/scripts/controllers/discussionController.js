@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('DiscussionCtrl', ['$scope', '$rootScope','comments',
-    function ($scope, $rootScope, comments) {
+  .controller('DiscussionCtrl', ['$scope', '$rootScope', '$state','comments',
+    function ($scope, $rootScope, $state, comments) {
+      var currentState = $state.current.url;
+      $scope.currentState = currentState.substring(0, currentState.length - 1);
+      console.log($scope.currentState);
+
       var articles = [];
 
       angular.forEach(comments, function (comment) {

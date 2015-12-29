@@ -27,8 +27,8 @@ angular.module('webClientApp', [
    */
   .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
       function ($stateProvider, $locationProvider, $urlRouterProvider) {
-    // Set the default route to to to .hot child state
-    $urlRouterProvider.when('/', 'articles/hot/');
+    // Set the default route to to to .popular child state
+    $urlRouterProvider.when('/', 'articles/popular/');
     $stateProvider
       .state('app', {
         url: '/',
@@ -47,8 +47,8 @@ angular.module('webClientApp', [
           }
         }
       })
-      .state('app.articles.hot', {
-        url: 'hot/',
+      .state('app.articles.popular', {
+        url: 'popular/',
         templateUrl: 'views/partials/_stream.html',
         controller: 'MainCtrl',
         resolve: {
@@ -70,8 +70,8 @@ angular.module('webClientApp', [
           }
         }
       })
-      .state('app.articles.recent', {
-        url: 'recent/',
+      .state('app.articles.recents', {
+        url: 'recents/',
         controller: 'MainCtrl',
         templateUrl: 'views/partials/_stream.html',
         resolve: {
@@ -239,11 +239,12 @@ angular.module('webClientApp', [
       })
       .state('app.publishers.profile.user.published', {
         url: 'published/',
-        templateUrl: 'views/partials/_articles_list.html'
+        templateUrl: 'views/profiles/stream.html',
+        controller: 'ProfileCtrl'
       })
       .state('app.publishers.profile.user.drafts', {
         url: 'drafts/',
-        templateUrl: 'views/partials/_articles_list.html',
+        templateUrl: 'views/profiles/stream.html',
         controller: 'DraftCtrl',
         resolve: {
           drafts: function($auth, $stateParams, UserDraft) {
@@ -273,7 +274,7 @@ angular.module('webClientApp', [
       })
       .state('app.publishers.profile.user.recommended', {
         url: 'recommended/',
-        templateUrl: 'views/partials/_articles_list.html',
+        templateUrl: 'views/profiles/stream.html',
         controller: 'RecommendationCtrl',
         resolve: {
           recommendations: function(UserRecommendation, $stateParams) {
@@ -283,7 +284,7 @@ angular.module('webClientApp', [
       })
       .state('app.publishers.profile.user.discussions', {
         url: 'discussions/',
-        templateUrl: 'views/partials/_articles_list.html',
+        templateUrl: 'views/profiles/stream.html',
         controller: 'DiscussionCtrl',
         resolve: {
           comments: function(UserComment, $stateParams) {

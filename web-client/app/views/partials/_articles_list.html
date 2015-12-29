@@ -5,8 +5,8 @@
       <a href="/">تصفح أشهر المقالات</a>
     </h4>
   </div>
-
   <div ng-repeat="article in articles" class="article" ng-class="{'loading': article.loading, 'blinking': article.loading}" style="border-right: 1px solid {{article.topic.category.color}}">
     <div ng-include="'views/partials/_article_item.html'"></div>
   </div>
+
 </div>

@@ -7,20 +7,17 @@
 
       <div class="listing-types-tabs">
         <div class="section-title">
-          <i class="circle-icon fa fa-line-chart" ng-if="'app.articles.hot'|isState"></i>
+          <i class="circle-icon fa fa-line-chart" ng-if="'app.articles.popular'|isState"></i>
           <i class="circle-icon fa fa-thumbs-o-up" ng-if="'app.articles.best'|isState"></i>
-          <i class="circle-icon fa fa-clock-o" ng-if="'app.articles.recent'|isState"></i>
-          <a ui-sref="app.articles.hot" ui-sref-active="active"> الأكثر شعبية </a> .
+          <i class="circle-icon fa fa-clock-o" ng-if="'app.articles.recents'|isState"></i>
+          <a ui-sref="app.articles.popular" ui-sref-active="active"> الأكثر شعبية </a> .
           <a ui-sref="app.articles.best" ui-sref-active="active"> الأفضل </a> .
-          <a ui-sref="app.articles.recent" ui-sref-active="active"> الأحدث </a>
+          <a ui-sref="app.articles.recents" ui-sref-active="active"> الأحدث </a>
         </div>
       </div>
 
       <div ui-view></div>
 
-      <div class="more-articles section">
-        <h3 class="section-title" ng-click="loadMoreArticles()" ng-disabled="inProgress == 'load-more'" ng-show="hasNext"> <i class="circle-icon fa fa-refresh"></i> </h3>
-      </div> <!-- more-articles -->
     </div> <!-- .content-wrapper -->
   </div> <!-- row -->
 </div> <!-- content-container -->

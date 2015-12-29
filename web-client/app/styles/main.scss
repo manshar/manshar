@@ -428,6 +428,9 @@ body.manshar {
   z-index: 1;
   color: #fff;
   overflow-y: auto;
+  .user-menu {
+    padding-top: 5em;
+  }
   img {
     display: block;
     width: 100%;
