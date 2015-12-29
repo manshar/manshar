@@ -10,10 +10,10 @@ angular.module('webClientApp')
       angular.element($window).bind('scroll', function() {
         didScroll = true;
       });
-      
+
       $interval(function(){
         if(didScroll) {
-          scope.yscroll = $window.pageYOffset;
+          scope.yscroll = document.body.scrollTop;
           didScroll = false;
 
           if(scope.yscroll < 50) {

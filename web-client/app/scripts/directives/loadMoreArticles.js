@@ -19,10 +19,20 @@ angular.module('webClientApp')
         var page = 1;
         scope.hasNext = true;
 
+        var scrollWatch = $rootScope.$watch('yscroll', function(newValue, oldValue) {
+          var scrollHeight = element[0].parentElement.scrollHeight;
+          if( !scope.inProgress && scrollHeight-newValue <= 1000) {
+            scope.loadMoreArticles();
+          }
+        });
+        scope.$on('$destroy', function() {
+          scrollWatch();
+        });
         // Success callback for querying articles. Appends retrieved articles.
         var addArticles = function(articles) {
           if (!articles || !articles.length) {
             scope.hasNext = false;
+            scrollWatch();
           }
           Array.prototype.push.apply(scope.articles, articles);
           scope.inProgress = null;
@@ -33,6 +43,7 @@ angular.module('webClientApp')
         var loopAddArticles = function(articles) {
           if (!articles || !articles.length) {
             scope.hasNext = false;
+            scrollWatch();
           }
           for(var i = 0; i < articles.length; ++i) {
             var article = articles[i].article;
@@ -45,7 +56,7 @@ angular.module('webClientApp')
         }
 
         scope.loadMoreArticles = function() {
-          scope.inProgress = 'load-more';
+          scope.inProgress = true;
           if(scope.topic) {
             TopicArticle.query({
               'categoryId': scope.topic.category.id,
