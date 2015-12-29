@@ -10,7 +10,7 @@
     <h3>{{article.tagline}}</h3>
   </a>
 </div>
-<div class="category-topic">
+<div class="category-topic" ng-if="article.topic">
   <a ui-sref="app.categories.topic.articles.list({ categoryId: article.topic.category.id, topicId: article.topic.id, order: order || 'popular'})">
     {{article.topic.title || 'الموضوع غير محدد'}}
   </a>
