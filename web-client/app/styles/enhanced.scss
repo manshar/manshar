@@ -792,8 +792,12 @@ h1, h2, h3 {
 
 .comments-container {
   .main-comment-box {
-    width: 300px;
-    right: -308px;
+    width: 252px;
+    right: -260px;
+    @media (min-width: 720px) and (max-width: 1023px) {
+      width: 130px;
+      right: -138px;
+    }
   }
   .anchored-comment-box {
     .comments-icons-container {

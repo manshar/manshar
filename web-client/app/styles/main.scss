@@ -1640,6 +1640,11 @@ h1, h2, h3 {
 
     .warning-note {
       padding: 1em;
+      margin-left: 16px;
+      text-align: left;
+      a {
+        color: $red;
+      }
     }
 
   }
