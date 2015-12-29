@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-.directive('sideMenu', ['$document', '$rootScope', 'LoginService',
-  function ($document, $rootScope, LoginService) {
+.directive('sideMenu', ['$document', '$rootScope', '$timeout', 'LoginService',
+  function ($document, $rootScope, $timeout, LoginService) {
   	return {
       restrict: 'E',
       link: function(scope, element) {
@@ -24,7 +24,8 @@ angular.module('webClientApp')
           }
         });
 
-	    	element[0].getElementsByClassName('menu-icon')[0].addEventListener('click', function(){
+        element[0].getElementsByClassName('menu-icon')[0].addEventListener(
+            'click', function(){
 			    if(scope.menuStatus === 'closed') {
             $rootScope.pushAside = true;
 			      scope.menuStatus = 'opened';
@@ -33,6 +34,16 @@ angular.module('webClientApp')
 			      scope.menuStatus = 'closed';
 			    }
 			  });
+
+        scope.clickedOutside = function() {
+          $timeout(function() {
+            if(document.body.clientWidth < 900 &&
+               scope.menuStatus === 'opened') {
+              $rootScope.pushAside = false;
+              scope.menuStatus = 'closed';
+            }
+          }, 100);
+        };
       },
       templateUrl: 'views/directives/sideMenu.html'
     };

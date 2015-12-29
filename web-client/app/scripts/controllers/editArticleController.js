@@ -5,7 +5,6 @@ angular.module('webClientApp')
   .controller('EditArticleCtrl', ['$rootScope', '$scope', '$stateParams', '$state', '$analytics', '$window', '$interval', '$timeout', '$anchorScroll', 'Article', 'article',
       function ($rootScope, $scope, $stateParams, $state, $analytics, $window, $interval, $timeout, $anchorScroll, Article, article) {
 
-    console.log('i am a controller');
     var confirmEditMessage = ('هذه العملية ستنقل المقال إلى مسوداتك. يمكنك' +
         ' نشرها مجدداً بالضغط على نشر. هل تود نقل المقال للمسودات؟');
 
@@ -13,7 +12,6 @@ angular.module('webClientApp')
     // Load the article if we are editing.
     lastSavedArticle = angular.copy(article);
     $scope.article = article;
-    console.log('article', article);
     /**
      * Checks if the article has been changed since the last time it was saved.
      * @return {boolean} True if the article has been changed.
@@ -49,7 +47,6 @@ angular.module('webClientApp')
     });
 
     var updateSuccess = function (resource) {
-      console.log('resouce', resource);
       lastSavedArticle = angular.copy(resource);
       $timeout(function () {
         $scope.isSaving = false;
@@ -112,7 +109,6 @@ angular.module('webClientApp')
      * @param {boolean} silent Whether to flash the controls or not.
      */
     $scope.saveArticle = function(article, published, silent) {
-      console.log('saving...');
       // Clear autosave interval before sitting published.
       if(autoSavePromise && published) {
         $interval.cancel(autoSavePromise);

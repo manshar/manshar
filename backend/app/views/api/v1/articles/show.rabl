@@ -29,8 +29,8 @@ if not locals[:listing]
     article.cover_abs_url '1140x270#'
   end
 
-  child @next => :next do
-    extends('api/v1/articles/show', locals: { listing: true })
+  child @next, :object_root => false do
+    extends('api/v1/articles/index', :collection => @next)
   end
 
   child :user do

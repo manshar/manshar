@@ -91,7 +91,10 @@ angular.module('webClientApp', [
         },
         resolve: {
           article: function(Article, $stateParams, $state) {
-            return Article.get({'articleId': $stateParams.articleId}, function(article) {
+            return Article.get({
+              'articleId': $stateParams.articleId,
+              'next_count': 5
+            }, function(article) {
               return article;
             }, function() {
               $state.go('app');

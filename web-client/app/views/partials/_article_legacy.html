@@ -1,0 +1,32 @@
+<div class="single-article legacy-article">
+  <div ng-class="{'nocover': !article.cover_url}">
+    <!-- Note: Legacy Article Rendering. -->
+    <!-- <div class="cover-image full-width-photo cover" manshar-cover url="{{article.cover_url}}" ng-show="article.cover_url"></div> -->
+    <!-- <div class="dimmer" ng-show="article.cover_url"></div> -->
+
+    <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }}</span>
+    <h1>{{article.title}}</h1>
+    <h2>{{article.tagline}}</h2>
+  </div>
+
+  <div class="manshar-article">
+    <div class="article-container tray" ng-class="{'new-version': !!article.json_model}">
+      <article
+        ng-if="article.body"
+        id="article-body"
+        ng-bind-html="article.body | mansharSanitizer"
+        image-zoom
+        highlight-code>
+      </article>
+
+      <div anchored-comments
+        article="article"
+        guid-elements-container-id="article-body"
+        guid-attribute="data-guid"
+        selector=".guid-tagged"
+        class="comments-container">
+      </div>
+    </div>
+  </div>
+
+</div> <!-- single-article -->

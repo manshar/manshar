@@ -15,7 +15,7 @@
 
       <div class="category-topics">
         <ul class="topics card-list unstyled">
-          <li ng-repeat="topic in topics" class="card topic">
+          <li ng-repeat="topic in topics" class="card topic" style="border-right-color: {{category.color}}">
             <a ui-sref="app.categories.topic({topicId: topic.id})">
               {{topic.title}}
             </a>

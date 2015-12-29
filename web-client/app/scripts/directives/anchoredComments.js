@@ -155,8 +155,7 @@ angular.module('webClientApp')
             angular.element(guidContainer).find('img').on('load', function() {
               repositionComments(
                   element[0],
-                  // guidContainer.offsetTop,
-                  0,
+                  guidContainer.offsetTop,
                   scope.guidAttribute);
             });
 
@@ -174,8 +173,7 @@ angular.module('webClientApp')
             for (var i = 0; i < elements.length; i++) {
               createNewComment(
                   elements[i], scope, element[0],
-                  // guidContainer.offsetTop,
-                  0,
+                  guidContainer.offsetTop,
                   scope.guidAttribute);
             }
 
@@ -196,7 +194,7 @@ angular.module('webClientApp')
             // Activate the anchor sidebar and focus the new comment textarea.
             scope.activeGuid = data.guid;
             scope.activeComments = getActiveComments();
-            element.parent().addClass(ANCHORS_ACTIVE);
+            document.body.classList.add(ANCHORS_ACTIVE);
             $timeout(function() {
               textarea.focus();
             }, 50);
@@ -212,7 +210,7 @@ angular.module('webClientApp')
         scope.clickedOutside = function() {
           scope.activeGuid = null;
           clearHighlightedComment();
-          element.parent().removeClass(ANCHORS_ACTIVE);
+          document.body.classList.remove(ANCHORS_ACTIVE);
         };
 
         /**

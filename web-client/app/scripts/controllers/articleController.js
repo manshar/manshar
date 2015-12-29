@@ -17,8 +17,7 @@ angular.module('webClientApp')
     $scope.article = article;
 
     // TODO: retrieve more than one article and rename the variable to readmore
-    console.log(article);
-    $scope.articles = article.next? [article.next]: [];
+    $scope.articles = article.articles || [];
 
     $scope.editArticle = function (articleId) {
       $state.go('app.articles.edit', {articleId: articleId});

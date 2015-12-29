@@ -66,13 +66,13 @@ class Article < ActiveRecord::Base
     not self.published
   end
 
-  def next
+  def next(count=1)
     query = Article.publishings.popular
-    next_article = query.where('hotness < ?', hotness).first
-    if next_article.nil?
-      next_article = query.where('hotness > ?', hotness).first
+    next_articles = query.where('hotness < ?', hotness)[0..count-1]
+    if next_articles.nil?
+      next_articles = query.where('hotness > ?', hotness)[0..count-1]
     end
-    next_article
+    next_articles
   end
 
   def time_to_read

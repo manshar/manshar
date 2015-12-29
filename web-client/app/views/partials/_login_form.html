@@ -4,7 +4,7 @@
     {{flash}}
     <p class="note">{{flashNote}}</p>
   </div>
-  <form>
+  <form class="note-form">
     <button ng-click="resendConfirmation(userForm)" ng-show="nonConfirmed">
       أرسل التفعيل مرة أخرى
     </button>
@@ -13,8 +13,8 @@
     <a ng-click="authenticate('gplus')" class="google-login-button">
       <i class="fa fa-google"></i>
       تسجيل الدخول
-    </a>
-    <a ng-click="authenticate('facebook')" class="facebook-login-button">
+    </a><!--
+    --><a ng-click="authenticate('facebook')" class="facebook-login-button">
       <i class="fa fa-facebook"></i>
       تسجيل الدخول
     </a>
