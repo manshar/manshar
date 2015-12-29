@@ -32,8 +32,12 @@ body {
   }
 }
 
-body, input, textarea {
+body, input, textarea, button {
   font-family: "Droid Arabic Naskh";
+}
+
+button {
+  cursor: pointer;
 }
 
 * {
@@ -1384,11 +1388,11 @@ h1, h2, h3 {
 
   article {
     position: relative;
-    font-size: 1em;
+    font-size: 14px;
 
     h1 {
 
-      margin: 1.6em 0;
+      margin: 30px 0;
 
       > h2 {
         margin: 0;
@@ -1396,19 +1400,19 @@ h1, h2, h3 {
     }
 
     h2 {
-      margin: 1em 0;
+      margin: 16px 0;
     }
 
     pre {
-      margin: 2em 0;
-      padding: 2em;
+      margin: 32px 0;
+      padding: 32px;
       direction: ltr;
       word-wrap: break-word;
       white-space: pre-wrap;
     }
 
     figure {
-      margin: 2em 0;
+      margin: 32px 0;
 
       img {
         width: 100%;
@@ -1416,7 +1420,7 @@ h1, h2, h3 {
     }
 
     p {
-      margin: 1em 0;
+      margin: 30px 0;
       line-height: 2;
     }
 
@@ -1479,7 +1483,7 @@ h1, h2, h3 {
     h2,
     h3,
     blockquote {
-      margin-left: 1.8em;
+      margin-left: 30px;
     }
 
     p {
@@ -1737,6 +1741,22 @@ h1, h2, h3 {
         font-size: 1em;
         cursor: pointer;
       }
+    }
+  }
+}
+
+.manshar {
+  .toolbelt-toolbar {
+    max-width: 220px;
+    .button-container {
+      width: 100px;
+    }
+  }
+
+
+  .editor-inline-toolbar {
+    button {
+      font-family: serif;
     }
   }
 }
