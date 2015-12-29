@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-.directive('loadMoreArticles', ['$document', '$rootScope', '$state', 'Article', 'TopicArticle', 'CategoryArticle', 'UserArticle', 'UserRecommendation', 'UserComment', 'UserDraft',
-  function ($document, $rootScope, $state, Article, TopicArticle, CategoryArticle, UserArticle, UserRecommendation, UserComment, UserDraft) {
+.directive('loadMoreData', ['$document', '$rootScope', '$state', 'User', 'Article', 'TopicArticle', 'CategoryArticle', 'UserArticle', 'UserRecommendation', 'UserComment', 'UserDraft',
+  function ($document, $rootScope, $state, User, Article, TopicArticle, CategoryArticle, UserArticle, UserRecommendation, UserComment, UserDraft) {
 
     // Pass order and category id
   	return {
@@ -11,30 +11,30 @@ angular.module('webClientApp')
         order: '=',
         category: '=',
         topic: '=',
-        articles: '=',
+        appendTo: '=',
         profile: '=',
         state: '='
       },
-      link: function(scope) {
+      link: function(scope, element) {
         var page = 1;
         scope.hasNext = true;
 
         var scrollWatch = $rootScope.$watch('yscroll', function(newValue, oldValue) {
           var scrollHeight = element[0].parentElement.scrollHeight;
           if( !scope.inProgress && scrollHeight-newValue <= 1000) {
-            scope.loadMoreArticles();
+            scope.loadMoreData();
           }
         });
         scope.$on('$destroy', function() {
           scrollWatch();
         });
         // Success callback for querying articles. Appends retrieved articles.
-        var addArticles = function(articles) {
-          if (!articles || !articles.length) {
+        var addData = function(data) {
+          if (!data || !data.length) {
             scope.hasNext = false;
             scrollWatch();
           }
-          Array.prototype.push.apply(scope.articles, articles);
+          Array.prototype.push.apply(scope.appendTo, data);
           scope.inProgress = null;
         };
 
@@ -48,32 +48,36 @@ angular.module('webClientApp')
           for(var i = 0; i < articles.length; ++i) {
             var article = articles[i].article;
             if(!loadedArticles[article.id]) {
-              scope.articles.push(article);
+              scope.appendTo.push(article);
               loadedArticles[article.id] = true;
             }
           }
           scope.inProgress = null;
         };
 
-        scope.loadMoreArticles = function() {
+        scope.loadMoreData = function() {
           scope.inProgress = true;
-          if(scope.topic) {
+          if(scope.state == 'publishers') {
+            User.query({
+              'page': ++page
+            }, addData);
+          } else if(scope.topic) {
             TopicArticle.query({
               'categoryId': scope.topic.category.id,
               'topicId': scope.topic.id,
               'page': ++page
-            }, addArticles);
+            }, addData);
           } else if(scope.category) {
             CategoryArticle.query({
               'categoryId': scope.category.id,
               'page': ++page
-            }, addArticles);
+            }, addData);
           } else if(scope.profile) {
             if(scope.state === 'published') {
               UserArticle.query({
                 'userId': scope.profile.id,
                 'page': ++page
-              }, addArticles);
+              }, addData);
             } else if(scope.state === 'recommended') {
               UserRecommendation.query({
                 'userId': scope.profile.id,
@@ -88,19 +92,19 @@ angular.module('webClientApp')
               UserDraft.query({
                 'userId': scope.profile.id,
                 'page': ++page
-              }, addArticles);
+              }, addData);
             }
           } else if(scope.order) {
             Article.query({
               'order': scope.order,
               'page': ++page
-            }, addArticles);
+            }, addData);
           }
         };
 
       },
       template: '<div class="more-articles section">'+
-                  '<h3 class="section-title" ng-click="loadMoreArticles()"'+
+                  '<h3 class="section-title" ng-click="loadMoreData()"'+
                     'ng-show="hasNext">'+
                     '<i class="circle-icon fa fa-refresh"></i>'+
                   '</h3>'+
