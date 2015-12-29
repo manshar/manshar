@@ -1417,8 +1417,8 @@ h1, h2, h3 {
       }
     }
 
-    h2 {
-      margin: 16px 0;
+    h2, h3 {
+      margin: 30px 0;
     }
 
     pre {
@@ -1440,6 +1440,14 @@ h1, h2, h3 {
     p {
       margin: 30px 0;
       line-height: 2;
+    }
+
+    blockquote {
+      margin: 30px 20px;
+      padding: 10px;
+      border-right: 10px solid #D9ECC2;
+      color: #999;
+      margin-right: 20px;
     }
 
     ul, ol {
@@ -1768,8 +1776,13 @@ h1, h2, h3 {
   }
 }
 
+.manshar-editor {
+  min-height: 70vh;
+}
+
 .manshar {
   .toolbelt-toolbar {
+    font-size: 12px;
     max-width: 220px;
     .button-container {
       width: 100px;
