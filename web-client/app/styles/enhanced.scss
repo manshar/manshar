@@ -743,6 +743,39 @@ h1, h2, h3 {
   }
 }
 
+.article-container {
+  > .article-meta {
+    margin-right: -352px;
+    right: 50%;
+  }
+
+  .carbon {
+    p,
+    h1,
+    h2,
+    h3,
+    blockquote {
+      margin-right: 2em;
+    }
+  }
+
+  > .article-line {
+    right: auto;
+    left: 50%;
+    margin-left: 250px;
+  }
+
+}
+
+.push-right {
+  .article-container {
+    > .article-meta {
+      margin-right: -405px;
+    }
+  }
+}
+
+
 /*
 *
 * New UI

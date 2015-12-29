@@ -7,6 +7,7 @@ angular.module('webClientApp')
     return {
       restrict: 'A',
       templateUrl: 'views/directives/categoryTopicPicker.html',
+      scope: {},
       link: function (scope) {
         scope.selectedCategory = null;
         scope.categories = Category.query();

@@ -19,7 +19,7 @@ angular.module('webClientApp')
         var page = 1;
         scope.hasNext = true;
 
-        var scrollWatch = $rootScope.$watch('yscroll', function(newValue, oldValue) {
+        var scrollWatch = $rootScope.$watch('yscroll', function(newValue) {
           var scrollHeight = element[0].parentElement.scrollHeight;
           if( !scope.inProgress && scrollHeight-newValue <= 1000) {
             scope.loadMoreData();
@@ -57,7 +57,7 @@ angular.module('webClientApp')
 
         scope.loadMoreData = function() {
           scope.inProgress = true;
-          if(scope.state == 'publishers') {
+          if(scope.state === 'publishers') {
             User.query({
               'page': ++page
             }, addData);
@@ -65,33 +65,39 @@ angular.module('webClientApp')
             TopicArticle.query({
               'categoryId': scope.topic.category.id,
               'topicId': scope.topic.id,
-              'page': ++page
+              'page': ++page,
+              'order': scope.order
             }, addData);
           } else if(scope.category) {
             CategoryArticle.query({
               'categoryId': scope.category.id,
-              'page': ++page
+              'page': ++page,
+              'order': scope.order
             }, addData);
           } else if(scope.profile) {
             if(scope.state === 'published') {
               UserArticle.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, addData);
             } else if(scope.state === 'recommended') {
               UserRecommendation.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, loopAddArticles);
             } else if(scope.state === 'discussions') {
               UserComment.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, loopAddArticles);
             } else if(scope.state === 'drafts') {
               UserDraft.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, addData);
             }
           } else if(scope.order) {
