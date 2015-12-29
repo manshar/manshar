@@ -7,7 +7,7 @@
 
       <div class="category-info">
         <h3 class="section-title">
-          <a ui-sref="app.categories.articles.list({categoryId: topic.category.id, order: order || 'popular'})">
+          <a ui-sref="app.categories.articles.list({categoryId: topic.category.id, order: order || 'popular'})" title="{{topic.category.title}}">
             <i class="circle-icon fa {{topic.category.icon_cssclass}}" style="background-color:{{topic.category.color}}"></i>
           </a>
           {{topic.title}}
