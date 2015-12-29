@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-.directive('sideMenu', ['$document', '$rootScope', '$timeout', 'LoginService',
-  function ($document, $rootScope, $timeout, LoginService) {
+.directive('sideMenu', ['$document', '$rootScope', '$timeout', 'LoginService', 'User',
+  function ($document, $rootScope, $timeout, LoginService, User) {
   	return {
       restrict: 'E',
       link: function(scope, element) {
@@ -21,6 +21,16 @@ angular.module('webClientApp')
             	scope.menuStatus = 'closed';
               $rootScope.pushAside = false;
             }
+          }
+        });
+
+        $rootScope.$on('auth:validation-success', function() {
+          if($rootScope.user.id) {
+            User.get({
+              userId: $rootScope.user.id
+            }, function(user) {
+              scope.thumbnail = user.thumb_url;
+            });
           }
         });
 

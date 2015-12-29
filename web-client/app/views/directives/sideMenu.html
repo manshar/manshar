@@ -1,10 +1,11 @@
 <!-- side menu -->
-<div class="menu-icon icon fa fa-bars"
-  ng-class="{'text-white': pushAside }"
-  click-outside="clickedOutside()"></div>
+<div class="menu-icon icon" click-outside="clickedOutside()">
+  <div ng-if="!thumbnail" class="fa fa-bars"
+    ng-class="{'text-white': pushAside }"></div>
+  <img ng-if="thumbnail" ng-src="{{thumbnail}}">
+</div>
 
 <div class="menu-wrapper">
-  <img class="profile-photo" ng-src="{{user.thumb_url}}">
   <ul class="user-menu with-border" ng-switch on="!!user.id">
     <li>
       <a ng-switch-when="true" ui-sref="app.publishers.profile.user.published({ userId: user.id })">
