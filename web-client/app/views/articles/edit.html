@@ -49,7 +49,7 @@
         <div class="metabar tray">
           <div class="manshar-controls">
             <h3 class="section-title">
-              <i class="circle-icon fa" ng-class="{'fa-check': !isSaving, 'fa-floppy-o': isSaving}"></i>
+              <i class="circle-icon fa" ng-class="{'fa-file-o': !isSaving, 'fa-floppy-o': isSaving}"></i>
               <span class="label ng-hide" ng-hide="isSaving">
                 محفوظ كمسودة
               </span>
@@ -59,7 +59,7 @@
             </h3>
 
             <h3 class="section-title action-button" ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
-              <i class="circle-icon fa"></i>
+              <i class="circle-icon fa fa-paper-plane-o"></i>
               <span>
                 نشر
               </span>
