@@ -1671,7 +1671,7 @@ h1, h2, h3 {
     h2,
     h3,
     blockquote {
-      margin-left: 30px;
+      margin-left: 16px;
     }
 
     p {
@@ -1683,6 +1683,11 @@ h1, h2, h3 {
         margin-top: 0;
       }
     }
+  }
+
+  a {
+    text-decoration: underline;
+    color: inherit;
   }
 }
 
@@ -1878,12 +1883,17 @@ h1, h2, h3 {
         height: 10px;
         opacity: 0.3;
         transition: height .1s cubic-bezier(0.65, 0.05, 0.36, 1),
-          opacity .1s cubic-bezier(0.65, 0.05, 0.36, 1);
+        opacity .1s cubic-bezier(0.65, 0.05, 0.36, 1);
 
         &.count-container {
           opacity: 0.5;
           height: 24px;
           position: relative;
+
+          line-height: 26px;
+          border-radius: 50%;
+          background: #999;
+          color: #fff;
         }
 
         &.new-button-container {
@@ -1892,6 +1902,7 @@ h1, h2, h3 {
           position: relative;
           top: -24px;
         }
+
       }
     }
 
