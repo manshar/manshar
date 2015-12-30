@@ -4,11 +4,11 @@ angular.module('webClientApp')
   .service('Article', ['$resource', '$http', '$q', '$cacheFactory', 'API_HOST',
       function ($resource, $http, $q, $cacheFactory, API_HOST) {
 
-      var $httpDefaultCache = $cacheFactory.get('$http');
+      var articlesCache = $cacheFactory('articles');
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var ArticleResource = $resource(baseUrl + 'articles/:articleId', {}, {
-        get: {cache: true},
-        query: {cache: true, isArray: true}
+        get: {cache: articlesCache},
+        query: {cache: articlesCache, isArray: true}
       });
 
       /**
@@ -78,7 +78,7 @@ angular.module('webClientApp')
             // Success.
             function (response) {
               // Update the cache after updating the article.
-              $httpDefaultCache.put(url, response.data);
+              articlesCache.removeAll();
               if (optSuccess) {
                 optSuccess(response.data);
               }

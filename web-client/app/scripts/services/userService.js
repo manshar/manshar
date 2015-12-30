@@ -11,7 +11,7 @@ angular.module('webClientApp')
   .service('User', ['$rootScope', '$resource', '$http', '$cacheFactory', 'API_HOST',
       function ($rootScope, $resource, $http, $cacheFactory, API_HOST) {
 
-      var $httpDefaultCache = $cacheFactory.get('$http');
+      var usersCache = $cacheFactory('users');
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserResource = $resource(baseUrl + 'users/:userId', {}, {
         update: {method: 'PUT'},
@@ -51,7 +51,7 @@ angular.module('webClientApp')
 
             // Success.
             angular.bind(this, function(response) {
-              $httpDefaultCache.put(url, response.data);
+              usersCache.removeAll();
               if (optSuccess) {
                 optSuccess(response.data);
               }
