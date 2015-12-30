@@ -1,18 +1,15 @@
-<div class="stats-container one-column" ng-show="stats && user.id == profile.id">
+<div class="stats-container one-column" ng-if="stats[0]">
 
-  <div ng-repeat="stat in stats"
-    class="article"
-    ng-class="{'loading': stat.loading, 'blinking': stat.loading}"
-    style="border-right: 1px solid {{stat.topic.category.color}}">
+  <div ng-repeat="stat in stats" class="article">
 
     <div class="title">
-      <a ui-sref="app.articles.show({ articleId: stat.id })"
+      <a ui-sref="app.articles.show({ articleId: stat.article_id })"
               analytics-on="click"
               analytics-event="click"
               analytics-category="UI"
-              analytics-label="Article in Main Page - {{stat.title}}"
-              analytics-value="article-{{stat.id}}">
-        <h2>{{stat.title || 'بدون عنوان'}}</h2>
+              analytics-label="Article in Stats Page - {{stat.article_title}}"
+              analytics-value="article-{{stat.article_id}}">
+        <h2>{{stat.article_title || 'بدون عنوان'}}</h2>
       </a>
     </div>
 
@@ -25,4 +22,14 @@
 
   </div>
 
+</div>
+
+
+<div class="stats-container one-column" ng-if="!stats[0]">
+  <div class="article">
+    <h3>لا يوجد إحصائيات.</h3>
+    <h4>
+      <a href="/">تصفح أشهر المقالات</a>
+    </h4>
+  </div>
 </div>

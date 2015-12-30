@@ -740,6 +740,17 @@ h1, h2, h3 {
 
 }
 
+.single-article {
+  article {
+    blockquote {
+      border-right: 4px solid #D9ECC2;
+      color: #999;
+      padding-right: 30px;
+      margin-right: -32px;
+    }
+  }
+}
+
 .push-right {
   .article-container {
     > .article-meta {
@@ -799,7 +810,7 @@ h1, h2, h3 {
   }
 }
 
-.manshar {
+body.manshar {
   .toolbelt-toolbar {
     font-size: 14px;
     max-width: 250px;

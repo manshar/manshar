@@ -21,6 +21,7 @@ html {
 
 body {
   font-size: 14px;
+  /*overflow: hidden;*/
 
   &.article-with-cover {
     .logo, .article-meta {
@@ -31,6 +32,54 @@ body {
     }
   }
 }
+
+/*
+// To allow transitions to happen without a jump to
+// the top of the page, the content ui-view need to have
+// the following styling (and body overflow: hidden).
+// The problem with this, is it breaks the document normal
+// scrolling and hence our scroll-spy doesn't get fired.
+// For some reason listening to scroll on the ui-view element
+// didn't work as the scroll event never fired. So for now
+// We'll stick with the jump.
+[ui-view="content"] {
+  height: 100%;
+  overflow: scroll;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+*/
+/** Pages Transitions. */
+[ui-view].ng-enter, [ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: all .3s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+[ui-view].ng-enter {
+  opacity: 0;
+  transform: scale3d(0.5, 0.5, 0.5);
+}
+
+[ui-view].ng-enter-active {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+[ui-view].ng-leave {
+  opacity: 1;
+  /*transform: scale3d(0, 0, 0);*/
+  transform: translate3d(0, 0, 0);
+}
+
+[ui-view].ng-leave-active {
+  opacity: 0;
+  /*transform: scale3d(0.5, 0.5, 0.5);*/
+  transform: translate3d(200px, 0, 0);
+}
+
 
 body, input, textarea, button {
   font-family: "Droid Arabic Naskh";
@@ -383,6 +432,15 @@ ul.unstyled {
  * Override Carbon Toolbar Styling.
  */
 body.manshar {
+
+  .toolbelt-toolbar {
+    font-size: 12px;
+    max-width: 220px;
+    .button-container {
+      width: 100px;
+    }
+  }
+
   .editor-inline-toolbar {
 
     .editor-toolbar-buttons {
@@ -393,6 +451,7 @@ body.manshar {
 
       .button-container {
         button {
+          font-family: serif;
           background-color: #CA1504;
           color: #fff;
           padding: 0.7em .8em;
@@ -417,8 +476,7 @@ body.manshar {
   .editor-block-toolbar {
     .editor-toolbar-buttons {
       button {
-        background-color: transparent;
-        padding: 0.3em 0.7em;
+        padding: 3px 8px 0 8px;
         width: auto;
 
         &:hover {
@@ -1443,11 +1501,10 @@ h1, h2, h3 {
     }
 
     blockquote {
-      margin: 30px 20px;
-      padding: 10px;
-      border-right: 10px solid #D9ECC2;
+      border-right: 4px solid #D9ECC2;
       color: #999;
-      margin-right: 20px;
+      padding-right: 30px;
+      margin-right: -16px;
     }
 
     ul, ol {
@@ -1778,21 +1835,4 @@ h1, h2, h3 {
 
 .manshar-editor {
   min-height: 70vh;
-}
-
-.manshar {
-  .toolbelt-toolbar {
-    font-size: 12px;
-    max-width: 220px;
-    .button-container {
-      width: 100px;
-    }
-  }
-
-
-  .editor-inline-toolbar {
-    button {
-      font-family: serif;
-    }
-  }
 }

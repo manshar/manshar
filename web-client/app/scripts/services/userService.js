@@ -15,8 +15,8 @@ angular.module('webClientApp')
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserResource = $resource(baseUrl + 'users/:userId', {}, {
         update: {method: 'PUT'},
-        get: {cache: true},
-        query: {cache: true, isArray: true}
+        get: {cache: usersCache},
+        query: {cache: usersCache, isArray: true}
       });
 
 
@@ -74,13 +74,14 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('UserDraft', ['$resource', 'API_HOST',
-      function ($resource, API_HOST) {
+  .service('UserDraft', ['$resource', '$cacheFactory', 'API_HOST',
+      function ($resource, $cacheFactory, API_HOST) {
 
+      var articlesCache = (
+          $cacheFactory.get('articles') || $cacheFactory('articles'));
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserDraftResource = $resource(baseUrl + 'me/drafts', {}, {
-        get: {cache: true},
-        query: {cache: true, isArray: true}
+        query: {cache: articlesCache, isArray: true}
       });
 
       return {
