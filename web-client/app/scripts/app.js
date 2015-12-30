@@ -195,7 +195,7 @@ angular.module('webClientApp', [
         resolve: {
           canEdit: function($auth, $state, $stateParams) {
             return $auth.validateUser().then(function(user) {
-              if(user.id === $stateParams.userId) {
+              if(parseInt(user.id) === parseInt($stateParams.userId)) {
                 return;
               } else {
                 $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});

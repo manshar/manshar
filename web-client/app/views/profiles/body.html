@@ -1,6 +1,6 @@
 <div class="profile-wrapper">
   <div class="section-title" ng-class="{'clear-right': user.id != profile.id}">
-    <a ng-click="editProfile()" ng-show="user.id == profile.id">
+    <a ui-sref="app.publishers.profile.user.edit({userId: user.id})" ng-show="user.id == profile.id">
       <i class="circle-icon fa fa-group"></i>
     </a>
     <div class="profile-info" ng-class="{'clear-padding': user.id == profile.id}">

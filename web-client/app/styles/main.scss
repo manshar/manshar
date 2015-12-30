@@ -278,8 +278,9 @@ ul.unstyled {
 }
 
 .form-div {
+  padding-top: 4em;
 
- header {
+  header {
    @include row(table);
 
    img {
@@ -293,17 +294,17 @@ ul.unstyled {
      display: inline-block;
      vertical-align: middle;
    }
- }
+  }
 
- .form-errors {
+  .form-errors {
    background: #CA1504;
    color: #FFFFFF;
    line-height: 40px;
    padding: 4px;
    text-align: center;
- }
+  }
 
- .form-flash {
+  .form-flash {
    background: #4CAF50;
    color: #FFFFFF;
    line-height: 40px;
@@ -313,9 +314,9 @@ ul.unstyled {
    .note {
      font-size: .7em;
    }
- }
+  }
 
- .oauth-providers {
+  .oauth-providers {
    a {
      display: inline-block;
      width: 50%;
@@ -340,9 +341,9 @@ ul.unstyled {
        }
      }
    }
- }
+  }
 
- form {
+  form {
   margin-top: 10px;
   &.note-form {
     margin: 0;
@@ -413,13 +414,13 @@ ul.unstyled {
        display: inline-block;
      }
    }
- }
+  }
 
- &.category {
+  &.category {
    img {
      width: 100%;
    }
- }
+  }
 }
 
 .form-info {
