@@ -1622,7 +1622,7 @@ h1, h2, h3 {
     }
 
     ul, ol {
-      margin-right: 80px;
+      margin-right: 40px;
     }
   }
 }
@@ -1962,4 +1962,13 @@ h1, h2, h3 {
 
 .manshar-editor {
   min-height: 70vh;
+}
+
+#loading-bar {
+  .peg {
+    box-shadow: none !important;
+  }
+  .bar {
+    background: $red !important;
+  }
 }
