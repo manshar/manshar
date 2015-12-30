@@ -532,51 +532,9 @@ angular.module('webClientApp', [
               id === resource.user.id);
     };
 
-    var checkAccess = function(event, next, current) {
-
-      /**
-       * First load to the AngularJS the user might have not been loaded
-       * so need to call the callback after validateUser promise is resolved.
-       */
-      var firstLoadCallback = function() {
-        if (!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
-          $location.path('/login').search('prev', $location.path());
-        }
-      };
-
-      // If this is the first load of the site.
-      if(!current) {
-        $auth.validateUser().then(firstLoadCallback, firstLoadCallback);
-      }
-      else if(!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
-        event.preventDefault();
-        // Show the dialog instead of redirecting for all navigations.
-        // Except first time landing on the site on protected page.
-        if (current) {
-          $rootScope.$broadcast('showLoginDialog', {
-            'prev': $location.path()
-          });
-        }
-      }
-    };
-
-
     $rootScope.$on('$stateChangeStart', function(
           event, toState, toParams, fromState, fromParams){
       /* jshint unused:false */
       $rootScope.previousState = fromState;
-    });
-
-    /**
-     * If the route to be accessed is private make sure the user is authenticated
-     * otherwise, broadcast 'showLoginDialog' to show login modal.
-     */
-    $rootScope.$on('$routeChangeStart', function(event, next, current) {
-      checkAccess(event, next, current);
-    });
-
-    $rootScope.$on('$routeChangeSuccess', function (event, current) {
-      $rootScope.page.title = current.$$route.title || $rootScope.page.title;
-      $rootScope.page.url = document.location.href;
     });
   }]);

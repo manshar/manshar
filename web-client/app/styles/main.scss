@@ -108,6 +108,7 @@ button {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .fa-heart:before {
     content: "\f004";
 }
@@ -219,16 +220,34 @@ button {
 .fa-line-chart:before {
     content: "\f201";
 }
-
-.fa-angle-up:before {
-  content: "\f106";
+.fa-heart2:before {
+    content: "\f005";
+}
+.fa-user:before {
+    content: "\f007";
+}
+.fa-file-o:before {
+    content: "\f016";
 }
 .fa-eye:before {
     content: "\f06e";
 }
-.fa-book:before {
-  content: "\f02d";
+.fa-floppy-o:before {
+    content: "\f0c7";
 }
+.fa-file-text-o:before {
+    content: "\f0f6";
+}
+.fa-paper-plane-o:before {
+    content: "\f1d9";
+}
+.fa-share-alt:before {
+    content: "\f1e0";
+}
+.fa-newspaper-o:before {
+    content: "\f1ea";
+}
+
 
 *{
   padding:0;
@@ -865,15 +884,44 @@ h1, h2, h3 {
   }
 }
 
+.stats-container {
+  .article {
+    .title {
+      margin: 3px 0;
+    }
+
+    h2 {
+      font-size: 18px;
+      color: #555;
+    }
+  }
+}
+
 .article-stats {
   p {
-    width: 25%;
-    min-width: 120px;
+    min-width: 70px;
     float: right;
     direction: ltr;
     text-align: right;
     padding-left: 1em;
-    font-size: 18px;
+    font-size: 12px;
+    color: #777;
+
+    &.view-count i {
+      color: #2299DD;
+    }
+
+    &.read-count i {
+      color: #ca1504;
+    }
+
+    &.comments-count i {
+      color: #EFB018;
+    }
+
+    &.recommendations-count i {
+      color: #008e94;
+    }
   }
 }
 
@@ -1368,11 +1416,23 @@ h1, h2, h3 {
 
 .profile-page {
   position: relative;
-
   .article-action {
     display: block;
   }
+
+  .listing-types-tabs {
+    .section-title {
+      margin-bottom: 0;
+    }
+    .private-tabs {
+      margin-right: 16px;
+      a:first-child {
+        margin-right: 0;
+      }
+    }
+  }
 }
+
 .category-info {
   margin: 6px 0 20px 40px;
   p {
@@ -1622,12 +1682,12 @@ h1, h2, h3 {
   }
 }
 
-.content-wrapper, .article-container.new-model {
+.legacy-article-container, .article-container.new-model {
   transition: transform .3s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
 .anchored-comments-active {
-  .content-wrapper, .article-container.new-model {
+  .legacy-article-container, .article-container.new-model {
     transform: translate3d(-60%, 0, 0);
   }
 
@@ -1635,6 +1695,8 @@ h1, h2, h3 {
     article {
 
       p, h1, h2, h3, blockquote {
+        transition: padding .1s cubic-bezier(0.65, 0.05, 0.36, 1),
+                    background-color .1s cubic-bezier(0.65, 0.05, 0.36, 1);
         &.comment-highlighted {
           padding: 1em;
         }

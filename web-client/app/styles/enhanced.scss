@@ -634,7 +634,20 @@ h1, h2, h3 {
 }
 
 .profile-page {
-  position: relative;
+
+  .listing-types-tabs {
+    .section-title {
+      display: inline-block;
+    }
+
+    .private-tabs {
+      display: inline-block;
+      margin-right: 0;
+      a:first-child {
+        margin-right: 0;
+      }
+    }
+  }
 }
 .profile-info, .category-info {
   margin: 6px 0 40px;
@@ -782,8 +795,14 @@ h1, h2, h3 {
   height: 148px;
 }
 
+.article-stats {
+  p {
+    min-width: 80px;
+  }
+}
+
 .anchored-comments-active {
-  .content-wrapper, .article-container.new-model {
+  .legacy-article-container, .article-container.new-model {
     transform: none;
   }
 }
