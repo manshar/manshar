@@ -1,20 +1,35 @@
- <div class="stats-container one-column" ng-show="stats && user.id == profile.id">
-  <table class="stats-dashboard">
-    <tr class="stats-header row">
-      <th> العنوان </th>
-      <th> المشاهدات </th>
-      <th> القراءات </th>
-      <th> التعليقات </th>
-      <th> التوصيات </th>
-    </tr>
-    <tr ng-repeat="stat in stats" class="row">
-      <td> {{stat.article_title}}
-        <a ng-href="{{$location.host() + 'articles/' + stat.article_id}}">رابط للمقال</a>
-      </td>
-      <td> {{stat.page_views_count}} </td>
-      <td> {{stat.reads_count}} </td>
-      <td> {{stat.comments_count}} </td>
-      <td> {{stat.recommendations_count}} </td>
-    </tr>
-  </table>
+<div class="stats-container one-column" ng-if="stats[0]">
+
+  <div ng-repeat="stat in stats" class="article">
+
+    <div class="title">
+      <a ui-sref="app.articles.show({ articleId: stat.article_id })"
+              analytics-on="click"
+              analytics-event="click"
+              analytics-category="UI"
+              analytics-label="Article in Stats Page - {{stat.article_title}}"
+              analytics-value="article-{{stat.article_id}}">
+        <h2>{{stat.article_title || 'بدون عنوان'}}</h2>
+      </a>
+    </div>
+
+    <div class="article-stats clearfix">
+      <p> {{stat.page_views_count}} <i class="fa fa-eye"></i> </p>
+      <p> {{stat.reads_count}} <i class="fa fa-book"></i> </p>
+      <p> {{stat.comments_count}} <i class="fa fa-comment"></i> </p>
+      <p> {{stat.recommendations_count}} <i class="fa fa-thumbs-o-up"></i> </p>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="stats-container one-column" ng-if="!stats[0]">
+  <div class="article">
+    <h3>لا يوجد إحصائيات.</h3>
+    <h4>
+      <a href="/">تصفح أشهر المقالات</a>
+    </h4>
+  </div>
 </div>

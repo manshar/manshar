@@ -25,6 +25,10 @@
     "hljs": false,
     "carbon": false,
     "Imagezoom": false,
-    "Webcam": false
+    "Webcam": false,
+    "Response": false,
+    "Request": false,
+    "toolbox": false,
+    "caches": false
   }
 }

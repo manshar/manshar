@@ -250,8 +250,11 @@ angular.module('webClientApp')
             'articleId': scope.article.id,
             'commentId': comment.id
           }, function () {
-            var index = scope.comments.indexOf(comment);
-            scope.comments.splice(index, 1);
+            $timeout(function() {
+              var index = scope.comments.indexOf(comment);
+              scope.comments.splice(index, 1);
+              scope.activeComments = getActiveComments();
+            });
           }, function (error) {
             $window.alert('حدث خطأ ما. الرجاء المحاولة مجدداً');
             console.log(error);

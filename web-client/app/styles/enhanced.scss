@@ -11,26 +11,6 @@ body {
 }
 
 /* Category picker styles */
-.modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  background: rgba(255,255,255,0.9);
-
-  .content {
-    padding: 3em 0;
-  }
-
-  .close-button {
-    color: #999;
-    padding: 1em;
-    cursor: pointer;
-    position: absolute;
-  }
-}
 .header-label {
   font-size: 0.7em;
   text-align: right;
@@ -198,7 +178,7 @@ html[xmlns] .clearfix {
     font-size: 14px;
   }
   &.push-right {
-    margin-right: -550px;
+    margin-right: -500px;
   }
 }
 
@@ -462,23 +442,16 @@ h1, h2, h3 {
 .article-share i {
   transition: all 0.3s;
 }
+
 .recommendation-button {
-  cursor: pointer;
-  display: inline-block;
-  &:hover {
-    color: #ca1504;
-    i {
-      transform: scale(1.4);
-    }
+  i {
+    width: 30px;
+    height: 30px;
+    border: 3px solid transparent;
   }
   .recommendation-count {
-    position: absolute;
-    right: -40px;
-    text-align: left;
-    width: 36px;
-    line-height: 34px;
-    color: #ca1504;
-    font-size: 18px;
+    right: -45px;
+    font-size: 14px;
   }
 }
 
@@ -743,6 +716,50 @@ h1, h2, h3 {
   }
 }
 
+.article-container {
+  > .article-meta {
+    margin-right: -352px;
+    right: 50%;
+  }
+
+  .carbon {
+    p,
+    h1,
+    h2,
+    h3,
+    blockquote {
+      margin-right: 32px;
+    }
+  }
+
+  > .article-line {
+    right: auto;
+    left: 50%;
+    margin-left: 250px;
+  }
+
+}
+
+.single-article {
+  article {
+    blockquote {
+      border-right: 4px solid #D9ECC2;
+      color: #999;
+      padding-right: 30px;
+      margin-right: -32px;
+    }
+  }
+}
+
+.push-right {
+  .article-container {
+    > .article-meta {
+      margin-right: -405px;
+    }
+  }
+}
+
+
 /*
 *
 * New UI
@@ -779,12 +796,23 @@ h1, h2, h3 {
 
 .comments-container {
   .main-comment-box {
-    width: 300px;
-    right: -308px;
+    width: 252px;
+    right: -260px;
+    @media (min-width: 720px) and (max-width: 1023px) {
+      width: 130px;
+      right: -138px;
+    }
   }
   .anchored-comment-box {
     .comments-icons-container {
       /*left: 2.9em;*/
     }
+  }
+}
+
+body.manshar {
+  .toolbelt-toolbar {
+    font-size: 14px;
+    max-width: 250px;
   }
 }

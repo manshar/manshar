@@ -24,6 +24,13 @@
   <meta property="og:image" content="{{page.image}}" />
   <meta property="article:published_time" content="{{page.publishedTime}}">
 
+  <!-- twitter cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@manshar" />
+  <meta name="twitter:title" content="{{page.title}} - منشر" />
+  <meta name="twitter:description" content="{{page.description}}" />
+  <meta name="twitter:image" content="{{page.image}}" />
+
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css({.tmp,app}) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
@@ -37,6 +44,7 @@
   <!-- endbuild -->
   <!-- Load the hosted stylesheets for highlight.js -->
   <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
+  <link rel="manifest" href="/manifest.json">
 </head>
 <body class="manshar" ng-class="{'no-scroll': showDisclaimer}" scroll-spy>
   <!--[if lt IE 7]>
@@ -67,6 +75,8 @@
   </div>
 
   <div data-category-topic-picker></div>
+  <div data-login-modal></div>
+
   <!-- Google Analytics: Configured in app.js run block. -->
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -106,6 +116,7 @@
  <script src="scripts/main.js"></script>
  <script src="scripts/appConfig.js"></script>
  <script src="scripts/cachedTemplates.js"></script>
+ <script src="scripts/service-worker-registration.js"></script>
 
  <script src="scripts/controllers/admin/manageCategoriesCtrl.js"></script>
  <script src="scripts/controllers/mainController.js"></script>

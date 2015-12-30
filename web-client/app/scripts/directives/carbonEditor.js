@@ -53,12 +53,17 @@ angular.module('webClientApp')
           sections:[
             new carbon.Section({
               components: [
-                new carbon.Paragraph({
-                  paragraphType: carbon.Paragraph.Types.MainHeader,
-                  placeholderText: 'عنوان المقال'
-                }),
-                new carbon.Paragraph({
-                  placeholderText: 'اكتب مقالك هنا'
+                new carbon.Layout({
+                  type: carbon.Layout.Types.SingleColumn,
+                  components: [
+                    new carbon.Paragraph({
+                      paragraphType: carbon.Paragraph.Types.MainHeader,
+                      placeholderText: 'عنوان المقال'
+                    }),
+                    new carbon.Paragraph({
+                      placeholderText: 'اكتب مقالك هنا'
+                    })
+                  ]
                 })
               ]
             })
@@ -66,6 +71,7 @@ angular.module('webClientApp')
         });
 
         var editor = new carbon.Editor(element[0], {
+          locale: 'ar',
           modules: [
             carbon.GiphyComponent,
             carbon.EmbeddedComponent,
@@ -85,6 +91,7 @@ angular.module('webClientApp')
           ComponentClass: carbon.EmbeddedComponent
         });
         editor.install(carbon.SelfieExtension);
+        editor.install(carbon.LayoutingExtension);
         editor.render();
 
         editor.addEventListener('change', function() {

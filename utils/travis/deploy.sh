@@ -6,6 +6,21 @@ elif [[ "$TRAVIS_BRANCH" == "" ]]
 then
   echo "TRAVIS_BRANCH variable is empty. This util is only to be used by Travis CI."
   exit 1
+elif [[ "$TRAVIS_BRANCH" == "staging" ]]
+then
+  echo "On Staging... Deploying to staging.manshar.com..."
+  wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  echo "Host heroku.com" >> ~/.ssh/config
+  echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  echo "   CheckHostIP no" >> ~/.ssh/config
+  echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  heroku keys:clear
+  yes | heroku keys:add
+
+  git config user.email "deploy-bot@manshar.me"
+  git config user.name "Manshar Deploy Bot"
+
+  $MANSHAR_HOME/utils/deploy.sh --name manshar-staging
 elif [[ "$TRAVIS_BRANCH" != "master" ]]
 then
   echo "Not master. No Deploy to do."

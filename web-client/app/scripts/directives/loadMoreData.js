@@ -65,33 +65,39 @@ angular.module('webClientApp')
             TopicArticle.query({
               'categoryId': scope.topic.category.id,
               'topicId': scope.topic.id,
-              'page': ++page
+              'page': ++page,
+              'order': scope.order
             }, addData);
           } else if(scope.category) {
             CategoryArticle.query({
               'categoryId': scope.category.id,
-              'page': ++page
+              'page': ++page,
+              'order': scope.order
             }, addData);
           } else if(scope.profile) {
             if(scope.state === 'published') {
               UserArticle.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, addData);
             } else if(scope.state === 'recommended') {
               UserRecommendation.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, loopAddArticles);
             } else if(scope.state === 'discussions') {
               UserComment.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, loopAddArticles);
             } else if(scope.state === 'drafts') {
               UserDraft.query({
                 'userId': scope.profile.id,
-                'page': ++page
+                'page': ++page,
+                'order': scope.order
               }, addData);
             }
           } else if(scope.order) {

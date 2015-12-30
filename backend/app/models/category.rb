@@ -8,13 +8,19 @@ class Category < ActiveRecord::Base
 
   dragonfly_accessor :icon do
     storage_options do |attachment|
-      { headers: {"x-amz-acl" => "public-read-write"} }
+      {
+        root_path: 'categories/icons/',
+        headers: {'x-amz-acl' => 'public-read-write'}
+      }
     end
   end
 
   dragonfly_accessor :image do
     storage_options do |attachment|
-      { headers: {"x-amz-acl" => "public-read-write"} }
+      {
+        root_path: 'categories/images/',
+        headers: {'x-amz-acl' => 'public-read-write'}
+      }
     end
   end
 
