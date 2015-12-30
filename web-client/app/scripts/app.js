@@ -28,7 +28,7 @@ angular.module('webClientApp', [
   .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
       function ($stateProvider, $locationProvider, $urlRouterProvider) {
     // Set the default route to to to .popular child state
-    $urlRouterProvider.when('/', 'articles/popular/');
+    $urlRouterProvider.when('/', 'articles/list/popular/');
     $stateProvider
       .state('app', {
         url: '/',
@@ -48,7 +48,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.articles.list', {
-        url: ':order/',
+        url: 'list/:order/',
         views: {
           'content@': {
             templateUrl: 'views/main.html',
@@ -62,7 +62,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.articles.show', {
-        url: ':articleId/show/',
+        url: ':articleId/',
         views: {
           'content@': {
             templateUrl: 'views/articles/show.html',
