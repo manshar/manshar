@@ -13,6 +13,7 @@ angular.module('webClientApp')
           //   category: 'User'
           // });
           LoginService.logout();
+          scope.thumbnail = null;
         };
         // Escape key listner to close menu
       	$document.bind('keyup', function(e) {
@@ -24,13 +25,25 @@ angular.module('webClientApp')
           }
         });
 
-        $rootScope.$on('auth:validation-success', function() {
-          if($rootScope.user.id) {
+        function getUserThumbUrl(user) {
+          if(user.id) {
             User.get({
-              userId: $rootScope.user.id
+              userId: user.id
             }, function(user) {
               scope.thumbnail = user.thumb_url;
             });
+          }
+        }
+
+        $rootScope.$on('auth:login-success', function(ev, user) {
+          if(user) {
+            getUserThumbUrl(user);
+          }
+        });
+
+        $rootScope.$on('auth:validation-success', function(ev, user) {
+          if(user) {
+            getUserThumbUrl(user);
           }
         });
 

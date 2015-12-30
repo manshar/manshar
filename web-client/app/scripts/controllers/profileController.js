@@ -52,13 +52,12 @@ angular.module('webClientApp')
      * Deletes an article.
      * @param {Object} article Article data.
      */
-    $scope.deleteArticle = function(article) {
+    $scope.deleteArticle = function(article, fromList) {
       $scope.inProgress = 'delete';
       if ($window.confirm('متأكد من حذف المقال؟')) {
         Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
-        var list = article.published ? $scope.articles : $scope.drafts;
-        var index = list.indexOf(article);
-        list.splice(index, 1);
+        var index = fromList.indexOf(article);
+        fromList.splice(index, 1);
       } else {
         $scope.inProgress = null;
       }

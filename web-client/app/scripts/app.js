@@ -40,7 +40,12 @@ angular.module('webClientApp', [
       })
       .state('app.articles', {
         abstract: true,
-        url: 'articles/'
+        url: 'articles/',
+        views: {
+          'content@': {
+            templateUrl: ''
+          }
+        }
       })
       .state('app.articles.list', {
         url: ':order/',
@@ -86,34 +91,20 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          user: function($rootScope) {
-            return $rootScope.user;
+          user: function($rootScope, $auth) {
+            return $auth.validateUser().then(function(user) {
+              return user;
+            });
           },
-          article: function(Article, $stateParams, $state, $rootScope) {
+          article: function(Article, $stateParams, $state, user) {
             return Article.get({'articleId': $stateParams.articleId}, function(article) {
               if (article.body) {
                 $state.go('app.articles.show', { articleId: article.id });
-              } else if($rootScope.user.id === article.user.id) {
+              } else if(user.id === article.user.id) {
                 return article;
               } else {
                 $state.go('app.articles.show', {articleId: article.id});
               }
-            }).$promise;
-          }
-        }
-      })
-      .state('app.articles.new', {
-        url: 'new/',
-        views: {
-          'content@': {}
-        },
-        resolve: {
-          article: function(Article, $state) {
-            return Article.save({ article: { published: false } }, function(resource) {
-              $state.go('app.articles.edit', { articleId: resource.id });
-            }, function(error) {
-              console.log(error);
-              $state.go('app');
             }).$promise;
           }
         }
@@ -481,8 +472,8 @@ angular.module('webClientApp', [
   /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'User', 'Category', 'GA_TRACKING_ID',
-      function ($location, $rootScope, $analytics, $auth, LoginService, User, Category, GA_TRACKING_ID) {
+  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'User', 'Category', 'GA_TRACKING_ID', 'Article', '$state',
+      function ($location, $rootScope, $analytics, $auth, LoginService, User, Category, GA_TRACKING_ID, Article, $state) {
 
     // ga is the Google analytics global variable.
     if (window.ga) {
@@ -503,11 +494,19 @@ angular.module('webClientApp', [
     /**
      * Load categories once for all application
      */
-     $rootScope.categories = Category.query();
+    $rootScope.categories = Category.query();
 
     /**
-     * Logs the user out.
+     * Create new article
      */
+    $rootScope.createNewArticle = function() {
+      Article.save({ article: { published: false } }, function(resource) {
+        $state.go('app.articles.edit', { articleId: resource.id });
+      }, function(error) {
+        console.log(error);
+        $state.go('app');
+      });
+    };
 
 
     /**

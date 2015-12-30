@@ -19,7 +19,7 @@ angular.module('webClientApp')
         var page = 1;
         scope.hasNext = true;
 
-        var scrollWatch = $rootScope.$watch('yscroll', function(newValue, oldValue) {
+        var scrollWatch = $rootScope.$watch('yscroll', function(newValue) {
           var scrollHeight = element[0].parentElement.scrollHeight;
           if( !scope.inProgress && scrollHeight-newValue <= 1000) {
             scope.loadMoreData();
@@ -57,7 +57,7 @@ angular.module('webClientApp')
 
         scope.loadMoreData = function() {
           scope.inProgress = true;
-          if(scope.state == 'publishers') {
+          if(scope.state === 'publishers') {
             User.query({
               'page': ++page
             }, addData);

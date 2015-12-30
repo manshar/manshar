@@ -1,7 +1,12 @@
 <div class="profile-wrapper">
-  <div class="profile-info">
-    <h3> {{profile.name}} </h3>
-    <p> {{profile.bio}} </p>
+  <div class="section-title" ng-class="{'clear-right': user.id != profile.id}">
+    <a ng-click="editProfile()" ng-show="user.id == profile.id">
+      <i class="circle-icon fa fa-pencil"></i>
+    </a>
+    <div class="profile-info" ng-class="{'clear-padding': user.id == profile.id}">
+      <h3> {{profile.name}} </h3>
+      <p> {{profile.bio}} </p>
+    </div>
   </div>
 
   <div class="listing-types-tabs">
@@ -25,10 +30,10 @@
     </div>
   </div>
 
-  <div class="profile-list">
-    <a href="/articles/new" class="write-new-button"
+  <div class="section-title">
+    <a ng-click="createNewArticle()"
       ng-show="user.id == profile.id">
-      <i class="fa fa-pencil"></i>
+      <i class="circle-icon fa fa-pencil"></i>
       اكتب مقال جديد
     </a>
   </div>
