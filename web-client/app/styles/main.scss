@@ -1084,6 +1084,22 @@ h1, h2, h3 {
 .section {
   padding-bottom: 40px;
 }
+
+.profile-info {
+  margin: 6px 0 20px 40px;
+  padding: 0 15px;
+  p {
+    color: #777;
+    font-size: 14px;
+  }
+  h3 {
+    color: #000;
+  }
+  .section-title {
+    right: 0;
+  }
+}
+
 .section-title {
   color: #b3b3b3;
   font-size: 16px;
@@ -1118,13 +1134,6 @@ h1, h2, h3 {
     padding: 0 15px;
     &.clear-padding {
       padding: 0;
-    }
-    p {
-      color: #777;
-      font-size: 14px;
-    }
-    h3 {
-      color: #000;
     }
   }
 }
@@ -1811,7 +1820,7 @@ h1, h2, h3 {
             a {
               color: #000;
               font-size: 0.6rem;
-              border-bottom: 1px solid #CBCBCB;
+              // border-bottom: 1px solid #CBCBCB;
             }
           }
 
