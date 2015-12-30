@@ -1013,13 +1013,22 @@ h1, h2, h3 {
   }
 }
 
+.publishers-page {
+  .dimmer {
+    background: rgba(0,0,0,0.4);
+    &:hover {
+      background: rgba(0,0,0,0);
+    }
+  }
+}
+
 .dimmer {
   position:absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.7);
 }
 
 
