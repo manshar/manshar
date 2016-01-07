@@ -4,8 +4,22 @@
   <div ng-include="'views/partials/_reset_form.html'" ng-show="activeView =='reset'"></div>
 
   <p class="form-info" ng-init="activeView = 'login'">
-    <a class="signup-link" ng-show="activeView != 'login'" ng-click="activeView = 'login'">سجل الدخول</a> {{ activeView != 'login' ? 'أو' : '' }}
-    <a class="signup-link" ng-show="activeView != 'signup'" ng-click="activeView = 'signup'">سجل حساب جديد</a> {{ activeView == 'login' ? 'أو' : '' }}
-    <a class="signup-link" ng-show="activeView != 'reset'" ng-click="activeView = 'reset'">استرجع كلمة المرور</a>
+    <a class="signup-link"
+       ng-show="activeView != 'login'"
+       ng-click="activeView = 'login'">
+          سجل الدخول
+    </a> {{ activeView != 'login' ? 'أو' : '' }}
+
+    <a class="signup-link"
+       ng-show="activeView != 'signup'"
+       ng-click="activeView = 'signup'">
+          سجل حساب
+     جديد</a> {{ activeView == 'login' ? 'أو' : '' }}
+
+    <a class="signup-link"
+       ng-show="activeView != 'reset'"
+       ng-click="activeView = 'reset'">
+          استرجع كلمة
+     المرور</a>
   </p>
 </div>

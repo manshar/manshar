@@ -58,10 +58,19 @@ angular.module('webClientApp')
 			    }
 			  });
 
-        scope.clickedOutside = function() {
+        scope.clickedOutsideNavIcon = function() {
           $timeout(function() {
             if(document.body.clientWidth < 1100 &&
                scope.menuStatus === 'opened') {
+              $rootScope.pushAside = false;
+              scope.menuStatus = 'closed';
+            }
+          }, 100);
+        };
+
+        scope.clickedOutsideMenu = function() {
+          $timeout(function() {
+            if(scope.menuStatus === 'opened') {
               $rootScope.pushAside = false;
               scope.menuStatus = 'closed';
             }

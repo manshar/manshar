@@ -1,38 +1,29 @@
-<div class="container content-container">
-  <div class="row clearfix">
-    <div class="content-wrapper">
+<div class="form-div center" ng-controller="LoginCtrl">
 
-      <div class="write-box form-title">
-        <p>استعادة كلمة المرور</p>
-      </div>
-
-      <div class="form-div center" ng-controller="ResetPasswordController">
-
-        <div class="form-errors" ng-show="error">{{error}}</div>
-
-        <form id="login-form" ng-submit="reset(userForm)" name="loginForm">
-          <label>
-            <input
-              type="email"
-              ng-model="userForm.email"
-              required
-              autofocus
-              placeholder="البريد الالكتروني"
-            />
-          </label>
-
-          <button
-            type="submit">
-            استعادة كلمة المرور</button>
-        </form>
-      </div>
-
-      <p class="form-info">
-        <a ui-sref="app.login" class="signup-link">سجل الدخول</a> أو
-        <a ui-sref="app.signup" class="signup-link">سجل حساب جديد</a>
-      </p>
-
-    </div>
+  <div class="write-box form-title">
+    <p>استعادة كلمة المرور</p>
   </div>
+
+  <div class="form-div center" ng-controller="ResetPasswordController">
+
+    <div class="form-errors" ng-show="error">{{error}}</div>
+
+    <form id="login-form" ng-submit="reset(userForm)" name="loginForm">
+      <label>
+        <input
+          type="email"
+          ng-model="userForm.email"
+          required
+          autofocus
+          placeholder="البريد الالكتروني"
+        />
+      </label>
+
+      <button
+        type="submit">
+        استعادة كلمة المرور</button>
+    </form>
+  </div>
+
 </div>
 
