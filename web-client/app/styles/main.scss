@@ -53,32 +53,45 @@ body {
 /** Pages Transitions. */
 [ui-view].ng-enter, [ui-view].ng-leave {
   position: absolute;
-  left: 0;
-  right: 0;
   transition: all .3s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
-[ui-view].ng-enter {
+[ui-view="content"].ng-enter, [ui-view="content"].ng-leave {
+  left: 0;
+  right: 0;
+}
+
+[ui-view="content"].ng-enter {
   opacity: 0;
   transform: scale3d(0.5, 0.5, 0.5);
 }
 
-[ui-view].ng-enter-active {
+[ui-view="content"].ng-enter-active {
   opacity: 1;
   transform: scale3d(1, 1, 1);
 }
 
+
+[ui-view].tabs-content.ng-enter {
+  opacity: 0;
+  transform: translate3d(-200px, 0, 0);
+}
+
+[ui-view].tabs-content.ng-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 [ui-view].ng-leave {
   opacity: 1;
-  /*transform: scale3d(0, 0, 0);*/
   transform: translate3d(0, 0, 0);
 }
 
 [ui-view].ng-leave-active {
   opacity: 0;
-  /*transform: scale3d(0.5, 0.5, 0.5);*/
-  transform: translate3d(200px, 0, 0);
 }
+
+
 
 
 body, input, textarea, button {
@@ -954,6 +967,14 @@ h1, h2, h3 {
     margin: 0 10px;
     &:hover, &.active {
       color: #ca1504;
+    }
+  }
+
+  .tab-icon {
+    display: none;
+
+    &.active {
+      display: inline-block;
     }
   }
 }
