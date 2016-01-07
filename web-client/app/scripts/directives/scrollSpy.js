@@ -13,7 +13,7 @@ angular.module('webClientApp')
 
       $interval(function(){
         if(didScroll) {
-          scope.yscroll = document.body.scrollTop;
+          scope.yscroll = document.body.scrollTop || document.documentElement.scrollTop;
           didScroll = false;
 
           if(scope.yscroll < 50) {
