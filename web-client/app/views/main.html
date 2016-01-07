@@ -2,12 +2,12 @@
   <div class="row clearfix">
     <div class="content-wrapper">
       <div class="write-box">
-        <a ui-sref="app.articles.new"><p> أكتب هنا... </p></a>
+        <a ng-click="createNewArticle()"><p> أكتب هنا... </p></a>
       </div>
 
       <div ng-include="'views/partials/_articles_order_tabs.html'"></div>
 
-      <div ng-include="'views/partials/_stream.html'"></div>
+      <div ui-view class="tabs-content"></div>
 
     </div> <!-- .content-wrapper -->
   </div> <!-- row -->
