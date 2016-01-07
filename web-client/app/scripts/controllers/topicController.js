@@ -18,15 +18,20 @@ angular.module('webClientApp')
     $rootScope.page.description = topic.category.description;
 
     // Used to make sure no duplicates occur in the publishers array
-    var publishersDict = {},
-      i;
-
-    for(i = 0; (i < articles.length) && ($scope.publishers.length<5); ++i) {
-      var user = articles[i].user;
-      if(!publishersDict[user.id]) {
-        publishersDict[user.id] = true;
-        $scope.publishers.push(user);
+    var publishersDict = {};
+    function addPublishers(articles) {
+      for(var i = 0; (i < articles.length) && ($scope.publishers.length < 5); ++i) {
+        var user = articles[i].user;
+        if(!publishersDict[user.id]) {
+          publishersDict[user.id] = true;
+          $scope.publishers.push(user);
+        }
       }
+    }
+
+    addPublishers($scope.firstArticles);
+    if($scope.publishers.length < 5) {
+      addPublishers($scope.articles);
     }
 
     $scope.showCategoriesPicker = function() {
