@@ -4,9 +4,10 @@ angular.module('webClientApp')
   .controller('MainCtrl', ['$scope', '$stateParams','$rootScope', 'Article', 'User', 'articles',
       function ($scope, $stateParams, $rootScope, Article, User, articles) {
 
+    $rootScope.page.title = 'منصة النشر العربية';
+    $rootScope.page.description = 'منصة نشر متخصصة باللغة العربية مفتوحة المصدر';
+
     $scope.order = $stateParams.order;
-    $scope.title = 'مَنْشَر';
-    $scope.tagline = 'منصة النشر العربية';
     $scope.articles = articles;
     $scope.firstArticles = $scope.articles.splice(0, 6);
     $scope.hasNext = articles ? true: false;
