@@ -1211,6 +1211,11 @@ h1, h2, h3 {
     text-align: justify;
     position: relative;
 
+    blockquote {
+      margin-right: -16px;
+    }
+
+
     .content-wrapper {
       min-height: 1px;
       padding: 0 15px;
@@ -1692,16 +1697,28 @@ h1, h2, h3 {
   .carbon .layout-float-right,
   .carbon .layout-single-column {
     margin: 0 auto 0 auto;
-    padding-right: 50px;
+    padding-right: 36px;
   }
 
   .carbon {
+
+    p,
+    h1,
+    h2,
+    h3 {
+      margin-right: 16px;
+    }
+
     p,
     h1,
     h2,
     h3,
     blockquote {
       margin-left: 16px;
+    }
+
+    blockquote {
+      margin-right: -2px;
     }
 
     p {

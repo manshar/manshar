@@ -723,14 +723,11 @@ h1, h2, h3 {
     right: 50%;
   }
 
-  .carbon {
-    p,
-    h1,
-    h2,
-    h3,
-    blockquote {
-      margin-right: 16px;
-    }
+  .carbon .layout-float-left,
+  .carbon .layout-float-right,
+  .carbon .layout-single-column {
+    margin: 0 auto 0 auto;
+    padding-right: 50px;
   }
 
   > .article-line {
