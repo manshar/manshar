@@ -4,8 +4,7 @@ angular.module('webClientApp')
 .directive('loadMoreData', ['$document', '$rootScope', '$state', 'User', 'Article', 'TopicArticle', 'CategoryArticle', 'UserArticle', 'UserRecommendation', 'UserComment', 'UserDraft',
   function ($document, $rootScope, $state, User, Article, TopicArticle, CategoryArticle, UserArticle, UserRecommendation, UserComment, UserDraft) {
 
-    // Pass order and category id
-  	return {
+    return {
       restrict: 'E',
       scope: {
         order: '=',
