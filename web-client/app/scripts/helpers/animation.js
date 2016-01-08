@@ -29,11 +29,11 @@ Animation.smoothScrollTo = function(
  */
 Animation.scrollToHelper_ = function(
     element, x1, x2, prop, t, v, step, timeFunc) {
-  if (t < 0 || t > 1 || v <= 0) {
+  if (Math.abs(t) < 0 || Math.abs(t) > 1 || v <= 0) {
     return;
   }
 
-  element[prop] = x1 - (x1 - x2) * timeFunc(t);
+  element[prop] = x1 - (x1 - x2) * timeFunc(Math.abs(t));
   var tt = t + v * step;
 
   window.requestAnimationFrame(function() {

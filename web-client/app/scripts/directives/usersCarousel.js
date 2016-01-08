@@ -9,6 +9,18 @@ angular.module('webClientApp')
         orderDir, containerWidth;
 
     /**
+     * Note: Firefox seems to flip the behavior of scrollLeft for elements -
+     * this might be related to the document being RTL. But in general it
+     * returns scrollLeft 0 when the scroll is to the far right (opposite to
+     * Chrome which return 0 when the scroll is to the far left).
+     *
+     * Firefox also returns negative values for scrollLeft starting from 0 from
+     * the far right to -(scrollWidth) to the far left. Chrome starts from
+     * +(scrollWidth) in the far right to 0 to the far left.
+     */
+    var isFirefox = navigator.userAgent.search('Firefox') !== -1;
+
+    /**
      * Runs a callback once the elements of the users carousel is initialized.
      * @param  {Function} callback Callback function.
      */
@@ -34,6 +46,9 @@ angular.module('webClientApp')
         }
       }
       var to = (users.length - selectedIndex) * itemWidth - containerWidth + 90;
+      if (isFirefox) {
+        to = -1 * selectedIndex * itemWidth;
+      }
       Animation.smoothScrollTo(
           carousel, carousel.scrollLeft, to, 'scrollLeft', 300,
           Animation.TimingFunctions.easeOutCuaic);
@@ -49,9 +64,14 @@ angular.module('webClientApp')
       }
       scrollTimeout = setTimeout(function () {
         var autoLoadBufferWidth = autoLoadBufferCount * itemWidth;
-        var scrollRight = carousel.scrollLeft + containerWidth;
+        var scrollLeft = Math.abs(carousel.scrollLeft);
+        var scrollRight = scrollLeft + containerWidth;
         var shouldLoadBefore = scrollRight > totalWidth - autoLoadBufferWidth;
-        var shouldLoadAfter = carousel.scrollLeft < autoLoadBufferWidth;
+        var shouldLoadAfter = scrollLeft < autoLoadBufferWidth;
+        if (isFirefox) {
+          shouldLoadBefore = scrollLeft < autoLoadBufferWidth;
+          shouldLoadAfter = scrollRight > totalWidth - autoLoadBufferWidth;
+        }
         if (shouldLoadAfter && !isLoadingAfter) {
           isLoadingAfter = true;
           loadMoreUsersAfter(users[users.length - 1].id, 10);
@@ -99,14 +119,20 @@ angular.module('webClientApp')
         'order': order
       }, function(newUsers) {
         var scrollLeftBefore = carousel.scrollLeft;
+        var newUsersAddedCount = 0;
         for (var i = 0; i < newUsers.length; i++) {
           if (newUsers[i] && !loadedUsers[newUsers[i].id]) {
             loadedUsers[newUsers[i].id] = true;
             users.splice(0, 0, newUsers[i]);
+            newUsersAddedCount++;
           }
         }
         setTimeout(function() {
           carousel.scrollLeft = scrollLeftBefore;
+          if (isFirefox) {
+            carousel.scrollLeft = (
+                scrollLeftBefore - newUsersAddedCount * itemWidth);
+          }
         }, 5);
         isLoadingBefore = false;
       });
