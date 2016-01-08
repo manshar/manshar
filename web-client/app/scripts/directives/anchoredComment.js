@@ -10,8 +10,8 @@ angular.module('webClientApp')
    * @param  {!angular.$timeout} $timeout Angular $timeout service.
    * @return {!angular.Directive} Angular directive definition.
    */
-  .directive('anchoredComment', ['$rootScope', '$timeout',
-      function ($rootScope, $timeout) {
+  .directive('anchoredComment', ['$rootScope', '$timeout', '$analytics',
+      function ($rootScope, $timeout, $analytics) {
 
     /**
      * Returns the parent of an element that has the class name.
@@ -66,6 +66,12 @@ angular.module('webClientApp')
           // Get the clicked anchor.
           var clickedEl = getParentWithClassName(
               'anchored-comment-box', e.target);
+
+          $analytics.eventTrack('click', {
+            category: 'UI',
+            label: 'Comments Anchor',
+            value: scope.commentsCount
+          });
 
           $rootScope.$emit(
               'show-comment', {target: clickedEl, guid: scope.guid});

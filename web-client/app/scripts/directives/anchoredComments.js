@@ -15,8 +15,8 @@ angular.module('webClientApp')
    * @param  {ArticleComment} ArticleComment Manshar's article comments service.
    * @return {!angular.Directive} Angular directive description.
    */
-  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', '$window', '$filter', 'ArticleComment',
-      function ($rootScope, $compile, $timeout, $window, $filter, ArticleComment) {
+  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', '$window', '$filter', '$analytics', 'ArticleComment',
+      function ($rootScope, $compile, $timeout, $window, $filter, $analytics, ArticleComment) {
 
     var COMMENT_HIGHLIGHT_CLASS = 'comment-highlighted';
     var ANCHORS_ACTIVE = 'anchored-comments-active';
@@ -226,6 +226,10 @@ angular.module('webClientApp')
                 guid: scope.activeGuid
               }
             }, function(comment) {
+              $analytics.eventTrack('New Comment Created', {
+                category: 'Comment'
+              });
+
               $timeout(function() {
                 scope.comments.push(comment);
                 scope.activeComments = getActiveComments();
@@ -250,6 +254,9 @@ angular.module('webClientApp')
             'articleId': scope.article.id,
             'commentId': comment.id
           }, function () {
+            $analytics.eventTrack('Comment Deleted', {
+              category: 'Comment'
+            });
             $timeout(function() {
               var index = scope.comments.indexOf(comment);
               scope.comments.splice(index, 1);

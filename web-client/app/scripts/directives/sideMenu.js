@@ -1,24 +1,28 @@
 'use strict';
 
 angular.module('webClientApp')
-.directive('sideMenu', ['$document', '$rootScope', '$timeout', 'LoginService', 'User',
-  function ($document, $rootScope, $timeout, LoginService, User) {
+.directive('sideMenu', ['$document', '$rootScope', '$timeout', '$analytics', 'LoginService', 'User',
+  function ($document, $rootScope, $timeout, $analytics, LoginService, User) {
   	return {
       restrict: 'E',
       link: function(scope, element) {
         $rootScope.pushAside = false;
   			scope.menuStatus = 'closed';
         scope.logout = function () {
-          // $analytics.eventTrack('Logout', {
-          //   category: 'User'
-          // });
+          $analytics.eventTrack('Logout', {
+            category: 'User'
+          });
           LoginService.logout();
           scope.thumbnail = null;
         };
+
         // Escape key listner to close menu
       	$document.bind('keyup', function(e) {
           if (e.keyCode === 27) {
             if(scope.menuStatus !== 'closed') {
+              $analytics.eventTrack('ESC Close', {
+                category: 'Side Menu'
+              });
             	scope.menuStatus = 'closed';
               $rootScope.pushAside = false;
             }
@@ -62,6 +66,9 @@ angular.module('webClientApp')
           $timeout(function() {
             if(document.body.clientWidth < 1100 &&
                scope.menuStatus === 'opened') {
+              $analytics.eventTrack('Clicked Outside Nav Icon Close', {
+                category: 'Side Menu'
+              });
               $rootScope.pushAside = false;
               scope.menuStatus = 'closed';
             }
@@ -71,6 +78,9 @@ angular.module('webClientApp')
         scope.clickedOutsideMenu = function() {
           $timeout(function() {
             if(scope.menuStatus === 'opened') {
+              $analytics.eventTrack('Clicked Outside Side Menu Close', {
+                category: 'Side Menu'
+              });
               $rootScope.pushAside = false;
               scope.menuStatus = 'closed';
             }
