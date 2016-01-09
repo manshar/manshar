@@ -724,14 +724,21 @@ header {
     padding: 1em;
     cursor: pointer;
     position: absolute;
+    z-index: 99;
   }
 
   .content {
-    padding: 3em 0;
+    // padding: 3em 0;
   }
 
   .content-wrapper {
     margin: 0;
+  }
+
+  @media(max-width: 720px) {
+    .content-wrapper {
+      margin-right: 36px;
+    }
   }
 }
 
