@@ -477,10 +477,17 @@ angular.module('webClientApp', [
     cfpLoadingBarProvider.includeSpinner = false;
   }])
   /**
+   * Disable automatic page collection. We do our own pageviews analytics
+   * collection to allow for page titles collection.
+   */
+  .config(function ($analyticsProvider) {
+    $analyticsProvider.virtualPageviews(false);
+  })
+  /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'User', 'Category', 'GA_TRACKING_ID', 'Article', '$state',
-      function ($location, $rootScope, $analytics, $auth, LoginService, User, Category, GA_TRACKING_ID, Article, $state) {
+  .run(['$location', '$rootScope', '$analytics', 'Category', 'GA_TRACKING_ID', 'Article', '$state', '$timeout',
+      function ($location, $rootScope, $analytics, Category, GA_TRACKING_ID, Article, $state, $timeout) {
 
     // ga is the Google analytics global variable.
     if (window.ga) {
@@ -507,10 +514,19 @@ angular.module('webClientApp', [
      * Create new article
      */
     $rootScope.createNewArticle = function() {
-      Article.save({ article: { published: false } }, function(resource) {
+      Article.save({
+        article: { published: false }
+      }, function(resource) {
+        $analytics.eventTrack('Article Created', {
+          category: 'Article'
+        });
         $state.go('app.articles.edit', { articleId: resource.id });
-      }, function(error) {
-        console.log(error);
+      }, function(response) {
+        $analytics.eventTrack('Article Create Error', {
+          category: 'Article',
+          label: angular.toJson(response.errors)
+        });
+
         $state.go('app');
       });
     };
@@ -541,8 +557,15 @@ angular.module('webClientApp', [
     };
 
     $rootScope.$on('$stateChangeStart', function(
-          event, toState, toParams, fromState, fromParams){
+          event, toState, toParams, fromState, fromParams) {
       /* jshint unused:false */
       $rootScope.previousState = fromState;
     });
+
+    $rootScope.$on('$stateChangeSuccess', function() {
+      $timeout(function() {
+        ga('send', 'pageview', {'page': $location.path()});
+      }, 200);
+    });
+
   }]);

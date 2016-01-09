@@ -48,7 +48,13 @@
           ng-if="isOwner(user, article)"
           tooltips
             tooltip-class="fixed-tooltip"
-            tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}">
+            tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}"
+          analytics-on="click"
+            analytics-event="click"
+            analytics-category="UI"
+            analytics-label="Edit Button in Article Page - {{article.title}}"
+            analytics-value="edit-{{article.id}}">
+
           <i class="fa fa-pencil circle-icon"></i>
         </span>
       </div>

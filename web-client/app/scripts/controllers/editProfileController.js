@@ -4,7 +4,6 @@ angular.module('webClientApp')
   .controller('EditProfileCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'User', 'profile','$analytics',
       function ($scope, $rootScope, $state, $stateParams, User, profile, $analytics) {
 
-
     $scope.profile = profile;
     $scope.error = null;
     $scope.errorMessages = {};
@@ -13,14 +12,18 @@ angular.module('webClientApp')
      * User Data update
      */
     $scope.updateUserData = function(profile) {
-      User.update($scope.profile.id, profile, updateUserDataSuccess, updateUserDataError);
+      User.update(
+          $scope.profile.id, profile,
+          updateUserDataSuccess, updateUserDataError);
     };
 
     var updateUserDataSuccess = function() {
       $analytics.eventTrack('Update Success', {
         category: 'User'
       });
-      $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
+      $state.go('app.publishers.profile.user.published', {
+        userId: $stateParams.userId
+      });
     };
 
     var updateUserDataError = function(response) {
@@ -37,7 +40,9 @@ angular.module('webClientApp')
      * own profile
      */
     var loggedOutUnbined = $rootScope.$on('auth:logout-success', function () {
-      $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
+      $state.go('app.publishers.profile.user.published', {
+        userId: $stateParams.userId
+      });
     });
 
     var onDestroy = function () {

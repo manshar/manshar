@@ -4,14 +4,19 @@
           analytics-on="click"
           analytics-event="click"
           analytics-category="UI"
-          analytics-label="Article in Main Page - {{article.title}}"
+          analytics-label="Article in Listing - {{article.title}}"
           analytics-value="article-{{article.id}}">
     <h2>{{article.title || 'بدون عنوان'}}</h2>
     <h3>{{article.tagline}}</h3>
   </a>
 </div>
 <div class="category-topic" ng-if="article.topic">
-  <a ui-sref="app.categories.topic.articles.list({ categoryId: article.topic.category.id, topicId: article.topic.id, order: order || 'popular'})">
+  <a ui-sref="app.categories.topic.articles.list({ categoryId: article.topic.category.id, topicId: article.topic.id, order: order || 'popular'})"
+      analytics-on="click"
+        analytics-event="click"
+        analytics-category="UI"
+        analytics-label="Topic in Article Listing - {{article.topic.title}}"
+        analytics-value="user-{{article.topic.id}}">
     {{article.topic.title || 'الموضوع غير محدد'}}
   </a>
 </div>
@@ -31,7 +36,7 @@
           analytics-on="click"
           analytics-event="click"
           analytics-category="UI"
-          analytics-label="User in Main Page - {{article.user.name}}"
+          analytics-label="User in Article Listing - {{article.user.name}}"
           analytics-value="user-{{article.user.id}}">
             {{article.user.name}}
         </a></p>

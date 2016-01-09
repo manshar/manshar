@@ -21,7 +21,11 @@
       </a>
     </li>
     <li>
-      <a ng-click="createNewArticle()">
+      <a ng-click="createNewArticle()"
+          analytics-on="click"
+            analytics-event="click"
+            analytics-category="UI"
+            analytics-label="New Article Button in Side Menu">
         <i></i>كتابة مقال
       </a>
     </li>
@@ -42,7 +46,10 @@
     </li>
     <li>
       <a ng-switch-when="true" ng-click="logout()"
-        analytics-on="click" analytics-event="click" analytics-category="UI" analytics-label="Nav Logout Link">
+        analytics-on="click"
+          analytics-event="click"
+          analytics-category="UI"
+          analytics-label="Nav Logout Link">
         <i></i>تسجيل الخروج
       </a>
     </li>
