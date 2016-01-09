@@ -682,6 +682,13 @@ h1, h2, h3 {
   }
 }
 
+.category-topics-picker {
+  .card-list {
+    overflow: visible;
+    white-space: normal;
+  }
+}
+
 .category-topics {
   position: absolute;
   left: 0;
@@ -786,6 +793,7 @@ h1, h2, h3 {
 .article-stats {
   p {
     min-width: 80px;
+    cursor: default;
   }
 }
 

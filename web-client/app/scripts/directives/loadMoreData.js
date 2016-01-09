@@ -18,10 +18,13 @@ angular.module('webClientApp')
       link: function(scope, element) {
         var page = 1;
         scope.hasNext = true;
+        scope.inProgress = false;
 
         var scrollWatch = $rootScope.$watch('yscroll', function(newValue) {
           var scrollHeight = element[0].parentElement.scrollHeight;
-          if( !scope.inProgress && scrollHeight-newValue <= 1000) {
+          var inProgress = scope.inProgress;
+          var shouldLoadMore = (scrollHeight-newValue) <= 1000;
+          if( !inProgress && shouldLoadMore) {
             scope.loadMoreData();
           }
         });
@@ -35,7 +38,7 @@ angular.module('webClientApp')
             scrollWatch();
           }
           Array.prototype.push.apply(scope.appendTo, data);
-          scope.inProgress = null;
+          scope.inProgress = false;
         };
 
         var loadedArticles = {};
@@ -52,11 +55,12 @@ angular.module('webClientApp')
               loadedArticles[article.id] = true;
             }
           }
-          scope.inProgress = null;
+          scope.inProgress = false;
         };
 
         scope.loadMoreData = function() {
           scope.inProgress = true;
+
           if(scope.state === 'publishers') {
             User.query({
               'page': ++page

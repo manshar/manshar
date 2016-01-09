@@ -285,14 +285,24 @@ ul.unstyled {
   left: 150px;
 }
 
-.form-div, .form-info {
-  width: 100%;
-  max-width: 400px;
-}
-
 .form-div {
-  padding-top: 4em;
-
+  input {
+    border: none;
+    padding: 3px;
+    background-color: #EEEEEE;
+    border-right: 2px solid #ccc;
+  }
+  .info {
+    padding: 10px 0;
+  }
+  .actions {
+    display: inline;
+    button {
+      background-color: #EEEEEE;
+      border: none;
+      padding: 3px;
+    }
+  }
   header {
    @include row(table);
 
@@ -692,10 +702,6 @@ header {
 
   .content {
     padding: 3em 0;
-  }
-
-  .form-div, .form-info {
-    margin: 44px auto 0;
   }
 
   .form-title {
@@ -1124,7 +1130,7 @@ h1, h2, h3 {
 .section-title {
   color: #b3b3b3;
   font-size: 16px;
-  margin-bottom: 16px;
+  margin: 16px 0;
   position: relative;
   right: -13px;
 
@@ -1518,7 +1524,11 @@ h1, h2, h3 {
   }
 }
 
-.category-topics {
+.category-topics-picker {
+  color: #6B6B6B;
+}
+
+.category-topics, .category-topics-picker {
   position: relative;
   font-size: 12px;
   margin-bottom: 40px;
@@ -1992,4 +2002,12 @@ h1, h2, h3 {
   .bar {
     background: $red !important;
   }
+}
+
+.text-red {
+  color: #CA1504;
+}
+
+.underline {
+  text-decoration: underline;
 }

@@ -22,29 +22,21 @@
   <div class="container content-container"> <!-- 700px centered -->
     <div class="row clearfix">
       <div class="content-wrapper editor">
+        <h3 class="section-title">
+          <i class="circle-icon fa fa-th-large"></i>
+          <span>نشرت في</span>
+          <a ng-click="changeTopic()">
+            <span>{{article.topic.title || 'اختر موضوع وفئة لمقالك'}}</span>
+          </a>
+          <a ng-click="changeTopic()">
+            . <span class="text-red">تعديل الفئة</span>
+          </a>
+          <a ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
+            . <span class="text-red">نشر</span>
+          </a>
+        </h3>
 
-        <div class="article-meta card-list" ng-show="article.topic.title || article.published_at">
-          <div class="meta-box">
-            <h1 class="header-label">
-              <span>نشرت في</span>
-            </h1>
-            <a ng-click="changeTopic()">
-              <div class="meta-details card">
-                <p class="meta-thumb">
-                  <img ng-src="{{article.topic.category.image_thumb_url}}" ng-show="article.topic.category.image_thumb_url"/>
-                </p>
-                <div class="meta-text">
-                  <div class="meta-name">
-                    <h3>{{article.topic.title || 'اختر موضوع لنشر تحته'}}</h3>
-                  </div>
-                  <div class="meta-more">
-                    {{article.topic.category.title}}
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+        <div category-topic-picker visible="visible"></div>
 
         <div class="metabar tray">
           <div class="manshar-controls">
@@ -58,17 +50,10 @@
               </span>
             </h3>
 
-            <h3 class="section-title action-button" ng-click="saveArticle(article, true)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'publish'}">
-              <i class="circle-icon fa fa-paper-plane-o"></i>
-              <span>
-                نشر
-              </span>
-            </h3>
-
             <h3 class="section-title action-button" ng-click="deleteArticle(article)" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
               <i class="circle-icon fa fa-trash-o"></i>
               <span>
-                حذف
+                حذف المقال
               </span>
             </h3>
 
