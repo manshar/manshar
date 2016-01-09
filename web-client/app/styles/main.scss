@@ -261,6 +261,10 @@ button {
 .fa-newspaper-o:before {
     content: "\f1ea";
 }
+.fa-sign-in:before {
+    content: "\f090";
+}
+
 
 
 *{
@@ -287,7 +291,7 @@ ul.unstyled {
 }
 
 .form-div {
-  input {
+  input, textarea {
     border: none;
     padding: 3px;
     background-color: #EEEEEE;
@@ -462,6 +466,28 @@ ul.unstyled {
    }
  }
 }
+
+/* Category picker styles */
+.header-label {
+  font-size: 0.7em;
+  text-align: right;
+
+  &.category-header-label{
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  span {
+    color: #606060;
+    background-color: #eee;
+    padding: 0 10px;
+
+    &.no-bg {
+      background-color: #fff;
+    }
+  }
+}
+
 
 .admin-dashboard {
  margin-top: 2em;
@@ -1113,20 +1139,25 @@ h1, h2, h3 {
   padding-bottom: 40px;
 }
 
-.profile-info {
-  margin: 6px 0 20px 40px;
-  padding: 0 15px;
-  p {
-    color: #777;
-    font-size: 14px;
-  }
-  h3 {
-    color: #000;
-  }
-  .section-title {
-    right: 0;
+.profile-wrapper {
+  .profile-info {
+
+    margin: 6px 0 20px 40px;
+    padding: 0 15px;
+
+    p {
+      color: #777;
+      font-size: 14px;
+    }
+    h3 {
+      color: #000;
+    }
+    &.section-title {
+      padding: 0;
+    }
   }
 }
+
 
 .section-title {
   color: #b3b3b3;
@@ -1137,6 +1168,19 @@ h1, h2, h3 {
 
   &.text-small {
     font-size: 12px;
+  }
+
+  &.section-subtitle {
+    font-size: 0.8em;
+
+    i {
+      width: 16px;
+      height: 16px;
+      font-size: 0.8em;
+      line-height: 2;
+      margin-right: 5px;
+      margin-left: 2em;
+    }
   }
 
   &.clear-right {
@@ -1166,7 +1210,6 @@ h1, h2, h3 {
   }
   .profile-info {
     margin: 6px 0 20px 40px;
-    padding: 0 15px;
     &.clear-padding {
       padding: 0;
     }
@@ -1250,32 +1293,39 @@ h1, h2, h3 {
   }
 }
 
-.manshar-controls {
-  .action-button {
-    cursor: pointer;
-  }
-}
-
-.article-share i {
-  transition: all 0.3s;
-}
-
-.recommendation-button {
+.recommendation-button,
+.section-title.action-button,
+.section-title .action-button {
   cursor: pointer;
-  display: inline-block;
+
   i {
-    transform: scale(1.4);
+    transition: all 0.3s;
+    border: 3px solid transparent;
     width: 30px;
     height: 30px;
-    border: 3px solid transparent;
   }
+
   &:hover {
     color: #ca1504;
     i {
-      transform: scale(1.35);
       border: 3px solid #eee;
     }
   }
+}
+
+.recommendation-button {
+  display: inline-block;
+
+  i {
+    transform: scale(1.4);
+  }
+
+  &:hover {
+    i {
+      transform: scale(1.35);
+    }
+  }
+
   .recommendation-count {
     position: absolute;
     right: -45px;
@@ -1301,9 +1351,6 @@ h1, h2, h3 {
     margin-right: -100%;
     padding-left: 100%;
     padding-right: 100%;
-    // background-image: url("../images/cover.jpg");
-    // background-size: cover;
-    // background-position: 50% 0;
     height: 600px;
     position: relative;
   }
@@ -1550,11 +1597,13 @@ h1, h2, h3 {
     overflow: scroll;
     padding-left: 3em;
     white-space: nowrap;
+    padding-bottom: 1em;
 
     &.expanded {
       height: auto;
     }
     li {
+      cursor: pointer;
       margin: 5px 0;
       display: inline-block;
       border-right: 2px solid #ccc;

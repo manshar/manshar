@@ -1,11 +1,11 @@
 <div class="profile-wrapper">
-  <div class="profile-info">
-    <h3> {{profile.name}} </h3>
-    <p> {{profile.bio}} </p>
-    <div class="section-title" ng-show="user.id == profile.id">
-      <a ui-sref="app.publishers.profile.user.edit({userId: user.id})">
-        <i class="circle-icon fa grey fa-pencil"></i>
-      </a>
+  <div class="profile-info" ng-class="{'section-title': user.id == profile.id}">
+    <a ng-show="user.id == profile.id" ui-sref="app.publishers.profile.user.edit({userId: user.id})" class="action-button">
+      <i class="circle-icon fa grey fa-pencil"></i>
+    </a>
+    <div>
+      <h3> {{profile.name}} </h3>
+      <p> {{profile.bio}} </p>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
   </div>
 
   <div class="section-title">
-    <a ng-click="createNewArticle()"
+    <a class="action-button" ng-click="createNewArticle()"
       ng-show="user.id == profile.id" class="action-text">
       <i class="circle-icon fa fa-pencil"></i>
       اكتب مقال جديد

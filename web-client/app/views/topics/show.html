@@ -12,6 +12,12 @@
           </a>
           {{topic.title}}
         </h3>
+
+        <a class="section-title section-subtitle"
+            ui-sref="app.categories.articles.list({categoryId: topic.category.id, order: order || 'popular'})">
+          <i class="circle-icon fa fa-arrow-right" style="background-color:{{topic.category.color}}"></i>
+          {{topic.category.title}}
+        </a>
       </div>
 
       <div ng-include="'views/partials/_articles_order_tabs.html'"></div>

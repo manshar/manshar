@@ -10,26 +10,6 @@ body {
   }
 }
 
-/* Category picker styles */
-.header-label {
-  font-size: 0.7em;
-  text-align: right;
-
-  &.category-header-label{
-    text-align: center;
-    margin-bottom: 1em;
-  }
-
-  span {
-    color: #606060;
-    background-color: #eee;
-    padding: 0 10px;
-
-    &.no-bg {
-      background-color: #fff;
-    }
-  }
-}
 .category-list {
   text-align: center;
 
@@ -644,7 +624,7 @@ h1, h2, h3 {
     font-size: 14px;
   }
 }
-.profile-info, .category-info p {
+.category-info p {
   padding: 0 15px;
 }
 .category-info h3 {

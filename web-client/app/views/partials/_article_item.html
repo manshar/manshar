@@ -22,10 +22,10 @@
 </div>
 
 <div class="section-title article-action" ng-show="article.user.id == user.id">
-  <a ng-click="deleteArticle(article, articles)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
+  <a class="action-button" ng-click="deleteArticle(article, articles)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
     <i class="circle-icon grey fa fa-trash-o"></i>
   </a>
-  <a ng-click="editArticle(article.id)">
+  <a ng-click="editArticle(article.id)" class="action-button">
     <i class="circle-icon grey fa fa-pencil"></i>
   </a>
 </div>

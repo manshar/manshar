@@ -24,9 +24,10 @@
       <div class="content-wrapper editor">
         <h3 class="section-title">
           <i class="circle-icon fa fa-th-large"></i>
-          <span>نشرت في</span>
           <a ng-click="changeTopic()">
-            <span>{{article.topic.title || 'اختر موضوع وفئة لمقالك'}}</span>
+            <span ng-if="article.published">نشرت </span>
+            <span ng-if="article.topic">في {{article.topic.title}}</span>
+            <span ng-if="!article.topic">اختر موضوع وفئة لمقالك</span>
           </a>
           <a ng-click="changeTopic()">
             . <span class="text-red">تعديل الفئة</span>

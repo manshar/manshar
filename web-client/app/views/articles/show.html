@@ -43,12 +43,12 @@
           src="'views/partials/_article_legacy.html'"></ng-include>
 
       <div class="section-title">
-        <span class="action-button"
+        <a class="action-button"
           ng-click="editArticle(article.id)"
           ng-if="isOwner(user, article)"
           tooltips
             tooltip-class="fixed-tooltip"
-            tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : 'تعديل'}}"
+            tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : ''}}"
           analytics-on="click"
             analytics-event="click"
             analytics-category="UI"
@@ -56,7 +56,8 @@
             analytics-value="edit-{{article.id}}">
 
           <i class="fa fa-pencil circle-icon"></i>
-        </span>
+          تعديل
+        </a>
       </div>
 
       <div class="article-author" style="border-right: 1px solid {{article.topic.category.color}}">
