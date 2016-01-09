@@ -1,4 +1,5 @@
-<div class="anchored-comment-box" ng-show="isActive || commentsCount"
+<div class="anchored-comment-box"
+    ng-class="{'active': isActive || commentsCount, 'inactive': !(isActive || commentsCount)}"
     analytics-on="mouseenter"
       analytics-event="Hover"
       analytics-category="UI"
@@ -6,7 +7,7 @@
       analytics-value="commentsCount">
   <div>
     <span class="comments-icons-container">
-      <div class="new-button-container comment-icon" ng-if="isActive">
+      <div class="new-button-container comment-icon">
         <div class="comment-icon-clipper">
           <span>+</span>
         </div>

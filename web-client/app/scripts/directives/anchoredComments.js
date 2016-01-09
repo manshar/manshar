@@ -196,7 +196,9 @@ angular.module('webClientApp')
             scope.activeComments = getActiveComments();
             document.body.classList.add(ANCHORS_ACTIVE);
             $timeout(function() {
-              textarea.focus();
+              if (!scope.activeComments.length) {
+                textarea.focus();
+              }
             }, 50);
           });
         });

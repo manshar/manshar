@@ -86,6 +86,7 @@ angular.module('webClientApp', [
           user: ['$rootScope', '$auth', function($rootScope, $auth) {
             return $auth.validateUser().then(function(user) {
               return user;
+            }).catch(function() {
             });
           }],
           article: ['Article', '$stateParams', '$state', 'user', function(Article, $stateParams, $state, user) {

@@ -114,16 +114,11 @@ angular.module('webClientApp')
         $interval.cancel(autoSavePromise);
       }
       article.published = published;
-      var formError = $scope.articleForm.$error;
-      if(published && formError && formError.required) {
-        $window.alert('تأكد من ادخال جميع المعلومات المطلوبة');
-        return;
-      }
 
       // First time publishing article.
       if (published && !article.published_at && !article.topic) {
+        $scope.visible = true;
         publishingAfterTopicPicked = published;
-        $rootScope.$emit('openTopicPicker', {allowCreateTopics: true});
       } else {
         if (!silent) {
           $scope.inProgress = published ? 'publish' : 'save';
@@ -152,14 +147,7 @@ angular.module('webClientApp')
      * Cancel creating an article.
      */
     $scope.cancel = function() {
-      $scope.inProgress = 'cancel';
-      // Warn the user when canceling editing an existing article or when
-      // canceling a new article with changed properties.
-      if (!isDirty() || $window.confirm('متأكد من إلغاء المقال؟')) {
-        $state.go('app');
-      } else {
-        $scope.inProgress = null;
-      }
+      $state.go('app.articles.show', {'articleId': article.id});
     };
 
     /**
@@ -178,7 +166,7 @@ angular.module('webClientApp')
     };
 
     $scope.changeTopic = function() {
-      $rootScope.$emit('openTopicPicker', {allowCreateTopics: true});
+      $rootScope.$emit('openTopicPicker');
     };
 
     /**

@@ -682,6 +682,13 @@ h1, h2, h3 {
   }
 }
 
+.category-topics-picker {
+  .card-list {
+    overflow: visible;
+    white-space: normal;
+  }
+}
+
 .category-topics {
   position: absolute;
   left: 0;
@@ -783,12 +790,13 @@ h1, h2, h3 {
 .article-stats {
   p {
     min-width: 80px;
+    cursor: default;
   }
 }
 
 .anchored-comments-active {
   .legacy-article-container, .article-container.new-model {
-    transform: none;
+    transform: translate3d(0,0,0);
   }
 }
 
@@ -808,8 +816,28 @@ h1, h2, h3 {
     }
   }
   .anchored-comment-box {
+    &.inactive {
+      display: none;
+    }
+
+    &.active {
+      display: block !important;
+    }
+
     .comments-icons-container {
-      /*left: 2.9em;*/
+
+      .comment-icon {
+        &.new-button-container {
+          opacity: 1;
+          font-size: 1em;
+          color: #000;
+          line-height: 1;
+
+          .comment-icon-clipper {
+            border-radius: none;
+          }
+        }
+      }
     }
   }
 }
