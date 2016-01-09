@@ -26,6 +26,7 @@ body {
   &.article-with-cover {
     .logo, .article-meta {
       color: #fff;
+      text-shadow: 0 0 1px #000;
       a, span {
         color: #fff;
       }
@@ -1689,6 +1690,7 @@ h1, h2, h3 {
 }
 
 .article-container {
+  padding-bottom: 4em;
 
   > .article-meta {
     transition: margin-right 0.4s;
@@ -1696,7 +1698,7 @@ h1, h2, h3 {
     right: -28px;
     text-align: left;
     z-index: 999;
-    top: 100px;
+    top: 120px;
     padding: 0;
     width: 88px;
   }
@@ -1742,11 +1744,29 @@ h1, h2, h3 {
       text-align: justify;
     }
 
-    section > .layout-staged {
-      figure {
-        margin-top: 0;
+    /* Margin causes a jump in the container after a translate3d happens
+       Use padding instead. */
+
+    section:first-of-type {
+      padding-top: 30px;
+      > .layout-staged:first-of-type, > .layout-bleed:first-of-type {
+        figure:first-of-type {
+          margin-top: -30px;
+        }
+      }
+
+      > .layout-single-column:first-of-type {
+        figure:first-of-type {
+          /*margin-top: 0;*/
+          /*padding-top: 32px;*/
+        }
+        p:first-of-type, h1:first-of-type {
+          /*margin-top: 0;*/
+          /*padding-top: 30px;*/
+        }
       }
     }
+
   }
 
   a {
@@ -1763,6 +1783,11 @@ h1, h2, h3 {
 
 .legacy-article-container, .article-container.new-model {
   transition: transform .3s cubic-bezier(0.65, 0.05, 0.36, 1);
+  transform: translate3d(0, 0, 0);
+}
+
+.article-container.new-model {
+  margin-top: -30px;
 }
 
 .anchored-comments-active {
@@ -1777,7 +1802,7 @@ h1, h2, h3 {
         transition: padding .1s cubic-bezier(0.65, 0.05, 0.36, 1),
                     background-color .1s cubic-bezier(0.65, 0.05, 0.36, 1);
         &.comment-highlighted {
-          padding: 1em;
+          padding: 0 1em;
         }
       }
 
@@ -1794,7 +1819,7 @@ h1, h2, h3 {
 .comments-container {
   font-size: 0.7em;
   position: absolute;
-  top: 0;
+  top: 35px;
   right: 20px;
 
   .main-comment-box {
@@ -1961,10 +1986,13 @@ h1, h2, h3 {
         }
 
         &.new-button-container {
-          opacity: 1;
+          opacity: 0.6;
           height: 0;
           position: relative;
           top: -24px;
+          font-size: 2.3em;
+          color: #9a9a9a;
+          line-height: 1.5;
         }
 
       }

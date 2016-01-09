@@ -48,9 +48,9 @@ angular.module('webClientApp', [
         templateUrl: 'views/partials/_stream.html',
         controller: 'StreamCtrl',
         resolve: {
-          articles: function(Article, $stateParams) {
+          articles: ['Article', '$stateParams', function(Article, $stateParams) {
             return Article.query({'order': $stateParams.order}).$promise;
-          }
+          }]
         }
       })
       .state('app.articles.show', {
@@ -62,7 +62,7 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          article: function(Article, $stateParams, $state) {
+          article: ['Article', '$stateParams', '$state', function(Article, $stateParams, $state) {
             return Article.get({
               'articleId': $stateParams.articleId,
               'next_count': 5
@@ -71,7 +71,7 @@ angular.module('webClientApp', [
             }, function() {
               $state.go('app');
             }).$promise;
-          }
+          }]
         }
       })
       .state('app.articles.edit', {
@@ -83,13 +83,13 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          user: function($rootScope, $auth, $location, $stateParams) {
+          user: ['$rootScope', '$auth', function($rootScope, $auth) {
             return $auth.validateUser().then(function(user) {
               return user;
             }).catch(function() {
             });
-          },
-          article: function(Article, $stateParams, $state, user) {
+          }],
+          article: ['Article', '$stateParams', '$state', 'user', function(Article, $stateParams, $state, user) {
             return Article.get({'articleId': $stateParams.articleId}, function(article) {
               if (article.body) {
                 $state.go('app.articles.show', { articleId: article.id });
@@ -99,7 +99,7 @@ angular.module('webClientApp', [
                 $state.go('app.articles.show', {articleId: article.id});
               }
             }).$promise;
-          }
+          }]
         }
       })
       .state('app.login', {
@@ -111,7 +111,7 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          requireNoAuth: function($auth, $state) {
+          requireNoAuth: ['$auth', '$state', function($auth, $state) {
             return $auth.validateUser().then(function(user) {
               if(user) {
                 $state.go('app.publishers.profile.user.published', { userId: user.id});
@@ -119,7 +119,7 @@ angular.module('webClientApp', [
             }, function() {
               return;
             }).$promise;
-          }
+          }]
         }
       })
       .state('app.publishers', {
@@ -131,9 +131,9 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          publishers: function(User) {
+          publishers: ['User', function(User) {
             return User.query().$promise;
-          }
+          }]
         }
       })
       .state('app.publishers.profile', {
@@ -151,10 +151,10 @@ angular.module('webClientApp', [
         templateUrl: 'views/profiles/body.html',
         controller: 'ProfileCtrl',
         resolve: {
-          profile: function(User, $stateParams) {
+          profile: ['User', '$stateParams', function(User, $stateParams) {
             return User.get({'userId': $stateParams.userId}).$promise;
-          },
-          publishers: function(User, $rootScope, $q, $stateParams) {
+          }],
+          publishers: ['User', '$rootScope', '$q', '$stateParams', function(User, $rootScope, $q, $stateParams) {
             // Only load publishers when coming from a non-profile state.
             if ($rootScope.previousState &&
                 $rootScope.previousState.name.indexOf('app.publishers.profile') !== -1) {
@@ -171,10 +171,10 @@ angular.module('webClientApp', [
               'order': 'published_articles_count',
               'include_pivot': true
             }).$promise;
-          },
-          articles: function(UserArticle, $stateParams) {
+          }],
+          articles: ['UserArticle', '$stateParams', function(UserArticle, $stateParams) {
             return UserArticle.query({'userId': $stateParams.userId}).$promise;
-          }
+          }]
         }
       })
       .state('app.publishers.profile.user.edit', {
@@ -186,7 +186,7 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          canEdit: function($auth, $state, $stateParams) {
+          canEdit: ['$auth', '$state', '$stateParams', function($auth, $state, $stateParams) {
             return $auth.validateUser().then(function(user) {
               if(parseInt(user.id) === parseInt($stateParams.userId)) {
                 return;
@@ -196,7 +196,7 @@ angular.module('webClientApp', [
             }, function() {
               $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
             });
-          }
+          }]
         }
       })
       .state('app.publishers.profile.user.published', {
@@ -209,14 +209,14 @@ angular.module('webClientApp', [
         templateUrl: 'views/profiles/stream.html',
         controller: 'DraftCtrl',
         resolve: {
-          drafts: function($auth, $stateParams, UserDraft) {
+          drafts: ['$auth', '$stateParams', 'UserDraft', function($auth, $stateParams, UserDraft) {
             return $auth.validateUser().then(function(user) {
               if(user &&
                  parseInt(user.id) === parseInt($stateParams.userId)) {
                 return UserDraft.query({}).$promise;
               }
             });
-          }
+          }]
         }
       })
       .state('app.publishers.profile.user.stats', {
@@ -224,13 +224,13 @@ angular.module('webClientApp', [
         templateUrl: 'views/profiles/stats.html',
         controller: 'StatCtrl',
         resolve: {
-          stats: function($auth, $stateParams, ArticleStats) {
+          stats: ['$auth', '$stateParams', 'ArticleStats', function($auth, $stateParams, ArticleStats) {
             return $auth.validateUser().then(function(user) {
               if(user && parseInt(user.id) === parseInt($stateParams.userId)) {
                 return ArticleStats.query({}).$promise;
               }
             });
-          }
+          }]
         }
       })
       .state('app.publishers.profile.user.recommended', {
@@ -238,9 +238,9 @@ angular.module('webClientApp', [
         templateUrl: 'views/profiles/stream.html',
         controller: 'RecommendationCtrl',
         resolve: {
-          recommendations: function(UserRecommendation, $stateParams) {
+          recommendations: ['UserRecommendation', '$stateParams', function(UserRecommendation, $stateParams) {
             return UserRecommendation.query({'userId': $stateParams.userId}).$promise;
-          }
+          }]
         }
       })
       .state('app.publishers.profile.user.discussions', {
@@ -248,9 +248,9 @@ angular.module('webClientApp', [
         templateUrl: 'views/profiles/stream.html',
         controller: 'DiscussionCtrl',
         resolve: {
-          comments: function(UserComment, $stateParams) {
+          comments: ['UserComment', '$stateParams', function(UserComment, $stateParams) {
             return UserComment.query({'userId': $stateParams.userId}).$promise;
-          }
+          }]
         }
       })
       .state('app.categories', {
@@ -267,16 +267,16 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          category: function(Category, $stateParams, $state) {
+          category: ['Category', '$stateParams', '$state', function(Category, $stateParams, $state) {
             return Category.get({'categoryId': $stateParams.categoryId}, function(category) {
               return category;
             }, function() {
               $state.go('app');
             });
-          },
-          topics: function(Topic, $stateParams) {
+          }],
+          topics: ['Topic', '$stateParams', function(Topic, $stateParams) {
             return Topic.query({'categoryId': $stateParams.categoryId}).$promise;
-          }
+          }]
         }
       })
       .state('app.categories.articles.list', {
@@ -284,12 +284,12 @@ angular.module('webClientApp', [
         templateUrl: 'views/partials/_stream.html',
         controller: 'StreamCtrl',
         resolve: {
-          articles: function(CategoryArticle, $stateParams) {
+          articles: ['CategoryArticle', '$stateParams', function(CategoryArticle, $stateParams) {
             return CategoryArticle.query({
               'categoryId': $stateParams.categoryId,
               'order': $stateParams.order
             }).$promise;
-          }
+          }]
         }
       })
       .state('app.categories.topic', {})
@@ -303,7 +303,7 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          topic: function(Topic, $state, $stateParams) {
+          topic: ['Topic', '$state', '$stateParams', function(Topic, $state, $stateParams) {
             return Topic.get({
                   'categoryId': $stateParams.categoryId,
                   'topicId': $stateParams.topicId
@@ -312,7 +312,7 @@ angular.module('webClientApp', [
                 }, function() {
                   $state.go('app');
                 }).$promise;
-          }
+          }]
         }
       })
       .state('app.categories.topic.articles.list', {
@@ -320,7 +320,7 @@ angular.module('webClientApp', [
         templateUrl: 'views/partials/_stream.html',
         controller: 'StreamCtrl',
         resolve: {
-          articles: function(TopicArticle, $state, $stateParams) {
+          articles: ['TopicArticle', '$state', '$stateParams', function(TopicArticle, $state, $stateParams) {
             return TopicArticle.query({
                     'categoryId': $stateParams.categoryId,
                     'topicId': $stateParams.topicId,
@@ -330,7 +330,7 @@ angular.module('webClientApp', [
                   }, function() {
                     $state.go('app');
                   }).$promise;
-          }
+          }]
         }
       })
       .state('app.signup', {
@@ -342,7 +342,7 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          requireNoAuth: function($auth, $state) {
+          requireNoAuth: ['$auth', '$state', function($auth, $state) {
             return $auth.validateUser().then(function(user) {
               if(user) {
                 $state.go('app.publishers.profile.user.published', { userId: user.id});
@@ -350,7 +350,7 @@ angular.module('webClientApp', [
             }, function() {
               return;
             }).$promise;
-          }
+          }]
         }
       })
       .state('app.reset', {
@@ -362,7 +362,7 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          requireNoAuth: function($auth, $state) {
+          requireNoAuth: ['$auth', '$state', function($auth, $state) {
             return $auth.validateUser().then(function(user) {
               if(user) {
                 $state.go('app.publishers.profile.user.published', { userId: user.id});
@@ -370,7 +370,7 @@ angular.module('webClientApp', [
             }, function() {
               return;
             }).$promise;
-          }
+          }]
         }
       })
       .state('app.admin', {
@@ -381,7 +381,7 @@ angular.module('webClientApp', [
           }
         },
         resolve: {
-          user: function($auth, $state) {
+          user: ['$auth', '$state', function($auth, $state) {
             return $auth.validateUser().then(function(user) {
               if(user.role === 'admin') {
                 return user;
@@ -391,7 +391,7 @@ angular.module('webClientApp', [
             }, function() {
                 $state.go('app');
             }).$promise;
-          }
+          }]
         }
       })
       .state('app.admin.categories', {
@@ -480,9 +480,9 @@ angular.module('webClientApp', [
    * Disable automatic page collection. We do our own pageviews analytics
    * collection to allow for page titles collection.
    */
-  .config(function ($analyticsProvider) {
+  .config(['$analyticsProvider', function($analyticsProvider) {
     $analyticsProvider.virtualPageviews(false);
-  })
+  }])
   /**
    * Everytime the route change check if the user need to login.
    */
