@@ -1,24 +1,21 @@
 <div class="form-div center" ng-controller="LoginCtrl">
+  <div class="write-box text-dark">
+    <p> تسجيل الدخول </p>
+  </div>
+
   <div class="form-errors" ng-show="error">{{error}}</div>
+
   <div class="form-flash" ng-show="flash">
     {{flash}}
     <p class="note">{{flashNote}}</p>
   </div>
+
   <form class="note-form">
     <button ng-click="resendConfirmation(userForm)" ng-show="nonConfirmed">
       أرسل التفعيل مرة أخرى
     </button>
   </form>
-  <div class="oauth-providers">
-    <a ng-click="authenticate('gplus')" class="google-login-button">
-      <i class="fa fa-google"></i>
-      تسجيل الدخول
-    </a><!--
-    --><a ng-click="authenticate('facebook')" class="facebook-login-button">
-      <i class="fa fa-facebook"></i>
-      تسجيل الدخول
-    </a>
-  </div>
+
   <form id="login-form" ng-submit="login(userForm)" name="loginForm">
     <label>
       <input
@@ -29,7 +26,6 @@
         placeholder="البريد الالكتروني"
       />
     </label>
-
     <label>
       <input
         type="password"
@@ -38,10 +34,32 @@
         placeholder="كلمة المرور"
       />
     </label>
-
-    <button
-      type="submit">
-      دخول</button>
+    <h3 class="section-title action-button text-small">
+      <a ng-click="login(userForm)">
+        <i class="circle-icon fa fa-sign-in"></i>
+        <span>
+          تسجيل الدخول
+        </span>
+      </a>
+    </h3>
   </form>
 
+  <div>
+    <h3 class="section-title action-button text-small">
+      <a ng-click="authenticate('gplus')">
+        <i class="circle-icon fa fa-google"></i>
+        <span>
+          سجل باستخدام جوجل
+        </span>
+      </a>
+    </h3>
+    <h3 class="section-title action-button text-small">
+      <a ng-click="authenticate('facebook')">
+        <i class="circle-icon fa fa-facebook"></i>
+        <span>
+          سجل باستخدام فيسبوك
+        </span>
+      </a>
+    </h3>
+  </div>
 </div>

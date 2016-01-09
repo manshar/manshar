@@ -1,6 +1,6 @@
 <div class="form-div center" ng-controller="LoginCtrl">
 
-  <div class="write-box form-title">
+  <div class="write-box form-title text-dark">
     <p>استعادة كلمة المرور</p>
   </div>
 
@@ -18,10 +18,14 @@
           placeholder="البريد الالكتروني"
         />
       </label>
-
-      <button
-        type="submit">
-        استعادة كلمة المرور</button>
+      <h3 class="section-title action-button text-small">
+        <a ng-click="reset(userForm)">
+          <i class="circle-icon fa fa-sign-in"></i>
+          <span>
+            استعادة كلمة المرور
+          </span>
+        </a>
+      </h3>
     </form>
   </div>
 

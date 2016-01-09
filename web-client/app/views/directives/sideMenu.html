@@ -57,7 +57,7 @@
 
   <ul class="categories-menu with-border">
     <li ui-sref-active="active" ng-repeat="category in categories" class="category-{{category.id}}" style="border-left-color: {{category.color}}">
-      <a ui-sref="app.categories.articles.list({categoryId: category.id})">
+      <a ui-sref="app.categories.articles.list({categoryId: category.id, order: 'popular'})">
         <i class="fa {{category.icon_cssclass}}"></i>
         {{category.title}}
       </a>

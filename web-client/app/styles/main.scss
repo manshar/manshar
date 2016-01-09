@@ -450,7 +450,6 @@ ul.unstyled {
  margin: 44px 0;
  font-size: 0.7em;
  color: #bbbaba;
- text-align: center;
 
  .signup-link {
    background-color: #F3EFEE;
@@ -704,10 +703,6 @@ header {
     padding: 3em 0;
   }
 
-  .form-title {
-    display: none;
-  }
-
   .content-wrapper {
     margin: 0;
   }
@@ -743,6 +738,11 @@ header {
   p {
     padding: 0 15px;
     color: #b3b3b3;
+  }
+  &.text-dark {
+    p {
+      color: #3D3D3D;
+    }
   }
 }
 
@@ -1134,6 +1134,10 @@ h1, h2, h3 {
   position: relative;
   right: -13px;
 
+  &.text-small {
+    font-size: 12px;
+  }
+
   &.clear-right {
     right: 0;
   }
@@ -1152,6 +1156,9 @@ h1, h2, h3 {
     margin-left: 10px;
     position: relative;
     top: 2px;
+    &.fa-facebook {
+      background-color: #49659F;
+    }
   }
   div {
     display: inline-block;
@@ -2027,4 +2034,12 @@ h1, h2, h3 {
 
 .underline {
   text-decoration: underline;
+}
+
+.padding-top-3em {
+  padding-top: 3em;
+}
+
+.text-dark {
+  color: #3D3D3D;
 }
