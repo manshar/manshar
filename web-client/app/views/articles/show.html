@@ -1,4 +1,4 @@
-<div class="article-container new-model" ng-if="article.json_model">
+<div class="article-container new-model" ng-if="!article.body">
 
   <div class="article-line"></div>
 
@@ -13,7 +13,6 @@
     <div class="manshar-article">
       <div class="new-version">
         <article
-          ng-if="article.json_model"
           id="article-body"
           article-renderer
             ng-model="article.json_model"
@@ -39,16 +38,13 @@
     <div class="content-wrapper">
 
       <ng-include
-          ng-if="!article.json_model"
+          ng-if="article.body"
           src="'views/partials/_article_legacy.html'"></ng-include>
 
-      <div class="section-title">
+      <div class="section-title text-small">
         <a class="action-button"
           ng-click="editArticle(article.id)"
           ng-if="isOwner(user, article)"
-          tooltips
-            tooltip-class="fixed-tooltip"
-            tooltip-title="{{article.body ? 'هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد. يمكنك نسخها ولصقها في مقال جديد إذا أردت التعديل.' : ''}}"
           analytics-on="click"
             analytics-event="click"
             analytics-category="UI"
@@ -56,7 +52,10 @@
             analytics-value="edit-{{article.id}}">
 
           <i class="fa fa-pencil circle-icon"></i>
-          تعديل
+          <span ng-if="article.body">
+            هذه المقالة قديمة ولا يمكن تعديلها باستخدام المحرر الجديد.
+          </span>
+          <span ng-if="!article.body">تعديل</span>
         </a>
       </div>
 

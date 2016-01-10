@@ -20,7 +20,6 @@
     "json3": "~3.2.4",
     "ng-token-auth": "~0.0.29-beta1",
     "carbon": "manshar/carbon",
-    "angular-tooltips": "~0.1.25",
     "image-zoom": "bmcmahen/image-zoom#~1.1.1",
     "angular-touch": "~1.4.7",
     "webcamjs": "~1.0.6",

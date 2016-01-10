@@ -4,9 +4,7 @@
   </div>
 
   <div class="form-errors" ng-show="error">
-    <ul>
-      <li ng-repeat="(key, data) in errorMessages">{{key}} {{data}}</li>
-    </ul>
+    {{error}}
   </div>
 
   <div class="form-flash" ng-show="flash">
