@@ -31,7 +31,7 @@ class ArticleRankingWorker
           article.comments_count,
           article.published_at)
       puts "Updating ranking for #{article.id} = #{hotness}..."
-      article.update_attributes(hotness: hotness)
+      article.update_column(:hotness, hotness)
     else
       puts 'article_id was not passed. Nothing to do.'
     end

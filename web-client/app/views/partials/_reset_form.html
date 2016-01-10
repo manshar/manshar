@@ -1,20 +1,33 @@
-<div class="form-div center" ng-controller="ResetPasswordController">
-  <div ng-include="'views/partials/_form_header.html'"></div>
-  <div class="form-errors" ng-show="error">{{error}}</div>
+<div class="form-div center" ng-controller="LoginCtrl">
 
-  <form id="login-form" ng-submit="reset(userForm)" name="loginForm">
-    <label>
-      <input
-        type="email"
-        ng-model="userForm.email"
-        required
-        autofocus
-        placeholder="البريد الالكتروني"
-      />
-    </label>
+  <div class="write-box form-title text-dark">
+    <p>استعادة كلمة المرور</p>
+  </div>
 
-    <button
-      type="submit">
-      استعادة كلمة المرور</button>
-  </form>
+  <div class="form-div center" ng-controller="ResetPasswordController">
+
+    <div class="form-errors" ng-show="error">{{error}}</div>
+
+    <form id="login-form" ng-submit="reset(userForm)" name="loginForm">
+      <label>
+        <input
+          type="email"
+          ng-model="userForm.email"
+          required
+          autofocus
+          placeholder="البريد الالكتروني"
+        />
+      </label>
+      <h3 class="section-title action-button text-small">
+        <a ng-click="reset(userForm)">
+          <i class="circle-icon fa fa-sign-in"></i>
+          <span>
+            استعادة كلمة المرور
+          </span>
+        </a>
+      </h3>
+    </form>
+  </div>
+
 </div>
+

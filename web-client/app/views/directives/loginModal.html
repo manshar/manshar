@@ -1,11 +1,31 @@
 <div data-modal-dialog visible="visible">
-  <div ng-include="'views/partials/_login_form.html'" ng-show="activeView =='login'"></div>
-  <div ng-include="'views/partials/_signup_form.html'" ng-show="activeView =='signup'"></div>
-  <div ng-include="'views/partials/_reset_form.html'" ng-show="activeView =='reset'"></div>
+  <div class="container content-container"> <!-- 700px centered -->
+    <div class="row clearfix">
+      <div class="content-wrapper">
+        <div ng-include="'views/partials/_login_form.html'" ng-show="activeView =='login'"></div>
+        <div ng-include="'views/partials/_signup_form.html'" ng-show="activeView =='signup'"></div>
+        <div ng-include="'views/partials/_reset_form.html'" ng-show="activeView =='reset'"></div>
 
-  <p class="form-info" ng-init="activeView = 'login'">
-    <a class="signup-link" ng-show="activeView != 'login'" ng-click="activeView = 'login'">سجل الدخول</a> {{ activeView != 'login' ? 'أو' : '' }}
-    <a class="signup-link" ng-show="activeView != 'signup'" ng-click="activeView = 'signup'">سجل حساب جديد</a> {{ activeView == 'login' ? 'أو' : '' }}
-    <a class="signup-link" ng-show="activeView != 'reset'" ng-click="activeView = 'reset'">استرجع كلمة المرور</a>
-  </p>
+        <p class="form-info" ng-init="activeView = 'login'">
+          <a class="signup-link"
+             ng-show="activeView != 'login'"
+             ng-click="activeView = 'login'">
+                سجل الدخول
+          </a> {{ activeView != 'login' ? 'أو' : '' }}
+
+          <a class="signup-link"
+             ng-show="activeView != 'signup'"
+             ng-click="activeView = 'signup'">
+                سجل حساب
+           جديد</a> {{ activeView == 'login' ? 'أو' : '' }}
+
+          <a class="signup-link"
+             ng-show="activeView != 'reset'"
+             ng-click="activeView = 'reset'">
+                استرجع كلمة
+           المرور</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

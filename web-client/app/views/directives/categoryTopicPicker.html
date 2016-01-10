@@ -1,56 +1,58 @@
-<div data-modal-dialog visible="visible">
-  <div>
-    <h1 class="header-label category-header-label">
-      <span>اختر الفئة</span><em ng-if="allowCreateTopics"> أو أكمل <a ng-click="selectTopic({})"> بدون موضوع</a></em>
-    </h1>
-    <ul class="category-list card-list">
-      <li class="category card category-{{category.id}}" ng-click="selectCategory(category)" ng-repeat="category in categories" ng-class="{'selected': selectedCategory == category}">
-        <style type="text/css">
-          .category-list.card-list .card.category-{{category.id}} {
-            border-color: {{category.color}};
-            color: {{category.color}};
-          }
-          .category-list.card-list .card.category-{{category.id}}:hover,
-          .category-list.card-list .card.category-{{category.id}}.selected {
-            background-color: {{category.color}};
-            color: #fff;
-          }
+<div ng-show="visible">
+  <h3 class="section-title">
+    <i class="circle-icon fa fa-th-large"></i>اختر الفئة
+    <span> أو أكمل <a class="underline" ng-click="selectTopic({})"> بدون موضوع</a></span>
+  </h3>
+  <div class="clearfix">
+    <div ng-click="selectCategory(category)" ng-repeat="category in categories" class="category-block block category-{{category.id}}" ng-class="{'selected': selectedCategory == category}">
+      <style type="text/css">
+        .category-block.category-{{category.id}} {
+          background-color: #B3B3B3;
+        }
+        .category-block.category-{{category.id}}:hover,
+        .category-block.category-{{category.id}}.selected {
+          background-color: {{category.color}};
+          color: #fff;
+        }
 
-        </style>
-        <div>
-          <i class="fa {{category.icon_cssclass}}"></i>
-        </div>
-        <div class="title">
-          {{category.title}}
-        </div>
-      </li>
-    </ul>
+      </style>
+      <div class="category-content">
+        <i class="large-icon fa {{category.icon_cssclass}}"></i>
+        <p> {{category.title}} </p>
+      </div>
+    </div>
   </div>
+  <div class="clearfix category-topics-picker">
+    <div ng-show="selectedCategory && !pickOnlyCategory">
+      <style type="text/css">
+        .category-topics-picker .card.topic {
+          padding: 5px;
+          border-right-color: {{selectedCategory.color}};
+        }
+        .category-topics-picker .card.topic:hover {
+          background-color: {{selectedCategory.color}};
+          color: #fff;
+        }
 
-  <div ng-show="selectedCategory && !pickOnlyCategory">
-    <style type="text/css">
-      .topic-list.card-list .card.topic {
-        border-color: {{selectedCategory.color}};
-        color: {{selectedCategory.color}};
-      }
-      .topic-list.card-list .card.topic:hover {
-        background-color: {{selectedCategory.color}};
-        color: #fff;
-      }
+        .category-topics-picker .card.topic.new-topic:hover {
+          background-color: white;
+          color: initial;
+        }
 
-      .topic-list.card-list .card.topic.new-topic:hover {
-        background-color: white;
-        color: initial;
-      }
-
-    </style>
-    <h1 class="header-label">
-      <span>اختر الموضوع</span>
-    </h1>
-    <ul class="card-list topic-list">
-      <li ng-if="allowCreateTopics" class="tabular topic card new-topic">
+        .form-div input {
+          border-right-color: {{selectedCategory.color}};
+        }
+        .form-div .actions button {
+          background-color: {{selectedCategory.color}};
+          color: #fff;
+        }
+      </style>
+      <h3 class="section-title">
+        <i class="circle-icon"></i>اختر موضوعا أو أضف موضوعا جديدا
+      </h3>
+      <div class="tabular new-topic">
         <div class="form-div">
-          <form ng-submit="saveTopic(newTopic)">
+          <form>
             <label>
               <input
                 type="text"
@@ -60,34 +62,32 @@
                 placeholder="موضوع المقال"
               />
             </label>
-            <div class="actions">
-              <button
-                type="submit">
-                موضوع جديد
+            <div class="actions" ng-show="!filteredTopics.length">
+              <button ng-click="saveTopic(newTopic)">
+                حفظ
               </button>
             </div>
           </form>
-          <h1 class="header-label">
-            <span class="no-bg">المواضيع توضح تخصص المقال في الفئة المختارة. </span>
-          </h1>
-          <h1 class="header-label">
-            <span class="no-bg">مثال: اذا تم اختيار فئة الصحة، يمكن ان يكون الموضوع الذي يوضح تخصص المقال: </span>
-          </h1>
-          <h1 class="header-label">
-            <span>صحة القلب</span>
-            <span class="no-bg">أو </span>
-            <span>التغذية الصحية</span>
-            <span class="no-bg">أو </span>
-            <span>رياضة الجري</span>
-          </h1>
-        </li>
-      </li>
-      <li class="card topic" ng-click="selectTopic(topic)" ng-repeat="topic in topics">
-        <div class="title">
-          {{topic.title}}
+          <div>
+            <p class="header-label">
+              <span class="no-bg">المواضيع توضح تخصص المقال في الفئة المختارة. </span>
+            </p>
+            <p class="header-label">
+              <span class="no-bg">مثال: اذا تم اختيار فئة الصحة، يمكن ان يكون الموضوع الذي يوضح تخصص المقال: </span>
+            </p>
+            <p class="header-label">
+              <span class="no-bg">صحة القلب أو التغذية الصحية أو رياضة الجري</span>
+            </p>
+          </div>
         </div>
-      </li>
-    </ul>
+      </div>
+      <ul class="topics card-list">
+        <li class="card topic" ng-click="selectTopic(topic)" ng-repeat="topic in filteredTopics = (topics | filter: newTopic.title)">
+          <div class="title">
+            {{topic.title}}
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-
 </div>

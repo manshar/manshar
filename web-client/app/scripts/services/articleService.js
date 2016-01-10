@@ -4,11 +4,12 @@ angular.module('webClientApp')
   .service('Article', ['$resource', '$http', '$q', '$cacheFactory', 'API_HOST',
       function ($resource, $http, $q, $cacheFactory, API_HOST) {
 
-      var $httpDefaultCache = $cacheFactory.get('$http');
+      var articlesCache = (
+          $cacheFactory.get('articles') || $cacheFactory('articles'));
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var ArticleResource = $resource(baseUrl + 'articles/:articleId', {}, {
-        get: {cache: true},
-        query: {cache: true, isArray: true}
+        get: {cache: articlesCache},
+        query: {cache: articlesCache, isArray: true}
       });
 
       /**
@@ -78,7 +79,7 @@ angular.module('webClientApp')
             // Success.
             function (response) {
               // Update the cache after updating the article.
-              $httpDefaultCache.put(url, response.data);
+              articlesCache.removeAll();
               if (optSuccess) {
                 optSuccess(response.data);
               }
@@ -104,13 +105,17 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('UserArticle', ['$resource', 'API_HOST',
-      function ($resource, API_HOST) {
+  .service('UserArticle', ['$resource', '$cacheFactory', 'API_HOST',
+      function ($resource, $cacheFactory, API_HOST) {
 
+      var articlesCache = (
+          $cacheFactory.get('articles') || $cacheFactory('articles'));
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserArticleResource = $resource(
         baseUrl + 'users/:userId/articles', {
           userId: '@userId'
+        }, {
+          query: {cache: articlesCache, isArray: true},
         });
 
       return {
@@ -124,13 +129,17 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('CategoryArticle', ['$resource', 'API_HOST',
-      function ($resource, API_HOST) {
+  .service('CategoryArticle', ['$resource', '$cacheFactory', 'API_HOST',
+      function ($resource, $cacheFactory, API_HOST) {
 
+      var articlesCache = (
+          $cacheFactory.get('articles') || $cacheFactory('articles'));
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var CategoryArticleResource = $resource(
         baseUrl + 'categories/:categoryId/articles', {
           categoryId: '@categoryId'
+        }, {
+          query: {cache: articlesCache, isArray: true}
         });
 
       return {
@@ -144,14 +153,18 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('TopicArticle', ['$resource', 'API_HOST',
-      function ($resource, API_HOST) {
+  .service('TopicArticle', ['$resource', '$cacheFactory', 'API_HOST',
+      function ($resource, $cacheFactory, API_HOST) {
 
+      var articlesCache = (
+          $cacheFactory.get('articles') || $cacheFactory('articles'));
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var TopicArticleResource = $resource(
         baseUrl + 'categories/:categoryId/topics/:topicId/articles', {
           categoryId: '@categoryId',
           topicId: '@topicId'
+        }, {
+          query: {cache: articlesCache, isArray: true}
         });
 
       return {

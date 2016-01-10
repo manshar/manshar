@@ -1,0 +1,28 @@
+<div class="listing-types-tabs">
+  <div class="section-title">
+    <span class="tab-icon" ui-sref-active="active">
+      <i class="ng-hide" ui-sref=".list({order: 'popular'})"></i>
+      <i class="circle-icon fa fa-line-chart"></i>
+    </span>
+
+    <span class="tab-icon" ui-sref-active="active">
+      <i class="ng-hide" ui-sref=".list({order: 'best'})"></i>
+      <i class="circle-icon fa fa-thumbs-o-up"></i>
+    </span>
+
+    <span class="tab-icon" ui-sref-active="active">
+      <i class="ng-hide" ui-sref=".list({order: 'recents'})"></i>
+      <i class="circle-icon fa fa-clock-o"></i>
+    </span>
+
+    <a ui-sref=".list({order: 'popular'})"
+       ui-sref-active="active"> الأكثر شعبية </a> .
+
+    <a ui-sref=".list({order: 'best'})"
+       ui-sref-active="active"> الأفضل </a> .
+
+    <a ui-sref=".list({order: 'recents'})"
+       ui-sref-active="active"> الأحدث </a>
+
+  </div>
+</div>

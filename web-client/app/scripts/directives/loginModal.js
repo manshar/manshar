@@ -7,7 +7,8 @@ angular.module('webClientApp')
     return {
       restrict: 'A',
       templateUrl: 'views/directives/loginModal.html',
-      link: function (scope) {
+      scope: {},
+      link: function (scope, element) {
         var prev = null;
         var showDialog = function (event, data) {
           prev = data && data.prev;
@@ -20,7 +21,10 @@ angular.module('webClientApp')
             '/accounts/update_password'
           ];
           if (ACCESS_PATHS.indexOf($location.path()) === -1) {
-            scope.visible = true;
+            $timeout(function() {
+              element[0].querySelector('[type="email"]').focus();
+              scope.visible = true;
+            });
           }
         };
 

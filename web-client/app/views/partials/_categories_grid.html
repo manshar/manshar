@@ -1,0 +1,12 @@
+<h3 class="section-title"> <i class="circle-icon fa fa-th-large"></i>اقرأ في الفئات</h3>
+
+<div class="clearfix">
+  <div ui-sref-active="active" ng-repeat="category in categories" class="category-block block" style="background:{{category.color}}">
+    <div class="category-content">
+      <a ui-sref="app.categories.articles.list({categoryId: category.id, order: order || 'popular'})">
+        <i class="large-icon fa {{category.icon_cssclass}}"></i>
+        <p> {{category.title}} </p>
+      </a>
+    </div>
+  </div>
+</div>

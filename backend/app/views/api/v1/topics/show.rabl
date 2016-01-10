@@ -1,9 +1,9 @@
 object @topic
 
-attributes :id, :title
+attributes :id, :title, :articles_count
 
 unless locals[:listing]
-  attributes :created_at, :updated_at, :articles_count
+  attributes :created_at, :updated_at
 end
 
 child :category do

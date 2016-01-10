@@ -1,0 +1,8 @@
+<div class="carousel">
+  <div class="author-block small-block block" ng-repeat="user in users" ng-class="{'selected': user.id === selectedUser.id }" >
+    <a ui-sref="app.publishers.profile.user.published({ userId: user.id })">
+      <div ng-class="{'dimmer': user.id !== selectedUser.id }"></div>
+      <div class="cover" data-manshar-cover url="{{user.thumb_url}}"></div>
+    </a>
+  </div>
+</div>

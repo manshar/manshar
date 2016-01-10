@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129220300) do
+ActiveRecord::Schema.define(version: 20151227080837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20151129220300) do
     t.string   "category_color"
     t.integer  "category_id"
     t.text     "json_model"
+    t.string   "user_avatar_url"
   end
 
   create_table "categories", force: :cascade do |t|

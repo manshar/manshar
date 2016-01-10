@@ -1,0 +1,81 @@
+<!-- side menu -->
+<div class="menu-icon icon" click-outside="clickedOutsideNavIcon()">
+  <div ng-if="!thumbnail" class="fa fa-bars"
+    ng-class="{'text-white': pushAside }"></div>
+  <img ng-if="thumbnail" ng-src="{{thumbnail}}">
+</div>
+
+<div class="menu-wrapper" click-outside="clickedOutsideMenu()">
+  <ul class="user-menu with-border" ng-switch on="!!user.id">
+    <li>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.published({ userId: user.id })">
+        <i></i>{{ user.name }}
+      </a>
+      <a ng-switch-when="false" ui-sref="app.login">
+        <i></i>تسجيل الدخول
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="false" ui-sref="app.signup">
+        <i></i>حساب جديد
+      </a>
+    </li>
+    <li>
+      <a ng-click="createNewArticle()"
+          analytics-on="click"
+            analytics-event="click"
+            analytics-category="UI"
+            analytics-label="New Article Button in Side Menu">
+        <i></i>كتابة مقال
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.published({ userId: user.id })">
+        <i></i>المنشورات
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.drafts({ userId: user.id })">
+        <i></i>المسودات
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ui-sref="app.publishers.profile.user.stats({ userId: user.id })">
+        <i></i>احصائيات المقالات
+      </a>
+    </li>
+    <li>
+      <a ng-switch-when="true" ng-click="logout()"
+        analytics-on="click"
+          analytics-event="click"
+          analytics-category="UI"
+          analytics-label="Nav Logout Link">
+        <i></i>تسجيل الخروج
+      </a>
+    </li>
+  </ul>
+
+  <ul class="categories-menu with-border">
+    <li ui-sref-active="active" ng-repeat="category in categories" class="category-{{category.id}}" style="border-left-color: {{category.color}}">
+      <a ui-sref="app.categories.articles.list({categoryId: category.id, order: 'popular'})">
+        <i class="fa {{category.icon_cssclass}}"></i>
+        {{category.title}}
+      </a>
+    </li>
+  </ul>
+
+  <ul class="with-border">
+    <li>
+      <a ui-sref="app.publishers">
+        <i></i>الناشرون
+      </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li> <a href="http://www.manshar.org/" target="_blank"><i></i>قصة منشر</a> </li>
+    <li> <a ui-sref="app.articles.show({articleId: 652})" ><i></i>شروط الاستخدام</a> </li>
+    <li> <a href="https://goo.gl/IuOXaA" target="_blank"><i></i>تابعنا</a> </li>
+    <li> <a href="https://github.com/manshar/manshar"><i></i>ساهم بتطوير المنصة</a> </li>
+  </ul>
+</div>

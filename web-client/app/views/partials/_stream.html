@@ -1,0 +1,11 @@
+<div ng-repeat="article in firstArticles" class="article" style="border-right: 1px solid {{article.topic.category.color}}">
+  <div ng-include="'views/partials/_article_item.html'"></div>
+</div>
+
+<div class="categories-section section" ng-include="'views/partials/_categories_grid.html'"></div>
+<div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
+
+<div ng-include="'views/partials/_articles_list.html'"></div>
+
+<load-more-data order="order" category="category" topic="topic" append-to="articles" profile="profile"></load-more-data>
+

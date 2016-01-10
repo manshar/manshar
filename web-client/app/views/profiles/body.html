@@ -1,0 +1,45 @@
+<div class="profile-wrapper">
+  <div class="profile-info" ng-class="{'section-title': user.id == profile.id}">
+    <a ng-show="user.id == profile.id" ui-sref="app.publishers.profile.user.edit({userId: user.id})" class="action-button">
+      <i class="circle-icon fa grey fa-pencil"></i>
+    </a>
+    <div>
+      <h3> {{profile.name}} </h3>
+      <p> {{profile.bio}} </p>
+    </div>
+  </div>
+
+  <div class="listing-types-tabs">
+    <div class="section-title">
+      <i class="circle-icon fa fa-file-text-o"
+          ng-if="'app.publishers.profile.user.published'|isState"></i>
+      <i class="circle-icon fa fa-thumbs-up"
+          ng-if="'app.publishers.profile.user.recommended'|isState"></i>
+      <i class="circle-icon fa fa-comment"
+          ng-if="'app.publishers.profile.user.discussions'|isState"></i>
+      <i class="circle-icon fa fa-file-o"
+          ng-if="'app.publishers.profile.user.drafts'|isState"></i>
+      <i class="circle-icon fa fa-line-chart"
+          ng-if="'app.publishers.profile.user.stats'|isState"></i>
+
+      <a ui-sref-active="active" ui-sref=".published">المنشورات</a>.
+      <a ui-sref-active="active" ui-sref=".recommended">التوصيات</a>.
+      <a ui-sref-active="active" ui-sref=".discussions">المناقشات</a>.
+    </div>
+    <div class="private-tabs">
+      <a ng-show="user.id == profile.id" ui-sref-active="active" ui-sref=".drafts">المسودات</a><span ng-show="user.id == profile.id">.</span>
+      <a ui-sref-active="active" ui-sref=".stats" ng-show="user.id == profile.id">احصائيات مقالاتك</a>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <a class="action-button" ng-click="createNewArticle()"
+      ng-show="user.id == profile.id" class="action-text">
+      <i class="circle-icon fa fa-pencil"></i>
+      اكتب مقال جديد
+    </a>
+  </div>
+
+  <!-- Displays the different tabs pages (published, drafts...) for user profile. -->
+  <div ui-view class="tabs-content"></div>
+</div>

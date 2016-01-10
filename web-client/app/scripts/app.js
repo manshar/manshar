@@ -10,7 +10,7 @@ angular.module('webClientApp', [
   'ngLocale',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
+  'ui.router',
   'AppConfig',
   'truncate',
   'angulartics',
@@ -19,147 +19,418 @@ angular.module('webClientApp', [
   'angular-loading-bar',
   'ipCookie',
   'ng-token-auth',
-  '720kb.tooltips'
+  'monospaced.elastic'
 ])
   /**
    * Routing.
    */
-  .config(['$routeProvider',
-      function ($routeProvider) {
-
-    /**
-     * Checks proper access to the route and reject it if unauthenticated.
-     */
-    var checkAccess = {
-      load: ['$q', '$location', '$rootScope', '$auth', '$route', 'LoginService',
-          function($q, $location, $rootScope, $auth, $route, LoginService) {
-        var isPublic = $route.current.isPublic;
-        var isAdmin = $route.current.isAdmin;
-        var deferred = $q.defer();
-        var callback = function() {
-          if(LoginService.isAuthorized(isPublic, isAdmin)) {
-            deferred.resolve();
-          } else {
-            deferred.reject();
-            $rootScope.$broadcast('showLoginDialog', {
-              'prev': $location.path()
-            });
+  .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
+      function ($stateProvider, $locationProvider, $urlRouterProvider) {
+    // Set the default route to to to .popular child state
+    $urlRouterProvider.when('/', 'articles/list/popular/');
+    $stateProvider
+      .state('app', {
+        abstract: true,
+        url: '/'
+      })
+      .state('app.articles', {
+        abstract: true,
+        url: 'articles/',
+        views: {
+          'content@': {
+            templateUrl: 'views/main.html'
           }
-        };
-        $auth.validateUser().then(callback, callback);
-        return deferred.promise;
-      }]
-    };
-
-
-    $routeProvider
-
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        title: 'منصة النشر العربية',
-        isPublic: true,
-        resolve: checkAccess
+        }
       })
-
-      .when('/login/?', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl',
-        title: 'تسجيل الدخول',
-        isPublic: true,
-        resolve: checkAccess
+      .state('app.articles.list', {
+        url: 'list/:order/',
+        templateUrl: 'views/partials/_stream.html',
+        controller: 'StreamCtrl',
+        resolve: {
+          articles: ['Article', '$stateParams', function(Article, $stateParams) {
+            return Article.query({'order': $stateParams.order}).$promise;
+          }]
+        }
       })
-
-      .when('/signup/?', {
-        templateUrl: 'views/signup.html',
-        controller: 'SignupCtrl',
-        title: 'مستخدم جديد',
-        isPublic: true,
-        resolve: checkAccess
+      .state('app.articles.show', {
+        url: ':articleId/',
+        views: {
+          'content@': {
+            templateUrl: 'views/articles/show.html',
+            controller: 'ArticleCtrl'
+          }
+        },
+        resolve: {
+          article: ['Article', '$stateParams', '$state', function(Article, $stateParams, $state) {
+            return Article.get({
+              'articleId': $stateParams.articleId,
+              'next_count': 5
+            }, function(article) {
+              return article;
+            }, function() {
+              $state.go('app');
+            }).$promise;
+          }]
+        }
       })
-
-      .when('/articles/new/?', {
-        templateUrl: 'views/articles/edit.html',
-        controller: 'NewArticleCtrl',
-        title: 'مقال جديد',
-        isPublic: false,
-        resolve: checkAccess
+      .state('app.articles.edit', {
+        url: ':articleId/edit/',
+        views: {
+          'content@': {
+            templateUrl: 'views/articles/edit.html',
+            controller: 'EditArticleCtrl'
+          }
+        },
+        resolve: {
+          user: ['$rootScope', '$auth', function($rootScope, $auth) {
+            return $auth.validateUser().then(function(user) {
+              return user;
+            }).catch(function() {
+            });
+          }],
+          article: ['Article', '$stateParams', '$state', 'user', function(Article, $stateParams, $state, user) {
+            return Article.get({'articleId': $stateParams.articleId}, function(article) {
+              if (article.body) {
+                $state.go('app.articles.show', { articleId: article.id });
+              } else if(user.id === article.user.id) {
+                return article;
+              } else {
+                $state.go('app.articles.show', {articleId: article.id});
+              }
+            }).$promise;
+          }]
+        }
       })
-
-      .when('/articles/:articleId/edit/?', {
-        templateUrl: 'views/articles/edit.html',
-        controller: 'EditArticleCtrl',
-        isPublic: false,
-        resolve: checkAccess
+      .state('app.login', {
+        url: 'login/',
+        views: {
+        'content@': {
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl'
+          }
+        },
+        resolve: {
+          requireNoAuth: ['$auth', '$state', function($auth, $state) {
+            return $auth.validateUser().then(function(user) {
+              if(user) {
+                $state.go('app.publishers.profile.user.published', { userId: user.id});
+              }
+            }, function() {
+              return;
+            }).$promise;
+          }]
+        }
       })
-
-      .when('/articles/:articleId/?', {
-        templateUrl: 'views/articles/show.html',
-        controller: 'ArticleCtrl',
-        isPublic: true,
-        resolve: checkAccess
+      .state('app.publishers', {
+        url: 'publishers/',
+        views: {
+          'content@': {
+            templateUrl: 'views/publishers/show.html',
+            controller: 'PublishersCtrl'
+          }
+        },
+        resolve: {
+          publishers: ['User', function(User) {
+            return User.query().$promise;
+          }]
+        }
       })
-
-      .when('/accounts/reset_password/?', {
-        templateUrl: 'views/accounts/reset_password.html',
-        controller: 'ResetPasswordController',
-        isPublic: true,
-        resolve: checkAccess
+      .state('app.publishers.profile', {
+        abstract: true,
+        url: 'profile/',
+        views: {
+          'content@': {
+            templateUrl: 'views/profiles/show.html',
+            controller: 'ProfileInitCtrl'
+          }
+        },
       })
-
-      .when('/accounts/update_password/?', {
-        templateUrl: 'views/accounts/update_password.html',
-        controller: 'UpdatePasswordController',
-        isPublic: true,
-        resolve: checkAccess
-      })
-
-      .when('/profiles/:userId/?', {
-        templateUrl: 'views/profiles/show.html',
+      .state('app.publishers.profile.user', {
+        url: ':userId/',
+        templateUrl: 'views/profiles/body.html',
         controller: 'ProfileCtrl',
-        isPublic: true,
-        resolve: checkAccess
-      })
+        resolve: {
+          profile: ['User', '$stateParams', function(User, $stateParams) {
+            return User.get({'userId': $stateParams.userId}).$promise;
+          }],
+          publishers: ['User', '$rootScope', '$q', '$stateParams', function(User, $rootScope, $q, $stateParams) {
+            // Only load publishers when coming from a non-profile state.
+            if ($rootScope.previousState &&
+                $rootScope.previousState.name.indexOf('app.publishers.profile') !== -1) {
+              var deferred = $q.defer();
+              deferred.resolve();
+              return deferred.promise;
+            }
 
-      .when('/profiles/:userId/edit/?', {
-        templateUrl: 'views/profiles/edit.html',
-        controller: 'EditProfileCtrl',
-        isPublic: false,
-        resolve: checkAccess
+            return User.query({
+              'pivot_id': $stateParams.userId,
+              'after_pivot_count': 10,
+              'before_pivot_count': 10,
+              'order_dir': 'ASC',
+              'order': 'published_articles_count',
+              'include_pivot': true
+            }).$promise;
+          }],
+          articles: ['UserArticle', '$stateParams', function(UserArticle, $stateParams) {
+            return UserArticle.query({'userId': $stateParams.userId}).$promise;
+          }]
+        }
       })
-
-      .when('/categories/:categoryId/?', {
-        templateUrl: 'views/categories/show.html',
-        controller: 'CategoryCtrl',
-        isPublic: true,
-        resolve: checkAccess
+      .state('app.publishers.profile.user.edit', {
+        url: 'edit/',
+        views: {
+          'content@': {
+            templateUrl: 'views/profiles/edit.html',
+            controller: 'EditProfileCtrl'
+          }
+        },
+        resolve: {
+          canEdit: ['$auth', '$state', '$stateParams', function($auth, $state, $stateParams) {
+            return $auth.validateUser().then(function(user) {
+              if(parseInt(user.id) === parseInt($stateParams.userId)) {
+                return;
+              } else {
+                $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
+              }
+            }, function() {
+              $state.go('app.publishers.profile.user.published', {userId: $stateParams.userId});
+            });
+          }]
+        }
       })
-
-      .when('/categories/:categoryId/topics/:topicId/?', {
-        templateUrl: 'views/topics/show.html',
-        controller: 'TopicCtrl',
-        isPublic: true,
-        resolve: checkAccess
+      .state('app.publishers.profile.user.published', {
+        url: 'published/',
+        templateUrl: 'views/profiles/stream.html',
+        controller: 'ProfileCtrl'
       })
-
-      .when('/admin/?', {
-        templateUrl: 'views/admin/dashboard.html',
-        isPublic: false,
-        isAdmin: true,
-        resolve: checkAccess
+      .state('app.publishers.profile.user.drafts', {
+        url: 'drafts/',
+        templateUrl: 'views/profiles/stream.html',
+        controller: 'DraftCtrl',
+        resolve: {
+          drafts: ['$auth', '$stateParams', 'UserDraft', function($auth, $stateParams, UserDraft) {
+            return $auth.validateUser().then(function(user) {
+              if(user &&
+                 parseInt(user.id) === parseInt($stateParams.userId)) {
+                return UserDraft.query({}).$promise;
+              }
+            });
+          }]
+        }
       })
-
-      .when('/admin/manage/categories/?', {
-        templateUrl: 'views/admin/manage/categories.html',
-        controller: 'ManageCategoriesCtrl',
-        isPublic: false,
-        isAdmin: true,
-        resolve: checkAccess
+      .state('app.publishers.profile.user.stats', {
+        url: 'stats/',
+        templateUrl: 'views/profiles/stats.html',
+        controller: 'StatCtrl',
+        resolve: {
+          stats: ['$auth', '$stateParams', 'ArticleStats', function($auth, $stateParams, ArticleStats) {
+            return $auth.validateUser().then(function(user) {
+              if(user && parseInt(user.id) === parseInt($stateParams.userId)) {
+                return ArticleStats.query({}).$promise;
+              }
+            });
+          }]
+        }
       })
-
-      .otherwise({
-        redirectTo: '/'
-      });
+      .state('app.publishers.profile.user.recommended', {
+        url: 'recommended/',
+        templateUrl: 'views/profiles/stream.html',
+        controller: 'RecommendationCtrl',
+        resolve: {
+          recommendations: ['UserRecommendation', '$stateParams', function(UserRecommendation, $stateParams) {
+            return UserRecommendation.query({'userId': $stateParams.userId}).$promise;
+          }]
+        }
+      })
+      .state('app.publishers.profile.user.discussions', {
+        url: 'discussions/',
+        templateUrl: 'views/profiles/stream.html',
+        controller: 'DiscussionCtrl',
+        resolve: {
+          comments: ['UserComment', '$stateParams', function(UserComment, $stateParams) {
+            return UserComment.query({'userId': $stateParams.userId}).$promise;
+          }]
+        }
+      })
+      .state('app.categories', {
+        abstract: true,
+        url: 'categories/:categoryId/',
+      })
+      .state('app.categories.articles', {
+        abstract: true,
+        url: 'articles/',
+        views: {
+          'content@': {
+            templateUrl: 'views/categories/show.html',
+            controller: 'CategoryCtrl'
+          }
+        },
+        resolve: {
+          category: ['Category', '$stateParams', '$state', function(Category, $stateParams, $state) {
+            return Category.get({'categoryId': $stateParams.categoryId}, function(category) {
+              return category;
+            }, function() {
+              $state.go('app');
+            });
+          }],
+          topics: ['Topic', '$stateParams', function(Topic, $stateParams) {
+            return Topic.query({'categoryId': $stateParams.categoryId}).$promise;
+          }]
+        }
+      })
+      .state('app.categories.articles.list', {
+        url: ':order/',
+        templateUrl: 'views/partials/_stream.html',
+        controller: 'StreamCtrl',
+        resolve: {
+          articles: ['CategoryArticle', '$stateParams', function(CategoryArticle, $stateParams) {
+            return CategoryArticle.query({
+              'categoryId': $stateParams.categoryId,
+              'order': $stateParams.order
+            }).$promise;
+          }]
+        }
+      })
+      .state('app.categories.topic', {})
+      .state('app.categories.topic.articles', {
+        url: 'topics/:topicId/articles/',
+        abstract: true,
+        views: {
+          'content@': {
+            templateUrl: 'views/topics/show.html',
+            controller: 'TopicCtrl'
+          }
+        },
+        resolve: {
+          topic: ['Topic', '$state', '$stateParams', function(Topic, $state, $stateParams) {
+            return Topic.get({
+                  'categoryId': $stateParams.categoryId,
+                  'topicId': $stateParams.topicId
+                }, function(topic) {
+                  return topic;
+                }, function() {
+                  $state.go('app');
+                }).$promise;
+          }]
+        }
+      })
+      .state('app.categories.topic.articles.list', {
+        url: ':order/',
+        templateUrl: 'views/partials/_stream.html',
+        controller: 'StreamCtrl',
+        resolve: {
+          articles: ['TopicArticle', '$state', '$stateParams', function(TopicArticle, $state, $stateParams) {
+            return TopicArticle.query({
+                    'categoryId': $stateParams.categoryId,
+                    'topicId': $stateParams.topicId,
+                    'order': $stateParams.order
+                  }, function(articles) {
+                    return articles;
+                  }, function() {
+                    $state.go('app');
+                  }).$promise;
+          }]
+        }
+      })
+      .state('app.signup', {
+        url: 'signup/',
+        views: {
+        'content@': {
+            templateUrl: 'views/signup.html',
+            controller: 'SignupCtrl'
+          }
+        },
+        resolve: {
+          requireNoAuth: ['$auth', '$state', function($auth, $state) {
+            return $auth.validateUser().then(function(user) {
+              if(user) {
+                $state.go('app.publishers.profile.user.published', { userId: user.id});
+              }
+            }, function() {
+              return;
+            }).$promise;
+          }]
+        }
+      })
+      .state('app.reset', {
+        url: 'accounts/reset_password/',
+        views: {
+        'content@': {
+            templateUrl: 'views/accounts/reset_password.html',
+            controller: 'ResetPasswordController'
+          }
+        },
+        resolve: {
+          requireNoAuth: ['$auth', '$state', function($auth, $state) {
+            return $auth.validateUser().then(function(user) {
+              if(user) {
+                $state.go('app.publishers.profile.user.published', { userId: user.id});
+              }
+            }, function() {
+              return;
+            }).$promise;
+          }]
+        }
+      })
+      .state('app.admin', {
+        url: 'admin/',
+        views: {
+        'content@': {
+            templateUrl: 'views/admin/dashboard.html'
+          }
+        },
+        resolve: {
+          user: ['$auth', '$state', function($auth, $state) {
+            return $auth.validateUser().then(function(user) {
+              if(user.role === 'admin') {
+                return user;
+              } else {
+                $state.go('app');
+              }
+            }, function() {
+                $state.go('app');
+            }).$promise;
+          }]
+        }
+      })
+      .state('app.admin.categories', {
+        url: 'manage/categories/',
+        views: {
+        'content@': {
+            templateUrl: 'views/admin/manage/categories.html',
+            controller: 'ManageCategoriesCtrl'
+          }
+        }
+      })
+      .state('app.redirects', {})
+      .state('app.redirects.profiles', {
+        url: 'profiles/:userId/',
+        onEnter: function ($state, $stateParams) {
+          $state.transitionTo('app.publishers.profile.user.published', {
+            userId: $stateParams.userId
+          });
+        }
+      })
+      .state('app.redirects.categories', {
+        url: 'categories/:categoryId/',
+        onEnter: function ($state, $stateParams) {
+          $state.transitionTo('app.categories.articles.list', {
+            categoryId: $stateParams.categoryId,
+            order: 'popular'
+          });
+        }
+      })
+      .state('app.redirects.topics', {
+        url: 'categories/:categoryId/topics/:topicId/',
+        onEnter: function ($state, $stateParams) {
+          $state.transitionTo('app.categories.topic.articles.list', {
+            categoryId: $stateParams.categoryId,
+            topicId: $stateParams.topicId,
+            order: 'popular'
+          });
+        }
+      })
+      ;
   }])
   .factory('unAuthenticatedInterceptor', ['$location', '$q', '$rootScope',
       function ($location, $q, $rootScope) {
@@ -233,10 +504,17 @@ angular.module('webClientApp', [
     cfpLoadingBarProvider.includeSpinner = false;
   }])
   /**
+   * Disable automatic page collection. We do our own pageviews analytics
+   * collection to allow for page titles collection.
+   */
+  .config(['$analyticsProvider', function($analyticsProvider) {
+    $analyticsProvider.virtualPageviews(false);
+  }])
+  /**
    * Everytime the route change check if the user need to login.
    */
-  .run(['$location', '$rootScope', '$analytics', '$auth', 'LoginService', 'User', 'GA_TRACKING_ID',
-      function ($location, $rootScope, $analytics, $auth, LoginService, User, GA_TRACKING_ID) {
+  .run(['$location', '$rootScope', '$analytics', 'Category', 'GA_TRACKING_ID', 'Article', '$state', '$timeout',
+      function ($location, $rootScope, $analytics, Category, GA_TRACKING_ID, Article, $state, $timeout) {
 
     // ga is the Google analytics global variable.
     if (window.ga) {
@@ -255,14 +533,31 @@ angular.module('webClientApp', [
     };
 
     /**
-     * Logs the user out.
+     * Load categories once for all application
      */
-    $rootScope.logout = function () {
-      $analytics.eventTrack('Logout', {
-        category: 'User'
+    $rootScope.categories = Category.query();
+
+    /**
+     * Create new article
+     */
+    $rootScope.createNewArticle = function() {
+      Article.save({
+        article: { published: false }
+      }, function(resource) {
+        $analytics.eventTrack('Article Created', {
+          category: 'Article'
+        });
+        $state.go('app.articles.edit', { articleId: resource.id });
+      }, function(response) {
+        $analytics.eventTrack('Article Create Error', {
+          category: 'Article',
+          label: angular.toJson(response.errors)
+        });
+
+        $state.go('app');
       });
-      LoginService.logout();
     };
+
 
     /**
      * Shows the login dialog.
@@ -288,54 +583,16 @@ angular.module('webClientApp', [
               id === resource.user.id);
     };
 
-    var checkAccess = function(event, next, current) {
-
-      /**
-       * First load to the AngularJS the user might have not been loaded
-       * so need to call the callback after validateUser promise is resolved.
-       */
-      var firstLoadCallback = function() {
-        if (!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
-          $location.path('/login').search('prev', $location.path());
-        }
-      };
-
-      // If this is the first load of the site.
-      if(!current) {
-        $auth.validateUser().then(firstLoadCallback, firstLoadCallback);
-      }
-      else if(!LoginService.isAuthorized(next.isPublic, next.isAdmin)) {
-        event.preventDefault();
-        // Show the dialog instead of redirecting for all navigations.
-        // Except first time landing on the site on protected page.
-        if (current) {
-          $rootScope.$broadcast('showLoginDialog', {
-            'prev': $location.path()
-          });
-        }
-      }
-    };
-
-    /**
-     * If the route to be accessed is private make sure the user is authenticated
-     * otherwise, broadcast 'showLoginDialog' to show login modal.
-     */
-    $rootScope.$on('$routeChangeStart', function(event, next, current) {
-      checkAccess(event, next, current);
+    $rootScope.$on('$stateChangeStart', function(
+          event, toState, toParams, fromState, fromParams) {
+      /* jshint unused:false */
+      $rootScope.previousState = fromState;
     });
 
-    $rootScope.$on('$routeChangeSuccess', function (event, current) {
-      $rootScope.page.title = current.$$route.title || $rootScope.page.title;
-      $rootScope.page.url = document.location.href;
+    $rootScope.$on('$stateChangeSuccess', function() {
+      $timeout(function() {
+        ga('send', 'pageview', {'page': $location.path()});
+      }, 200);
     });
-
-    var getLoggedInUserProfile = function(event, data) {
-      User.get({'userId': data.id}, function(user) {
-        angular.extend($rootScope.user, user);
-      });
-    };
-
-    $rootScope.$on('auth:validation-success', getLoggedInUserProfile);
-    $rootScope.$on('auth:login-success', getLoggedInUserProfile);
 
   }]);

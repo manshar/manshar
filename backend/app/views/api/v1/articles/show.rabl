@@ -1,14 +1,15 @@
 object @article
 
 attributes :id, :title, :tagline, :published_at,
-   :recommendations_count, :comments_count, :reading_time
+   :recommendations_count, :comments_count, :reading_time, :published,
+   :updated_at
 
 # Don't return cover for listings. We only need these when we are getting the
 # full article. This might change in the future but for now this is causing
 # a lot of queries to be executed when listing articles.
 if not locals[:listing]
 
-  attributes :json_model, :created_at, :updated_at, :published, :hotness
+  attributes :json_model, :created_at, :hotness
 
   # Only serve body when json_model is empty
   if not root_object.json_model
@@ -29,8 +30,8 @@ if not locals[:listing]
     article.cover_abs_url '1140x270#'
   end
 
-  child @next => :next do
-    extends('api/v1/articles/show', locals: { listing: true })
+  child @next, :object_root => false do
+    extends('api/v1/articles/index', :collection => @next)
   end
 
   child :user do
@@ -45,7 +46,8 @@ else
   node :user do |article|
     {
       id: article.user_id,
-      name: article.user_name
+      name: article.user_name,
+      thumb_url: article.user_avatar_url
     }
   end
 

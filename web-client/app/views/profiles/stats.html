@@ -1,0 +1,35 @@
+<div class="stats-container one-column" ng-if="stats[0]">
+
+  <div ng-repeat="stat in stats" class="article">
+
+    <div class="title">
+      <a ui-sref="app.articles.show({ articleId: stat.article_id })"
+              analytics-on="click"
+              analytics-event="click"
+              analytics-category="UI"
+              analytics-label="Article in Stats Page - {{stat.article_title}}"
+              analytics-value="article-{{stat.article_id}}">
+        <h2>{{stat.article_title || 'بدون عنوان'}}</h2>
+      </a>
+    </div>
+
+    <div class="article-stats clearfix">
+      <p class="view-count" title="المشاهدات"> {{stat.page_views_count}} <i class="fa fa-eye"></i> </p>
+      <p class="read-count" title="القراءات"> {{stat.reads_count}} <i class="fa fa-newspaper-o"></i> </p>
+      <p class="comments-count" title="التعليقات"> {{stat.comments_count}} <i class="fa fa-comment"></i> </p>
+      <p class="recommendations-count" title="التوصيات"> {{stat.recommendations_count}} <i class="fa fa-thumbs-up"></i> </p>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="stats-container one-column" ng-if="!stats[0]">
+  <div class="article">
+    <h3>لا يوجد إحصائيات.</h3>
+    <h4>
+      <a href="/">تصفح أشهر المقالات</a>
+    </h4>
+  </div>
+</div>

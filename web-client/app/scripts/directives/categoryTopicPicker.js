@@ -7,11 +7,14 @@ angular.module('webClientApp')
     return {
       restrict: 'A',
       templateUrl: 'views/directives/categoryTopicPicker.html',
+      scope: {
+        visible: '='
+      },
       link: function (scope) {
         scope.selectedCategory = null;
         scope.categories = Category.query();
         scope.topics = [];
-        scope.allowCreateTopics = false;
+        // scope.allowCreateTopics = false;
         scope.visible = false;
 
         scope.selectCategory = function(category) {
@@ -65,11 +68,9 @@ angular.module('webClientApp')
         };
 
         $rootScope.$on('openTopicPicker', function(event, data) {
-          if (data.category) {
+          if (data && data.category) {
             scope.selectCategory(getCategoryById(data.category.id));
           }
-          scope.allowCreateTopics = data.allowCreateTopics;
-          scope.pickOnlyCategory = data.pickOnlyCategory;
           scope.visible = true;
         });
       }

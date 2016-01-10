@@ -10,8 +10,8 @@ angular.module('webClientApp')
    * @param  {!angular.$timeout} $timeout Angular $timeout service.
    * @return {!angular.Directive} Angular directive definition.
    */
-  .directive('anchoredComment', ['$rootScope', '$timeout',
-      function ($rootScope, $timeout) {
+  .directive('anchoredComment', ['$rootScope', '$timeout', '$analytics',
+      function ($rootScope, $timeout, $analytics) {
 
     /**
      * Returns the parent of an element that has the class name.
@@ -61,11 +61,17 @@ angular.module('webClientApp')
         listeners.push(listener);
 
         // On clicking the bubble icon send an event to show the comment.
-        var commentButton = element.find('div').find('span');
+        var commentButton = element.find('div').find('div');
         commentButton.on('click', function(e) {
           // Get the clicked anchor.
           var clickedEl = getParentWithClassName(
               'anchored-comment-box', e.target);
+
+          $analytics.eventTrack('click', {
+            category: 'UI',
+            label: 'Comments Anchor',
+            value: scope.commentsCount
+          });
 
           $rootScope.$emit(
               'show-comment', {target: clickedEl, guid: scope.guid});
@@ -86,7 +92,25 @@ angular.module('webClientApp')
               scope.commentsCount++;
             }
           }
+
+          scope.latestComments = getLatestComments(4);
         });
+
+        var getLatestComments = function(count) {
+          var comments = [];
+          var allComments = scope.$parent.comments || [];
+          for (var i = 0; i < allComments.length; i++) {
+            if (allComments[i].guid === scope.guid) {
+              comments.push(allComments[i]);
+            }
+          }
+
+          var startIndex = Math.max(0, comments.length - count);
+          var endIndex = Math.min(
+              comments.length, Math.max(comments.length, count));
+          comments.reverse();
+          return comments.slice(startIndex, endIndex);
+        };
 
         scope.$on('$destroy', cleanup);
       }

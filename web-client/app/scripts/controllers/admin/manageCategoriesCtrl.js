@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ManageCategoriesCtrl', ['$scope', '$routeParams', '$window', 'Category', '$analytics',
-      function ($scope, $routeParams, $window, Category, $analytics) {
+  .controller('ManageCategoriesCtrl', ['$scope', '$window', 'Category', '$analytics',
+      function ($scope, $window, Category, $analytics) {
 
     // Holder for creating new categories.
     $scope.category = {};
-    $scope.categories = Category.query();
+    $scope.categories = Category.query({all: true}, function(category) {
+      console.log('category', category);
+    });
     $scope.error = null;
     $scope.errorMessages = {};
 

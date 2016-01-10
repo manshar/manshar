@@ -15,6 +15,7 @@ class Article < ActiveRecord::Base
   scope :popular, -> { order('hotness DESC') }
   scope :best, -> { order('recommendations_count DESC') }
   scope :recents, -> { order('published_at DESC') }
+  scope :recently_updated, -> { order('updated_at DESC') }
 
   before_save :published_post, :time_to_read
   after_save :update_published_articles_count
@@ -35,6 +36,11 @@ class Article < ActiveRecord::Base
   end
   persistize :user_name
 
+  def user_avatar_url
+    user.avatar_abs_url('400x400#')
+  end
+  persistize :user_avatar_url
+
   def topic_title
     topic ? topic.title : nil
   end
@@ -44,6 +50,7 @@ class Article < ActiveRecord::Base
     category ? category.color : nil
   end
   persistize :category_color
+
 
 
   # Instance Methods.
@@ -63,13 +70,13 @@ class Article < ActiveRecord::Base
     not self.published
   end
 
-  def next
+  def next(count=1)
     query = Article.publishings.popular
-    next_article = query.where('hotness < ?', hotness).first
-    if next_article.nil?
-      next_article = query.where('hotness > ?', hotness).first
+    next_articles = query.where('hotness < ?', hotness)[0..count-1]
+    if next_articles.nil?
+      next_articles = query.where('hotness > ?', hotness)[0..count-1]
     end
-    next_article
+    next_articles
   end
 
   def time_to_read
@@ -81,6 +88,8 @@ class Article < ActiveRecord::Base
   end
 
   def update_published_articles_count
+    # TODO(mkhatib): Move this operation to a worker?
+    # TODO(mkhatib): Also update the cached number of articles in topics and categories.
     self.user.published_articles_count = self.user.published_articles.count
     self.user.save
   end

@@ -1,7 +1,14 @@
-<div>
-  <div ng-include="'views/partials/_signup_form.html'"></div>
-  <p class="form-info">
-    <a href="/login" class="signup-link">سجل الدخول</a> أو
-    <a href="/accounts/reset_password" class="signup-link">استرجع كلمة المرور</a>
-  </p>
+<div class="container content-container">
+  <div class="row clearfix">
+    <div class="content-wrapper">
+			<div>
+			  <div ng-include="'views/partials/_signup_form.html'"></div>
+			  <p class="form-info">
+			    <a ui-sref="app.login" class="signup-link">سجل الدخول</a> أو
+			    <a ui-sref="app.reset" class="signup-link">استرجع كلمة المرور</a>
+			  </p>
+			</div>
+
+		</div>
+	</div>
 </div>

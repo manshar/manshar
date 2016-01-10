@@ -1,0 +1,45 @@
+<span class="reading-time" ng-hide="article.loading">{{article.reading_time | timeToRead }}</span>
+<div class="title">
+  <a ui-sref="app.articles.show({ articleId: article.id })"
+          analytics-on="click"
+          analytics-event="click"
+          analytics-category="UI"
+          analytics-label="Article in Listing - {{article.title}}"
+          analytics-value="article-{{article.id}}">
+    <h2>{{article.title || 'بدون عنوان'}}</h2>
+    <h3>{{article.tagline}}</h3>
+  </a>
+</div>
+<div class="category-topic" ng-if="article.topic">
+  <a ui-sref="app.categories.topic.articles.list({ categoryId: article.topic.category.id, topicId: article.topic.id, order: order || 'popular'})"
+      analytics-on="click"
+        analytics-event="click"
+        analytics-category="UI"
+        analytics-label="Topic in Article Listing - {{article.topic.title}}"
+        analytics-value="user-{{article.topic.id}}">
+    {{article.topic.title || 'الموضوع غير محدد'}}
+  </a>
+</div>
+
+<div class="section-title article-action" ng-show="article.user.id == user.id">
+  <a class="action-button" ng-click="deleteArticle(article, articles)" ng-if="article.id" ng-disabled="inProgress" ng-class="{'in-progress': inProgress == 'delete'}">
+    <i class="circle-icon grey fa fa-trash-o"></i>
+  </a>
+  <a ng-click="editArticle(article.id)" class="action-button">
+    <i class="circle-icon grey fa fa-pencil"></i>
+  </a>
+</div>
+
+<div class="meta-data">
+  <p><a ng-hide="article.loading"
+          ui-sref="app.publishers.profile.user.published({ userId: article.user.id })"
+          analytics-on="click"
+          analytics-event="click"
+          analytics-category="UI"
+          analytics-label="User in Article Listing - {{article.user.name}}"
+          analytics-value="user-{{article.user.id}}">
+            {{article.user.name}}
+        </a></p>
+  <p ng-if="article.published">{{article.published_at | date:'EEEE, d MMMM'}}</p>
+  <p ng-if="!article.published">{{article.updated_at | date:'EEEE, d MMMM'}}</p>
+</div>

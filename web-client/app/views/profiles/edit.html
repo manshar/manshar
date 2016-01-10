@@ -1,13 +1,28 @@
-<div class="form-div">
-  <div ng-include="'views/partials/_form_header.html'"></div>
-  <div class="form-errors" ng-show="error">
-    <ul>
-      <li ng-repeat="(key, data) in errorMessages">{{key}} {{data}}</li>
-    </ul>
-  </div>
-  <form id="signup-form" name="signupForm" ng-submit="updateUserData(profile)">
-    <div ng-include="'views/partials/_user_form.html'"></div>
+<div class="container content-container"> <!-- 700px centered -->
+  <div class="row clearfix">
+    <div class="content-wrapper">
+      <div class="form-div">
+        <div class="write-box text-dark">
+          <p> تعديل الحساب الشخصي </p>
+        </div>
+        <div class="form-errors" ng-show="error">
+          <ul>
+            <li ng-repeat="(key, data) in errorMessages">{{key}} {{data}}</li>
+          </ul>
+        </div>
+        <form id="signup-form" name="signupForm" ng-submit="updateUserData(profile)">
+          <div ng-include="'views/partials/_user_form.html'"></div>
 
-    <button type="submit">حفظ التعديلات</button>
-  </form>
+          <h3 class="section-title action-button text-small">
+            <a ng-click="updateUserData(profile)">
+              <i class="circle-icon fa fa-floppy-o"></i>
+              <span>
+                حفظ التعديلات
+              </span>
+            </a>
+          </h3>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

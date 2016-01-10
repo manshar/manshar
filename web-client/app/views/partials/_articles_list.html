@@ -1,50 +1,14 @@
-<ul class="cards-list-container one-column card-list">
-  <li ng-repeat="article in articles" class="card" ng-class="{'loading': article.loading, 'blinking': article.loading}">
-    <div class="article-details article-card" style="border-left: 4em solid {{getCardColor(article.topic.category.color)}}">
-      <div class="header tray">
-        <div class="title">
-          <a ng-href="{{ article.loading ? '#' : ('/articles/' + article.id) }}"
-              analytics-on="click"
-              analytics-event="click"
-              analytics-category="UI"
-              analytics-label="Article in Main Page - {{article.title}}"
-              analytics-value="article-{{article.id}}">
-            <h1>{{article.title}}</h1>
-            <h2>{{article.tagline}}</h2>
-          </a>
-          <div class="meta-data">
-            <div class="date">
-              {{article.published_at | date:'EEEE, d MMMM'}}
-            </div>
-            <a ng-hide="article.loading" ng-href="/profiles/{{article.user.id}}"
-              analytics-on="click"
-              analytics-event="click"
-              analytics-category="UI"
-              analytics-label="User in Main Page - {{article.user.name}}"
-              analytics-value="user-{{article.user.id}}">
-                {{article.user.name}}
-            </a>
-            <div class="category-topic" ng-show="article.topic.title" style="background-color: {{getCardColor(article.topic.category.color)}};">
-              <a ng-href="/categories/{{article.topic.category.id}}/topics/{{article.topic.id}}">
-                {{article.topic.title}}
-              </a>
-            </div>
-          </div>
-          <span class="reading-time" ng-hide="article.loading"> {{article.reading_time | timeToRead }} </span>
-          <div class="stats-box">
-            <span ng-show="article.recommendations_count">
-              <i class="fa fa-thumbs-o-up"></i> {{article.recommendations_count}}
-            </span>
-            <span ng-show="article.comments_count">
-              <i class="fa fa-comment-o"></i> {{article.comments_count}}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
-  <button class="load-more-button" ng-click="loadMoreArticles()" ng-disabled="inProgress == 'load-more'" ng-show="hasNext">
-    <i class="fa fa-refresh"></i>
-    <span>المزيد من المقالات</span>
-  </button>
-</ul>
+<div class="articles">
+  <div class="article" ng-hide="{{articles[0]}}">
+    <h3>لا يوجد مقالات.</h3>
+    <h4>
+      <a href="/">تصفح أشهر المقالات</a>
+    </h4>
+  </div>
+  <div ng-repeat="article in articles"
+    class="article"
+    ng-class="{'loading': article.loading, 'blinking': article.loading}"
+    style="border-right: 1px solid {{article.topic.category.color}}">
+    <div ng-include="'views/partials/_article_item.html'"></div>
+  </div>
+</div>

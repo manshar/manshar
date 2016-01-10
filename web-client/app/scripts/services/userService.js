@@ -11,12 +11,12 @@ angular.module('webClientApp')
   .service('User', ['$rootScope', '$resource', '$http', '$cacheFactory', 'API_HOST',
       function ($rootScope, $resource, $http, $cacheFactory, API_HOST) {
 
-      var $httpDefaultCache = $cacheFactory.get('$http');
+      var usersCache = $cacheFactory('users');
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserResource = $resource(baseUrl + 'users/:userId', {}, {
         update: {method: 'PUT'},
-        get: {cache: true},
-        query: {cache: true, isArray: true}
+        get: {cache: usersCache},
+        query: {cache: usersCache, isArray: true}
       });
 
 
@@ -51,7 +51,7 @@ angular.module('webClientApp')
 
             // Success.
             angular.bind(this, function(response) {
-              $httpDefaultCache.put(url, response.data);
+              usersCache.removeAll();
               if (optSuccess) {
                 optSuccess(response.data);
               }
@@ -74,13 +74,14 @@ angular.module('webClientApp')
    * @param  {string} API_HOST Manshar API host.
    * @return {!angular.Service} Angualr service definition.
    */
-  .service('UserDraft', ['$resource', 'API_HOST',
-      function ($resource, API_HOST) {
+  .service('UserDraft', ['$resource', '$cacheFactory', 'API_HOST',
+      function ($resource, $cacheFactory, API_HOST) {
 
+      var articlesCache = (
+          $cacheFactory.get('articles') || $cacheFactory('articles'));
       var baseUrl = '//' + API_HOST + '/api/v1/';
       var UserDraftResource = $resource(baseUrl + 'me/drafts', {}, {
-        get: {cache: true},
-        query: {cache: true, isArray: true}
+        query: {cache: articlesCache, isArray: true}
       });
 
       return {

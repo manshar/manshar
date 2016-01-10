@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def drafts
-    articles.drafts.recents
+    articles.drafts.recently_updated
   end
 
   def admin

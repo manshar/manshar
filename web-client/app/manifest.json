@@ -5,15 +5,23 @@
   "icons": [
     {
       "src": "images/manshar@48x48.png",
-      "sizes": "48x48"
+      "sizes": "48x48",
+      "type": "image/png"
     },
     {
       "src": "images/manshar@96x96.png",
-      "sizes": "96x96"
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "images/manshar@144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
     },
     {
       "src": "images/manshar@192x192.png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "type": "image/png"
     }
   ],
   "theme_color": "#CA1B03",

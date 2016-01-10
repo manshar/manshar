@@ -1,69 +1,32 @@
-<div class="category-page">
-  <style type="text/css">
-    .category-page {
-      min-height: 100%;
-    }
+<div class="container content-container">
+  <div class="row clearfix">
+    <div class="content-wrapper">
+      <div class="write-box">
+        <a ng-click="createNewArticle()">
+          <p> عبر عن رأيك. شارك خبراتك. اكتب عن تجاربك. دوّن بالعربية.</p>
+          <p> اضغط هنا لتبدأ الكتابة... </p>
+        </a>
+      </div>
 
-    .category-page,
-    .category-page .cards-list-container,
-    .category-page .main-header {
-      background-color: {{topic.category.color}};
-    }
+      <div class="category-info">
+        <h3 class="section-title">
+          <a ui-sref="app.categories.articles.list({categoryId: topic.category.id, order: order || 'popular'})" title="{{topic.category.title}}">
+            <i class="circle-icon fa {{topic.category.icon_cssclass}}" style="background-color:{{topic.category.color}}"></i>
+          </a>
+          {{topic.title}}
+        </h3>
 
-    .category-page .card {
-      color: {{topic.category.color}} !important;
-    }
-
-    .category-page .card.topic:hover {
-      background-color: {{topic.category.color|darker:-0.2}} !important;
-      color: #fff !important;
-    }
-
-    .category-page .card.topic {
-      width: auto;
-    }
-
-    .category-page .card .category-topic {
-      display: none;
-    }
-
-    .category-page .write-new-button {
-      background-color: {{topic.category.color|darker:-0.2}};
-    }
-
-    .category-page .write-new-button:hover {
-      background-color: {{topic.category.color|darker:-0.4}};
-    }
-
-    .category-page .card-list .article-card {
-      border-left: 4em solid {{topic.category.color|darker:-0.4}};
-    }
-
-    .category-page .card-list .article-card .category-topic {
-      background-color: {{topic.category.color|darker:-0.4}};
-    }
-  </style>
-  <header class="main-header">
-    <div class="hero-unit tray">
-      <h1>{{topic.title}}</h1>
-      <p class="manshar-tagline topics card-list">
-        <span>في</span>
-        <a class="card topic" ng-href="/categories/{{topic.category.id}}">
-          <i class="fa {{topic.category.icon_cssclass}}"></i>
+        <a class="section-title section-subtitle"
+            ui-sref="app.categories.articles.list({categoryId: topic.category.id, order: order || 'popular'})">
+          <i class="circle-icon fa fa-arrow-right" style="background-color:{{topic.category.color}}"></i>
           {{topic.category.title}}
         </a>
-      </p>
-    </div>
-    <div class="category-nav-actions" ng-class="{'move-up': forceBar && moveUp}">
-      <a ng-click="showCategoriesPicker()">
-        <i class="fa fa-th-large"></i>
-      </a>
-    </div>
-    <a href="/articles/new" class="write-new-button">
-      <i class="fa fa-pencil"></i>
-      اكتب مقال جديد
-    </a>
-  </header>
+      </div>
 
-  <div ng-include="'views/partials/_articles_list.html'"></div>
-</div>
+      <div ng-include="'views/partials/_articles_order_tabs.html'"></div>
+
+      <div ui-view class="tabs-content"></div>
+
+    </div> <!-- .content-wrapper -->
+  </div> <!-- row -->
+</div> <!-- content-container -->

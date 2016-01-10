@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ResetPasswordController', ['$scope', '$location', '$window', '$analytics', '$auth',
-      function ($scope, $location, $window, $analytics, $auth) {
+  .controller('ResetPasswordController', ['$scope', '$window', '$analytics', '$auth',
+      function ($scope, $window, $analytics, $auth) {
 
     $scope.error = null;
     $scope.userForm = {};

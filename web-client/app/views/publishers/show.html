@@ -1,0 +1,18 @@
+<div class="container content-container">
+  <div class="row clearfix">
+    <div class="content-wrapper publishers-page">
+    	<div class="write-box">
+        <a ui-sref="app.articles.new">
+        	<p> عبر عن رأيك. شارك خبراتك. اكتب عن تجاربك. دوّن بالعربية.</p>
+        	<p> اضغط هنا لتبدأ الكتابة... </p>
+        </a>
+      </div>
+
+      <div class="authors-section section" ng-include="'views/partials/_suggested_authors.html'"></div>
+
+      <load-more-data state="currentState" append-to="publishers"></load-more-data>
+
+    </div>
+  </div>
+</div>
+</div>
