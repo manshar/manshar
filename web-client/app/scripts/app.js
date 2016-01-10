@@ -403,7 +403,6 @@ angular.module('webClientApp', [
           }
         }
       });
-      $urlRouterProvider.otherwise('/');
   }])
   .factory('unAuthenticatedInterceptor', ['$location', '$q', '$rootScope',
       function ($location, $q, $rootScope) {
