@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('LoginCtrl', ['$scope', '$http', '$location', '$stateParams', '$analytics', 'LoginService', 'SignupService',
-      function ($scope, $http, $location, $stateParams, $analytics, LoginService, SignupService) {
+  .controller('LoginCtrl', ['$scope', '$http', '$location', '$state', '$stateParams', '$analytics', 'LoginService', 'SignupService',
+      function ($scope, $http, $location, $state, $stateParams, $analytics, LoginService, SignupService) {
 
     $scope.isLoginPage = $location.path() === '/login/';
     $scope.error = null;
@@ -23,11 +23,10 @@ angular.module('webClientApp')
       $analytics.eventTrack('Login Success', {
         category: 'User'
       });
-      console.log('$location.path()', $location.path());
       if ($scope.isLoginPage) {
-        $location.path($stateParams.prev || '/profiles/' + user.id)
-          // Remove the prev param when redirecting.
-          .search('prev', null);
+        $state.go('app.publishers.profile.user.published', {
+          userId: user.id
+        });
       }
     };
 

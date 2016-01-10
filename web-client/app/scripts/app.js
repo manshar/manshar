@@ -293,7 +293,7 @@ angular.module('webClientApp', [
       })
       .state('app.categories.topic', {})
       .state('app.categories.topic.articles', {
-        url: 'topics/:topicId/',
+        url: 'topics/:topicId/articles/',
         abstract: true,
         views: {
           'content@': {
@@ -401,7 +401,36 @@ angular.module('webClientApp', [
             controller: 'ManageCategoriesCtrl'
           }
         }
-      });
+      })
+      .state('app.redirects', {})
+      .state('app.redirects.profiles', {
+        url: 'profiles/:userId/',
+        onEnter: function ($state, $stateParams) {
+          $state.transitionTo('app.publishers.profile.user.published', {
+            userId: $stateParams.userId
+          });
+        }
+      })
+      .state('app.redirects.categories', {
+        url: 'categories/:categoryId/',
+        onEnter: function ($state, $stateParams) {
+          $state.transitionTo('app.categories.articles.list', {
+            categoryId: $stateParams.categoryId,
+            order: 'popular'
+          });
+        }
+      })
+      .state('app.redirects.topics', {
+        url: 'categories/:categoryId/topics/:topicId/',
+        onEnter: function ($state, $stateParams) {
+          $state.transitionTo('app.categories.topic.articles.list', {
+            categoryId: $stateParams.categoryId,
+            topicId: $stateParams.topicId,
+            order: 'popular'
+          });
+        }
+      })
+      ;
   }])
   .factory('unAuthenticatedInterceptor', ['$location', '$q', '$rootScope',
       function ($location, $q, $rootScope) {
