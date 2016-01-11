@@ -86,6 +86,16 @@ angular.module('webClientApp')
             }
           }, 100);
         };
+
+        scope.clickedOnMenuItem = function() {
+          $timeout(function() {
+            if(document.body.clientWidth < 1100 &&
+               scope.menuStatus === 'opened') {
+              $rootScope.pushAside = false;
+              scope.menuStatus = 'closed';
+            }
+          }, 100);
+        };
       },
       templateUrl: 'views/directives/sideMenu.html'
     };

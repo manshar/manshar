@@ -5,7 +5,7 @@
   <img ng-if="thumbnail" ng-src="{{thumbnail}}">
 </div>
 
-<div class="menu-wrapper" click-outside="clickedOutsideMenu()">
+<div class="menu-wrapper" click-outside="clickedOutsideMenu()" ng-click="clickedOnMenuItem()">
   <ul class="user-menu with-border" ng-switch on="!!user.id">
     <li>
       <a ng-switch-when="true" ui-sref="app.publishers.profile.user.published({ userId: user.id })">
