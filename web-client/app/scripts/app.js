@@ -84,15 +84,16 @@ angular.module('webClientApp', [
         resolve: {
           user: ['$rootScope', '$auth', function($rootScope, $auth) {
             return $auth.validateUser().then(function(user) {
+              console.log('validate user', user);
               return user;
             }).catch(function() {
             });
           }],
           article: ['Article', '$stateParams', '$state', 'user', function(Article, $stateParams, $state, user) {
             return Article.get({'articleId': $stateParams.articleId}, function(article) {
-              if (article.body) {
+              if (article && article.body) {
                 $state.go('app.articles.show', { articleId: article.id });
-              } else if(user.id === article.user.id) {
+              } else if(parseInt(user.id) === parseInt(article.user.id)) {
                 return article;
               } else {
                 $state.go('app.articles.show', {articleId: article.id});
