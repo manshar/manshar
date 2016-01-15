@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', 'profile', 'articles', 'publishers', 'Article', '$state', '$stateParams','$analytics', '$anchorScroll','$window',
-    function ($scope, $rootScope, profile, articles, publishers, Article, $state, $stateParams, $analytics, $anchorScroll, $window) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', 'profile', 'articles', 'publishers', 'Article', '$state', '$stateParams','$analytics', '$anchorScroll',
+    function ($scope, $rootScope, profile, articles, publishers, Article, $state, $stateParams, $analytics, $anchorScroll) {
     $anchorScroll();
 
     $rootScope.page.title = profile.name;
@@ -38,6 +38,9 @@ angular.module('webClientApp')
       $analytics.eventTrack('Article Deleted', {
         category: 'Article'
       });
+
+      swal('تم الحذف!', 'تم حذف مقالك.', 'success');
+
       $scope.inProgress = null;
     };
 
@@ -57,13 +60,27 @@ angular.module('webClientApp')
      */
     $scope.deleteArticle = function(article, fromList) {
       $scope.inProgress = 'delete';
-      if ($window.confirm('متأكد من حذف المقال؟')) {
-        Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
-        var index = fromList.indexOf(article);
-        fromList.splice(index, 1);
-      } else {
-        $scope.inProgress = null;
-      }
+      swal({
+        title: 'متأكد من حذف المقال؟',
+        text: 'لن تستطيع استعادة المقال بعد الحذف.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'نعم متأكد وأريد حذف المقال.',
+        cancelButtonText: 'لا، الغ الحذف.',
+        closeOnConfirm: false,
+        closeOnCancel: false },
+      function(isConfirm){
+        if (isConfirm) {
+          Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
+          var index = fromList.indexOf(article);
+          fromList.splice(index, 1);
+        } else {
+          $scope.inProgress = null;
+          swal('تم الغاء الحذف', 'مقالك بأمان :)', 'error');
+        }
+      });
+      console.log('swal', swal);
     };
 
     $scope.getCardColor = function(color) {

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .directive('categoryTopicPicker', ['$rootScope', '$window', '$location', 'Category', 'Topic',
-      function ($rootScope, $window, $location, Category, Topic) {
+  .directive('categoryTopicPicker', ['$rootScope', '$location', 'Category', 'Topic',
+      function ($rootScope, $location, Category, Topic) {
 
     return {
       restrict: 'A',
@@ -41,7 +41,7 @@ angular.module('webClientApp')
         };
 
         var createTopicError = function() {
-          $window.alert('حدث خطأ ما، الرجاء المحاولة مرة أخرى.');
+          swal('حدث خطأ ما', 'الرجاء المحاولة مرة ثانية', 'error');
         };
 
         scope.saveTopic = function(topic) {
@@ -52,7 +52,7 @@ angular.module('webClientApp')
             }, createTopicSuccess, createTopicError);
           }
           else {
-            $window.alert('موضوع المقال لا يجب ان يتعدى ثلاث كلمات');
+            swal('موضوع المقال لا يجب ان يتعدى ثلاث كلمات', 'الرجاء تعديل الموضوع','error');
           }
         };
 

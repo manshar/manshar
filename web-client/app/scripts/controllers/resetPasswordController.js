@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('ResetPasswordController', ['$scope', '$window', '$analytics', '$auth',
-      function ($scope, $window, $analytics, $auth) {
+  .controller('ResetPasswordController', ['$scope', '$analytics', '$auth',
+      function ($scope, $analytics, $auth) {
 
     $scope.error = null;
     $scope.userForm = {};
@@ -15,7 +15,7 @@ angular.module('webClientApp')
       $analytics.eventTrack('Password Reset Success', {
         category: 'User'
       });
-      $window.alert('تم إرسال تعليمات استرجاع كلمة المرور إلى بريدك الإلكتروني.');
+      swal('تم الإرسال!', 'تم إرسال تعليمات استرجاع كلمة المرور إلى بريدك الإلكتروني.', 'success');
     };
 
     var resetError = function(response) {

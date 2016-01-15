@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webClientApp')
-  .controller('UpdatePasswordController', ['$rootScope', '$scope', '$location', '$window', '$analytics', '$auth',
-      function ($rootScope, $scope, $location, $window, $analytics, $auth) {
+  .controller('UpdatePasswordController', ['$rootScope', '$scope', '$state', '$analytics', '$auth',
+      function ($rootScope, $scope, $state, $analytics, $auth) {
 
     $scope.error = null;
     $scope.userForm = {};
@@ -12,7 +12,7 @@ angular.module('webClientApp')
     });
 
     $rootScope.$on('auth:password-reset-confirm-error', function() {
-      $window.alert('Unable to verify your account. Please try again.');
+      swal('حدث خطأ!', 'لم يمكننا التحقق من حسابك. الرجاء المحاولة مرة أخرى.', 'error');
     });
 
     $scope.update = function(userForm) {
@@ -23,8 +23,8 @@ angular.module('webClientApp')
       $analytics.eventTrack('Password Update Success', {
         category: 'User'
       });
-      $window.alert('تم تحديث كلمة المرور بنجاح. سيتم إرسالك إلى صفحة تسجيل الدخول.');
-      $location.path('/login');
+      swal('تم التحديث!', 'تم تحديث كلمة المرور بنجاح. سيتم إرسالك إلى صفحة تسجيل الدخول.', 'success');
+      $state.go('app.login');
     };
 
     var updateError = function(response) {

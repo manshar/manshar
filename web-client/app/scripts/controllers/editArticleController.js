@@ -2,11 +2,11 @@
 /* jshint camelcase: false */
 
 angular.module('webClientApp')
-  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$stateParams', '$state', '$analytics', '$window', '$interval', '$timeout', '$anchorScroll', 'Article', 'article',
-      function ($rootScope, $scope, $stateParams, $state, $analytics, $window, $interval, $timeout, $anchorScroll, Article, article) {
+  .controller('EditArticleCtrl', ['$rootScope', '$scope', '$stateParams', '$state', '$analytics', '$interval', '$timeout', '$anchorScroll', 'Article', 'article',
+      function ($rootScope, $scope, $stateParams, $state, $analytics, $interval, $timeout, $anchorScroll, Article, article) {
 
-    var confirmEditMessage = ('هذه العملية ستنقل المقال إلى مسوداتك. يمكنك' +
-        ' نشرها مجدداً بالضغط على نشر. هل تود نقل المقال للمسودات؟');
+    var confirmEditMessage = ('عملية تعديل المقال تنقل المقال إلى مسوداتك. يمكنك' +
+        ' نشرها مجدداً بالضغط على نشر.');
 
     var lastSavedArticle = {};
     // Load the article if we are editing.
@@ -37,11 +37,22 @@ angular.module('webClientApp')
     // they publish it again.
     $timeout(function () {
       if (article.published) {
-        if (!$window.confirm(confirmEditMessage)) {
-          $state.go('app.articles.show', {articleId: article.id});
-        } else {
-          $scope.article.published = false;
-        }
+        swal({
+          title: 'متأكد من نقل المقال الى المسودات؟',
+          text: confirmEditMessage,
+          type: 'info',
+          showCancelButton: true,
+          confirmButtonText: 'نعم متأكد.',
+          cancelButtonText: 'لا، الغ التعديل.',
+          closeOnConfirm: true,
+          closeOnCancel: true },
+        function(isConfirm){
+          if (!isConfirm) {
+            $state.go('app.articles.show', {articleId: article.id});
+          } else {
+            $scope.article.published = false;
+          }
+        });
       }
       $anchorScroll();
     });
@@ -89,6 +100,9 @@ angular.module('webClientApp')
       $analytics.eventTrack('Article Deleted', {
         category: 'Article'
       });
+
+      swal('تم الحذف!', 'تم حذف مقالك.', 'success');
+
       $state.go('app.publishers.profile.user.published', {userId: $rootScope.user.id});
     };
 
@@ -136,11 +150,25 @@ angular.module('webClientApp')
      */
     $scope.deleteArticle = function(article) {
       $scope.inProgress = 'delete';
-      if ($window.confirm('متأكد من حذف المقال؟')) {
-        Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
-      } else {
-        $scope.inProgress = null;
-      }
+
+      swal({
+        title: 'متأكد من حذف المقال؟',
+        text: 'لن تستطيع استعادة المقال بعد الحذف.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'نعم متأكد وأريد حذف المقال.',
+        cancelButtonText: 'لا، الغ الحذف.',
+        closeOnConfirm: false,
+        closeOnCancel: false },
+      function(isConfirm){
+        if (isConfirm) {
+          Article.delete({ 'articleId': article.id }, {}, deleteSuccess, deleteError);
+        } else {
+          $scope.inProgress = null;
+          swal('تم الغاء الحذف', 'مقالك بأمان :)', 'error');
+        }
+      });
     };
 
     /**

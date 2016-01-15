@@ -29,7 +29,7 @@ angular.module('webClientApp')
       var emailInUseMsg = 'This email address is already in use';
       var message = (
           response.errors && response.errors[0] ||
-          response.errors.full_messages && response.errors.full_messages[0] || '');
+          response.errors && response.errors.full_messages && response.errors.full_messages[0] || '');
       if (message.indexOf(emailInUseMsg) !== -1) {
         $scope.error = 'هذا الإيميل مستخدم من قبل، الرجاء تسجيل الدخول.';
       } else {

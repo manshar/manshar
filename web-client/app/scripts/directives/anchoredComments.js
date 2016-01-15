@@ -15,8 +15,8 @@ angular.module('webClientApp')
    * @param  {ArticleComment} ArticleComment Manshar's article comments service.
    * @return {!angular.Directive} Angular directive description.
    */
-  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', '$window', '$filter', '$analytics', 'ArticleComment',
-      function ($rootScope, $compile, $timeout, $window, $filter, $analytics, ArticleComment) {
+  .directive('anchoredComments', ['$rootScope', '$compile', '$timeout', '$filter', '$analytics', 'ArticleComment',
+      function ($rootScope, $compile, $timeout, $filter, $analytics, ArticleComment) {
 
     var COMMENT_HIGHLIGHT_CLASS = 'comment-highlighted';
     var ANCHORS_ACTIVE = 'anchored-comments-active';
@@ -265,8 +265,7 @@ angular.module('webClientApp')
               scope.activeComments = getActiveComments();
             });
           }, function (error) {
-            $window.alert('حدث خطأ ما. الرجاء المحاولة مجدداً');
-            console.log(error);
+            swal('حدث خطأ ما', 'الرجاء المحاولة مرة ثانية', 'error');
           });
         };
 
