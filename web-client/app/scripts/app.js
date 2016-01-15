@@ -24,8 +24,22 @@ angular.module('webClientApp', [
   /**
    * Routing.
    */
-  .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
-      function ($stateProvider, $locationProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlMatcherFactoryProvider','$locationProvider', '$urlRouterProvider',
+      function ($stateProvider, $urlMatcherFactoryProvider, $locationProvider, $urlRouterProvider) {
+    // Make a trailing slash optional
+    $urlMatcherFactoryProvider.strictMode(false);
+    $urlRouterProvider.rule(function ($injector, $location) {
+      var path = $location.url();
+      // check to see if the path already has a slash where it should be
+      if (path[path.length - 1] === '/' || path.indexOf('/?') > -1) {
+          return;
+      }
+      if (path.indexOf('?') > -1) {
+          return path.replace('?', '/?');
+      }
+      return path + '/';
+    });
+
     // Set the default route to to to .popular child state
     $urlRouterProvider.when('/', 'articles/list/popular/');
     $stateProvider
