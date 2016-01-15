@@ -43,7 +43,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.articles.list', {
-        url: 'list/:order/',
+        url: 'list/:order/?',
         templateUrl: 'views/partials/_stream.html',
         controller: 'StreamCtrl',
         resolve: {
@@ -53,7 +53,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.articles.show', {
-        url: ':articleId/',
+        url: ':articleId/?',
         views: {
           'content@': {
             templateUrl: 'views/articles/show.html',
@@ -74,7 +74,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.articles.edit', {
-        url: ':articleId/edit/',
+        url: ':articleId/edit/?',
         views: {
           'content@': {
             templateUrl: 'views/articles/edit.html',
@@ -102,7 +102,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.login', {
-        url: 'login/',
+        url: 'login/?',
         views: {
         'content@': {
             templateUrl: 'views/login.html',
@@ -122,7 +122,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.publishers', {
-        url: 'publishers/',
+        url: 'publishers/?',
         views: {
           'content@': {
             templateUrl: 'views/publishers/show.html',
@@ -146,7 +146,7 @@ angular.module('webClientApp', [
         },
       })
       .state('app.publishers.profile.user', {
-        url: ':userId/',
+        url: ':userId/?',
         templateUrl: 'views/profiles/body.html',
         controller: 'ProfileCtrl',
         resolve: {
@@ -177,7 +177,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.publishers.profile.user.edit', {
-        url: 'edit/',
+        url: 'edit/?',
         views: {
           'content@': {
             templateUrl: 'views/profiles/edit.html',
@@ -199,12 +199,12 @@ angular.module('webClientApp', [
         }
       })
       .state('app.publishers.profile.user.published', {
-        url: 'published/',
+        url: 'published/?',
         templateUrl: 'views/profiles/stream.html',
         controller: 'ProfileCtrl'
       })
       .state('app.publishers.profile.user.drafts', {
-        url: 'drafts/',
+        url: 'drafts/?',
         templateUrl: 'views/profiles/stream.html',
         controller: 'DraftCtrl',
         resolve: {
@@ -219,7 +219,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.publishers.profile.user.stats', {
-        url: 'stats/',
+        url: 'stats/?',
         templateUrl: 'views/profiles/stats.html',
         controller: 'StatCtrl',
         resolve: {
@@ -233,7 +233,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.publishers.profile.user.recommended', {
-        url: 'recommended/',
+        url: 'recommended/?',
         templateUrl: 'views/profiles/stream.html',
         controller: 'RecommendationCtrl',
         resolve: {
@@ -243,7 +243,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.publishers.profile.user.discussions', {
-        url: 'discussions/',
+        url: 'discussions/?',
         templateUrl: 'views/profiles/stream.html',
         controller: 'DiscussionCtrl',
         resolve: {
@@ -279,7 +279,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.categories.articles.list', {
-        url: ':order/',
+        url: ':order/?',
         templateUrl: 'views/partials/_stream.html',
         controller: 'StreamCtrl',
         resolve: {
@@ -315,7 +315,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.categories.topic.articles.list', {
-        url: ':order/',
+        url: ':order/?',
         templateUrl: 'views/partials/_stream.html',
         controller: 'StreamCtrl',
         resolve: {
@@ -333,7 +333,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.signup', {
-        url: 'signup/',
+        url: 'signup/?',
         views: {
         'content@': {
             templateUrl: 'views/signup.html',
@@ -353,7 +353,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.reset', {
-        url: 'accounts/reset_password/',
+        url: 'accounts/reset_password/?',
         views: {
         'content@': {
             templateUrl: 'views/accounts/reset_password.html',
@@ -373,7 +373,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.admin', {
-        url: 'admin/',
+        url: 'admin/?',
         views: {
         'content@': {
             templateUrl: 'views/admin/dashboard.html'
@@ -394,7 +394,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.admin.categories', {
-        url: 'manage/categories/',
+        url: 'manage/categories/?',
         views: {
         'content@': {
             templateUrl: 'views/admin/manage/categories.html',
@@ -404,7 +404,7 @@ angular.module('webClientApp', [
       })
       .state('app.redirects', {})
       .state('app.redirects.profiles', {
-        url: 'profiles/:userId/',
+        url: 'profiles/:userId/?',
         onEnter: function ($state, $stateParams) {
           $state.transitionTo('app.publishers.profile.user.published', {
             userId: $stateParams.userId
@@ -412,7 +412,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.redirects.categories', {
-        url: 'categories/:categoryId/',
+        url: 'categories/:categoryId/?',
         onEnter: function ($state, $stateParams) {
           $state.transitionTo('app.categories.articles.list', {
             categoryId: $stateParams.categoryId,
@@ -421,7 +421,7 @@ angular.module('webClientApp', [
         }
       })
       .state('app.redirects.topics', {
-        url: 'categories/:categoryId/topics/:topicId/',
+        url: 'categories/:categoryId/topics/:topicId/?',
         onEnter: function ($state, $stateParams) {
           $state.transitionTo('app.categories.topic.articles.list', {
             categoryId: $stateParams.categoryId,
