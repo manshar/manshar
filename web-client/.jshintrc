@@ -29,6 +29,7 @@
     "Response": false,
     "Request": false,
     "toolbox": false,
-    "caches": false
+    "caches": false,
+    "swal": false
   }
 }

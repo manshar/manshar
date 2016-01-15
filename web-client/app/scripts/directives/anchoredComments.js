@@ -264,7 +264,7 @@ angular.module('webClientApp')
               scope.comments.splice(index, 1);
               scope.activeComments = getActiveComments();
             });
-          }, function (error) {
+          }, function () {
             swal('حدث خطأ ما', 'الرجاء المحاولة مرة ثانية', 'error');
           });
         };
