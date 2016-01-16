@@ -604,7 +604,14 @@ angular.module('webClientApp', [
 
     $rootScope.$on('$stateChangeSuccess', function() {
       $timeout(function() {
-        ga('send', 'pageview', {'page': $location.path()});
+        var path = $location.path();
+        if (path[path.length - 1] === '/' || path.indexOf('/?') > -1) {
+        } else if (path.indexOf('?') > -1) {
+          path = path.replace('?', '/?');
+        } else {
+          path = path + '/';
+        }
+        ga('send', 'pageview', {'page': path});
       }, 200);
     });
 
