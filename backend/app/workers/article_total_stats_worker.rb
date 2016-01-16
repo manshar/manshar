@@ -34,7 +34,7 @@ class ArticleTotalStatsWorker
       'end-date' => DateTime.now.strftime("%Y-%m-%d"),
       'dimensions' => 'ga:pagePath',
       'metrics' => 'ga:uniquePageviews,ga:timeOnPage',
-      'filters' => 'ga:pagePath=~^/articles/\d+/?$;ga:hostname==www.manshar.com',
+      'filters' => 'ga:pagePath=~^/articles/\d+$,ga:pagePath=~^/articles/\d+/$',
       'start-index' => start_index,
       'sort' => '-ga:timeOnPage'
     })
