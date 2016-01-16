@@ -16,6 +16,8 @@ angular.module('webClientApp')
         category: 'User'
       });
 
+      fbq('track', 'CompleteRegistration');
+
       $scope.flash = 'تم إرسال رسالة إلى بريدك الإلكتروني لتفعيل حسابك.';
       $scope.flashNote = '(تأكد من مجلد السبام)';
     };

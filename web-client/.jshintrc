@@ -30,6 +30,7 @@
     "Request": false,
     "toolbox": false,
     "caches": false,
-    "swal": false
+    "swal": false,
+    "fbq": false
   }
 }
