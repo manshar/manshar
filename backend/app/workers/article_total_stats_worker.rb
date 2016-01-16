@@ -36,24 +36,33 @@ class ArticleTotalStatsWorker
       'metrics' => 'ga:uniquePageviews,ga:timeOnPage',
       'filters' => 'ga:pagePath=~^/articles/\d+$,ga:pagePath=~^/articles/\d+/$',
       'start-index' => start_index,
-      'sort' => '-ga:timeOnPage'
+      'sort' => '-ga:pagePath'
     })
 
     response = Oj.load(query_data.body)
     rows_count = [response['itemsPerPage'], response['totalResults']].min
 
     puts 'Loop over response rows'
-    for row in response['rows']
+    rows = response['rows']
+    stat_map = rows.group_by do |row|
       match = row[0].match(/\/articles\/(\d+)/)
-      if not match
-        puts row
+      if match
+        return match ? match[1].to_i : nil
       end
-      article_id = match ? match[1].to_i : nil
-      unique_pageviews = row[1].to_i
-      time_on_page = row[2].to_i
+    end
+    stat_map.each do |article_id, records|
+      if article_id.nil?
+        next
+      end
+      unique_pageviews = 0
+      time_on_page = 0
+      for row in records
+        unique_pageviews += row[1].to_i
+        time_on_page += row[2].to_i
+      end
 
       puts "Updating stats for article with ID #{article_id}..."
-      article = Article.find_by_id(article_id)
+      article = Article.find_by_id(article_id.to_i)
       if article and article.published
         puts "Found article with #{article_id}..."
         title = article.title
