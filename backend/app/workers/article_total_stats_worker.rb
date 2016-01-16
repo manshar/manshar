@@ -25,7 +25,7 @@ class ArticleTotalStatsWorker
   @@analytics = @@client.discovered_api('analytics', 'v3')
 
   def perform(start_index=1)
-    puts 'Articles stats worker starting...'
+    puts "Articles stats worker starting at index #{start_index}..."
 
     # Query Analytics API  to retrieve Unique Page Views and Time on Page
     query_data = @@client.execute(:api_method => @@analytics.data.ga.get, :parameters => {
@@ -36,21 +36,23 @@ class ArticleTotalStatsWorker
       'metrics' => 'ga:uniquePageviews,ga:timeOnPage',
       'filters' => 'ga:pagePath=~^/articles/\d+$,ga:pagePath=~^/articles/\d+/$',
       'start-index' => start_index,
-      'sort' => '-ga:pagePath'
+      'sort' => 'ga:pagePath'
     })
 
     response = Oj.load(query_data.body)
     rows_count = [response['itemsPerPage'], response['totalResults']].min
 
-    puts 'Loop over response rows'
+    puts "Loop over response rows  #{response['itemsPerPage']} out of #{response['totalResults']}"
     rows = response['rows']
     stat_map = rows.group_by do |row|
       match = row[0].match(/\/articles\/(\d+)/)
       if match
-        return match ? match[1].to_i : nil
+        match ? match[1].to_i : nil
       end
     end
+    puts stat_map.length
     stat_map.each do |article_id, records|
+      puts article_id, records
       if article_id.nil?
         next
       end
@@ -83,7 +85,7 @@ class ArticleTotalStatsWorker
       end
     end
 
-    if rows_count < response['totalResults']
+    if (start_index + rows_count) < response['totalResults']
       puts 'More results available. Spin another worker'
       ArticleTotalStatsWorker.perform_async(start_index+rows_count)
     end
