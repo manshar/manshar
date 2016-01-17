@@ -603,6 +603,14 @@ angular.module('webClientApp', [
     });
 
     $rootScope.$on('$stateChangeSuccess', function() {
+      console.log($state.current.name);
+      if($state.current.name.indexOf('profile') > -1 ||
+        $state.current.name === 'app.articles.show' ||
+        $state.current.name === 'app.articles.edit') {
+        $rootScope.hideLogoText = true;
+      } else {
+        $rootScope.hideLogoText = false;
+      }
       $timeout(function() {
         var path = $location.path();
         if (path[path.length - 1] === '/' || path.indexOf('/?') > -1) {

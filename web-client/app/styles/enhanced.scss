@@ -57,11 +57,12 @@ body {
 
 .logo {
   right: 50%;
-  margin-right: -350px;
-  top: 40px;
+  margin-right: -267px;
+  top: 16px;
 
   span {
     display: inline-table;
+    color: #C81916;
   }
 }
 
@@ -104,9 +105,11 @@ body {
 }
 
 .article-author {
+  padding: 30px 60px 0;
+  min-height: 99px;
   img {
-    right: -100px;
-    width: 99px;
+    right: -50px;
+    width: 100px;
   }
 }
 
@@ -190,7 +193,7 @@ body {
 
 .article-container {
   > .article-meta {
-    margin-right: -352px;
+    margin-right: -368px;
     right: 50%;
   }
 

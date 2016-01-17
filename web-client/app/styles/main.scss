@@ -754,20 +754,33 @@ header {
 .menu-icon {
   position: fixed;
   top: 16px;
-  left: 12px;
+  left: 16px;
   font-size: 18px;
   cursor: pointer;
   z-index: 8;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   transition: left 0.4s;
+  .fa {
+    display: block;
+    height: 32px;
+  }
+  .fa-bars {
+    &::before {
+      vertical-align: middle;
+    }
+  }
   img {
-    width: 26px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 10;
   }
 }
 
 .write-box {
-  padding: 46px 0 30px;
+  padding: 70px 0 12px;
   p {
     padding: 0 15px;
     color: #b3b3b3;
@@ -820,12 +833,11 @@ html[xmlns] .clearfix {
 
 .logo {
   position: absolute;
-  right: 0;
+  right: 16px;
   text-align: left;
   z-index: 999;
-  top: 22px;
+  top: 16px;
   transition: all 0.4s;
-  padding: 6px 0;
   a {
     color: #000;
     font-size: 14px;
@@ -835,17 +847,17 @@ html[xmlns] .clearfix {
   }
   img {
     display: inline;
-    width: 21px;
+    width: 32px;
+    border-radius: 50%;
   }
   span {
     display: none;
     vertical-align: top;
-    margin-right: -4px;
-    font-size: 0.8em;
-    font-size: 14px;
+    margin-right: -7px;
+    font-size: 21px;
   }
   &.push-right {
-    margin-right: -500px;
+    margin-right: -416px;
   }
 }
 
@@ -912,6 +924,10 @@ h1, h2, h3 {
       color: #555;
     }
   }
+}
+
+.article-share {
+  margin-top: 4em;
 }
 
 .article-stats {
@@ -1225,12 +1241,12 @@ h1, h2, h3 {
 
 .single-article {
   &.legacy-article {
-    padding: 2em 1em;
+    padding: 2em;
     text-align: justify;
     position: relative;
 
     blockquote {
-      margin-right: -16px;
+      margin-right: -30px;
     }
 
     .content-wrapper {
@@ -1308,12 +1324,9 @@ h1, h2, h3 {
 }
 
 .article-author {
-  padding: 0 15px;
+  padding: 0 30px;
   position: relative;
-  right: -1px;
   color: #aaa;
-  margin: 40px 0;
-  min-height: 99px;
   h3 {
     font-size: 14px;
     display: inline;
@@ -1324,13 +1337,22 @@ h1, h2, h3 {
   }
   img {
     position: absolute;
-    right: -50px;
+    right: -25px;
     top: 0;
-    width: 49px;
+    width: 50px;
+    border-radius: 50%;
   }
   a {
     color: #222;
   }
+}
+
+.published-meta {
+  margin: -20px -2px 0;
+  padding: 5px;
+  cursor: default;
+  color: #b3b3b3;
+  font-size: 13px;
 }
 
 @media(max-width: 700px) {
@@ -1370,10 +1392,8 @@ h1, h2, h3 {
   }
 
   .logo {
-    margin: 12px 0;
     width: 36px;
     height: 36px;
-    background: #ca1504;
   }
   .logo p {
     display: none;
@@ -1603,7 +1623,7 @@ h1, h2, h3 {
     right: -28px;
     text-align: left;
     z-index: 999;
-    top: 140px;
+    top: 56px;
     padding: 0;
     width: 88px;
   }
@@ -1652,7 +1672,7 @@ h1, h2, h3 {
     /* Margin causes a jump in the container after a translate3d happens
        Use padding instead. */
     section:first-of-type {
-      padding-top: 30px;
+      padding-top: 40px;
       > .layout-staged:first-of-type, > .layout-bleed:first-of-type {
         figure:first-of-type {
           margin-top: -30px;
@@ -1881,7 +1901,7 @@ h1, h2, h3 {
           height: 0;
           position: relative;
           top: -24px;
-          font-size: 2.3em;
+          font-size: 1.8em;
           color: #9a9a9a;
           line-height: 1.5;
         }

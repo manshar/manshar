@@ -60,7 +60,7 @@
         </a>
       </div>
 
-      <div class="article-author" style="border-right: 1px solid {{article.topic.category.color}}">
+      <div class="article-author">
         <a class="meta-thumb" ui-sref="app.publishers.profile.user.published({userId: article.user.id})">
           <img ng-src="{{article.user.thumb_url}}" />
         </a>
@@ -70,17 +70,16 @@
         </a>
 
         <p>{{article.user.bio || 'غير معروف'}}</p>
+      </div>
 
-        <div>
-          <span ng-if="article.topic">
-            <span>نشرت في</span>
-            <a ng-show="article.topic" ui-sref="app.categories.topic.articles.list({ categoryId: article.topic.category.id, topicId: article.topic.id})">
-              <h3>{{article.topic.title || 'غير محدد'}}</h3>
-            </a>،
-          </span>
-          <span>{{article.published_at | date:'fullDate'}}</span>
-        </div>
-
+      <div class="published-meta" style="border-right: 1px solid {{article.topic.category.color}}">
+        <span ng-if="article.topic">
+          <span>منشور في</span>
+          <a ng-show="article.topic" ui-sref="app.categories.topic.articles.list({ categoryId: article.topic.category.id, topicId: article.topic.id})">
+            <span style="color: {{article.topic.category.color}}">{{article.topic.title || 'غير محدد'}}</span>
+          </a>.
+        </span>
+        <span>{{article.published_at | date:'fullDate'}}</span>
       </div>
 
       <div class="article-share section" ng-if="article">
