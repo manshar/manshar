@@ -614,6 +614,7 @@ body.manshar {
       color: #aaa;
     }
     a {
+      padding: 4px 0;
       padding-left: 10px;
       line-height: 26px;
       display: block;
@@ -622,7 +623,6 @@ body.manshar {
       }
     }
     li {
-      margin: 2px 0;
       transition: background .2s;
       &:hover {
         background: rgba(0,0,0,0.1);
