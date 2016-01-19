@@ -26,6 +26,6 @@
   ],
   "theme_color": "#CA1B03",
   "background_color": "#CA1B03",
-  "display": "standalone", // fullscreen, browser
+  "display": "standalone",
   "start_url": "/?homescreen=1"
 }

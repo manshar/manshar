@@ -7,7 +7,7 @@
       analytics-value="commentsCount">
   <div>
     <span class="comments-icons-container">
-      <div class="new-button-container comment-icon">
+      <div class="new-button-container comment-icon" ng-if="!latestComments[0]">
         <div class="comment-icon-clipper">
           <span>+</span>
         </div>
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="count-container comment-icon" ng-if="commentsCount">
+      <div class="count-container comment-icon" ng-if="commentsCount && commentsCount > commentsCountToShow">
         <div class="comment-icon-clipper">
           <span>{{commentsCount}}</span>
         </div>
