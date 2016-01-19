@@ -7,7 +7,7 @@ angular.module('webClientApp')
     $scope.category = category;
     $scope.topics = topics;
 
-    $rootScope.page.title = category.title;
+    $rootScope.page.title = category.title + ' - منشر';
     $rootScope.page.image = category.original_image_url;
     $rootScope.page.publishedTime = category.created_at;
     $rootScope.page.description = category.description;

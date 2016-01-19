@@ -6,7 +6,7 @@ angular.module('webClientApp')
     $anchorScroll();
 
     $scope.topic = topic;
-    $rootScope.page.title = topic.title;
+    $rootScope.page.title = topic.title + ' - منشر';
     $rootScope.page.image = topic.category.original_image_url;
     $rootScope.page.publishedTime = topic.created_at;
     $rootScope.page.description = topic.category.description;
