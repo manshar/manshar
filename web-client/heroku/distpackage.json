@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
      "express": "^3.5.0",
-     "prerender-node": "^0.1.18"
+     "prerender-node": "^0.1.18",
+     "lodash": "^4.0.0"
   }
 }
