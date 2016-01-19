@@ -10,9 +10,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="google-site-verification" content="COI4m1T5a5V_HGhylgZ7eKO1Qxmf2Wgd7A5gUq9YQow" />
   <!-- Use ng-bind to avoid {{}} being displayed when loading. -->
-  <title ng-bind="page.title + ' - منشر'">منشر - منصة النشر العربية</title>
+  <title ng-bind="page.title || 'منشر - فكِّر بالعربية'">منشر - منصة النشر العربية</title>
   <meta name="keywords" content="تدوين, كتابة, عربي, مقالات, مدونات,مفتوح المصدر, محتوى عربي, مواضيع">
-  <meta name="description" content="منصة نشر وتدوين باللغة العربية.">
+  <meta name="description" content="{{page.description || 'منصة نشر وتدوين باللغة العربية.'}}">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Open Graph Metadata -->

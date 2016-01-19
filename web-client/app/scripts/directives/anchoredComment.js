@@ -51,6 +51,7 @@ angular.module('webClientApp')
       },
       link: function (scope, element) {
         scope.commentsCount = 0;
+        scope.commentsCountToShow = 4;
 
         // Shows the anchor icon for the user to click.
         var listener = $rootScope.$on('show-anchor', function(e, data) {
@@ -93,14 +94,17 @@ angular.module('webClientApp')
             }
           }
 
-          scope.latestComments = getLatestComments(4);
+          scope.latestComments = getLatestComments(scope.commentsCountToShow);
         });
 
         var getLatestComments = function(count) {
           var comments = [];
+          var usersAlreadyAdded = {};
           var allComments = scope.$parent.comments || [];
           for (var i = 0; i < allComments.length; i++) {
-            if (allComments[i].guid === scope.guid) {
+            if (allComments[i].guid === scope.guid &&
+                !usersAlreadyAdded[allComments[i].user.id]) {
+              usersAlreadyAdded[allComments[i].user.id] = true;
               comments.push(allComments[i]);
             }
           }

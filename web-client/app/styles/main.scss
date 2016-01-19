@@ -614,6 +614,7 @@ body.manshar {
       color: #aaa;
     }
     a {
+      padding: 4px 0;
       padding-left: 10px;
       line-height: 26px;
       display: block;
@@ -622,7 +623,6 @@ body.manshar {
       }
     }
     li {
-      margin: 2px 0;
       transition: background .2s;
       &:hover {
         background: rgba(0,0,0,0.1);
@@ -1689,6 +1689,7 @@ h1, h2, h3 {
 .new-model {
   .comments-container {
     right: 56px;
+    top: 35px;
   }
 }
 
@@ -1727,7 +1728,7 @@ h1, h2, h3 {
 .comments-container {
   font-size: 0.7em;
   position: absolute;
-  top: 35px;
+  top: 0;
   right: 20px;
 
   .main-comment-box {
