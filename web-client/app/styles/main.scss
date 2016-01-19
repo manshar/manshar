@@ -1689,6 +1689,7 @@ h1, h2, h3 {
 .new-model {
   .comments-container {
     right: 56px;
+    top: 35px;
   }
 }
 
@@ -1727,7 +1728,7 @@ h1, h2, h3 {
 .comments-container {
   font-size: 0.7em;
   position: absolute;
-  top: 35px;
+  top: 0;
   right: 20px;
 
   .main-comment-box {

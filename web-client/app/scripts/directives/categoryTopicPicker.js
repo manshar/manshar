@@ -10,7 +10,7 @@ angular.module('webClientApp')
       scope: {
         visible: '='
       },
-      link: function (scope) {
+      link: function (scope, element) {
         scope.selectedCategory = null;
         scope.categories = Category.query();
         scope.topics = [];
@@ -25,6 +25,7 @@ angular.module('webClientApp')
             scope.selectedCategory = null;
           } else {
             scope.topics = Topic.query({categoryId: category.id});
+            element.find('input')[0].focus();
           }
         };
 

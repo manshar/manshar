@@ -10,9 +10,7 @@ angular.module('webClientApp')
     $rootScope.page.title = article.title;
     $rootScope.page.image = article.cover_url;
     $rootScope.page.publishedTime = article.created_at;
-
-    var cleanBody = $filter('nohtml')(article.body);
-    $rootScope.page.description = $filter('words')(cleanBody, 50);
+    $rootScope.page.description = article.tagline;
 
     $scope.article = article;
 
