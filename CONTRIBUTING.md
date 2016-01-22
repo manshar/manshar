@@ -3,6 +3,8 @@
 
 ## Install the environment
 
+The following steps will help you prepare your environment and get the project running on your local machine. However, if you just want to work on the front-end part of Manshar, you can reuse the existing dev backend `api-dev.manshar.com` and not have to install the whole backend and its dependencies including the database. Please refer to the wiki page [Contributing to Web Client](https://github.com/manshar/manshar/wiki/Contributing-to-Web-Client) for more details.
+
 ### Install [Homebrew](http://brew.sh/) (OS X)
 
 Homebrew is the best package manager out there for OS X.
