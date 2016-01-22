@@ -28,6 +28,14 @@ angular.module('webClientApp', [
       function ($stateProvider, $urlMatcherFactoryProvider, $locationProvider, $urlRouterProvider) {
     // Make a trailing slash optional
     $urlMatcherFactoryProvider.strictMode(false);
+
+    // Example of using function rule as param
+    $urlRouterProvider.otherwise(function($injector, $location){
+      var state = $injector.get('$state');
+      state.go('app.404');
+      return $location.path();
+    });
+
     $urlRouterProvider.rule(function ($injector, $location) {
       var path = $location.url();
       // check to see if the path already has a slash where it should be
@@ -443,7 +451,14 @@ angular.module('webClientApp', [
           });
         }
       })
-      ;
+      .state('app.404', {
+        url: '404/',
+        views: {
+        'content@': {
+            templateUrl: 'views/404.html'
+          }
+        }
+      });
   }])
   .factory('unAuthenticatedInterceptor', ['$location', '$q', '$rootScope',
       function ($location, $q, $rootScope) {
