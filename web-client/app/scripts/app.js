@@ -603,7 +603,6 @@ angular.module('webClientApp', [
     });
 
     $rootScope.$on('$stateChangeSuccess', function() {
-      console.log($state.current.name);
       if($state.current.name.indexOf('profile') > -1 ||
         $state.current.name === 'app.articles.show' ||
         $state.current.name === 'app.articles.edit') {

@@ -799,6 +799,35 @@ header {
 .content-container {
   min-height: 100vh;
   position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  .article-author {
+    padding: 0 30px;
+    position: relative;
+    color: #aaa;
+    h3 {
+      font-size: 14px;
+      display: inline;
+    }
+    p, div {
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+    img {
+      position: absolute;
+      right: -25px;
+      top: 0;
+      width: 50px;
+      border-radius: 50%;
+    }
+    a {
+      text-decoration: none;
+      color: #222;
+    }
+  }
 }
 
 /* Clearfix */
@@ -1321,33 +1350,9 @@ h1, h2, h3 {
   }
 }
 
-.article-author {
-  padding: 0 30px;
-  position: relative;
-  color: #aaa;
-  h3 {
-    font-size: 14px;
-    display: inline;
-  }
-  p, div {
-    font-size: 12px;
-    margin-bottom: 20px;
-  }
-  img {
-    position: absolute;
-    right: -25px;
-    top: 0;
-    width: 50px;
-    border-radius: 50%;
-  }
-  a {
-    color: #222;
-  }
-}
-
 .published-meta {
-  margin: -20px -2px 0;
-  padding: 5px;
+  margin: -20px -1px 0;
+  padding: 5px 10px;
   cursor: default;
   color: #b3b3b3;
   font-size: 13px;
@@ -1620,7 +1625,6 @@ h1, h2, h3 {
     position: absolute;
     right: -28px;
     text-align: left;
-    z-index: 999;
     top: 56px;
     padding: 0;
     width: 88px;

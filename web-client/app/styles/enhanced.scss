@@ -53,6 +53,15 @@ body {
 
 .content-container {
   position: static;
+
+  .article-author {
+    padding: 30px 60px 0;
+    min-height: 99px;
+    img {
+      right: -50px;
+      width: 100px;
+    }
+  }
 }
 
 .logo {
@@ -101,15 +110,6 @@ body {
 .recommendation-button {
   .recommendation-count {
     font-size: 14px;
-  }
-}
-
-.article-author {
-  padding: 30px 60px 0;
-  min-height: 99px;
-  img {
-    right: -50px;
-    width: 100px;
   }
 }
 
