@@ -6,7 +6,8 @@
           analytics-category="UI"
           analytics-label="Article in Listing - {{article.title}}"
           analytics-value="article-{{article.id}}">
-    <h2>{{article.title || 'بدون عنوان'}}</h2>
+    <h2 ng-if="article.title">{{article.title || 'بدون عنوان'}}</h2>
+    <h2 ng-if="!article.published && !article.title">بدون عنوان</h2>
     <h3>{{article.tagline}}</h3>
   </a>
 </div>

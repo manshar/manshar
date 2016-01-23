@@ -59,6 +59,7 @@ angular.module('webClientApp', [
         url: 'articles/',
         views: {
           'content@': {
+            controller: 'MainCtrl',
             templateUrl: 'views/main.html'
           }
         }

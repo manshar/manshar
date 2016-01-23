@@ -7,7 +7,7 @@ angular.module('webClientApp')
     $anchorScroll();
 
     // TODO: set proper values for page properties
-    $rootScope.page.title = article.title + ' - ' + article.user.name;
+    $rootScope.page.title = (article.title || article.tagline) + ' - ' + article.user.name;
     $rootScope.page.image = article.cover_url;
     $rootScope.page.publishedTime = article.created_at;
     $rootScope.page.description = article.tagline;

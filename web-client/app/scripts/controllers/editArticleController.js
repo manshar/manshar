@@ -183,13 +183,11 @@ angular.module('webClientApp')
      * @param  {carbonEditor} editor A carbon editor instance.
      */
     $scope.onChange = function(editor) {
-      $scope.article.title = editor.getTitle();
+      $scope.article.title = !editor.getTitle() ? '' : editor.getTitle();
       $scope.article.body = editor.getHTML();
-      var snippet = editor.getSnippet();
+      var snippet = !editor.getSnippet() ? '' : editor.getSnippet();
       if (snippet) {
-        var words = snippet.split(' ');
-        words = words.slice(0, 35);
-        $scope.article.tagline = words.join(' ') + '...';
+        $scope.article.tagline = snippet;
       }
     };
 

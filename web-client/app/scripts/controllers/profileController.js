@@ -5,7 +5,7 @@ angular.module('webClientApp')
     function ($scope, $rootScope, profile, articles, publishers, Article, $state, $stateParams, $analytics, $anchorScroll) {
     $anchorScroll();
 
-    $rootScope.page.title = profile.name;
+    $rootScope.page.title = profile.name + ' - منشر';
     $rootScope.page.description = profile.bio;
 
     $scope.profile = profile;
