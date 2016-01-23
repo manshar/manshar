@@ -427,30 +427,30 @@ angular.module('webClientApp', [
       .state('app.redirects', {})
       .state('app.redirects.profiles', {
         url: 'profiles/:userId/',
-        onEnter: function ($state, $stateParams) {
+        onEnter: ['$state', '$stateParams', function ($state, $stateParams) {
           $state.transitionTo('app.publishers.profile.user.published', {
             userId: $stateParams.userId
           });
-        }
+        }]
       })
       .state('app.redirects.categories', {
         url: 'categories/:categoryId/',
-        onEnter: function ($state, $stateParams) {
+        onEnter: ['$state', '$stateParams', function ($state, $stateParams) {
           $state.transitionTo('app.categories.articles.list', {
             categoryId: $stateParams.categoryId,
             order: 'popular'
           });
-        }
+        }]
       })
       .state('app.redirects.topics', {
         url: 'categories/:categoryId/topics/:topicId/',
-        onEnter: function ($state, $stateParams) {
+        onEnter: ['$state', '$stateParams', function ($state, $stateParams) {
           $state.transitionTo('app.categories.topic.articles.list', {
             categoryId: $stateParams.categoryId,
             topicId: $stateParams.topicId,
             order: 'popular'
           });
-        }
+        }]
       })
       .state('app.404', {
         url: '404/',
@@ -550,7 +550,7 @@ angular.module('webClientApp', [
       ga('create', GA_TRACKING_ID);
     }
 
-    $rootScope.linkPrefix = '//' + document.location.host;
+    $rootScope.linkPrefix = 'https://' + document.location.host;
 
     /**
      * Holds data about page-wide attributes. Like pages title.

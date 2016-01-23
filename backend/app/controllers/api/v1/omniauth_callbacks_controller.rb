@@ -15,12 +15,13 @@ class Api::V1::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksC
   # Override this to set image attribute properly.
   # devise_token_auth uses 'image' for the attribute name.
   def assign_provider_attrs(user, auth_hash)
-    user.assign_attributes({
-      nickname: auth_hash['info']['nickname'],
-      name: auth_hash['info']['name'],
-      avatar_url: get_large_image(auth_hash['info']['image']),
-      email: auth_hash['info']['email']
-    })
+    attrs = {}
+    attrs[:nickname] = auth_hash['info']['nickname'] if not user.nickname
+    attrs[:name] = auth_hash['info']['name'] if not user.name
+    attrs[:avatar_url] = auth_hash['info']['avatar_url'] if not user.avatar_url
+    attrs[:email] = auth_hash['info']['email'] if not user.email
+
+    user.assign_attributes(attrs)
   end
 
   # RecordNotUnique is thrown when the email has already been used with another

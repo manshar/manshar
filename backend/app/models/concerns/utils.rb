@@ -7,8 +7,10 @@ module Concerns::Utils
   #  url == '//manshar.me/images/example.png'
   def abs_url url, host
     uri = url
+    puts host
+    protocol = host =~ /localhost/ ? 'http' : 'https'
     if uri && uri !~ /^http/
-      uri = "https://#{host}#{uri}"
+      uri = "#{protocol}://#{host}#{uri}"
     end
     uri
   end
