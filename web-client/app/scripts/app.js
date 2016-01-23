@@ -89,7 +89,7 @@ angular.module('webClientApp', [
             }, function(article) {
               return article;
             }, function() {
-              $state.go('app');
+              $state.go('app.404');
             }).$promise;
           }]
         }
@@ -291,7 +291,7 @@ angular.module('webClientApp', [
             return Category.get({'categoryId': $stateParams.categoryId}, function(category) {
               return category;
             }, function() {
-              $state.go('app');
+              $state.go('app.404');
             });
           }],
           topics: ['Topic', '$stateParams', function(Topic, $stateParams) {
@@ -330,7 +330,7 @@ angular.module('webClientApp', [
                 }, function(topic) {
                   return topic;
                 }, function() {
-                  $state.go('app');
+                  $state.go('app.404');
                 }).$promise;
           }]
         }
@@ -348,7 +348,7 @@ angular.module('webClientApp', [
                   }, function(articles) {
                     return articles;
                   }, function() {
-                    $state.go('app');
+                    $state.go('app.404');
                   }).$promise;
           }]
         }
@@ -406,10 +406,10 @@ angular.module('webClientApp', [
               if(user.role === 'admin') {
                 return user;
               } else {
-                $state.go('app');
+                $state.go('app.404');
               }
             }, function() {
-                $state.go('app');
+                $state.go('app.404');
             }).$promise;
           }]
         }
