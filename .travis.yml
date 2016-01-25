@@ -8,7 +8,7 @@ env:
   - DRAGONFLY_SECRET=c2jq0a9cj039jc01mamc09qjc930ur10fjafj0a9fj09fj23qnweocn0qwf0qfjq
   - secure: Ek/EsKA4yC6RrhlHNhlSsztud+UxFxbvwiaEkqIo2MTo1ewr40/7k8JLuONgYNHL47/ZKvzqXfRiD+Zq18xIXNEO8KyIf3ASLmhMYOLQsPZIsmCSUgnBpwpfiO9tiuAf4ww5+A8sD4Ob4xnkLpwB961bBn1RyIKN6mymuxzdtPw=
 rvm:
-  - 2.0.0
+  - 2.3.0
   - ruby-head
 before_install:
   - cd /usr/lib/git-core/
