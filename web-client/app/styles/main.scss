@@ -21,6 +21,7 @@ html {
 
 body {
   font-size: 14px;
+  overflow-x: hidden;
 
   &.article-with-cover {
     .logo, .article-meta {

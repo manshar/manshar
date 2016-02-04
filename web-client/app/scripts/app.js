@@ -510,7 +510,7 @@ angular.module('webClientApp', [
    */
   .config(['$authProvider', 'API_HOST', function($authProvider, API_HOST) {
     $authProvider.configure({
-      apiUrl: 'https://' + API_HOST,
+      apiUrl: '//' + API_HOST,
       omniauthWindowType: 'newWindow',
       confirmationSuccessUrl:  'https://' + window.location.host + '/login',
       passwordResetSuccessUrl: ('https://' + window.location.host +
@@ -518,7 +518,7 @@ angular.module('webClientApp', [
       authProviderPaths: {
         facebook: '/auth/facebook',
         gplus:   '/auth/gplus'
-      },
+      }
     });
   }])
 
