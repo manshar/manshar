@@ -394,6 +394,22 @@ angular.module('webClientApp', [
           }]
         }
       })
+      .state('app.updatePassword', {
+        url: 'accounts/update_password/',
+        views: {
+        'content@': {
+            templateUrl: 'views/accounts/update_password.html',
+            controller: 'UpdatePasswordController'
+          }
+        },
+        resolve: {
+          requireNoAuth: ['$auth', '$state', function($auth, $state) {
+            return $auth.validateUser().catch(function() {
+              $state.go('app.articles.list', {'order': 'popular'});
+            }).$promise;
+          }]
+        }
+      })
       .state('app.admin', {
         url: 'admin/',
         views: {
@@ -494,10 +510,10 @@ angular.module('webClientApp', [
    */
   .config(['$authProvider', 'API_HOST', function($authProvider, API_HOST) {
     $authProvider.configure({
-      apiUrl: '//' + API_HOST,
+      apiUrl: 'https://' + API_HOST,
       omniauthWindowType: 'newWindow',
-      confirmationSuccessUrl:  '//' + window.location.host + '/login',
-      passwordResetSuccessUrl: ('//' + window.location.host +
+      confirmationSuccessUrl:  'https://' + window.location.host + '/login',
+      passwordResetSuccessUrl: ('https://' + window.location.host +
                                 '/accounts/update_password'),
       authProviderPaths: {
         facebook: '/auth/facebook',
