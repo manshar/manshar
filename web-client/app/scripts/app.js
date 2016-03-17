@@ -29,6 +29,7 @@ angular.module('webClientApp', [
     // Make a trailing slash optional
     $urlMatcherFactoryProvider.strictMode(false);
 
+
     // Example of using function rule as param
     $urlRouterProvider.otherwise(function($injector, $location){
       var state = $injector.get('$state');
@@ -484,8 +485,8 @@ angular.module('webClientApp', [
         return config;
       },
 
-      'requestError': function(response) {
-        console.error(response);
+      'requestError': function() {
+        // pass
       },
 
       'response': function(response) {
@@ -629,8 +630,7 @@ angular.module('webClientApp', [
     };
 
     $rootScope.$on('$stateChangeStart', function(
-          event, toState, toParams, fromState, fromParams) {
-      /* jshint unused:false */
+          event, toState, toParams, fromState) {
       $rootScope.previousState = fromState;
     });
 
@@ -645,6 +645,7 @@ angular.module('webClientApp', [
       $timeout(function() {
         var path = $location.path();
         if (path[path.length - 1] === '/' || path.indexOf('/?') > -1) {
+          // pass.
         } else if (path.indexOf('?') > -1) {
           path = path.replace('?', '/?');
         } else {

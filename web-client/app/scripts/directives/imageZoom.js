@@ -17,7 +17,7 @@ angular.module('webClientApp')
                     try {
                       imgZoom.hide();
                     } catch (e) {
-                      console.log('Error happened: ', e);
+                      // pass.
                     }
                     unbindWatch();
                   }

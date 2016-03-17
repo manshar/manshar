@@ -106,7 +106,7 @@ rails s
 # Running the web-client.
 cd web-client
 
-grunt serve
+gulp
 ```
 
 ## Run tests
@@ -118,6 +118,10 @@ cd backend
 
 rspec spec
 
+# TODO(mkhatib): Document running tests and coverage after moving them to
+the new gulp-task flow.
+
+<!--
 # Web-client tests.
 
 cd web-client
@@ -131,6 +135,7 @@ grunt test
 # You'll end up with something like: localhost:5555/PhantomJS 1.9.2 (Mac OS X)
 grunt coverage
 ```
+-->
 
 ## HowTo keep in sync your git repository for Manshar
 
@@ -160,7 +165,7 @@ git checkout xyz
 
 After implementing the feature and its test cases, push it to your github account
 
-If your edits touch the web-client code, make sure to also run ```grunt``` to build the web-client. And make sure
+If your edits touch the web-client code, make sure to also run ```gulp``` to build the web-client. And make sure
 it builds successfully without errors or jshints warnings (try to fix jshints warnings).
 
 

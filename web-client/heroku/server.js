@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var express = require('express');
 var app = module.exports = express();
+var routes = require('./routes');
 
 app.configure(function(){
   // Here we require the prerender middleware that will handle requests from
@@ -53,14 +54,37 @@ app.configure(function(){
       }
     }
   };
+
+  // TODO(mkhatib): This allows people to access EVERYTHING in the root dir
+  // including this very same server.js file. Instead maybe whitelist specific
+  // files and folders. Add them to routes.js.
+  // Maybe move all the static files under a /public folder to allow easy
+  // management - these would still be served with a '/' path so nothing
+  // breaks.
   app.use(express.static(__dirname, options));
   app.use(app.router);
 });
 
-// This will ensure that all routing is handed over to AngularJS
-app.get('*', function(req, res){
-  res.sendfile('index.html');
+// Any static files that weren't found by express.static middleware
+// should just 404.
+app.get('/scripts/*', function(req, res) {
+  res.send('Not Found', 404);
 });
+app.get('/styles/*', function(req, res) {
+  res.send('Not Found', 404);
+});
+app.get('/images/*', function(req, res){
+  res.send('Not Found', 404);
+});
+
+// This will ensure that all routing that the AngularJS app handles is handed
+// over to AngularJS entrypoint which is index.html. All others will 404.
+// TODO(mkhatib): Update 404.html file.
+routes.appRoutes.forEach(function(route) {
+  app.get(route, function(req, res){
+    res.sendfile('index.html');
+  });
+})
 
 var port = process.env.PORT || 9000;
 app.listen(port);

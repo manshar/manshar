@@ -32,15 +32,15 @@
   <meta name="twitter:image" content="{{page.image}}" />
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css({.tmp,app}) styles/main.css -->
+  <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" type="text/css" href="bower_components/sweetalert/dist/sweetalert.css">
+  <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
   <link rel="stylesheet" href="bower_components/carbon/dist/carbon.min.css">
   <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
   <link rel="stylesheet" href="bower_components/image-zoom/dist/imagezoom.css">
   <!-- endbuild -->
-  <!-- build:css({.tmp,app}) styles/enhanced.css -->
-  <link rel="stylesheet" type="text/css" href="styles/enhanced.css" media="screen  and (min-width: 45em)" />
+  <!-- build:css styles/enhanced.css media="screen  and (min-width: 45em)"-->
+  <link rel="stylesheet" href="styles/enhanced.css" media="screen  and (min-width: 45em)">
   <!-- endbuild -->
   <!-- Load the hosted stylesheets for highlight.js -->
   <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
@@ -102,13 +102,15 @@
   <!-- End Facebook Pixel Code -->
 
  <!-- Need to load shims before angular.js to allow progress events to work. -->
+ <!-- build:js scripts/shims.js -->
  <script src="bower_components/angular-file-upload/dist/angular-file-upload-shim.min.js"></script>
+ <!-- endbuild -->
  <script src="bower_components/angular/angular.js"></script>
  <!-- build:js scripts/modules.js -->
  <script src="bower_components/angular-animate/angular-animate.js"></script>
  <script src="bower_components/angular-resource/angular-resource.js"></script>
  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
- <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+ <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
  <script src="bower_components/angular-touch/angular-touch.js"></script>
  <script src="bower_components/angular-i18n/angular-locale_ar.js"></script>
@@ -121,16 +123,13 @@
  <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
  <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
  <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
- <script src="bower_components/jquery/dist/jquery.min.js"></script>
  <script src="bower_components/image-zoom/dist/imagezoom.js"></script>
  <script src="bower_components/angular-elastic/elastic.js"></script>
  <!-- Replace the alerts with sweet alert for better styling -->
  <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
 
- <script src="scripts/helpers/animation.js"></script>
-
  <script src="scripts/app.js"></script>
- <script src="scripts/main.js"></script>
+ <script src="scripts/helpers/animation.js"></script>
  <script src="scripts/appConfig.js"></script>
  <script src="scripts/cachedTemplates.js"></script>
  <script src="scripts/service-worker-registration.js"></script>

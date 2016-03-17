@@ -6,7 +6,7 @@ angular.module('webClientApp')
       $anchorScroll();
 
       $rootScope.page.title = 'الناشرون';
-    	$rootScope.page.description = 'ناشرو المقالات على منصة منشر للتدوين';
+      $rootScope.page.description = 'ناشرو المقالات على منصة منشر للتدوين';
 
       $scope.publishers = publishers;
       var currentState = $state.current.url;
