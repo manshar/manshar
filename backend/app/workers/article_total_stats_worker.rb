@@ -20,11 +20,24 @@ class ArticleTotalStatsWorker
     client
   end
 
-  # Autherize client
-  @@client = ArticleTotalStatsWorker.get_authorized_client
-  @@analytics = @@client.discovered_api('analytics', 'v3')
+  begin
+    # Autherize client
+    @@client = ArticleTotalStatsWorker.get_authorized_client
+    @@analytics = @@client.discovered_api('analytics', 'v3')
+  rescue Exception => e
+    @@client = nil
+    @@analytics = nil
+    puts e.message
+    puts e.backtrace.inspect
+  end
 
   def perform(start_index=1)
+
+    if @@client.nil? or @@analytics.nil?
+      puts 'Not calculating total articles stats due to client authorization or service discovery issue.'
+      return
+    end
+
     puts "Articles stats worker starting at index #{start_index}..."
 
     # Query Analytics API  to retrieve Unique Page Views and Time on Page
