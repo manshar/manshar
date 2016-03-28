@@ -7,10 +7,6 @@ angular.module('webClientApp')
     $scope.error = null;
     $scope.userForm = {};
 
-    $rootScope.$on('auth:password-reset-confirm-success', function() {
-      console.log('Success');
-    });
-
     $rootScope.$on('auth:password-reset-confirm-error', function() {
       swal('حدث خطأ!', 'لم يمكننا التحقق من حسابك. الرجاء المحاولة مرة أخرى.', 'error');
     });

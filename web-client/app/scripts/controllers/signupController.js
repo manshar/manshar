@@ -39,7 +39,6 @@ angular.module('webClientApp')
       }
 
       $scope.flash = null;
-      console.log(response.errors); // Detailed error message from backend.
     };
 
   }]);

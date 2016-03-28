@@ -6,17 +6,18 @@ angular.module('webClientApp')
 
     // Holder for creating new categories.
     $scope.category = {};
-    $scope.categories = Category.query({all: true}, function(category) {
-      console.log('category', category);
-    });
+    $scope.categories = Category.query({all: true});
     $scope.error = null;
     $scope.errorMessages = {};
 
     $scope.saveCategory = function(category) {
       if (category.id) {
-        Category.update({'categoryId': category.id}, {'category': category}, updateSuccess, updateError);
+        Category.update(
+            {'categoryId': category.id},
+            {'category': category},
+            updateSuccess, updateError);
       } else {
-        Category.save({'category': category}, createSuccess, updateError);
+        Category.save({'category': category}, createSuccess, createError);
       }
     };
 

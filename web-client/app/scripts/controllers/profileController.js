@@ -80,7 +80,6 @@ angular.module('webClientApp')
           swal('تم الغاء الحذف', 'مقالك بأمان :)', 'error');
         }
       });
-      console.log('swal', swal);
     };
 
     $scope.getCardColor = function(color) {

@@ -76,7 +76,6 @@ if [ $STATUS -ne 0 ]; then
   echo 'An error happened :-('
   exit $STATUS
 fi
-# sed '/web-client\/dist/d' .gitignore > .gitignore.new && mv .gitignore.new .gitignore
 
 echo "Installing sass to compile web-client..."
 echo "You might be prompted to enter your computer password..."
@@ -84,7 +83,7 @@ gem install sass
 
 echo "Building Web Client..."
 cd $MANSHAR_HOME/web-client/
-grunt build --cdn-base=$CDN_BASE --api-host=$REMOTE_API_HOST --force
+gulp build:production --api-host=$REMOTE_API_HOST --cdn-base=$CDN_BASE
 cd $MANSHAR_HOME/web-client/dist
 echo "Deploing Web Client Dist to $NAME-web..."
 git init
@@ -92,7 +91,7 @@ git add .
 git commit -am 'Deploying web client dist...'
 git remote add $NAME-web git@heroku.com:$NAME-web.git
 git push $NAME-web master --force
-# yes | git push $NAME-web `git subtree split --prefix web-client/dist deploy`:master --force
+
 STATUS=$?
 if [ $STATUS -eq 0 ]; then
   echo "Deployed $NAME-web Successfully..."
@@ -158,7 +157,6 @@ git add --all && git commit -am 'Deploying Manshar Workers...'
 
 # Deploying Workers instance.
 echo "Deploing Workers instance to $NAME-workers..."
-# git subtree push --prefix backend $NAME-workers master
 git remote add $NAME-workers git@heroku.com:$NAME-workers.git
 git push $NAME-workers master --force
 

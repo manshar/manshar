@@ -51,7 +51,7 @@ else
   # Note(mkhatib): Trying to drop CDN base for static content since we're now using
   # Cloudflare which will be caching without the need for this.
   # cd $MANSHAR_HOME/web-client/ && grunt --cdn-base=//d32rdl4awdotlf.cloudfront.net && cd $MANSHAR_HOME
-  cd $MANSHAR_HOME/web-client/ && grunt && cd $MANSHAR_HOME
+  cd $MANSHAR_HOME/web-client/ && gulp build:production && cd $MANSHAR_HOME
   git add --all && git commit -a -m 'Deploying Web Client Dist...'
   yes | git push web-client-heroku `git subtree split --prefix web-client/dist tmp-deploy`:master --force
 

@@ -1,4 +1,4 @@
-FROM dockerfile/nodejs-bower-grunt
+FROM dockerfile/nodejs-bower-gulp
 RUN apt-get update && apt-get install -y ruby
 RUN gem install sass
 
@@ -10,7 +10,7 @@ ENV LANG en_US.UTF-8
 WORKDIR /manshar-web-client
 RUN npm cache clean
 RUN npm install -g phantomjs
-RUN npm install -g grunt grunt-cli --save-dev
+RUN npm install -g gulp
 
 # Install node packages.
 WORKDIR /node

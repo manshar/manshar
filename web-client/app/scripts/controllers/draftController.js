@@ -5,5 +5,5 @@ angular.module('webClientApp')
     function ($scope, $state, drafts) {
       $scope.articles = drafts;
       var currentState = $state.current.url;
-	    $scope.currentState = currentState.substring(0, currentState.length - 1);
+      $scope.currentState = currentState.substring(0, currentState.length - 1);
   }]);
