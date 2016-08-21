@@ -341,6 +341,17 @@ module.exports = {
         'https://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Bold.woff',
         'https://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Bold.ttf',
 
+        'http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js',
+        'http://yandex.st/highlightjs/8.0/highlight.min.js',
+        'http://yandex.st/highlightjs/8.0/styles/default.min.css',
+        'http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css',
+        'http://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Regular.woff2',
+        'http://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Regular.woff',
+        'http://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Regular.ttf',
+        'http://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Bold.woff2',
+        'http://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Bold.woff',
+        'http://fonts.gstatic.com/ea/droidarabicnaskh/v7/DroidNaskh-Bold.ttf',
+
         // TODO(mkhatib): Figure out a way to do this.
         // APIs responses we'd like to get to get the user to browse offline.
         // 'https://api.manshar.com/api/v1/categories',

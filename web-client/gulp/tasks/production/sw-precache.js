@@ -4,30 +4,14 @@ var path = require('path');
 
 var packageJson = require('../../../package.json');
 var config = require('../../config').precache;
-
-// var pathToRegexp = require('path-to-regexp');
-// var routes = require('../../../heroku/routes');
-// function getNavigateFallbackWhitelist() {
-//   var fallbackUrlsWhitelist = [];
-//   var patterns = routes.appRoutes;
-//   for (var i = 0; i < patterns.length; i++) {
-//     var exp = pathToRegexp(patterns[i]);
-//     var expStr = exp.source;
-//     fallbackUrlsWhitelist.push(new RegExp(expStr));
-//   }
-//   return fallbackUrlsWhitelist;
-// }
-
+var routes = require('../../../heroku/routes');
 
 function writeServiceWorkerFile(target, callback) {
   var precacheConfig = {
     cacheId: packageJson.name,
     importScripts: config[target].importScripts,
     navigateFallback: '/index.html',
-    // TODO(mkhatib): Maybe whitelist specific paths to fallback to index.html
-    // at the time I implemented this I couldn't get regexes to be generated
-    // in the correct format for sw-precache to understand them.
-    // navigateFallbackWhitelist: getNavigateFallbackWhitelist(),
+    navigateFallbackWhitelist: routes.appRoutesRegexes,
     // If handleFetch is false (i.e. because this is called from swPrecache:dev), then
     // the service worker will precache resources but won't actually serve them.
     // This allows you to test precaching behavior without worry about the cache preventing your

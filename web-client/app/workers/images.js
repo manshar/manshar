@@ -12,4 +12,8 @@
   toolbox.router.get('/(.+)/(articles/covers|categories/icons|categories/images|images)/(.*)', imageRequests, {
     origin: /manshar\.s3\.amazonaws\.com/
   });
+
+  toolbox.router.get('/media/.+', imageRequests, {
+    origin: /https?:\/\/api(?:-staging|-dev)?\.manshar\.com/
+  });
 })();
