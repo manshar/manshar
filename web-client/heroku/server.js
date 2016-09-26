@@ -52,8 +52,15 @@ app.configure(function(){
       if (path.match(/ttf|woff|woff2|eot|svg/ig)) {
         res.set('Access-Control-Allow-Origin', '*');
       }
+
+      // Cache service workers for only 15 minutes.
+      var SW_REGEX = /\/(?:workers|service-worker\.js)/i;
+      if (path.match(SW_REGEX)) {
+        res.set('Cache-Control', 'public, max-age=900000');
+      }
     }
   };
+
 
   // TODO(mkhatib): This allows people to access EVERYTHING in the root dir
   // including this very same server.js file. Instead maybe whitelist specific
@@ -64,6 +71,23 @@ app.configure(function(){
   app.use(express.static(__dirname, options));
   app.use(app.router);
 });
+
+app.get('/service-worker.js', function(req, res) {
+  res.sendFile(__dirname + '/service-worker.js');
+});
+
+app.get('/favicon.ico', function(req, res) {
+  res.sendFile(__dirname + '/favicon.ico');
+});
+
+app.get('/robots.txt', function(req, res) {
+  res.sendFile(__dirname + '/robots.txt');
+});
+
+app.get('/manifest.json', function(req, res) {
+  res.sendFile(__dirname + '/manifest.json');
+});
+
 
 // Any static files that weren't found by express.static middleware
 // should just 404.

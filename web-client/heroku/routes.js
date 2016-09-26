@@ -1,7 +1,4 @@
 module.exports = {
-  // TODO(mkhatib): Use this in express server.
-  // TODO(mkhatib): Generate cache strategy file for these routes to serve
-  // index.html.
   // This is used by for two things.
   //
   // One to only serve the main app (index.html)
@@ -36,7 +33,21 @@ module.exports = {
     // Legacy paths.
     '/profiles/:uid/?',
   ],
-  staticRoutes: [
 
+  // These are important to allow service-worker cache to fallback to index.html
+  // only in the application routes and allow the rest to 404 normally.
+  //
+  // Without this any path would fallback to index.html (including service-worker.js).
+  appRoutesRegexes: [
+    /^\/$/,
+    /^\/404\/?$/,
+    /^\/articles\/\d+\/?$/,
+    /^\/articles\/\d+\/edit\/?$/,
+    /^\/articles\/list\/(popular|recent|best)\/?$/,
+    /^\/categories\/\d+\/articles\/(popular|recent|best)\/?$/,
+    /^\/categories\/\d+\/topics\/\d+\/articles\/(popular|recent|best)\/?$/,
+    /^\/publishers\/?$/,
+    /^\/publishers\/profile\/\d+\/(published|recommended|discussions|drafts|stats|edit)\/?$/,
+    /^\/profiles\/\d+\/?$/,
   ],
 };
