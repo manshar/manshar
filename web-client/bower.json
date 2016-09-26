@@ -34,6 +34,7 @@
     "angular-scenario": "~1.5.0"
   },
   "resolutions": {
-    "angular": "~1.5.0"
+    "angular": "~1.5.0",
+    "angular-cookie": "~4.1.0"
   }
 }
