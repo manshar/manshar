@@ -7,7 +7,7 @@ gem 'pg', platform: :ruby
 
 # Authentication and Registration mechanism.
 gem 'devise'
-gem 'devise_token_auth'
+gem 'devise_token_auth', '0.1.30'
 gem 'omniauth-facebook'
 gem 'omniauth-gplus', '~> 2.0'
 
