@@ -6,8 +6,8 @@ gem 'rails', '4.2'
 gem 'pg', platform: :ruby
 
 # Authentication and Registration mechanism.
-gem 'devise', git: 'https://github.com/plataformatec/devise.git'
-gem 'devise_token_auth', '0.1.30'
+gem 'devise'
+gem 'devise_token_auth'
 gem 'omniauth-facebook'
 gem 'omniauth-gplus', '~> 2.0'
 
@@ -45,7 +45,7 @@ gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-
 
 # Allows styling emails HTML with non-inline styles.
 gem 'hpricot'
-gem 'premailer-rails'
+gem 'premailer-rails', '1.9.4'
 gem 'roadie'
 gem 'roadie-rails'
 

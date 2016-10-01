@@ -34,7 +34,7 @@
     "gulp-changed-in-place": "^2.0.3",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
-    "gulp-cssnano": "^2.1.1",
+    "gulp-cssnano": "2.1.1",
     "gulp-eslint": "^2.0.0",
     "gulp-filter": "^3.0.1",
     "gulp-google-cdn": "^2.1.0",
@@ -82,6 +82,7 @@
     "run-sequence": "^1.1.5",
     "serve-index": "^1.7.3",
     "serve-static": "^1.10.2",
+    "svgo": "^0.6.1",
     "sw-precache": "git://github.com/mkhatib/sw-precache"
   },
   "engines": {
