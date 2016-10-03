@@ -20,15 +20,22 @@ module.exports = {
     '/articles/:id/edit/?',
 
     // Articles Listings.
+    '/articles/?',
+    '/articles/list/?',
     '/articles/list/:order/?',
 
     // Categories and Topics.
+    '/categories/:cid/?',
+    '/categories/:cid/articles/?',
     '/categories/:cid/articles/:order/?',
+    '/categories/:cid/topics/:tid/?',
+    '/categories/:cid/topics/:tid/articles/?',
     '/categories/:cid/topics/:tid/articles/:order/?',
 
     // Publishers and Profiles.
     '/publishers/?',
-    '/publishers/profile/:uid/(published|recommended|discussions|drafts|stats|edit)/?',
+    '/publishers/profile/:uid/?',
+    '/publishers/profile/:uid/:subpage/?',
 
     // Legacy paths.
     '/profiles/:uid/?',
@@ -43,10 +50,17 @@ module.exports = {
     /^\/404\/?$/,
     /^\/articles\/\d+\/?$/,
     /^\/articles\/\d+\/edit\/?$/,
+    /^\/articles\/?$/,
+    /^\/articles\/list\/?$/,
     /^\/articles\/list\/(popular|recent|best)\/?$/,
+    /^\/categories\/\d+\/?$/,
+    /^\/categories\/\d+\/articles\/?$/,
     /^\/categories\/\d+\/articles\/(popular|recent|best)\/?$/,
+    /^\/categories\/\d+\/topics\/\d+\/?$/,
+    /^\/categories\/\d+\/topics\/\d+\/articles\/?$/,
     /^\/categories\/\d+\/topics\/\d+\/articles\/(popular|recent|best)\/?$/,
     /^\/publishers\/?$/,
+    /^\/publishers\/profile\/\d+\/?$/,
     /^\/publishers\/profile\/\d+\/(published|recommended|discussions|drafts|stats|edit)\/?$/,
     /^\/profiles\/\d+\/?$/,
   ],
