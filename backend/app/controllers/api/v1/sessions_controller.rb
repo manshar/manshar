@@ -30,7 +30,7 @@ class Api::V1::SessionsController < DeviseTokenAuth::SessionsController
       @token     = SecureRandom.urlsafe_base64(nil, false)
 
       @resource.tokens[@client_id] = {
-        token: BCrypt::Password.create(@token),
+        token: ::BCrypt::Password.create(@token),
         expiry: (Time.now + DeviseTokenAuth.token_lifespan).to_i
       }
       @resource.save

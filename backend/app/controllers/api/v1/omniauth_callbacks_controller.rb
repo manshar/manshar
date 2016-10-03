@@ -30,7 +30,7 @@ class Api::V1::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksC
     @resource = User.find_by_email(@resource.email)
 
     @resource.tokens[@client_id] = {
-      token: BCrypt::Password.create(@token),
+      token: ::BCrypt::Password.create(@token),
       expiry: @expiry
     }
 

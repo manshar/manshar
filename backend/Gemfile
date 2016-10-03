@@ -45,7 +45,7 @@ gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-
 
 # Allows styling emails HTML with non-inline styles.
 gem 'hpricot'
-gem 'premailer-rails', '1.9.4'
+gem 'premailer-rails' #, '1.9.4'
 gem 'roadie'
 gem 'roadie-rails'
 
@@ -56,7 +56,7 @@ gem "persistize"
 gem 'kaminari'
 
 # To communicate with Google APIs. Mainly for Analytics
-gem 'google-api-client'
+gem 'google-api-client', '<0.9'
 
 group :production do
   gem 'rails_12factor'
