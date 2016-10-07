@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2'
+gem 'rails', '4.2.7.1'
 gem 'pg', platform: :ruby
 
 # Authentication and Registration mechanism.
@@ -38,7 +38,7 @@ gem 'sass'
 
 # Background and scheduled jobs.
 gem 'sidekiq'
-gem 'sidetiq'
+gem 'sidetiq' # Sidetiq provides a simple API for defining recurring workers for Sidekiq.
 
 # Used to manage notifications, emails and messaging.
 gem 'mailboxer', git: 'git://github.com/div/mailboxer.git', :branch => 'rails42-foreigner'
