@@ -29,7 +29,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    super || owned? || article_owner?
+    super || owned? || article_owner? || admin?
   end
 
 
@@ -42,4 +42,7 @@ class CommentPolicy < ApplicationPolicy
     comment.article.user_id == user.id if user
   end
 
+  def admin?
+    user.admin? || user.editor?
+  end
 end

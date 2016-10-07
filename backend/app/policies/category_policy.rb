@@ -34,7 +34,7 @@ class CategoryPolicy < ApplicationPolicy
 
   private
   def admin?
-    user.admin
+    user.admin? || user.editor?
   end
 
 end

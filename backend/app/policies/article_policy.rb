@@ -45,7 +45,7 @@ class ArticlePolicy < ApplicationPolicy
 
   private
   def owned?
-		article.user_id == user.id if user
+    article.user_id == user.id if user
   end
 
 end

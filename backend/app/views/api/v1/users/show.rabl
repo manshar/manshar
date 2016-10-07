@@ -11,7 +11,7 @@ end
 # a lot of queries to be executed when listing articles.
 unless locals[:listing]
 
-  attributes :bio, :created_at, :admin, :staff, :comments_count,
+  attributes :bio, :created_at, :admin, :editor, :comments_count,
       :recommendations_count
   attribute :avatar_abs_url => :avatar_url
 

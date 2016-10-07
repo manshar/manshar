@@ -37,7 +37,7 @@ class TotalStatPolicy < ApplicationPolicy
 
   private
   def owned?
-		total_stat.user_id == user.id if user
+    total_stat.user_id == user.id if user
   end
 
 end

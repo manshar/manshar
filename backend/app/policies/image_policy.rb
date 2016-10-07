@@ -31,7 +31,7 @@ class ImagePolicy < ApplicationPolicy
 
   private
   def owned?
-		@image.user_id == @user.id if @user
+    @image.user_id == @user.id if @user
   end
 
 end

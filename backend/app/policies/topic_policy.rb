@@ -34,7 +34,7 @@ class TopicPolicy < ApplicationPolicy
 
   private
   def admin?
-    user.admin
+    user.admin? || user.editor?
   end
 
 end

@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   end
   abs_url_for :avatar
 
+  enum role: { author: 1, editor: 2, admin: 3 }
+
   def published_articles
     articles.publishings.recents
   end
@@ -40,11 +42,11 @@ class User < ActiveRecord::Base
   end
 
   def admin
-    role == 'admin'
+    admin?
   end
 
-  def staff
-    role == 'staff'
+  def editor
+    editor?
   end
 
   def mailboxer_email(object)
