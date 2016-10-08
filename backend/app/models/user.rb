@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :recommendations, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :links, dependent: :destroy
-  has_many :picks, class_name: 'Pickability', foreign_key: 'user_id'
+  has_many :picks, class_name: 'Pickability', foreign_key: 'user_id', dependent: :destroy
 
   dragonfly_accessor :avatar do
     default ENV['DEFAULT_AVATAR']

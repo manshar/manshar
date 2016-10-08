@@ -8,7 +8,7 @@ class Article < ActiveRecord::Base
   belongs_to :category
   has_many :recommendations, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :pickabilities, as: :pickable
+  has_many :pickabilities, as: :pickable, dependent: :destroy
 
   scope :publishings, -> { where(published: true) }
   scope :drafts, -> { where(published: false) }

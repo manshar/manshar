@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007225254) do
+ActiveRecord::Schema.define(version: 20161008225221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20161007225254) do
   end
 
   add_index "pickabilities", ["pickable_type", "pickable_id"], name: "index_pickabilities_on_pickable_type_and_pickable_id", using: :btree
+  add_index "pickabilities", ["user_id", "pickable_type", "pickable_id"], name: "idx_user_pickabilities_on_pickabiility_id_and_type", unique: true, using: :btree
   add_index "pickabilities", ["user_id"], name: "index_pickabilities_on_user_id", using: :btree
 
   create_table "recommendations", force: :cascade do |t|
