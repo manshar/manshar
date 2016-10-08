@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :recommendations, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :links, dependent: :destroy
+  has_many :picks, class_name: 'Pickability', foreign_key: 'user_id'
 
   dragonfly_accessor :avatar do
     default ENV['DEFAULT_AVATAR']
@@ -88,4 +89,8 @@ class User < ActiveRecord::Base
     }
   end
 
+  def picked_articles
+    return unless editor? || admin?
+    picks
+  end
 end

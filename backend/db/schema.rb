@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007182744) do
+ActiveRecord::Schema.define(version: 20161007225254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,17 @@ ActiveRecord::Schema.define(version: 20161007182744) do
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
 
+  create_table "pickabilities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "pickable_id"
+    t.string   "pickable_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "pickabilities", ["pickable_type", "pickable_id"], name: "index_pickabilities_on_pickable_type_and_pickable_id", using: :btree
+  add_index "pickabilities", ["user_id"], name: "index_pickabilities_on_user_id", using: :btree
+
   create_table "recommendations", force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "user_id"
@@ -212,4 +223,5 @@ ActiveRecord::Schema.define(version: 20161007182744) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "pickabilities", "users"
 end
