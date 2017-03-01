@@ -1,3 +1,13 @@
+# No Longer Maintained
+
+## Note from maintainers
+
+After few years of developing Manshar, we have taken the decision to no longer developing Manshar in the open. This repo is gonna be up for tracking bugs for the hosted platform of [manshar.com](https://www.manshar.com) for reference and might be taken down in the future. All future development of manshar.com will be done in a private repo. We're greatful to have had the opportunity to work with some of you and thankful to have helped us reach where we are. Please get in touch on core@manshar.com for any questions. Here's an [article (in Arabic) explaining the decision around this](https://www.manshar.com/articles/XvtGNBykKjP1PVV8Fz8o2g/read/).
+
+Best.
+
+#### ------------
+
 ![Logo](https://1.gravatar.com/avatar/ac6571097189f411da44a14686696ae1?d=https%3A%2F%2Fidenticons.github.com%2F67518fc079ac975c749e84438c636930.png&r=x&s=100)
 
 # Manshar | منشر [![Build Status](https://travis-ci.org/manshar/manshar.png?branch=master)](https://travis-ci.org/manshar/manshar) [![Code Climate](https://codeclimate.com/github/manshar/manshar.png)](https://codeclimate.com/github/manshar/manshar)
